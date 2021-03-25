@@ -19,24 +19,24 @@ ID3D11RenderTargetView* g_pRenderTargetView = nullptr;
 
 LRESULT WINAPI WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
-	if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
-		return true;
+    if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+        return true;
 
-	return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
+    return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
 
 HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags)
 {
     static bool init = false;
-	if (!init)
-	{
+    if (!init)
+    {
         pSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)& pDevice);
         if (!pDevice) {
             return g_oPresent(pSwapChain, SyncInterval, Flags);
         }
 
-		DXGI_SWAP_CHAIN_DESC desc;
-		pSwapChain->GetDesc(&desc);
+        DXGI_SWAP_CHAIN_DESC desc;
+        pSwapChain->GetDesc(&desc);
         g_hWindow = desc.OutputWindow;
 
         pDevice->GetImmediateContext(&g_pContext);
@@ -59,37 +59,37 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         init = true;
     }
 
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-	ImGui::Begin("ImGui Window");
+    ImGui_ImplDX11_NewFrame();
+    ImGui_ImplWin32_NewFrame();
+    ImGui::NewFrame();
+    ImGui::Begin("ImGui Window");
 
-	ImGui::Text("Hello");
-	ImGui::Button("World!");
+    ImGui::Text("Hello");
+    ImGui::Button("World!");
 
-	ImGui::End();
-	ImGui::Render();
+    ImGui::End();
+    ImGui::Render();
 
-	g_pContext->OMSetRenderTargets(1, &g_pRenderTargetView, NULL);
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-	return g_oPresent(pSwapChain, SyncInterval, Flags);
+    g_pContext->OMSetRenderTargets(1, &g_pRenderTargetView, NULL);
+    ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+    return g_oPresent(pSwapChain, SyncInterval, Flags);
 }
 
 bool InitGui()
 {
-	if (kiero::init(kiero::RenderType::D3D11) == kiero::Status::Success)
-	{
-		kiero::bind(8, (void**)& g_oPresent, Detour_Present);
-		std::cout << "GUI Initialized" << std::endl;
+    if (kiero::init(kiero::RenderType::D3D11) == kiero::Status::Success)
+    {
+        kiero::bind(8, (void**)& g_oPresent, Detour_Present);
+        std::cout << "GUI Initialized" << std::endl;
         return true;
-	} else {
-		std::cout << "Failed to initialize GUI!" << std::endl;
+    } else {
+        std::cout << "Failed to initialize GUI!" << std::endl;
         return false;
-	}
+    }
 }
 
 void RemoveGui()
 {
     kiero::shutdown();
-	SetWindowLongPtr(g_hWindow, GWLP_WNDPROC, (LONG_PTR)oWndProc);
+    SetWindowLongPtr(g_hWindow, GWLP_WNDPROC, (LONG_PTR)oWndProc);
 }
