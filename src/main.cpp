@@ -1,9 +1,11 @@
 #include "pch.h"
 #include "helpers.h"
+#include "gui.h"
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {
     CreateConsole();
+    InitGui();
 
     while (true) {
         if (GetAsyncKeyState(VK_END) & 1) {
@@ -16,6 +18,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
     }
 
     RemoveConsole();
+    RemoveGui();
     
 	FreeLibraryAndExitThread(hModule, 0);
 	return TRUE;
