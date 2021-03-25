@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\helpers.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\helpers.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

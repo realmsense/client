@@ -1,10 +1,9 @@
 #include "pch.h"
+#include "helpers.h"
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {
-    FILE* f;
-    AllocConsole();
-    freopen_s(&f, "CONOUT$", "w", stdout);
+    CreateConsole();
 
     while (true) {
         if (GetAsyncKeyState(VK_END) & 1) {
@@ -16,8 +15,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
         }
     }
 
-    fclose(f);
-    FreeConsole();
+    RemoveConsole();
+    
 	FreeLibraryAndExitThread(hModule, 0);
 	return TRUE;
 }
