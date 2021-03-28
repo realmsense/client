@@ -95,6 +95,36 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
     ImGui::Checkbox("Disable Fog", &disableFog);
 
+    static float hue = 1.0f;
+    static float speed = 0.0035f;
+    hue += speed;
+    if (hue > 360.0f) hue = 1.0f;
+    ImColor rainbow = ImColor::HSV(hue, 1.0f, 1.0f);
+
+    RECT windowRect;
+    if (GetClientRect(g_hWindow, &windowRect)) {
+        Vector3 playerPos;
+        playerPos.x = g_pProCamera2D->fields.BKGIPAJPNPF;
+        playerPos.y = g_pProCamera2D->fields.EJEMLBMNAKC;
+        playerPos.z = 0.0f;
+
+        // Camera Offset (pressing x)
+        Transform* transform = Component_1_get_transform(reinterpret_cast<Component_1*>(g_pMainCamera), nullptr);
+        Vector3 localPlayerPos = Transform_get_localPosition(transform, nullptr);
+        playerPos.y += localPlayerPos.y * 2;
+
+        Vector3 playerScreenPos = Camera_WorldToScreenPoint_1(g_pMainCamera, playerPos, nullptr);
+
+        ImVec2 origin;
+        origin.x = playerScreenPos.x;
+        origin.y = playerScreenPos.y;
+
+        ImVec2 target = ImGui::GetMousePos();
+
+        ImDrawList* draw = ImGui::GetBackgroundDrawList();
+        draw->AddLine((origin), target, rainbow, 3.0f);
+    }
+
     ImGui::End();
     ImGui::Render();
 
