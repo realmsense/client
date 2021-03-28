@@ -1,9 +1,20 @@
-#include "pch.h"
+#include "il2cpp-init.h"
+#include "il2cpp-appdata.h"
+
+#include <windows.h>
+#include <iostream>
+
 #include "helpers.h"
 #include "gui.h"
 
+using namespace app;
+
+// Custom injected code entry point
 DWORD WINAPI MainThread(HMODULE hModule)
 {
+    init_il2cpp();
+    il2cpp_thread_attach(il2cpp_domain_get());
+
     CreateConsole();
     InitGui();
 
@@ -15,11 +26,12 @@ DWORD WINAPI MainThread(HMODULE hModule)
         if (GetAsyncKeyState(VK_INSERT) & 1) {
             std::cout << "yuh" << std::endl;
         }
-    }
 
+        Sleep(5);
+    }
+    
     RemoveConsole();
     RemoveGui();
-    
     FreeLibraryAndExitThread(hModule, 0);
     return TRUE;
 }

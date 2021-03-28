@@ -1,34 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\imgui">
-      <UniqueIdentifier>{17259b7e-2b07-4351-9c20-17b581f61025}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\minhook">
-      <UniqueIdentifier>{9940f41a-4d79-4f92-a70b-18cf5234966a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\kiero">
-      <UniqueIdentifier>{84fc1729-9358-438b-b9a7-120c600b5cd9}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\il2cpp\framework\il2cpp-helpers.cpp">
+      <Filter>Source Files\il2cpp\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\il2cpp\framework\il2cpp-init.cpp">
+      <Filter>Source Files\il2cpp\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\helpers.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\kiero\kiero.cpp">
+      <Filter>Source Files\kiero</Filter>
     </ClCompile>
     <ClCompile Include="src\imgui\imgui.cpp">
       <Filter>Source Files\imgui</Filter>
@@ -66,19 +58,49 @@
     <ClCompile Include="src\minhook\src\hde\hde64.c">
       <Filter>Source Files\minhook</Filter>
     </ClCompile>
-    <ClCompile Include="src\kiero\kiero.cpp">
-      <Filter>Source Files\kiero</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions-ptr.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-functions.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-metadata-version.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-types.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-types-ptr.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\framework\il2cpp-appdata.h">
+      <Filter>Source Files\il2cpp\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\framework\il2cpp-helpers.h">
+      <Filter>Source Files\il2cpp\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\framework\il2cpp-init.h">
+      <Filter>Source Files\il2cpp\framework</Filter>
+    </ClInclude>
     <ClInclude Include="src\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\helpers.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\kiero\kiero.h">
+      <Filter>Source Files\kiero</Filter>
     </ClInclude>
     <ClInclude Include="src\imgui\imconfig.h">
       <Filter>Source Files\imgui</Filter>
@@ -125,12 +147,35 @@
     <ClInclude Include="src\minhook\src\hde\table64.h">
       <Filter>Source Files\minhook</Filter>
     </ClInclude>
-    <ClInclude Include="src\kiero\kiero.h">
-      <Filter>Source Files\kiero</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d98b67bc-ae02-47c6-9aca-a5c7948cb481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp">
+      <UniqueIdentifier>{5865f511-446e-4f71-be42-aedc1e29ad1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp\appdata">
+      <UniqueIdentifier>{8c4ef8da-4b8a-447b-b791-fa19adcdd429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp\framework">
+      <UniqueIdentifier>{7f4ae379-8557-4af2-b00b-4758a60a0ac7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{02dcd431-e026-4405-8b49-2f45729264a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\kiero">
+      <UniqueIdentifier>{2d9d37d2-f30a-42c1-be64-dc73b476fa7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imgui">
+      <UniqueIdentifier>{30e60c4e-5f3d-4019-8df4-e4d3d5605edc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\minhook">
+      <UniqueIdentifier>{b1c7fb31-3f06-44df-b7c3-ad181be6c19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{80841d27-735c-49f0-a7a0-70dca6b5e95e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\minhook\dll_resources\MinHook.rc">
