@@ -1,3 +1,5 @@
+#include "pch.h"
+
 #include <windows.h>
 #include <iostream>
 
@@ -6,6 +8,10 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_win32.h"
 #include "imgui/imgui_impl_dx11.h"
+
+#include "globals.h"
+
+using namespace app;
 
 typedef HRESULT(__stdcall* Present) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -63,7 +69,12 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
-    ImGui::Begin("ImGui Window");
+    ImGui::Begin("RotMG Internal");
+
+    if (ImGui::SliderFloat("Zoom Amount", &zoomAmount, 0.0f, 20.0f)) {
+        std::cout << "Zoom Amount: " << zoomAmount << std::endl;
+        Camera_set_orthographicSize(g_pMainCamera, zoomAmount, nullptr);
+    }
 
     ImGui::Text("Hello");
     ImGui::Button("World!");

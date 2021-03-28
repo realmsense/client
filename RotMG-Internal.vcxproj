@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\globals.cpp" />
     <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\il2cpp\framework\il2cpp-helpers.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
@@ -48,6 +49,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h" />
     <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions-ptr.h" />
@@ -55,7 +57,6 @@
     <ClInclude Include="src\il2cpp\appdata\il2cpp-metadata-version.h" />
     <ClInclude Include="src\il2cpp\appdata\il2cpp-types-ptr.h" />
     <ClInclude Include="src\il2cpp\appdata\il2cpp-types.h" />
-    <ClInclude Include="src\il2cpp\framework.h" />
     <ClInclude Include="src\il2cpp\framework\il2cpp-appdata.h" />
     <ClInclude Include="src\il2cpp\framework\il2cpp-helpers.h" />
     <ClInclude Include="src\il2cpp\framework\il2cpp-init.h" />

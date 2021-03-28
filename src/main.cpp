@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <iostream>
 
+#include "globals.h"
 #include "helpers.h"
 #include "gui.h"
 
@@ -17,6 +18,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
     CreateConsole();
     InitGui();
+    InitPointers();
 
     while (true) {
         if (GetAsyncKeyState(VK_END) & 1) {
