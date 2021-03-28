@@ -38,7 +38,8 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     if (!init)
     {
         pSwapChain->GetDevice(__uuidof(ID3D11Device), (void**)& pDevice);
-        if (!pDevice) {
+        if (!pDevice)
+        {
             return g_oPresent(pSwapChain, SyncInterval, Flags);
         }
 
@@ -70,14 +71,29 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
     ImGui::Begin("RotMG Internal");
+    ImGui::Text("Hello World!");
 
-    if (ImGui::SliderFloat("Zoom Amount", &zoomAmount, 0.0f, 20.0f)) {
+    if (ImGui::SliderFloat("Zoom Amount", &zoomAmount, 0.0f, 20.0f))
+    {
         std::cout << "Zoom Amount: " << zoomAmount << std::endl;
         Camera_set_orthographicSize(g_pMainCamera, zoomAmount, nullptr);
     }
 
-    ImGui::Text("Hello");
-    ImGui::Button("World!");
+    if (ImGui::Checkbox("Perspective Editor", &disablePerspectiveEditor))
+    {
+        if (!g_pCameraManager)
+        {
+            std::cout << "g_pCameraManager is nullptr" << std::endl;
+        }
+        else
+        {
+            CameraPerspectiveEditor* cameraPerspectiveEditor = g_pCameraManager->fields.OOJJDIANIBF;
+            Behaviour_set_enabled(reinterpret_cast<Behaviour*>(cameraPerspectiveEditor), disablePerspectiveEditor, nullptr);
+            std::cout << "CameraPerspectiveEditor: " << disablePerspectiveEditor << std::endl;
+        }
+    }
+
+    ImGui::Checkbox("Disable Fog", &disableFog);
 
     ImGui::End();
     ImGui::Render();

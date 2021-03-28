@@ -61,6 +61,9 @@
     <ClCompile Include="src\globals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\hooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h">
@@ -148,6 +151,9 @@
       <Filter>Source Files\minhook</Filter>
     </ClInclude>
     <ClInclude Include="src\globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hooks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,6 +7,7 @@
 #include "globals.h"
 #include "helpers.h"
 #include "gui.h"
+#include "hooks.h"
 
 using namespace app;
 
@@ -19,6 +20,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
     CreateConsole();
     InitGui();
     InitPointers();
+    InitHooks();
 
     while (true) {
         if (GetAsyncKeyState(VK_END) & 1) {
