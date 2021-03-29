@@ -12,7 +12,7 @@ TileSetColor Original_Tile_SetColor = nullptr;
 void* Detour_Tile_SetColor(SpriteRenderer* __this, Color value, MethodInfo* method)
 {
     // don't change the tile color if it is being darkened
-    if (disableFog
+    if (g_bDisableFog
         && (value.r != 1 || value.g != 1 || value.b != 1 || value.a != 1)
     ) {
         return nullptr;
@@ -33,6 +33,18 @@ void* Detour_CameraManager_Update(CameraManager* __this, MethodInfo* method)
     return Original_CameraManager_Update(__this, method);
 }
 
+//DO_APP_FUNC(0x008D6CA0, void, UnityThread_Update, (UnityThread * __this, MethodInfo * method));
+typedef void* (__cdecl* _UnityThread_Update)(UnityThread* __this, MethodInfo* method);
+_UnityThread_Update Original_UnityThread_Update = nullptr;
+void* Detour_UnityThread_Update(UnityThread* __this, MethodInfo* method)
+{
+    if (g_bNoclip)
+    {
+        return nullptr;
+    }
+    return Original_UnityThread_Update(__this, method);
+}
+
 bool InitHooks()
 {
     if (MH_CreateHook(SpriteRenderer_set_color, Detour_Tile_SetColor, reinterpret_cast<LPVOID*>(&Original_Tile_SetColor)) != MH_OK)
@@ -44,6 +56,12 @@ bool InitHooks()
     if (MH_CreateHook(CameraManager_Update, Detour_CameraManager_Update, reinterpret_cast<LPVOID*>(&Original_CameraManager_Update)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour CameraManager_Update", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    if (MH_CreateHook(UnityThread_Update, Detour_UnityThread_Update, reinterpret_cast<LPVOID*>(&Original_UnityThread_Update)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour UnityThread_Update", "RotMG Internal", MB_OK);
         return 1;
     }
 

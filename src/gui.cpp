@@ -73,13 +73,13 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     ImGui::Begin("RotMG Internal");
     ImGui::Text("Hello World!");
 
-    if (ImGui::SliderFloat("Zoom Amount", &zoomAmount, 0.0f, 20.0f))
+    if (ImGui::SliderFloat("Zoom Amount", &g_fZoomAmount, 0.0f, 20.0f))
     {
-        std::cout << "Zoom Amount: " << zoomAmount << std::endl;
-        Camera_set_orthographicSize(g_pMainCamera, zoomAmount, nullptr);
+        std::cout << "Zoom Amount: " << g_fZoomAmount << std::endl;
+        Camera_set_orthographicSize(g_pMainCamera, g_fZoomAmount, nullptr);
     }
 
-    if (ImGui::Checkbox("Perspective Editor", &disablePerspectiveEditor))
+    if (ImGui::Checkbox("Perspective Editor", &g_bDisablePerspectiveEditor))
     {
         if (!g_pCameraManager)
         {
@@ -88,13 +88,16 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         else
         {
             CameraPerspectiveEditor* cameraPerspectiveEditor = g_pCameraManager->fields.OOJJDIANIBF;
-            Behaviour_set_enabled(reinterpret_cast<Behaviour*>(cameraPerspectiveEditor), disablePerspectiveEditor, nullptr);
-            std::cout << "CameraPerspectiveEditor: " << disablePerspectiveEditor << std::endl;
+            Behaviour_set_enabled(reinterpret_cast<Behaviour*>(cameraPerspectiveEditor), g_bDisablePerspectiveEditor, nullptr);
+            std::cout << "CameraPerspectiveEditor: " << g_bDisablePerspectiveEditor << std::endl;
         }
     }
 
-    ImGui::Checkbox("Disable Fog", &disableFog);
+    ImGui::Checkbox("Disable Fog", &g_bDisableFog);
 
+    ImGui::Checkbox("Noclip", &g_bNoclip);
+
+    /*
     static float hue = 1.0f;
     static float speed = 0.0035f;
     hue += speed;
@@ -124,6 +127,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         ImDrawList* draw = ImGui::GetBackgroundDrawList();
         draw->AddLine((origin), target, rainbow, 3.0f);
     }
+    */
 
     ImGui::End();
     ImGui::Render();
