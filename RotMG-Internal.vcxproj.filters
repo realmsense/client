@@ -16,27 +16,6 @@
     <ClCompile Include="src\kiero\kiero.cpp">
       <Filter>Source Files\kiero</Filter>
     </ClCompile>
-    <ClCompile Include="src\imgui\imgui.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_demo.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_draw.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_impl_dx11.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_impl_win32.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_tables.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_widgets.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="src\minhook\src\buffer.c">
       <Filter>Source Files\minhook</Filter>
     </ClCompile>
@@ -58,6 +37,27 @@
     <ClCompile Include="src\hooks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\imgui\imgui.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_demo.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_draw.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_impl_dx11.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_impl_win32.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_tables.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h">
@@ -71,30 +71,6 @@
     </ClInclude>
     <ClInclude Include="src\kiero\kiero.h">
       <Filter>Source Files\kiero</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imconfig.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui_impl_dx11.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui_impl_win32.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui_internal.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imstb_rectpack.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imstb_textedit.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imstb_truetype.h">
-      <Filter>Source Files\imgui</Filter>
     </ClInclude>
     <ClInclude Include="src\minhook\src\buffer.h">
       <Filter>Source Files\minhook</Filter>
@@ -122,6 +98,30 @@
     </ClInclude>
     <ClInclude Include="src\hooks.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imconfig.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imgui.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imgui_impl_dx11.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imgui_impl_win32.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imgui_internal.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imstb_rectpack.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imstb_textedit.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\imstb_truetype.h">
+      <Filter>Source Files\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

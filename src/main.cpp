@@ -1,5 +1,4 @@
-#include <windows.h>
-#include <iostream>
+#include "pch.h"
 
 #include "globals.h"
 #include "helpers.h"

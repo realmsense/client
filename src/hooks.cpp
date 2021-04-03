@@ -1,7 +1,6 @@
 #include "pch.h"
-#include <iostream>
-#include "minhook/include/MinHook.h"
 #include "globals.h"
+#include "minhook/include/MinHook.h"
 
 bool InitHooks()
 {

@@ -1,8 +1,5 @@
 #include "pch.h"
 
-#include <windows.h>
-#include <iostream>
-
 #include <d3d11.h>
 #include "kiero/kiero.h"
 #include "imgui/imgui.h"

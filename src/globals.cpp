@@ -1,6 +1,4 @@
 #include "pch.h"
-#include <windows.h>
-#include <iostream>
 
 // Pointers (game objects)
 uintptr_t g_pBaseAddress;
