@@ -68,6 +68,9 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     ImGui::Begin("RotMG Internal");
     ImGui::Text("Hello World!");
 
+    ImGui::Checkbox("Noclip", &g_bNoclip);
+    ImGui::Checkbox("Disable Fog", &g_bDisableFog);
+
     if (g_pPlayer)
     {
         if (ImGui::CollapsingHeader("Player Info"))

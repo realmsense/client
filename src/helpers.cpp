@@ -1,8 +1,6 @@
 #include "pch.h"
 #include <vector>
 
-#include <TlHelp32.h>
-
 void CreateConsole()
 {
    AllocConsole();

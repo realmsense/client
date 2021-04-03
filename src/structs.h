@@ -1,6 +1,7 @@
 #include <cstdint>
 
 struct Vector3 { float x, y, z; };
+struct Color { float r, g, b, a; };
 
 class Player
 {

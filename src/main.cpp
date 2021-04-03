@@ -12,6 +12,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
     InitGui();
     InitPointers();
     InitHooks();
+    LoadSettings();
 
     std::cout << "GameAssembly.dll " << g_pBaseAddress << std::endl;
 
@@ -24,20 +25,21 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         // use arrow keys to increment noclip
         if (GetAsyncKeyState(VK_UP) & 1) {
-            g_pPlayer->pos.y -= 1.0f;
+            if (g_pPlayer) g_pPlayer->pos.y -= 1.0f;
         }
         if (GetAsyncKeyState(VK_DOWN) & 1) {
-            g_pPlayer->pos.y += 1.0f;
+            if (g_pPlayer)
+                g_pPlayer->pos.y += 1.0f;
         }
         if (GetAsyncKeyState(VK_RIGHT) & 1) {
-            g_pPlayer->pos.x += 1.0f;
+            if (g_pPlayer) g_pPlayer->pos.x += 1.0f;
         }
         if (GetAsyncKeyState(VK_LEFT) & 1) {
-            g_pPlayer->pos.x -= 1.0f;
+            if (g_pPlayer) g_pPlayer->pos.x -= 1.0f;
         }
 
-        if (GetAsyncKeyState(VK_INSERT) & 1) {
-            std::cout << g_pPlayer->pos.x << std::endl;
+        if (GetAsyncKeyState(VK_SPACE) & 1) {
+            g_bNoclip = !g_bNoclip;
         }
 
         Sleep(5);
