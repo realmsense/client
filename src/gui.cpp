@@ -68,6 +68,19 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     ImGui::Begin("RotMG Internal");
     ImGui::Text("Hello World!");
 
+    if (g_pPlayer)
+    {
+        if (ImGui::CollapsingHeader("Player Info"))
+        {
+            ImGui::Text("X: %.2f", g_pPlayer->pos.x);
+            ImGui::SameLine();
+            ImGui::Text("Y: %.2f", g_pPlayer->pos.x);
+
+            ImGui::Text("HP: %i / %i", g_pPlayer->hp, g_pPlayer->maxHP);
+            ImGui::Text("MP: %.0f / %i", g_pPlayer->mp, g_pPlayer->maxMP);
+        }
+    }
+
     ImGui::End();
     ImGui::Render();
 

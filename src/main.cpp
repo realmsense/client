@@ -13,13 +13,31 @@ DWORD WINAPI MainThread(HMODULE hModule)
     InitPointers();
     InitHooks();
 
+    std::cout << "GameAssembly.dll " << g_pBaseAddress << std::endl;
+
     while (true) {
         if (GetAsyncKeyState(VK_END) & 1) {
             break;
         }
 
+        g_pPlayer = *(Player**)FindDMAAddy(g_pBaseAddress + 0x3A41998, { 0x8, 0x160, 0x38 });
+
+        // use arrow keys to increment noclip
+        if (GetAsyncKeyState(VK_UP) & 1) {
+            g_pPlayer->pos.y -= 1.0f;
+        }
+        if (GetAsyncKeyState(VK_DOWN) & 1) {
+            g_pPlayer->pos.y += 1.0f;
+        }
+        if (GetAsyncKeyState(VK_RIGHT) & 1) {
+            g_pPlayer->pos.x += 1.0f;
+        }
+        if (GetAsyncKeyState(VK_LEFT) & 1) {
+            g_pPlayer->pos.x -= 1.0f;
+        }
+
         if (GetAsyncKeyState(VK_INSERT) & 1) {
-            std::cout << "yuh" << std::endl;
+            std::cout << g_pPlayer->pos.x << std::endl;
         }
 
         Sleep(5);

@@ -2,6 +2,7 @@
 
 // Pointers (game objects)
 uintptr_t g_pBaseAddress;
+Player* g_pPlayer;
 
 // Hack Settings
 

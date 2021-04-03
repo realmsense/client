@@ -91,6 +91,7 @@
     <ClInclude Include="src\minhook\src\hde\table64.h" />
     <ClInclude Include="src\minhook\src\trampoline.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\structs.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="src\minhook\dll_resources\MinHook.rc" />
