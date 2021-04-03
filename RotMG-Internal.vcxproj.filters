@@ -4,12 +4,6 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\il2cpp\framework\il2cpp-helpers.cpp">
-      <Filter>Source Files\il2cpp\framework</Filter>
-    </ClCompile>
-    <ClCompile Include="src\il2cpp\framework\il2cpp-init.cpp">
-      <Filter>Source Files\il2cpp\framework</Filter>
-    </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -66,33 +60,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h">
-      <Filter>Source Files\il2cpp\appdata</Filter>
-    </ClInclude>
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions-ptr.h">
-      <Filter>Source Files\il2cpp\appdata</Filter>
-    </ClInclude>
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-functions.h">
-      <Filter>Source Files\il2cpp\appdata</Filter>
-    </ClInclude>
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-metadata-version.h">
-      <Filter>Source Files\il2cpp\appdata</Filter>
-    </ClInclude>
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-types.h">
-      <Filter>Source Files\il2cpp\appdata</Filter>
-    </ClInclude>
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-types-ptr.h">
-      <Filter>Source Files\il2cpp\appdata</Filter>
-    </ClInclude>
-    <ClInclude Include="src\il2cpp\framework\il2cpp-appdata.h">
-      <Filter>Source Files\il2cpp\framework</Filter>
-    </ClInclude>
-    <ClInclude Include="src\il2cpp\framework\il2cpp-helpers.h">
-      <Filter>Source Files\il2cpp\framework</Filter>
-    </ClInclude>
-    <ClInclude Include="src\il2cpp\framework\il2cpp-init.h">
-      <Filter>Source Files\il2cpp\framework</Filter>
-    </ClInclude>
     <ClInclude Include="src\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -160,15 +127,6 @@
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{d98b67bc-ae02-47c6-9aca-a5c7948cb481}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\il2cpp">
-      <UniqueIdentifier>{5865f511-446e-4f71-be42-aedc1e29ad1f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\il2cpp\appdata">
-      <UniqueIdentifier>{8c4ef8da-4b8a-447b-b791-fa19adcdd429}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\il2cpp\framework">
-      <UniqueIdentifier>{7f4ae379-8557-4af2-b00b-4758a60a0ac7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{02dcd431-e026-4405-8b49-2f45729264a4}</UniqueIdentifier>

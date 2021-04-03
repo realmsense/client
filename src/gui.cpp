@@ -11,8 +11,6 @@
 
 #include "globals.h"
 
-using namespace app;
-
 typedef HRESULT(__stdcall* Present) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -72,62 +70,6 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     ImGui::NewFrame();
     ImGui::Begin("RotMG Internal");
     ImGui::Text("Hello World!");
-
-    if (ImGui::SliderFloat("Zoom Amount", &g_fZoomAmount, 0.0f, 20.0f))
-    {
-        std::cout << "Zoom Amount: " << g_fZoomAmount << std::endl;
-        Camera_set_orthographicSize(g_pMainCamera, g_fZoomAmount, nullptr);
-    }
-
-    if (ImGui::Checkbox("Perspective Editor", &g_bDisablePerspectiveEditor))
-    {
-        if (!g_pCameraManager)
-        {
-            std::cout << "g_pCameraManager is nullptr" << std::endl;
-        }
-        else
-        {
-            CameraPerspectiveEditor* cameraPerspectiveEditor = g_pCameraManager->fields.OOJJDIANIBF;
-            Behaviour_set_enabled(reinterpret_cast<Behaviour*>(cameraPerspectiveEditor), g_bDisablePerspectiveEditor, nullptr);
-            std::cout << "CameraPerspectiveEditor: " << g_bDisablePerspectiveEditor << std::endl;
-        }
-    }
-
-    ImGui::Checkbox("Disable Fog", &g_bDisableFog);
-
-    ImGui::Checkbox("Noclip", &g_bNoclip);
-
-    /*
-    static float hue = 1.0f;
-    static float speed = 0.0035f;
-    hue += speed;
-    if (hue > 360.0f) hue = 1.0f;
-    ImColor rainbow = ImColor::HSV(hue, 1.0f, 1.0f);
-
-    RECT windowRect;
-    if (GetClientRect(g_hWindow, &windowRect)) {
-        Vector3 playerPos;
-        playerPos.x = g_pProCamera2D->fields.BKGIPAJPNPF;
-        playerPos.y = g_pProCamera2D->fields.EJEMLBMNAKC;
-        playerPos.z = 0.0f;
-
-        // Camera Offset (pressing x)
-        Transform* transform = Component_1_get_transform(reinterpret_cast<Component_1*>(g_pMainCamera), nullptr);
-        Vector3 localPlayerPos = Transform_get_localPosition(transform, nullptr);
-        playerPos.y += localPlayerPos.y * 2;
-
-        Vector3 playerScreenPos = Camera_WorldToScreenPoint_1(g_pMainCamera, playerPos, nullptr);
-
-        ImVec2 origin;
-        origin.x = playerScreenPos.x;
-        origin.y = playerScreenPos.y;
-
-        ImVec2 target = ImGui::GetMousePos();
-
-        ImDrawList* draw = ImGui::GetBackgroundDrawList();
-        draw->AddLine((origin), target, rainbow, 3.0f);
-    }
-    */
 
     ImGui::End();
     ImGui::Render();

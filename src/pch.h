@@ -8,6 +8,5 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
-#include "il2cpp-appdata.h"
 
 #endif //PCH_H

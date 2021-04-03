@@ -1,6 +1,3 @@
-#include "il2cpp-init.h"
-#include "il2cpp-appdata.h"
-
 #include <windows.h>
 #include <iostream>
 
@@ -9,14 +6,9 @@
 #include "gui.h"
 #include "hooks.h"
 
-using namespace app;
-
 // Custom injected code entry point
 DWORD WINAPI MainThread(HMODULE hModule)
 {
-    init_il2cpp();
-    il2cpp_thread_attach(il2cpp_domain_get());
-
     CreateConsole();
     InitGui();
     InitPointers();

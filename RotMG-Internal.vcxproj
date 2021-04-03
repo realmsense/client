@@ -22,12 +22,6 @@
     <ClCompile Include="src\globals.cpp" />
     <ClCompile Include="src\gui.cpp" />
     <ClCompile Include="src\hooks.cpp" />
-    <ClCompile Include="src\il2cpp\framework\il2cpp-helpers.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="src\il2cpp\framework\il2cpp-init.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="src\helpers.cpp" />
     <ClCompile Include="src\imgui\imgui.cpp" />
     <ClCompile Include="src\imgui\imgui_demo.cpp" />
@@ -53,15 +47,6 @@
     <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\hooks.h" />
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h" />
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions-ptr.h" />
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-functions.h" />
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-metadata-version.h" />
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-types-ptr.h" />
-    <ClInclude Include="src\il2cpp\appdata\il2cpp-types.h" />
-    <ClInclude Include="src\il2cpp\framework\il2cpp-appdata.h" />
-    <ClInclude Include="src\il2cpp\framework\il2cpp-helpers.h" />
-    <ClInclude Include="src\il2cpp\framework\il2cpp-init.h" />
     <ClInclude Include="src\helpers.h" />
     <ClInclude Include="src\imgui\imconfig.h" />
     <ClInclude Include="src\imgui\imgui.h" />
