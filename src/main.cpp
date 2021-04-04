@@ -23,19 +23,13 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         g_pPlayer = *(Player**)FindDMAAddy(g_pBaseAddress + 0x3A41998, { 0x8, 0x160, 0x38 });
 
-        // use arrow keys to increment noclip
-        if (GetAsyncKeyState(VK_UP) & 1) {
-            if (g_pPlayer) g_pPlayer->pos.y -= 1.0f;
-        }
-        if (GetAsyncKeyState(VK_DOWN) & 1) {
-            if (g_pPlayer)
-                g_pPlayer->pos.y += 1.0f;
-        }
-        if (GetAsyncKeyState(VK_RIGHT) & 1) {
-            if (g_pPlayer) g_pPlayer->pos.x += 1.0f;
-        }
-        if (GetAsyncKeyState(VK_LEFT) & 1) {
-            if (g_pPlayer) g_pPlayer->pos.x -= 1.0f;
+        if (g_bNoclip && g_pPlayer)
+        {
+            float change = 0.01f;
+            if (GetAsyncKeyState(0x57)) g_pPlayer->pos.y -= change; // w - up
+            if (GetAsyncKeyState(0x41)) g_pPlayer->pos.x -= change; // a - left
+            if (GetAsyncKeyState(0x53)) g_pPlayer->pos.y += change; // s - down
+            if (GetAsyncKeyState(0x44)) g_pPlayer->pos.x += change; // d - right
         }
 
         if (GetAsyncKeyState(VK_SPACE) & 1) {
