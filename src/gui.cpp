@@ -80,7 +80,6 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         {
             // Movement
             ImGui::Checkbox("Noclip", &g_bNoclip);
-            ImGui::SliderFloat("Noclip Amount", &g_fNoclipChange, 1.0, 100.0);
 
             // View
             ImGui::Checkbox("Disable Fog", &g_bDisableFog);
@@ -94,11 +93,6 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 }
             }
 
-            if (g_bDisablePerspectiveEditor == NULL && g_pCameraManager)
-            {
-                //
-            }
-
             if (ImGui::Checkbox("Perspective Editor", &g_bDisablePerspectiveEditor))
             {
                 if (g_pCameraManager)
@@ -109,12 +103,10 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 }
             }
 
-            //g_bDisableFog
-
             ImGui::EndTabItem();
         }
 
-        // Debug
+        // Meme
         if (ImGui::BeginTabItem(":realtrollblack:"))
         {
             static bool niggmode = false;
@@ -133,6 +125,9 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                     PlaySound(NULL, NULL, SND_ASYNC);
                 }
             }
+
+            ImGui::SliderFloat("Noclip Amount", &g_fNoclipChange, 1.0, 100.0);
+
             ImGui::EndTabItem();
         }
 
