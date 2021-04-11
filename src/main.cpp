@@ -4,11 +4,11 @@
 #include "gui.h"
 #include "hooks.h"
 
+#include <sstream>
+
 /*
 TODO:
-Go through globals.cpp pointers and fix the hooks (fix the uintptr_t* shit
-
-Add back all hacks to gui tab (and fix/update offsets)
+Add more logging comments (especially debug if pointers are null etc)
 
 Add packet reading/writing functionality
 */
@@ -28,15 +28,15 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         if (g_bNoclip && g_pPlayer)
         {
-            if (GetAsyncKeyState(0x57)) g_pPlayer->pos.y -= 0.01 * g_fNoclipChange; // w - up
-            if (GetAsyncKeyState(0x41)) g_pPlayer->pos.x -= 0.01 * g_fNoclipChange; // a - left
-            if (GetAsyncKeyState(0x53)) g_pPlayer->pos.y += 0.01 * g_fNoclipChange; // s - down
-            if (GetAsyncKeyState(0x44)) g_pPlayer->pos.x += 0.01 * g_fNoclipChange; // d - right
+            if (GetAsyncKeyState(0x57)) g_pPlayer->pos.y -= 0.01f * g_fNoclipChange; // w - up
+            if (GetAsyncKeyState(0x41)) g_pPlayer->pos.x -= 0.01f * g_fNoclipChange; // a - left
+            if (GetAsyncKeyState(0x53)) g_pPlayer->pos.y += 0.01f * g_fNoclipChange; // s - down
+            if (GetAsyncKeyState(0x44)) g_pPlayer->pos.x += 0.01f * g_fNoclipChange; // d - right
         }
 
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
-        
+
         }
 
         if (GetAsyncKeyState(VK_DELETE) & 1)

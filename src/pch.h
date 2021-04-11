@@ -12,5 +12,6 @@
 #include <iostream>
 #include "structs.h"
 #include "helpers.h"
+#include "globals.h"
 
 #endif //PCH_H

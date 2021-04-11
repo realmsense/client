@@ -73,13 +73,43 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     ImGui::Begin("RotMG Internal");
 
     ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_None;
-    if (ImGui::BeginTabBar("MyTabBar", tab_bar_flags))
+    if (ImGui::BeginTabBar("MainTabBar", tab_bar_flags))
     {
         // Hacks
         if (ImGui::BeginTabItem("Hacks"))
         {
+            // Movement
             ImGui::Checkbox("Noclip", &g_bNoclip);
             ImGui::SliderFloat("Noclip Amount", &g_fNoclipChange, 1.0, 100.0);
+
+            // View
+            ImGui::Checkbox("Disable Fog", &g_bDisableFog);
+
+            if (ImGui::SliderFloat("Zoom Amount", &g_fZoomAmount, 0.0f, 20.0f))
+            {
+                if (g_pMainCamera)
+                {
+                    std::cout << "Zoom Amount: " << g_fZoomAmount << std::endl;
+                    Camera_set_orthographicSize(g_pMainCamera, g_fZoomAmount);
+                }
+            }
+
+            if (g_bDisablePerspectiveEditor == NULL && g_pCameraManager)
+            {
+                //
+            }
+
+            if (ImGui::Checkbox("Perspective Editor", &g_bDisablePerspectiveEditor))
+            {
+                if (g_pCameraManager)
+                {
+                    uintptr_t cameraPerspectiveEditor = *(uintptr_t*)(g_pCameraManager + 0x48); // OOJJDIANIBF
+                    Behaviour_set_enabled(cameraPerspectiveEditor, g_bDisablePerspectiveEditor);
+                    std::cout << "CameraPerspectiveEditor: " << g_bDisablePerspectiveEditor << std::endl;
+                }
+            }
+
+            //g_bDisableFog
 
             ImGui::EndTabItem();
         }
@@ -113,7 +143,9 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             {
                 std::map<std::string, uintptr_t> map;
                 map.insert(std::pair<std::string, uintptr_t>("g_pBaseAddress", g_pBaseAddress));
-                map.insert(std::pair<std::string, uintptr_t>("g_pPlayer", *(uintptr_t*)g_pPlayer));
+                map.insert(std::pair<std::string, uintptr_t>("g_pCameraManager", g_pCameraManager));
+                map.insert(std::pair<std::string, uintptr_t>("g_pMainCamera", g_pMainCamera));
+                map.insert(std::pair<std::string, uintptr_t>("g_pPlayer", reinterpret_cast<uintptr_t>(g_pPlayer)));
                 for (auto const& x : map)
                 {
                     std::string str1 = ptrToHex(x.second);
@@ -126,6 +158,61 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                     if (ImGui::Button("Copy")) ImGui::SetClipboardText(str);
                     ImGui::PopID();
                 }
+                ImGui::TreePop();
+            }
+
+            if (ImGui::TreeNode("Player Info"))
+            {
+                float columnWidth = 100.0f;
+                ImGui::Text("Name");
+                ImGui::SameLine(columnWidth);
+                std::string playerName = readUnityString(g_pPlayer->name);
+                ImGui::Text(playerName.c_str());
+
+                ImGui::Text("HP");
+                ImGui::SameLine(columnWidth);
+                ImGui::Text("%i / %i", g_pPlayer->hp, g_pPlayer->maxHP);
+
+                ImGui::Text("MP");
+                ImGui::SameLine(columnWidth);
+                ImGui::Text("%.0f / %i", g_pPlayer->mp, g_pPlayer->maxMP);
+
+                ImGui::Text("Pos");
+                ImGui::SameLine(columnWidth);
+                ImGui::Text("X: %.2f Y: %.2f", g_pPlayer->pos.x, g_pPlayer->pos.y);
+
+                ImGui::Text("Tile");
+                std::string tileName = readUnityString(g_pPlayer->standingTile->OBGKICHNIDN->name);
+                ImGui::SameLine(columnWidth);
+                ImGui::Text(tileName.c_str());
+
+                //stats
+                ImGui::Text("Attack");
+                ImGui::SameLine(columnWidth);
+                ImGui::Text("%i", g_pPlayer->attack);
+
+                ImGui::SameLine(columnWidth * 1.5f);
+                ImGui::Text("Defense");
+                ImGui::SameLine(columnWidth * 2.5f);
+                ImGui::Text("%i", g_pPlayer->defense);
+
+                ImGui::Text("Speed");
+                ImGui::SameLine(columnWidth);
+                ImGui::Text("%.0f", g_pPlayer->speed);
+
+                ImGui::SameLine(columnWidth * 1.5f);
+                ImGui::Text("Dexterity");
+                ImGui::SameLine(columnWidth * 2.5f);
+                ImGui::Text("%.0f", g_pPlayer->dexterity);
+
+                ImGui::Text("Vitality");
+                ImGui::SameLine(columnWidth);
+                ImGui::Text("%i", g_pPlayer->vitality);
+
+                ImGui::SameLine(columnWidth * 1.5f);
+                ImGui::Text("Wisdom");
+                ImGui::SameLine(columnWidth * 2.5f);
+                ImGui::Text("%i", g_pPlayer->wisdom);
 
                 ImGui::TreePop();
             }
@@ -135,40 +222,6 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
         ImGui::EndTabBar();
     }
-
-    //ImGui::Checkbox("Disable Fog", &g_bDisableFog);
-    //if (ImGui::SliderFloat("Zoom Amount", &g_fZoomAmount, 0.0f, 20.0f))
-    //{
-    //    std::cout << "Zoom Amount: " << g_fZoomAmount << std::endl;
-    //
-    //    if (!g_pCameraManager)
-    //    {
-    //        std::cout << "g_pCameraManager is nullptr!" << std::endl;
-    //    }
-    //    else
-    //    {
-    //        void* CameraManager_ZoomIn = (void*)(g_pBaseAddress + 0x15a3120);
-    //    }
-    //
-    //    //Camera_set_orthographicSize(g_pMainCamera, g_fZoomAmount, nullptr);
-    //}
-    //
-    //ImGui::SliderInt("AutoNexus", &g_iAutoNexusPercent, 0, 100, "%d%%");
-    //
-    //if (ImGui::Button("Nexus")) {
-    //    INPUT inputs[2];
-    //    ZeroMemory(inputs, sizeof(inputs));
-    //
-    //    inputs[0].type = INPUT_KEYBOARD;
-    //    inputs[0].ki.wVk = 0x52;
-    //
-    //    inputs[1].type = INPUT_KEYBOARD;
-    //    inputs[1].ki.wVk = 0x52;
-    //    inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
-    //
-    //    SendInput(ARRAYSIZE(inputs), inputs, sizeof(INPUT));
-    //}
-
 
     //if (g_pPlayer)
     //{

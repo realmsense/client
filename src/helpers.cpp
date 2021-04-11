@@ -3,6 +3,8 @@
 #include "fake_ntdl.h"
 
 #include <sstream>
+#include <locale>
+#include <codecvt>
 
 void CreateConsole()
 {
@@ -22,6 +24,18 @@ std::string ptrToHex(uintptr_t ptr)
     stream << std::hex << ptr;
     std::string result(stream.str());
     return result;
+}
+
+std::string readUnityString(String* str)
+{
+    uintptr_t addr = (uintptr_t)str;
+    std::stringstream sstream;
+    int length = *(int*)(addr + 0x10);
+    for (int i = 0; i < length; i++) {
+        wchar_t charAt = *(wchar_t*)(addr + 0x14 + (0x2 * i));
+        sstream << (char)charAt;
+    }
+    return sstream.str();
 }
 
 uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)

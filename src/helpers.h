@@ -2,7 +2,9 @@
 
 void CreateConsole();
 void RemoveConsole();
+
 std::string ptrToHex(uintptr_t ptr);
+std::string readUnityString(String* str);
 
 uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets);
 
