@@ -11,5 +11,6 @@
 #include <windows.h>
 #include <iostream>
 #include "structs.h"
+#include "helpers.h"
 
 #endif //PCH_H

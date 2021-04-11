@@ -1,4 +1,5 @@
 #include "pch.h"
+#include "globals.h"
 
 #include <d3d11.h>
 #include "kiero/kiero.h"
@@ -6,7 +7,8 @@
 #include "imgui/imgui_impl_win32.h"
 #include "imgui/imgui_impl_dx11.h"
 
-#include "globals.h"
+#include <map>
+#include <sstream>
 
 typedef HRESULT(__stdcall* Present) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -46,7 +48,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
         // Render Target
         ID3D11Texture2D* pBackBuffer;
-        pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)& pBackBuffer);
+        pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBackBuffer);
         pDevice->CreateRenderTargetView(pBackBuffer, NULL, &g_pRenderTargetView);
         pBackBuffer->Release();
 
@@ -66,23 +68,129 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
     ImGui::Begin("RotMG Internal");
-    ImGui::Text("Hello World!");
 
-    ImGui::Checkbox("Noclip", &g_bNoclip);
-    ImGui::Checkbox("Disable Fog", &g_bDisableFog);
-
-    if (g_pPlayer)
+    ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_None;
+    if (ImGui::BeginTabBar("MyTabBar", tab_bar_flags))
     {
-        if (ImGui::CollapsingHeader("Player Info"))
+        // Hacks
+        if (ImGui::BeginTabItem("Hacks"))
         {
-            ImGui::Text("X: %.2f", g_pPlayer->pos.x);
-            ImGui::SameLine();
-            ImGui::Text("Y: %.2f", g_pPlayer->pos.x);
+            ImGui::Checkbox("Noclip", &g_bNoclip);
+            ImGui::SliderFloat("Noclip Amount", &g_fNoclipChange, 1.0, 100.0);
 
-            ImGui::Text("HP: %i / %i", g_pPlayer->hp, g_pPlayer->maxHP);
-            ImGui::Text("MP: %.0f / %i", g_pPlayer->mp, g_pPlayer->maxMP);
+            ImGui::EndTabItem();
         }
+
+        // Debug
+        if (ImGui::BeginTabItem("Debug"))
+        {
+            if (ImGui::TreeNode("Pointers"))
+            {
+                std::map<std::string, uintptr_t> map;
+                map.insert(std::pair<std::string, uintptr_t>("g_pBaseAddress", g_pBaseAddress));
+                map.insert(std::pair<std::string, uintptr_t>("g_pPlayer", *(uintptr_t*)g_pPlayer));
+                for (auto const& x : map)
+                {
+                    std::string str1 = ptrToHex(x.second);
+                    const char* str = str1.c_str();
+                    ImGui::PushID(str);
+                    ImGui::Text(x.first.c_str());
+                    ImGui::SameLine(140);
+                    ImGui::Text(str);
+                    ImGui::SameLine(240);
+                    if (ImGui::Button("Copy")) ImGui::SetClipboardText(str);
+                    ImGui::PopID();
+                }
+
+                ImGui::TreePop();
+            }
+
+            ImGui::EndTabItem();
+        }
+
+        ImGui::EndTabBar();
     }
+
+    //ImGui::Checkbox("Disable Fog", &g_bDisableFog);
+    //if (ImGui::SliderFloat("Zoom Amount", &g_fZoomAmount, 0.0f, 20.0f))
+    //{
+    //    std::cout << "Zoom Amount: " << g_fZoomAmount << std::endl;
+    //
+    //    if (!g_pCameraManager)
+    //    {
+    //        std::cout << "g_pCameraManager is nullptr!" << std::endl;
+    //    }
+    //    else
+    //    {
+    //        void* CameraManager_ZoomIn = (void*)(g_pBaseAddress + 0x15a3120);
+    //    }
+    //
+    //    //Camera_set_orthographicSize(g_pMainCamera, g_fZoomAmount, nullptr);
+    //}
+    //
+    //ImGui::SliderInt("AutoNexus", &g_iAutoNexusPercent, 0, 100, "%d%%");
+    //
+    //if (ImGui::Button("Nexus")) {
+    //    INPUT inputs[2];
+    //    ZeroMemory(inputs, sizeof(inputs));
+    //
+    //    inputs[0].type = INPUT_KEYBOARD;
+    //    inputs[0].ki.wVk = 0x52;
+    //
+    //    inputs[1].type = INPUT_KEYBOARD;
+    //    inputs[1].ki.wVk = 0x52;
+    //    inputs[1].ki.dwFlags = KEYEVENTF_KEYUP;
+    //
+    //    SendInput(ARRAYSIZE(inputs), inputs, sizeof(INPUT));
+    //}
+
+
+    //if (g_pPlayer)
+    //{
+    //    if (ImGui::CollapsingHeader("Player Info"))
+    //    {
+    //        ImGui::Text("X: %.2f", g_pPlayer->pos.x);
+    //        ImGui::SameLine();
+    //        ImGui::Text("Y: %.2f", g_pPlayer->pos.x);
+    //
+    //        ImGui::Text("HP: %i / %i", g_pPlayer->hp, g_pPlayer->maxHP);
+    //        ImGui::Text("MP: %.0f / %i", g_pPlayer->mp, g_pPlayer->maxMP);
+    //    }
+    //}
+
+    //RECT windowRect;
+    //if (GetClientRect(g_hWindow, &windowRect) && g_pPlayer)
+    //{
+    //    ImDrawList* draw = ImGui::GetBackgroundDrawList();
+    //
+    //    WorldToScreenPoint worldToScreenPoint = (WorldToScreenPoint)(g_pBaseAddress + 0xD6E820);
+    //    Vector3 playerScreenPoint = worldToScreenPoint(g_pMainCamera, g_pPlayer->pos2);
+    //
+    //    for (int i = 0; i < g_aEntityList.size(); i++) {
+    //        uintptr_t entity = g_aEntityList[i];
+    //        float x = *(float*)(entity + 0x3C);
+    //        float y = *(float*)(entity + 0x40);
+    //        std::cout << x << "," << y << std::endl;
+    //
+    //        //Vector3 vecScreenPoint = worldToScreenPoint(g_pMainCamera, { x, y, 0.0f });
+    //        //ImVec2 origin = ImVec2(playerScreenPoint.x, playerScreenPoint.y);
+    //        //ImVec2 target = ImVec2(vecScreenPoint.x, vecScreenPoint.y);
+    //        //draw->AddLine(origin, target, IM_COL32_BLACK, 3.0f);
+    //    
+    //        //float x = *(float*)(entity + 0x30);
+    //        //std::cout << x << ",";
+    //    }
+    //
+    //    //ImVec2 mousePos = ImGui::GetMousePos();
+    //    //
+    //    //ImVec2 origin = ImVec2(playerScreenPoint.x, playerScreenPoint.y);
+    //    //ImVec2 target = mousePos;
+    //    //
+    //    //draw->AddLine(origin, target, IM_COL32_BLACK, 3.0f);
+    //
+    //    //WorldToScreenPoint screenToWorldPoint = (WorldToScreenPoint)(g_pBaseAddress + 0xd6e410);
+    //    //Vector3 mouseWorldPoint = screenToWorldPoint(g_pMainCamera, { mousePos.x, mousePos.y, 0.0f });
+    //}
 
     ImGui::End();
     ImGui::Render();

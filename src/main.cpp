@@ -1,11 +1,12 @@
 #include "pch.h"
 
 #include "globals.h"
-#include "helpers.h"
 #include "gui.h"
 #include "hooks.h"
 
-// Custom injected code entry point
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
+
 DWORD WINAPI MainThread(HMODULE hModule)
 {
     CreateConsole();
@@ -14,22 +15,47 @@ DWORD WINAPI MainThread(HMODULE hModule)
     InitHooks();
     LoadSettings();
 
-    std::cout << "GameAssembly.dll " << g_pBaseAddress << std::endl;
-
     while (true) {
         if (GetAsyncKeyState(VK_END) & 1) {
             break;
         }
 
-        g_pPlayer = *(Player**)FindDMAAddy(g_pBaseAddress + 0x3A41998, { 0x8, 0x160, 0x38 });
-
         if (g_bNoclip && g_pPlayer)
         {
-            float change = 0.01f;
-            if (GetAsyncKeyState(0x57)) g_pPlayer->pos.y -= change; // w - up
-            if (GetAsyncKeyState(0x41)) g_pPlayer->pos.x -= change; // a - left
-            if (GetAsyncKeyState(0x53)) g_pPlayer->pos.y += change; // s - down
-            if (GetAsyncKeyState(0x44)) g_pPlayer->pos.x += change; // d - right
+            if (GetAsyncKeyState(0x57)) g_pPlayer->pos.y -= 0.01 * g_fNoclipChange; // w - up
+            if (GetAsyncKeyState(0x41)) g_pPlayer->pos.x -= 0.01 * g_fNoclipChange; // a - left
+            if (GetAsyncKeyState(0x53)) g_pPlayer->pos.y += 0.01 * g_fNoclipChange; // s - down
+            if (GetAsyncKeyState(0x44)) g_pPlayer->pos.x += 0.01 * g_fNoclipChange; // d - right
+        }
+
+        static bool niggmode = false;
+        if (GetAsyncKeyState(VK_INSERT) & 1) {
+        
+            niggmode = !niggmode;
+            if (niggmode)
+            {
+                g_bNoclip = true;
+                //g_fNoclipChange = 50.0f;
+                PlaySound(TEXT("C:\\Users\\Extacy\\source\\repos\\RotMG-Internal\\x64\\Debug\\picture_cut.wav"), NULL, SND_FILENAME | SND_ASYNC);
+            }
+            else
+            {
+                g_bNoclip = false;
+                //g_fNoclipChange = 1.0f;
+                PlaySound(NULL, NULL, SND_ASYNC);
+            }
+        }
+
+        if (GetAsyncKeyState(VK_DELETE) & 1) {
+            //String* string;
+            //string->length = 1;
+            //string->value[0] = L'\x48';
+            //
+            //Notification_MACCMNMIHPN notification;
+            //notification.Message_HMDIOGPMABE = string;
+            //notification.ObjectID_LADFHJEFKEC
+        
+            //notification.Mess;age_HMDIOGPMABE = "";
         }
 
         if (GetAsyncKeyState(VK_SPACE) & 1) {
@@ -38,8 +64,9 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         Sleep(5);
     }
-    
+
     RemoveConsole();
+    RemoveHooks();
     RemoveGui();
     FreeLibraryAndExitThread(hModule, 0);
     return TRUE;
