@@ -20,14 +20,6 @@ void* Detour_GetPlayer(Player2 player)
     return Original_GetPlayer(player);
 }
 
-typedef void* (__cdecl* _ReceivePacket)(uintptr_t __this, uintptr_t packet);
-_ReceivePacket Original_ReceivePacket = nullptr;
-void* Detour_ReceivePacket(uintptr_t __this, uintptr_t packet)
-{
-    std::cout << std::hex << packet << std::endl;
-    return Original_ReceivePacket(__this, packet);
-}
-
 //typedef void* (__cdecl* _TileSetColor)(void* __this, Color value);
 //_TileSetColor Original_Tile_SetColor = nullptr;
 //void* Detour_Tile_SetColor(void* __this, Color value)
@@ -94,13 +86,6 @@ bool InitHooks()
     if (MH_CreateHook(GetPlayer, Detour_GetPlayer, reinterpret_cast<LPVOID*>(&Original_GetPlayer)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour GetPlayer", "RotMGInternal", MB_OK);
-        return false;
-    }
-
-    void* ReceivePacket = (void*)(g_pBaseAddress + 0x64fa40);
-    if (MH_CreateHook(ReceivePacket, Detour_ReceivePacket, reinterpret_cast<LPVOID*>(&Original_ReceivePacket)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour ReceivePacket", "RotMGInternal", MB_OK);
         return false;
     }
 

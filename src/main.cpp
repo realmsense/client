@@ -4,8 +4,14 @@
 #include "gui.h"
 #include "hooks.h"
 
-#include <mmsystem.h>
-#pragma comment(lib, "winmm.lib")
+/*
+TODO:
+Go through globals.cpp pointers and fix the hooks (fix the uintptr_t* shit
+
+Add back all hacks to gui tab (and fix/update offsets)
+
+Add packet reading/writing functionality
+*/
 
 DWORD WINAPI MainThread(HMODULE hModule)
 {
@@ -28,34 +34,14 @@ DWORD WINAPI MainThread(HMODULE hModule)
             if (GetAsyncKeyState(0x44)) g_pPlayer->pos.x += 0.01 * g_fNoclipChange; // d - right
         }
 
-        static bool niggmode = false;
-        if (GetAsyncKeyState(VK_INSERT) & 1) {
+        if (GetAsyncKeyState(VK_INSERT) & 1)
+        {
         
-            niggmode = !niggmode;
-            if (niggmode)
-            {
-                g_bNoclip = true;
-                //g_fNoclipChange = 50.0f;
-                PlaySound(TEXT("C:\\Users\\Extacy\\source\\repos\\RotMG-Internal\\x64\\Debug\\picture_cut.wav"), NULL, SND_FILENAME | SND_ASYNC);
-            }
-            else
-            {
-                g_bNoclip = false;
-                //g_fNoclipChange = 1.0f;
-                PlaySound(NULL, NULL, SND_ASYNC);
-            }
         }
 
-        if (GetAsyncKeyState(VK_DELETE) & 1) {
-            //String* string;
-            //string->length = 1;
-            //string->value[0] = L'\x48';
-            //
-            //Notification_MACCMNMIHPN notification;
-            //notification.Message_HMDIOGPMABE = string;
-            //notification.ObjectID_LADFHJEFKEC
-        
-            //notification.Mess;age_HMDIOGPMABE = "";
+        if (GetAsyncKeyState(VK_DELETE) & 1)
+        {
+
         }
 
         if (GetAsyncKeyState(VK_SPACE) & 1) {

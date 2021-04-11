@@ -13,6 +13,7 @@ uintptr_t* g_pCameraManager;
 // Hack Settings
 bool g_bNoclip;
 bool g_bDisableFog;
+bool g_bNiggaMode;
 float g_fZoomAmount;
 float g_fNoclipChange;
 int g_iAutoNexusPercent;

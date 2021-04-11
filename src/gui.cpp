@@ -10,6 +10,9 @@
 #include <map>
 #include <sstream>
 
+#include <mmsystem.h>
+#pragma comment(lib, "winmm.lib")
+
 typedef HRESULT(__stdcall* Present) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -78,6 +81,28 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             ImGui::Checkbox("Noclip", &g_bNoclip);
             ImGui::SliderFloat("Noclip Amount", &g_fNoclipChange, 1.0, 100.0);
 
+            ImGui::EndTabItem();
+        }
+
+        // Debug
+        if (ImGui::BeginTabItem(":realtrollblack:"))
+        {
+            static bool niggmode = false;
+            if (ImGui::Checkbox("nigga mode", &niggmode))
+            {
+                if (niggmode)
+                {
+                    g_bNoclip = true;
+                    g_fNoclipChange = 77.7f;
+                    PlaySound(TEXT("C:\\Users\\Extacy\\source\\repos\\RotMG-Internal\\x64\\Debug\\picture_cut.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                }
+                else
+                {
+                    g_bNoclip = false;
+                    g_fNoclipChange = 1.0f;
+                    PlaySound(NULL, NULL, SND_ASYNC);
+                }
+            }
             ImGui::EndTabItem();
         }
 

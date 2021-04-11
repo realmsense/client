@@ -12,6 +12,7 @@ extern Camera_set_orthographicSize camera_set_orthographicSize;
 
 // Hack Settings
 extern bool g_bNoclip;
+extern bool g_bNiggaMode;
 extern float g_fNoclipChange;
 extern bool g_bDisableFog;
 extern float g_fZoomAmount;
