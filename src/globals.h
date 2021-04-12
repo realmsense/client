@@ -17,6 +17,11 @@ extern _Behaviour_set_enabled Behaviour_set_enabled;
 typedef bool (__cdecl* _Behaviour_get_enabled)(uintptr_t __this);
 extern _Behaviour_get_enabled Behaviour_get_enabled;
 
+typedef Vector3(__cdecl* _WorldToScreen)(uintptr_t camera, Vector3 position);
+extern _WorldToScreen WorldToScreen;
+
+typedef Vector3(__cdecl* _ScreenToWorld)(uintptr_t camera, Vector3 position);
+extern _ScreenToWorld ScreenToWorld;
 
 // Hack Settings
 

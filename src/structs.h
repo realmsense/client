@@ -5,7 +5,6 @@ struct Vector3 { float x, y, z; };
 struct Color { float r, g, b, a; };
 
 typedef uintptr_t (__cdecl* GetMainCamera)(void);
-typedef Vector3 (__cdecl* WorldToScreenPoint)(void* camera, Vector3 position);
 
 class String
 {
@@ -82,3 +81,9 @@ public:
 
 // UnityEngine.Behaviour.get_enabled
 #define OFFSET_BEHAVIOUR_GET_ENABLED 0x220d570
+
+// UnityEngine.Camera.WorldToScreenPoint
+#define OFFSET_WORLD_TO_SCREEN 0x220f640
+
+// UnityEngine.Camera.ScreenToWorldPoint
+#define OFFSET_SCREEN_TO_WORLD 0x220f230
