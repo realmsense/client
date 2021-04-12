@@ -116,7 +116,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 {
                     g_bNoclip = true;
                     g_fNoclipChange = 77.7f;
-                    PlaySound(TEXT("C:\\Users\\Extacy\\source\\repos\\RotMG-Internal\\x64\\Debug\\picture_cut.wav"), NULL, SND_FILENAME | SND_ASYNC);
+                    PlaySound(TEXT("C:\\Users\\Extacy\\Desktop\\picture_cut.wav"), NULL, SND_FILENAME | SND_ASYNC);
                 }
                 else
                 {
@@ -217,53 +217,6 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
         ImGui::EndTabBar();
     }
-
-    //if (g_pPlayer)
-    //{
-    //    if (ImGui::CollapsingHeader("Player Info"))
-    //    {
-    //        ImGui::Text("X: %.2f", g_pPlayer->pos.x);
-    //        ImGui::SameLine();
-    //        ImGui::Text("Y: %.2f", g_pPlayer->pos.x);
-    //
-    //        ImGui::Text("HP: %i / %i", g_pPlayer->hp, g_pPlayer->maxHP);
-    //        ImGui::Text("MP: %.0f / %i", g_pPlayer->mp, g_pPlayer->maxMP);
-    //    }
-    //}
-
-    //RECT windowRect;
-    //if (GetClientRect(g_hWindow, &windowRect) && g_pPlayer)
-    //{
-    //    ImDrawList* draw = ImGui::GetBackgroundDrawList();
-    //
-    //    WorldToScreenPoint worldToScreenPoint = (WorldToScreenPoint)(g_pBaseAddress + 0xD6E820);
-    //    Vector3 playerScreenPoint = worldToScreenPoint(g_pMainCamera, g_pPlayer->pos2);
-    //
-    //    for (int i = 0; i < g_aEntityList.size(); i++) {
-    //        uintptr_t entity = g_aEntityList[i];
-    //        float x = *(float*)(entity + 0x3C);
-    //        float y = *(float*)(entity + 0x40);
-    //        std::cout << x << "," << y << std::endl;
-    //
-    //        //Vector3 vecScreenPoint = worldToScreenPoint(g_pMainCamera, { x, y, 0.0f });
-    //        //ImVec2 origin = ImVec2(playerScreenPoint.x, playerScreenPoint.y);
-    //        //ImVec2 target = ImVec2(vecScreenPoint.x, vecScreenPoint.y);
-    //        //draw->AddLine(origin, target, IM_COL32_BLACK, 3.0f);
-    //    
-    //        //float x = *(float*)(entity + 0x30);
-    //        //std::cout << x << ",";
-    //    }
-    //
-    //    //ImVec2 mousePos = ImGui::GetMousePos();
-    //    //
-    //    //ImVec2 origin = ImVec2(playerScreenPoint.x, playerScreenPoint.y);
-    //    //ImVec2 target = mousePos;
-    //    //
-    //    //draw->AddLine(origin, target, IM_COL32_BLACK, 3.0f);
-    //
-    //    //WorldToScreenPoint screenToWorldPoint = (WorldToScreenPoint)(g_pBaseAddress + 0xd6e410);
-    //    //Vector3 mouseWorldPoint = screenToWorldPoint(g_pMainCamera, { mousePos.x, mousePos.y, 0.0f });
-    //}
 
     ImGui::End();
     ImGui::Render();

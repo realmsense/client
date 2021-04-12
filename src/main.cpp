@@ -6,13 +6,6 @@
 
 #include <sstream>
 
-/*
-TODO:
-Add more logging comments (especially debug if pointers are null etc)
-
-Add packet reading/writing functionality
-*/
-
 DWORD WINAPI MainThread(HMODULE hModule)
 {
     CreateConsole();
