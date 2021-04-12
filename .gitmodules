@@ -1,9 +1,0 @@
-[submodule "src/minhook"]
-	path = src/minhook
-	url = https://github.com/TsudaKageyu/minhook
-[submodule "src/kiero"]
-	path = src/kiero
-	url = https://github.com/Rebzzel/kiero
-[submodule "src/imgui"]
-	path = src/imgui
-	url = https://github.com/ocornut/imgui
