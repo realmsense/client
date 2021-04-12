@@ -30,12 +30,23 @@ std::string readUnityString(String* str)
 {
     uintptr_t addr = (uintptr_t)str;
     std::stringstream sstream;
-    int length = *(int*)(addr + 0x10);
+    int length = str->length;
     for (int i = 0; i < length; i++) {
         wchar_t charAt = *(wchar_t*)(addr + 0x14 + (0x2 * i));
         sstream << (char)charAt;
     }
     return sstream.str();
+}
+
+void writeUnityString(String* &target, char* source)
+{
+    uintptr_t addr = (uintptr_t)target;
+    size_t length = strlen(source);
+    target->length = length;
+    for (int i = 0; i < length; i++)
+    {
+        *(wchar_t*)(addr + 0x14 + (0x2 * i)) = (char)source[i];
+    }
 }
 
 uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)
