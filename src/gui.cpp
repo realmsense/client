@@ -177,11 +177,16 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
             if (ImGui::TreeNode("Player Info"))
             {
-                float columnWidth = 100.0f;
+                float columnWidth = 130.0f;
                 ImGui::Text("Name");
                 ImGui::SameLine(columnWidth);
                 std::string playerName = readUnityString(g_pPlayer->name);
                 ImGui::Text(playerName.c_str());
+
+                ImGui::Text("Object Name");
+                ImGui::SameLine(columnWidth);
+                std::string objectName = readUnityString(g_pPlayer->objectProps->name);
+                ImGui::Text(objectName.c_str());
 
                 ImGui::Text("HP");
                 ImGui::SameLine(columnWidth);
