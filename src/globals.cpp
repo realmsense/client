@@ -1,9 +1,9 @@
 #include "pch.h"
-#include <vector>
+#include <unordered_set>
 
 // Pointers (game objects)
 uintptr_t g_pBaseAddress;
-Player* g_pPlayer;
+Entity* g_pPlayer;
 uintptr_t g_pMainCamera;
 uintptr_t g_pCameraManager;
 
@@ -14,7 +14,9 @@ _Behaviour_set_enabled Behaviour_set_enabled;
 _WorldToScreen WorldToScreen;
 _ScreenToWorld ScreenToWorld;
 
-// Hack Settings
+// Variables / Settings
+bool g_bWindowFocused;
+std::unordered_set<Entity*> g_aEnemyList;
 
 /* movement */
 bool g_bNoclip;
@@ -32,7 +34,7 @@ void InitPointers()
     // The remaining pointers will be set from detoured functions
     g_pBaseAddress = (uintptr_t)GetModuleHandle(L"GameAssembly.dll");
 
-    GetMainCamera getMainCamera = (GetMainCamera)(g_pBaseAddress + OFFSET_GET_MAINCAMERA);
+    _GetMainCamera getMainCamera = (_GetMainCamera)(g_pBaseAddress + OFFSET_GET_MAINCAMERA);
     g_pMainCamera = getMainCamera();
 
     Camera_set_orthographicSize = (_Camera_set_orthographicSize)(g_pBaseAddress + OFFSET_SET_ORTHOGRAPHICSIZE);
@@ -44,8 +46,8 @@ void InitPointers()
 
 void LoadSettings()
 {
-    // TODO: load from save settings
 
+    // TODO: load from save settings
     /* movement */
     g_bNoclip = false;
     g_fNoclipChange = 1.0f;

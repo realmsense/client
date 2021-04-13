@@ -15,7 +15,15 @@ DWORD WINAPI MainThread(HMODULE hModule)
     LoadSettings();
 
     while (true) {
-        if (GetAsyncKeyState(VK_END) & 1) {
+
+        // Ignore keybinds if window isn't focused
+        if (!g_bWindowFocused)
+        {
+            continue;
+        }
+
+        if (GetAsyncKeyState(VK_END) & 1)
+        {
             break;
         }
 
@@ -37,7 +45,9 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         }
 
-        if (GetAsyncKeyState(VK_SPACE) & 1) {
+        // v key - toggle noclip
+        if (GetAsyncKeyState(0x56) & 1)
+        {
             g_bNoclip = !g_bNoclip;
         }
 

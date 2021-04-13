@@ -12,12 +12,38 @@ void* Detour_UnityThread_Update(uintptr_t __this)
     return Original_UnityThread_Update(__this);
 }
 
-typedef void* (__cdecl* _GetPlayer)(Player __this);
+typedef void* (__cdecl* _GetPlayer)(Entity __this);
 _GetPlayer Original_GetPlayer = nullptr;
-void* Detour_GetPlayer(Player player)
+void* Detour_GetPlayer(Entity player)
 {
+    if (&player != g_pPlayer)
+    {
+        // changed map, clear stuff
+        g_aEnemyList.clear();
+    }
+
     g_pPlayer = &player;
+    
+    //std::cout << std::hex << *(uintptr_t*)&player << std::endl;
     return Original_GetPlayer(player);
+}
+
+typedef void* (__cdecl* _GetEnemy)(Entity enemy);
+_GetEnemy Original_GetEnemy = nullptr;
+void* Detour_GetEnemy(Entity enemy)
+{
+    if (&enemy == g_pPlayer)
+    {
+        return Original_GetEnemy(enemy);
+    }
+
+    // Probably incorrect naming by DECA
+    if (enemy.entityType == EntityType::Character)
+    {
+        g_aEnemyList.insert(&enemy);
+    }
+
+    return Original_GetEnemy(enemy);
 }
 
 typedef void* (__cdecl* _TileSetColor)(uintptr_t __this, Color value);
@@ -46,6 +72,22 @@ void* Detour_CameraManager_Update(uintptr_t cameraManager)
     return Original_CameraManager_Update(cameraManager);
 }
 
+
+typedef void* (__cdecl* _Add_Dynamic_Object)(uintptr_t __this, float x, float y, Color color, uintptr_t entity);
+_Add_Dynamic_Object Original_Add_Dynamic_Object = nullptr;
+void* Detour_Add_Dynamic_Object(uintptr_t __this, float x, float y, Color color, uintptr_t entity)
+{
+    if (entity)
+    {
+        std::cout << x << "," << y << std::endl;
+        std::cout << color.r << "," << color.g << "," << color.b << std::endl;
+        std::cout << std::hex << entity << std::endl;
+        std::cout << std::endl;
+    }
+
+    return Original_Add_Dynamic_Object(__this, x, y, color, entity);
+}
+
 bool InitHooks()
 {
     MH_Initialize();
@@ -58,11 +100,18 @@ bool InitHooks()
         return false;
     }
     
-    void* GetPlayer = (void*)(g_pBaseAddress + OFFSET_GETPLAYER);
+    void* GetPlayer = (void*)(g_pBaseAddress + OFFSET_GET_PLAYER);
     if (MH_CreateHook(GetPlayer, Detour_GetPlayer, reinterpret_cast<LPVOID*>(&Original_GetPlayer)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour GetPlayer", "RotMGInternal", MB_OK);
         return false;
+    }
+
+    void* GetEnemy = (void*)(g_pBaseAddress + OFFSET_GET_ENEMY);
+    if (MH_CreateHook(GetEnemy, Detour_GetEnemy, reinterpret_cast<LPVOID*>(&Original_GetEnemy)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour GetEnemy", "RotMG Internal", MB_OK);
+        return 1;
     }
 
     void* SpriteRenderer_SetColor = (void*)(g_pBaseAddress + OFFSET_SPRITE_SET_COLOR);

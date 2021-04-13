@@ -156,7 +156,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 ImGui::TreePop();
             }
 
-            if (ImGui::TreeNode("Player Info"))
+            if (ImGui::TreeNode("Entity Info"))
             {
                 float columnWidth = 100.0f;
                 ImGui::Text("Name");
@@ -177,9 +177,13 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 ImGui::Text("X: %.2f Y: %.2f", g_pPlayer->pos.x, g_pPlayer->pos.y);
 
                 ImGui::Text("Tile");
-                std::string tileName = readUnityString(g_pPlayer->standingTile->OBGKICHNIDN->name);
-                ImGui::SameLine(columnWidth);
-                ImGui::Text(tileName.c_str());
+
+                if (g_pPlayer->standingTile)
+                {
+                    std::string tileName = readUnityString(g_pPlayer->standingTile->OBGKICHNIDN->name);
+                    ImGui::SameLine(columnWidth);
+                    ImGui::Text(tileName.c_str());
+                }
 
                 //stats
                 ImGui::Text("Attack");
@@ -212,12 +216,59 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 ImGui::TreePop();
             }
 
+            if (ImGui::Button("Clear Enemy List"))
+            {
+                g_aEnemyList.clear();
+            }
+
+
             ImGui::EndTabItem();
         }
 
         ImGui::EndTabBar();
     }
 
+    RECT windowRect;
+    g_bWindowFocused = GetClientRect(g_hWindow, &windowRect);
+
+    if (g_bWindowFocused && g_pPlayer)
+    {
+        /*
+        * For some reason unity flips the Y coordinate when using WorldToSreen/ScreenToWorld
+        * So we have to flip the value every time it's passed/returned.
+        */
+
+        static float hue = 1.0f;
+        static float speed = 0.0035f;
+        hue += speed;
+        if (hue > 360.0f) hue = 1.0f;
+        ImColor rainbow = ImColor::HSV(hue, 1.0f, 1.0f);
+
+        ImDrawList* draw = ImGui::GetBackgroundDrawList();
+
+        Vector3 playerPos = { g_pPlayer->pos.x, (g_pPlayer->pos.y) * -1, 0.0f };
+        Vector3 playerScreenPoint = WorldToScreen(g_pMainCamera, playerPos);
+
+        ImVec2 mousePos = ImGui::GetMousePos();
+
+        ImVec2 origin = { playerScreenPoint.x, playerScreenPoint.y };
+        ImVec2 target = mousePos;
+
+        for (auto& x : g_aEnemyList)
+        {
+            Entity* entity = x;
+            Vector3 entityPos = { entity->pos.x, (entity->pos.y) * -1, 0.0f };
+            Vector3 entityScreenPos = WorldToScreen(g_pMainCamera, entityPos);
+
+            // Flip y coordinate, unity is weird
+            float windowHeight = windowRect.bottom - windowRect.top;
+            entityScreenPos.y = windowHeight - entityScreenPos.y;
+
+            ImVec2 target = ImVec2(entityScreenPos.x, entityScreenPos.y);
+            draw->AddLine(origin, target, rainbow, 3.0f);
+        }
+    }
+    
     ImGui::End();
     ImGui::Render();
 

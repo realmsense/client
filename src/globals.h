@@ -1,29 +1,22 @@
 #include "pch.h"
-#include <vector>
+#include <unordered_set>
 
 // Pointers (game objects)
 extern uintptr_t g_pBaseAddress;
-extern Player* g_pPlayer;
+extern Entity* g_pPlayer;
 extern uintptr_t g_pMainCamera;
 extern uintptr_t g_pCameraManager;
 
 // Functions
-typedef void* (__cdecl* _Camera_set_orthographicSize)(uintptr_t UnityEngine_Camera, float amount);
 extern _Camera_set_orthographicSize Camera_set_orthographicSize;
-
-typedef void* (__cdecl* _Behaviour_set_enabled)(uintptr_t __this, bool value);
 extern _Behaviour_set_enabled Behaviour_set_enabled;
-
-typedef bool (__cdecl* _Behaviour_get_enabled)(uintptr_t __this);
 extern _Behaviour_get_enabled Behaviour_get_enabled;
-
-typedef Vector3(__cdecl* _WorldToScreen)(uintptr_t camera, Vector3 position);
 extern _WorldToScreen WorldToScreen;
-
-typedef Vector3(__cdecl* _ScreenToWorld)(uintptr_t camera, Vector3 position);
 extern _ScreenToWorld ScreenToWorld;
 
-// Hack Settings
+// Variables / Settings
+extern bool g_bWindowFocused;
+extern std::unordered_set<Entity*> g_aEnemyList;
 
 /* movement */
 extern bool g_bNoclip;
@@ -34,8 +27,6 @@ extern bool g_bNiggaMode;
 extern bool g_bDisableFog;
 extern float g_fZoomAmount;
 extern bool g_bDisablePerspectiveEditor;
-
-extern std::vector<uintptr_t> g_aEntityList;
 
 void InitPointers();
 void LoadSettings();
