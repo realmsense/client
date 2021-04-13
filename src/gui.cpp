@@ -141,22 +141,41 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 map.insert(std::pair<std::string, uintptr_t>("g_pCameraManager", g_pCameraManager));
                 map.insert(std::pair<std::string, uintptr_t>("g_pMainCamera", g_pMainCamera));
                 map.insert(std::pair<std::string, uintptr_t>("g_pPlayer", reinterpret_cast<uintptr_t>(g_pPlayer)));
-                for (auto const& x : map)
+                for (auto &ptr : map)
                 {
-                    std::string str1 = ptrToHex(x.second);
-                    const char* str = str1.c_str();
-                    ImGui::PushID(str);
-                    ImGui::Text(x.first.c_str());
+                    std::string ptrHex = ptrToHex(ptr.second);
+                    ImGui::PushID(ptrHex.c_str());
+                    ImGui::Text(ptr.first.c_str());
                     ImGui::SameLine(140);
-                    ImGui::Text(str);
+                    ImGui::Text(ptrHex.c_str());
                     ImGui::SameLine(240);
-                    if (ImGui::Button("Copy")) ImGui::SetClipboardText(str);
+                    if (ImGui::Button("Copy")) ImGui::SetClipboardText(ptrHex.c_str());
                     ImGui::PopID();
                 }
+
+                if (ImGui::TreeNode("Enemy List"))
+                {
+                    for (auto& enemy : g_aEnemyList)
+                    {
+                        std::string enemyName = readUnityString(enemy->objectProps->name);
+                        std::string enemyPtrHex = ptrToHex((uintptr_t)enemy).c_str();
+
+                        ImGui::PushID(enemyName.c_str());
+                        ImGui::Text(enemyName.c_str());
+                        ImGui::SameLine(140);
+                        ImGui::Text(enemyPtrHex.c_str());
+                        ImGui::SameLine(240);
+                        if (ImGui::Button("Copy")) ImGui::SetClipboardText(enemyPtrHex.c_str());
+                        ImGui::PopID();
+                    }
+
+                    ImGui::TreePop();
+                }
+
                 ImGui::TreePop();
             }
 
-            if (ImGui::TreeNode("Entity Info"))
+            if (ImGui::TreeNode("Player Info"))
             {
                 float columnWidth = 100.0f;
                 ImGui::Text("Name");
@@ -254,19 +273,24 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         ImVec2 origin = { playerScreenPoint.x, playerScreenPoint.y };
         ImVec2 target = mousePos;
 
-        for (auto& x : g_aEnemyList)
+        ImGui::SetWindowFontScale(1.5);
+        for (auto &x : g_aEnemyList)
         {
-            Entity* entity = x;
-            Vector3 entityPos = { entity->pos.x, (entity->pos.y) * -1, 0.0f };
-            Vector3 entityScreenPos = WorldToScreen(g_pMainCamera, entityPos);
+            Entity* enemy = x;
+            Vector3 enemyPos = { enemy->pos.x, (enemy->pos.y) * -1, 0.0f };
+            Vector3 enemyScreenPos = WorldToScreen(g_pMainCamera, enemyPos);
 
             // Flip y coordinate, unity is weird
-            float windowHeight = windowRect.bottom - windowRect.top;
-            entityScreenPos.y = windowHeight - entityScreenPos.y;
+            float windowHeight = (float)(windowRect.bottom - windowRect.top);
+            enemyScreenPos.y = windowHeight - enemyScreenPos.y;
 
-            ImVec2 target = ImVec2(entityScreenPos.x, entityScreenPos.y);
+            ImVec2 target = ImVec2(enemyScreenPos.x, enemyScreenPos.y);
             draw->AddLine(origin, target, rainbow, 3.0f);
+
+            std::string enemyName = readUnityString(enemy->objectProps->name);
+            draw->AddText(target, IM_COL32_BLACK, enemyName.c_str());
         }
+        ImGui::SetWindowFontScale(1.0);
     }
     
     ImGui::End();
