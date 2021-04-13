@@ -146,7 +146,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                     std::string ptrHex = ptrToHex(ptr.second);
                     ImGui::PushID(ptrHex.c_str());
                     ImGui::Text(ptr.first.c_str());
-                    ImGui::SameLine(140);
+                    ImGui::SameLine(160);
                     ImGui::Text(ptrHex.c_str());
                     ImGui::SameLine(240);
                     if (ImGui::Button("Copy")) ImGui::SetClipboardText(ptrHex.c_str());
@@ -155,6 +155,9 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                 if (ImGui::TreeNode("Enemy List"))
                 {
+                    ImGui::Checkbox("Enemy Tracers", &g_bEnemyTracers);
+                    ImGui::Checkbox("Enemy Names", &g_bEnemyNames);
+
                     for (auto& enemy : g_aEnemyList)
                     {
                         std::string enemyName = readUnityString(enemy->objectProps->name);
@@ -245,7 +248,6 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 g_aEnemyList.clear();
             }
 
-
             ImGui::EndTabItem();
         }
 
@@ -278,8 +280,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         ImVec2 origin = { playerScreenPoint.x, playerScreenPoint.y };
         ImVec2 target = mousePos;
 
-        ImGui::SetWindowFontScale(1.2f);
-
+        //ImGui::SetWindowFontScale(1.2f);
         for (auto &x : g_aEnemyList)
         {
             Entity* enemy = x;
@@ -291,12 +292,17 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             enemyScreenPos.y = windowHeight - enemyScreenPos.y;
 
             ImVec2 target = ImVec2(enemyScreenPos.x, enemyScreenPos.y);
-            draw->AddLine(origin, target, rainbow, 3.0f);
+            if (g_bEnemyTracers)
+                draw->AddLine(origin, target, rainbow, 3.0f);
 
-            std::string enemyName = readUnityString(enemy->objectProps->name);
-            draw->AddText(target, IM_COL32_BLACK, enemyName.c_str());
+            if (g_bEnemyNames)
+            {
+                std::string enemyName = readUnityString(enemy->objectProps->name);
+                draw->AddText(ImGui::GetFont(), ImGui::GetFontSize() * 1.2f, target, IM_COL32_BLACK, enemyName.c_str());
+                //draw->AddText(target, IM_COL32_BLACK, enemyName.c_str());
+            }
         }
-        ImGui::SetWindowFontScale(1.0);
+        //ImGui::SetWindowFontScale(1.0);
     }
     
     ImGui::End();

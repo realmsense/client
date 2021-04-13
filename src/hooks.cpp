@@ -23,22 +23,31 @@ void* Detour_GetPlayer(Entity player)
     }
 
     g_pPlayer = &player;
-    
+
     //std::cout << std::hex << *(uintptr_t*)&player << std::endl;
     return Original_GetPlayer(player);
 }
 
-typedef void* (__cdecl* _GetEntity)(Entity enemy);
+typedef void* (__cdecl* _GetEntity)(Entity entity);
 _GetEntity Original_GetEntity = nullptr;
-void* Detour_GetEntity(Entity enemy)
+void* Detour_GetEntity(Entity entity)
 {
-    // Weird naming by DECA, but "Character" is really an enemy
-    if (enemy.entityType == EntityType::Character)
+    // ignore if this is our player
+    if (&entity == g_pPlayer)
     {
-        g_aEnemyList.insert(&enemy);
+        return Detour_GetEntity(entity);
     }
 
-    return Original_GetEntity(enemy);
+    // TODO: we should probably be using one std::map?
+    // to store one large entity list but the enum EntityType
+
+    // Weird naming by DECA, but "Character" is really an enemy
+    if (entity.entityType == EntityType::Character)
+    {
+        g_aEnemyList.insert(&entity);
+    }
+
+    return Original_GetEntity(entity);
 }
 
 typedef void* (__cdecl* _TileSetColor)(uintptr_t __this, Color value);
@@ -48,7 +57,7 @@ void* Detour_Tile_SetColor(uintptr_t __this, Color value)
     // don't change the tile color if it is being darkened
     if (g_bDisableFog
         && (value.r != 1 || value.g != 1 || value.b != 1 || value.a != 1)
-    ) {
+        ) {
         return nullptr;
     }
 
@@ -94,7 +103,7 @@ bool InitHooks()
         MessageBoxA(NULL, "Failed to Detour UnityThread_Update", "RotMGInternal", MB_OK);
         return false;
     }
-    
+
     void* GetPlayer = (void*)(g_pBaseAddress + OFFSET_GET_PLAYER);
     if (MH_CreateHook(GetPlayer, Detour_GetPlayer, reinterpret_cast<LPVOID*>(&Original_GetPlayer)) != MH_OK)
     {

@@ -28,6 +28,10 @@ bool g_bDisableFog;
 float g_fZoomAmount;
 bool g_bDisablePerspectiveEditor;
 
+/* debug */
+bool g_bEnemyTracers;
+bool g_bEnemyNames;
+
 void InitPointers()
 {
     // Load pointers we can get easily from functions
@@ -57,4 +61,8 @@ void LoadSettings()
     g_bDisableFog = true;
     g_fZoomAmount = 7.2f;
     g_bDisablePerspectiveEditor = true;
+
+    /* debug */
+    g_bEnemyTracers = false;
+    g_bEnemyNames = false;
 }

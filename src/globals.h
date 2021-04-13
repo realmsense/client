@@ -1,6 +1,10 @@
 #include "pch.h"
 #include <unordered_set>
 
+void InitPointers();
+void LoadSettings();
+
+
 // Pointers (game objects)
 extern uintptr_t g_pBaseAddress;
 extern Entity* g_pPlayer;
@@ -28,5 +32,6 @@ extern bool g_bDisableFog;
 extern float g_fZoomAmount;
 extern bool g_bDisablePerspectiveEditor;
 
-void InitPointers();
-void LoadSettings();
+/* debug */
+extern bool g_bEnemyTracers;
+extern bool g_bEnemyNames;
