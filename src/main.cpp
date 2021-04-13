@@ -14,7 +14,17 @@ DWORD WINAPI MainThread(HMODULE hModule)
     InitHooks();
     LoadSettings();
 
-    while (true) {
+    while (true)
+    {
+        // Remove enemies that no longer exist - https://stackoverflow.com/a/15662547
+        for (auto it = g_aEnemyList.begin(); it != g_aEnemyList.end();)
+        {
+            Entity* enemy = *it;
+            if (!enemy->alive)
+                it = g_aEnemyList.erase(it);
+            else
+                it++;
+        }
 
         // Ignore keybinds if window isn't focused
         if (!g_bWindowFocused)

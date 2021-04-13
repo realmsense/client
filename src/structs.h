@@ -56,21 +56,22 @@ class Entity
 {
 public:
     char pad_0000[24];                      /*0x0000*/
-	class ObjectProperties *objectProps;    /*0x0018*/  char pad_0020[28];      /*0x0020*/
-	Vector2 pos;                            /*0x003C*/  char pad_0044[20];      /*0x0044*/
-	class Tile *standingTile;               /*0x0058*/  char pad_0060[92];      /*0x0060*/
-	EntityType entityType;                  /*0x00BC*/  char pad_00C0[152];     /*0x00C0*/
-	class String *name;                     /*0x0158*/  char pad_0160[108];     /*0x0160*/
-	int32_t maxHP;                          /*0x01CC*/
-	int32_t hp;                             /*0x01D0*/  char pad_01D4[464];     /*0x01D4*/
-	int32_t attack;                         /*0x03A4*/
-	float speed;                            /*0x03A8*/
-	float dexterity;                        /*0x03AC*/
-	int32_t vitality;                       /*0x03B0*/
-	int32_t wisdom;                         /*0x03B4*/  char pad_03B8[80];      /*0x03B8*/
-	int32_t defense;                        /*0x0408*/  char pad_040C[76];      /*0x040C*/
-	int32_t maxMP;                          /*0x0458*/
-	float mp;                               /*0x045C*/  char pad_0460[8280];    /*0x0460*/
+    class ObjectProperties* objectProps;    /*0x0018*/  char pad_0020[28];      /*0x0020*/
+    Vector2 pos;                            /*0x003C*/  char pad_0044[20];      /*0x0044*/
+    class Tile* standingTile;               /*0x0058*/
+    bool alive;                             /*0x0060*/  char pad_0061[91];      /*0x0061*/
+    EntityType entityType;                  /*0x00BC*/  char pad_00C0[152];     /*0x00C0*/
+    class String* name;                     /*0x0158*/  char pad_0160[108];     /*0x0160*/
+    int32_t maxHP;                          /*0x01CC*/
+    int32_t hp;                             /*0x01D0*/  char pad_01D4[464];     /*0x01D4*/
+    int32_t attack;                         /*0x03A4*/
+    float speed;                            /*0x03A8*/
+    float dexterity;                        /*0x03AC*/
+    int32_t vitality;                       /*0x03B0*/
+    int32_t wisdom;                         /*0x03B4*/  char pad_03B8[80];      /*0x03B8*/
+    int32_t defense;                        /*0x0408*/  char pad_040C[76];      /*0x040C*/
+    int32_t maxMP;                          /*0x0458*/
+    float mp;                               /*0x045C*/  char pad_0460[8280];    /*0x0460*/
 }; //Size: 0x24B8
 
 class Tile

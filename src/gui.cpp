@@ -273,7 +273,8 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         ImVec2 origin = { playerScreenPoint.x, playerScreenPoint.y };
         ImVec2 target = mousePos;
 
-        ImGui::SetWindowFontScale(1.5);
+        ImGui::SetWindowFontScale(1.2f);
+
         for (auto &x : g_aEnemyList)
         {
             Entity* enemy = x;

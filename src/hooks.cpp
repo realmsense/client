@@ -28,22 +28,17 @@ void* Detour_GetPlayer(Entity player)
     return Original_GetPlayer(player);
 }
 
-typedef void* (__cdecl* _GetEnemy)(Entity enemy);
-_GetEnemy Original_GetEnemy = nullptr;
-void* Detour_GetEnemy(Entity enemy)
+typedef void* (__cdecl* _GetEntity)(Entity enemy);
+_GetEntity Original_GetEntity = nullptr;
+void* Detour_GetEntity(Entity enemy)
 {
-    if (&enemy == g_pPlayer)
-    {
-        return Original_GetEnemy(enemy);
-    }
-
-    // Probably incorrect naming by DECA
+    // Weird naming by DECA, but "Character" is really an enemy
     if (enemy.entityType == EntityType::Character)
     {
         g_aEnemyList.insert(&enemy);
     }
 
-    return Original_GetEnemy(enemy);
+    return Original_GetEntity(enemy);
 }
 
 typedef void* (__cdecl* _TileSetColor)(uintptr_t __this, Color value);
@@ -107,10 +102,10 @@ bool InitHooks()
         return false;
     }
 
-    void* GetEnemy = (void*)(g_pBaseAddress + OFFSET_GET_ENEMY);
-    if (MH_CreateHook(GetEnemy, Detour_GetEnemy, reinterpret_cast<LPVOID*>(&Original_GetEnemy)) != MH_OK)
+    void* GetEntity = (void*)(g_pBaseAddress + OFFSET_GET_ENEMY);
+    if (MH_CreateHook(GetEntity, Detour_GetEntity, reinterpret_cast<LPVOID*>(&Original_GetEntity)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour GetEnemy", "RotMG Internal", MB_OK);
+        MessageBoxA(NULL, "Failed to Detour GetEntity", "RotMG Internal", MB_OK);
         return 1;
     }
 
