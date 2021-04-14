@@ -4,7 +4,6 @@
 void InitPointers();
 void LoadSettings();
 
-
 // Pointers (game objects)
 extern uintptr_t g_pBaseAddress;
 extern Entity* g_pPlayer;
@@ -20,6 +19,7 @@ extern _ScreenToWorld ScreenToWorld;
 
 // Variables / Settings
 extern bool g_bWindowFocused;
+extern bool g_bMenuOpen;
 extern std::unordered_set<Entity*> g_aEnemyList;
 
 /* autos */

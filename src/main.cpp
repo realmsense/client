@@ -32,6 +32,12 @@ DWORD WINAPI MainThread(HMODULE hModule)
             continue;
         }
 
+        // ` - toggle menu
+        if (GetAsyncKeyState(VK_OEM_3) & 1)
+        {
+            g_bMenuOpen = !g_bMenuOpen;
+        }
+
         if (GetAsyncKeyState(VK_END) & 1)
         {
             break;

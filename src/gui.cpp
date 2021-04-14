@@ -70,7 +70,8 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
-    ImGui::Begin("RotMG Internal");
+    ImGui::SetNextWindowCollapsed(!g_bMenuOpen);
+    g_bMenuOpen = ImGui::Begin("RotMG Internal");
 
     ImGuiTabBarFlags tab_bar_flags = ImGuiTabBarFlags_None;
     if (ImGui::BeginTabBar("MainTabBar", tab_bar_flags))

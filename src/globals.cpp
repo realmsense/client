@@ -16,6 +16,7 @@ _ScreenToWorld ScreenToWorld;
 
 // Variables / Settings
 bool g_bWindowFocused;
+bool g_bMenuOpen;
 std::unordered_set<Entity*> g_aEnemyList;
 
 /* autos */
@@ -55,6 +56,8 @@ void LoadSettings()
 {
 
     // TODO: load from save settings
+
+    g_bMenuOpen = true;
 
     /* autos */
     g_bAutoAim = true;
