@@ -114,6 +114,7 @@ typedef Vector3(__cdecl* _ScreenToWorld)(uintptr_t camera, Vector3 position);
 #define OFFSET_BEHAVIOUR_SET_ENABLED 0x220d5f0  // UnityEngine.Behaviour.set_enabled
 #define OFFSET_BEHAVIOUR_GET_ENABLED 0x220d570  // UnityEngine.Behaviour.get_enabled
 #define OFFSET_SPRITE_SET_COLOR 0x209c7c0       // UnityEngine.SpriteRenderer.set_color
+#define OFFSET_GET_MOUSEPOS 0x30ad000           // UnityEngine.Input.get_mousePosition
 #define OFFSET_ADD_DYNAMIC_OBJECT 0x1716760     // DecaGames.RotMG.Managers.MiniMap.MiniMapManager.AddDynamicObjectToMap
 #define OFFSET_REMOVE_DYNAMIC_OBJECT 0x1721ab0  // DecaGames.RotMG.Managers.MiniMap.MiniMapManager.RemoveDynamicObjectFromMap
 #define OFFSET_CAMERAMANAGER_UPDATE 0x301a70    // DecaGames.RotMG.Managers.CameraManager.Update

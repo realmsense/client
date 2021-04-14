@@ -76,7 +76,6 @@ void* Detour_CameraManager_Update(uintptr_t cameraManager)
     return Original_CameraManager_Update(cameraManager);
 }
 
-
 typedef void* (__cdecl* _Add_Dynamic_Object)(uintptr_t __this, float x, float y, Color color, uintptr_t entity);
 _Add_Dynamic_Object Original_Add_Dynamic_Object = nullptr;
 void* Detour_Add_Dynamic_Object(uintptr_t __this, float x, float y, Color color, uintptr_t entity)
@@ -90,6 +89,36 @@ void* Detour_Add_Dynamic_Object(uintptr_t __this, float x, float y, Color color,
     }
 
     return Original_Add_Dynamic_Object(__this, x, y, color, entity);
+}
+
+typedef Vector3 (__cdecl* _Input_GetMousePos)(uintptr_t __this);
+_Input_GetMousePos Original_Input_GetMousePos = nullptr;
+Vector3 Detour_Input_GetMousePos(uintptr_t __this)
+{
+    if (!g_bAutoAim)
+    {
+        return Original_Input_GetMousePos(__this);
+    }
+
+    Entity* chosenEnemy = nullptr;
+    for (auto& x : g_aEnemyList)
+    {
+        // TODO: choose the enemy based on the option chosen
+        // e.g. closest enemy, highest health/defense, closest to cursor, etc
+        chosenEnemy = x;
+        break;
+    }
+    
+    Vector3 mousePos = Original_Input_GetMousePos(__this);
+
+    if (chosenEnemy && g_pMainCamera)
+    {
+        Vector3 enemyPos = { chosenEnemy->pos.x, (chosenEnemy->pos.y) * -1, 0.0f };
+        Vector3 enemyScreenPos = WorldToScreen(g_pMainCamera, enemyPos);
+        mousePos = enemyScreenPos;
+    }
+
+    return mousePos;
 }
 
 bool InitHooks()
@@ -129,6 +158,13 @@ bool InitHooks()
     if (MH_CreateHook(CameraManager_Update, Detour_CameraManager_Update, reinterpret_cast<LPVOID*>(&Original_CameraManager_Update)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour CameraManager_Update", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    void* Input_GetMousePos = (void*)(g_pBaseAddress + OFFSET_GET_MOUSEPOS);
+    if (MH_CreateHook(Input_GetMousePos, Detour_Input_GetMousePos, reinterpret_cast<LPVOID*>(&Original_Input_GetMousePos)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour Input_GetMousePos", "RotMG Internal", MB_OK);
         return 1;
     }
 

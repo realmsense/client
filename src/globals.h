@@ -22,6 +22,9 @@ extern _ScreenToWorld ScreenToWorld;
 extern bool g_bWindowFocused;
 extern std::unordered_set<Entity*> g_aEnemyList;
 
+/* autos */
+extern bool g_bAutoAim;
+
 /* movement */
 extern bool g_bNoclip;
 extern float g_fNoclipChange;

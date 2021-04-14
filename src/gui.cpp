@@ -78,6 +78,9 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         // Hacks
         if (ImGui::BeginTabItem("Hacks"))
         {
+            // Autos
+            ImGui::Checkbox("Auto Aim", &g_bAutoAim);
+
             // Movement
             ImGui::Checkbox("Noclip", &g_bNoclip);
 
@@ -298,7 +301,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             if (g_bEnemyNames)
             {
                 std::string enemyName = readUnityString(enemy->objectProps->name);
-                draw->AddText(ImGui::GetFont(), ImGui::GetFontSize() * 1.2f, target, IM_COL32_BLACK, enemyName.c_str());
+                draw->AddText(ImGui::GetFont(), ImGui::GetFontSize() * 1.5f, target, IM_COL32_BLACK, enemyName.c_str());
                 //draw->AddText(target, IM_COL32_BLACK, enemyName.c_str());
             }
         }

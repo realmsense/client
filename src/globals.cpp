@@ -18,6 +18,9 @@ _ScreenToWorld ScreenToWorld;
 bool g_bWindowFocused;
 std::unordered_set<Entity*> g_aEnemyList;
 
+/* autos */
+bool g_bAutoAim;
+
 /* movement */
 bool g_bNoclip;
 float g_fNoclipChange;
@@ -52,6 +55,10 @@ void LoadSettings()
 {
 
     // TODO: load from save settings
+
+    /* autos */
+    g_bAutoAim = true;
+
     /* movement */
     g_bNoclip = false;
     g_fNoclipChange = 1.0f;
