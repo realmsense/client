@@ -21,6 +21,7 @@ std::unordered_set<Entity*> g_aEnemyList;
 
 /* autos */
 bool g_bAutoAim;
+AutoAimTarget g_AutoAimTarget;
 
 /* movement */
 bool g_bNoclip;
@@ -61,6 +62,7 @@ void LoadSettings()
 
     /* autos */
     g_bAutoAim = true;
+    g_AutoAimTarget = AutoAimTarget::ClosestPos;
 
     /* movement */
     g_bNoclip = false;

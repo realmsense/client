@@ -95,23 +95,73 @@ typedef Vector3 (__cdecl* _Input_GetMousePos)(uintptr_t __this);
 _Input_GetMousePos Original_Input_GetMousePos = nullptr;
 Vector3 Detour_Input_GetMousePos(uintptr_t __this)
 {
-    if (!g_bAutoAim)
+    Vector3 mousePos = Original_Input_GetMousePos(__this);
+
+    if (!g_bAutoAim || !g_pPlayer || !g_pMainCamera)
     {
-        return Original_Input_GetMousePos(__this);
+        return mousePos;
     }
 
     Entity* chosenEnemy = nullptr;
-    for (auto& x : g_aEnemyList)
+    for (auto& enemy : g_aEnemyList)
     {
-        // TODO: choose the enemy based on the option chosen
-        // e.g. closest enemy, highest health/defense, closest to cursor, etc
-        chosenEnemy = x;
-        break;
+        if (chosenEnemy == nullptr)
+        {
+            chosenEnemy = enemy;
+            continue;
+        }
+
+        if (g_AutoAimTarget == AutoAimTarget::ClosestPos)
+        {
+            float chosenDistance = CalculateDistance(chosenEnemy->pos, g_pPlayer->pos);
+            float currentDistance = CalculateDistance(enemy->pos, g_pPlayer->pos);
+            if (currentDistance < chosenDistance)
+            {
+                chosenEnemy = enemy;
+                continue;
+            }
+        }
+        else if (g_AutoAimTarget == AutoAimTarget::ClosestMouse)
+        {
+            Vector3 mouseWorldPos3 = ScreenToWorld(g_pMainCamera, mousePos);
+            Vector2 mouseWorldPos = { mouseWorldPos3.x, mouseWorldPos3.y * -1 };
+            float chosenDistance = CalculateDistance(chosenEnemy->pos, mouseWorldPos);
+            float currentdistance = CalculateDistance(enemy->pos, mouseWorldPos);
+            if (currentdistance < chosenDistance)
+            {
+                chosenEnemy = enemy;
+                continue;
+            }
+        }
+        else if (g_AutoAimTarget == AutoAimTarget::HighestDef)
+        {
+            // TODO: what happens if the enemy is armor broken?
+            int chosenDef = chosenEnemy->defense;
+            int currentDefense = enemy->defense;
+            if (currentDefense > chosenDef)
+            {
+                chosenEnemy = enemy;
+                continue;
+            }
+        }
+        else if (g_AutoAimTarget == AutoAimTarget::HighestMaxHP)
+        {
+            int chosenHP = chosenEnemy->maxHP;
+            int currentHP = enemy->maxHP;
+            if (chosenHP > currentHP)
+            {
+                chosenEnemy = enemy;
+                continue;
+            }
+        }
+        else
+        {
+            chosenEnemy = enemy;
+            break;
+        }
     }
     
-    Vector3 mousePos = Original_Input_GetMousePos(__this);
-
-    if (chosenEnemy && g_pMainCamera)
+    if (chosenEnemy)
     {
         Vector3 enemyPos = { chosenEnemy->pos.x, (chosenEnemy->pos.y) * -1, 0.0f };
         Vector3 enemyScreenPos = WorldToScreen(g_pMainCamera, enemyPos);

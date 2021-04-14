@@ -4,6 +4,14 @@ struct Vector2 { float x, y; };
 struct Vector3 { float x, y, z; };
 struct Color { float r, g, b, a; };
 
+enum AutoAimTarget
+{
+    ClosestMouse,
+    ClosestPos,
+    HighestDef,
+    HighestMaxHP
+};
+
 enum class EntityType : int32_t
 {
     BasicMapObject          = 0,

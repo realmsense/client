@@ -24,6 +24,7 @@ extern std::unordered_set<Entity*> g_aEnemyList;
 
 /* autos */
 extern bool g_bAutoAim;
+extern AutoAimTarget g_AutoAimTarget;
 
 /* movement */
 extern bool g_bNoclip;

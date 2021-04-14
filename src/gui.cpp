@@ -107,6 +107,23 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 }
             }
 
+            const char* aim_targets[] =
+            {
+                "Closest to Mouse",     // AutoAimTarget::ClosestMouse
+                "Closest to Player",    // AutoAimTarget::ClosestPos
+                "Highest Defense",      // AutoAimTarget::HighestDef
+                "Highest Max HP (Boss)" // AutoAimTarget::HighestMaxHP
+            };
+            static int selected_target = 1;
+
+            ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing() * strlen(aim_targets[3]) / 2); // set width to the widest string
+
+            if (ImGui::Combo("Auto Aim Target", &selected_target, aim_targets, IM_ARRAYSIZE(aim_targets), IM_ARRAYSIZE(aim_targets)))
+            {
+                g_AutoAimTarget = AutoAimTarget(selected_target);
+                std::cout << g_AutoAimTarget << " " << aim_targets[selected_target] << std::endl;
+            }
+
             ImGui::EndTabItem();
         }
 

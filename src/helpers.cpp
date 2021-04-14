@@ -18,6 +18,13 @@ void RemoveConsole()
    FreeConsole();
 }
 
+float CalculateDistance(Vector2 a, Vector2 b)
+{
+    float diffX = a.x - b.x;
+    float diffY = a.y - b.y;
+    return sqrt((diffX * diffX) + (diffY * diffY));
+}
+
 std::string ptrToHex(uintptr_t ptr)
 {
     std::stringstream stream;
