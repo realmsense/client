@@ -121,6 +121,20 @@ Vector3 Detour_Input_GetMousePos(uintptr_t __this)
     return mousePos;
 }
 
+typedef void*(__cdecl* _SocketManager_SendMessage)(uintptr_t __this, uintptr_t packet);
+_SocketManager_SendMessage Original_SocketManager_SendMessage = nullptr;
+void* Detour_SocketManager_SendMessage(uintptr_t __this, uintptr_t packet)
+{
+    int packetId = *(int*)(packet + 0x18);
+    if (g_bNoclip
+        && packetId == 42 // move
+    ) {
+        return nullptr;
+    }
+
+    return Original_SocketManager_SendMessage(__this, packet);
+}
+
 bool InitHooks()
 {
     MH_Initialize();
@@ -165,6 +179,13 @@ bool InitHooks()
     if (MH_CreateHook(Input_GetMousePos, Detour_Input_GetMousePos, reinterpret_cast<LPVOID*>(&Original_Input_GetMousePos)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour Input_GetMousePos", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    void* SocketManager_SendMessage = (void*)(g_pBaseAddress + OFFSET_SOCKET_SENDMESSAGE);
+    if (MH_CreateHook(SocketManager_SendMessage, Detour_SocketManager_SendMessage, reinterpret_cast<LPVOID*>(&Original_SocketManager_SendMessage)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour SocketManager_SendMessage", "RotMG Internal", MB_OK);
         return 1;
     }
 

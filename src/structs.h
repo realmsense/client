@@ -117,6 +117,7 @@ typedef Vector3(__cdecl* _ScreenToWorld)(uintptr_t camera, Vector3 position);
 #define OFFSET_GET_MOUSEPOS 0x30ad000           // UnityEngine.Input.get_mousePosition
 #define OFFSET_ADD_DYNAMIC_OBJECT 0x1716760     // DecaGames.RotMG.Managers.MiniMap.MiniMapManager.AddDynamicObjectToMap
 #define OFFSET_REMOVE_DYNAMIC_OBJECT 0x1721ab0  // DecaGames.RotMG.Managers.MiniMap.MiniMapManager.RemoveDynamicObjectFromMap
+#define OFFSET_SOCKET_SENDMESSAGE 0x650e40      // DecaGames.RotMG.Managers.Net.SocketManager.NPMFAPBMCPI (SendMessage)
 #define OFFSET_CAMERAMANAGER_UPDATE 0x301a70    // DecaGames.RotMG.Managers.CameraManager.Update
 #define OFFSET_UNITYTHREAD_UPDATE 0x498900      // DecaGames.RotMG.Extensions.UnityThread.Update
 #define OFFSET_GET_PLAYER 0x2f2850              // JFNHHLNJJKP.JJCAKPHMLKD - Random method that runs every tick to get player

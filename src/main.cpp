@@ -64,6 +64,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
         // v key - toggle noclip
         if (GetAsyncKeyState(0x56) & 1)
         {
+            // TODO: test if the current tile is walkable
             g_bNoclip = !g_bNoclip;
         }
 
