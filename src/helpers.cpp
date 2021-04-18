@@ -45,7 +45,7 @@ std::string readUnityString(String* str)
     return sstream.str();
 }
 
-void writeUnityString(String* &target, char* source)
+void writeUnityString(String* target, const char* source)
 {
     uintptr_t addr = (uintptr_t)target;
     size_t length = strlen(source);
