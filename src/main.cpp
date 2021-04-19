@@ -53,7 +53,11 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
-
+            std::vector<Entity*> playerList = ReadUnityList<Entity*>(g_pNBJLMDOACBC->playerList);
+            for (int i = 0; i < playerList.size(); i++)
+            {
+                std::cout << ReadUnityString(playerList[i]->name) << std::endl;
+            }
         }
 
         if (GetAsyncKeyState(VK_DELETE) & 1)
