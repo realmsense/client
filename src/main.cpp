@@ -26,6 +26,39 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 it++;
         }
 
+        if (g_pNBJLMDOACBC)
+        {
+            std::vector<Entity*> playerList = ReadUnityList<Entity*>(g_pNBJLMDOACBC->playerList);
+
+            // added - local is not in global
+            for (auto& player : playerList)
+            {
+                if (!player) continue;
+
+                bool exists = std::find(g_aPlayerList.begin(), g_aPlayerList.end(), player) != g_aPlayerList.end();
+                if (!exists)
+                {
+                    Vector3 newScale = { g_fPlayerSize, g_fPlayerSize, 1.0f };
+                    uintptr_t contentTransform = (uintptr_t)player->viewHandler->contentTransform;
+                    Transform_set_localScale(contentTransform, newScale);
+                }
+            }
+
+            // removed - global is not in local
+            //for (auto& player : g_aPlayerList)
+            //{
+            //    bool exists = std::find(playerList.begin(), playerList.end(), player) != playerList.end();
+            //    if (!exists)
+            //    {
+            //        // can't update transform here
+            //        // todo: we need to update our player's transform when we load into a new map
+            //        std::cout << "Player was removed " << ReadUnityString(player->name) << std::endl;
+            //    }
+            //}
+
+            g_aPlayerList = playerList;
+        }
+
         // Ignore keybinds if window isn't focused
         if (!g_bWindowFocused)
         {

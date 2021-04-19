@@ -12,6 +12,8 @@ uintptr_t g_pCameraManager;
 _Camera_set_orthographicSize Camera_set_orthographicSize;
 _Behaviour_get_enabled Behaviour_get_enabled;
 _Behaviour_set_enabled Behaviour_set_enabled;
+_Transform_get_localScale Transform_get_localScale;
+_Transform_set_localScale Transform_set_localScale;
 _WorldToScreen WorldToScreen;
 _ScreenToWorld ScreenToWorld;
 
@@ -19,6 +21,7 @@ _ScreenToWorld ScreenToWorld;
 bool g_bWindowFocused;
 bool g_bMenuOpen;
 std::unordered_set<Entity*> g_aEnemyList;
+std::vector<Entity*> g_aPlayerList;
 
 /* autos */
 bool g_bAutoAim;
@@ -27,12 +30,15 @@ AutoAimTarget g_AutoAimTarget;
 /* movement */
 bool g_bNoclip;
 float g_fNoclipChange;
+
+/* meme */
 bool g_bNiggaMode;
 
 /* view */
 bool g_bDisableFog;
 float g_fZoomAmount;
 bool g_bDisablePerspectiveEditor;
+float g_fPlayerSize;
 
 /* debug */
 bool g_bEnemyTracers;
@@ -50,6 +56,8 @@ void InitPointers()
     Camera_set_orthographicSize = (_Camera_set_orthographicSize)(g_pBaseAddress + OFFSET_SET_ORTHOGRAPHICSIZE);
     Behaviour_get_enabled = (_Behaviour_get_enabled)(g_pBaseAddress + OFFSET_BEHAVIOUR_GET_ENABLED);
     Behaviour_set_enabled = (_Behaviour_set_enabled)(g_pBaseAddress + OFFSET_BEHAVIOUR_SET_ENABLED);
+    Transform_get_localScale = (_Transform_get_localScale)(g_pBaseAddress + OFFSET_TRANSFORM_GET_LOCAL_SCALE);
+    Transform_set_localScale = (_Transform_set_localScale)(g_pBaseAddress + OFFSET_TRANSFORM_SET_LOCAL_SCALE);
     WorldToScreen = (_WorldToScreen)(g_pBaseAddress + OFFSET_WORLD_TO_SCREEN);
     ScreenToWorld = (_ScreenToWorld)(g_pBaseAddress + OFFSET_SCREEN_TO_WORLD);
 }
@@ -68,12 +76,15 @@ void LoadSettings()
     /* movement */
     g_bNoclip = false;
     g_fNoclipChange = 1.0f;
+
+    /* meme */
     g_bNiggaMode = false;
 
     /* view */
     g_bDisableFog = true;
     g_fZoomAmount = 7.2f;
     g_bDisablePerspectiveEditor = true;
+    g_fPlayerSize = 1.0f;
 
     /* debug */
     g_bEnemyTracers = false;
