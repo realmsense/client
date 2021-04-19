@@ -164,7 +164,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 map.insert(std::pair<std::string, uintptr_t>("g_pPlayer", reinterpret_cast<uintptr_t>(g_pPlayer)));
                 for (auto &ptr : map)
                 {
-                    std::string ptrHex = ptrToHex(ptr.second);
+                    std::string ptrHex = PtrToHex(ptr.second);
                     ImGui::PushID(ptrHex.c_str());
                     ImGui::Text(ptr.first.c_str());
                     ImGui::SameLine(160);
