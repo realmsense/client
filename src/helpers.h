@@ -5,9 +5,10 @@ void RemoveConsole();
 
 float CalculateDistance(Vector2 a, Vector2 b);
 
-std::string ptrToHex(uintptr_t ptr);
-std::string readUnityString(String* str);
-void writeUnityString(String* target, const char* source);
+std::string PtrToHex(uintptr_t ptr);
+std::string ReadUnityString(String* str);
+void WriteUnityString(String* target, const char* source);
+
 
 uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets);
 

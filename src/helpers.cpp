@@ -25,7 +25,7 @@ float CalculateDistance(Vector2 a, Vector2 b)
     return sqrt((diffX * diffX) + (diffY * diffY));
 }
 
-std::string ptrToHex(uintptr_t ptr)
+std::string PtrToHex(uintptr_t ptr)
 {
     std::stringstream stream;
     stream << std::hex << ptr;
@@ -33,7 +33,7 @@ std::string ptrToHex(uintptr_t ptr)
     return result;
 }
 
-std::string readUnityString(String* str)
+std::string ReadUnityString(String* str)
 {
     uintptr_t addr = (uintptr_t)str;
     std::stringstream sstream;
@@ -45,7 +45,7 @@ std::string readUnityString(String* str)
     return sstream.str();
 }
 
-void writeUnityString(String* target, const char* source)
+void WriteUnityString(String* target, const char* source)
 {
     uintptr_t addr = (uintptr_t)target;
     size_t length = strlen(source);

@@ -181,8 +181,8 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                     for (auto& enemy : g_aEnemyList)
                     {
-                        std::string enemyName = readUnityString(enemy->objectProps->name);
-                        std::string enemyPtrHex = ptrToHex((uintptr_t)enemy).c_str();
+                        std::string enemyName = ReadUnityString(enemy->objectProps->name);
+                        std::string enemyPtrHex = PtrToHex((uintptr_t)enemy).c_str();
 
                         ImGui::PushID(enemyName.c_str());
                         ImGui::Text(enemyName.c_str());
@@ -204,12 +204,12 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 float columnWidth = 130.0f;
                 ImGui::Text("Name");
                 ImGui::SameLine(columnWidth);
-                std::string playerName = readUnityString(g_pPlayer->name);
+                std::string playerName = ReadUnityString(g_pPlayer->name);
                 ImGui::Text(playerName.c_str());
 
                 ImGui::Text("Object Name");
                 ImGui::SameLine(columnWidth);
-                std::string objectName = readUnityString(g_pPlayer->objectProps->name);
+                std::string objectName = ReadUnityString(g_pPlayer->objectProps->name);
                 ImGui::Text(objectName.c_str());
 
                 ImGui::Text("HP");
@@ -228,7 +228,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                 if (g_pPlayer->standingTile)
                 {
-                    std::string tileName = readUnityString(g_pPlayer->standingTile->OBGKICHNIDN->name);
+                    std::string tileName = ReadUnityString(g_pPlayer->standingTile->OBGKICHNIDN->name);
                     ImGui::SameLine(columnWidth);
                     ImGui::Text(tileName.c_str());
                 }
@@ -318,7 +318,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
             if (g_bEnemyNames)
             {
-                std::string enemyName = readUnityString(enemy->objectProps->name);
+                std::string enemyName = ReadUnityString(enemy->objectProps->name);
                 draw->AddText(ImGui::GetFont(), ImGui::GetFontSize() * 1.5f, target, IM_COL32_BLACK, enemyName.c_str());
                 //draw->AddText(target, IM_COL32_BLACK, enemyName.c_str());
             }
