@@ -122,6 +122,20 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
             ImGui::Checkbox("Hide pets", &g_bHidePets);
 
+            static bool unlimitedFPS = false;
+            if (ImGui::Checkbox("Unlimited FPS", &unlimitedFPS))
+            {
+                if (unlimitedFPS)
+                {
+                    SetVsync(0);
+                    SetFpsTarget(999);
+                }
+                else
+                {
+                    SetVsync(1);
+                }
+            }
+
             const char* aim_targets[] =
             {
                 "Closest to Mouse",     // AutoAimTarget::ClosestMouse

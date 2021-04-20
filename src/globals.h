@@ -10,6 +10,8 @@ extern Entity* g_pPlayer;
 extern NBJLMDOACBC* g_pNBJLMDOACBC;
 extern uintptr_t g_pMainCamera;
 extern uintptr_t g_pCameraManager;
+extern _SetVsync SetVsync;
+extern _SetFpsTarget SetFpsTarget;
 
 // Functions
 extern _Camera_set_orthographicSize Camera_set_orthographicSize;

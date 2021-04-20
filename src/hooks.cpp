@@ -270,7 +270,7 @@ bool InitHooks()
         MessageBoxA(NULL, "Failed to Detour GetPlayerList", "RotMG Internal", MB_OK);
         return 1;
     }
-
+    
     void* GetPet = (void*)(g_pBaseAddress + OFFSET_GET_PET);
     if (MH_CreateHook(GetPet, Detour_GetPet, reinterpret_cast<LPVOID*>(&Original_GetPet)) != MH_OK)
     {

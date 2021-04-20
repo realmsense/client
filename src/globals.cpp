@@ -16,6 +16,8 @@ _Transform_get_localScale Transform_get_localScale;
 _Transform_set_localScale Transform_set_localScale;
 _WorldToScreen WorldToScreen;
 _ScreenToWorld ScreenToWorld;
+_SetVsync SetVsync;
+_SetFpsTarget SetFpsTarget;
 
 // Variables / Settings
 bool g_bWindowFocused;
@@ -61,6 +63,8 @@ void InitPointers()
     Transform_set_localScale = (_Transform_set_localScale)(g_pBaseAddress + OFFSET_TRANSFORM_SET_LOCAL_SCALE);
     WorldToScreen = (_WorldToScreen)(g_pBaseAddress + OFFSET_WORLD_TO_SCREEN);
     ScreenToWorld = (_ScreenToWorld)(g_pBaseAddress + OFFSET_SCREEN_TO_WORLD);
+    SetVsync = (_SetVsync)(g_pBaseAddress + OFFSET_SET_VSYNC);
+    SetFpsTarget = (_SetFpsTarget)(g_pBaseAddress + OFFSET_SET_FPS_TARGET);
 }
 
 void LoadSettings()

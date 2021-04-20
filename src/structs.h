@@ -170,6 +170,8 @@ typedef Vector3 (__cdecl* _Transform_get_localScale)(uintptr_t transform);
 typedef void (__cdecl* _Transform_set_localScale)(uintptr_t transform, Vector3 scale);
 typedef Vector3 (__cdecl* _WorldToScreen)(uintptr_t camera, Vector3 position);
 typedef Vector3 (__cdecl* _ScreenToWorld)(uintptr_t camera, Vector3 position);
+typedef void(__cdecl* _SetVsync)(int value);
+typedef void(__cdecl* _SetFpsTarget)(int value);
 
 // Global Structs
 enum AutoAimTarget
@@ -202,3 +204,5 @@ enum AutoAimTarget
 #define OFFSET_GET_ENEMY                        0xe5a1d0    // COEDKELBKMI.(HOGFGOPEKAE or FFHEDOAINJH) - Random method to get enemy 
 #define OFFSET_GET_PLAYER_LIST                  0xa3b030    // NBJLMDOACBC.CDKKNNAJIBG - random method that runs every tick, the class contains `List<JFNHHLNJJKP>` of players.
 #define OFFSET_GET_PET                          0x916bc0    // DAFEAHGLBGL.AOOJCNNGNGI - random method that runs every tick to get pets
+#define OFFSET_SET_VSYNC                        0x232fdb0   // UnityEngine.QualitySettings.set_vSyncCount
+#define OFFSET_SET_FPS_TARGET                   0x220b6e0   // UnityEngine.Application.set_targetFrameRate
