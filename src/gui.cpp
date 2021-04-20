@@ -108,6 +108,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                 if (ImGui::BeginTabItem("Movement"))
                 {
                     ImGui::Checkbox("Noclip", &g_bNoclip);
+                    ImGui::SliderFloat("Walk Amount", &g_fWalkAmount, 1.0f, 10.0f);
                     ImGui::EndTabItem();
                 }
 

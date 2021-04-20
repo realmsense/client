@@ -65,6 +65,26 @@ DWORD WINAPI MainThread(HMODULE hModule)
             continue;
         }
 
+        static bool walk = false;
+        static float oldSpeed;
+
+        // LShift Pressed - turn on walk
+        if (GetAsyncKeyState(VK_LSHIFT) < 0 && !walk)
+        {
+            std::cout << "Walk Enabled" << std::endl;
+            walk = true;
+            oldSpeed = g_pPlayer->speed;
+            g_pPlayer->speed /= g_fWalkAmount;
+        }
+
+        // LShift Released - reset speed
+        if (GetAsyncKeyState(VK_LSHIFT) == 0 && walk)
+        {
+            std::cout << "Walk Disabled" << std::endl;
+            walk = false;
+            g_pPlayer->speed = oldSpeed;
+        }
+
         // ` - toggle menu
         if (GetAsyncKeyState(VK_OEM_3) & 1)
         {
