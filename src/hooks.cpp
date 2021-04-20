@@ -185,13 +185,29 @@ void* Detour_SocketManager_SendMessage(uintptr_t __this, uintptr_t packet)
     return Original_SocketManager_SendMessage(__this, packet);
 }
 
-
 typedef void* (__cdecl* _GetPlayerList)(NBJLMDOACBC __this, int EGHLCCGKEDH);
 _GetPlayerList Original_GetPlayerList = nullptr;
 void* Detour_GetPlayerList(NBJLMDOACBC __this, int EGHLCCGKEDH)
 {
     g_pNBJLMDOACBC = &__this;
     return Original_GetPlayerList(__this, EGHLCCGKEDH);
+}
+
+typedef void* (__cdecl* _GetPet)(Entity pet, bool AMKOONDPFBD);
+_GetPet Original_GetPet = nullptr;
+void* Detour_GetPet(Entity pet, bool AMKOONDPFBD)
+{
+    // TODO: optimise this
+    Vector3 newScale;
+    if (g_bHidePets)
+        newScale = { 0.0f, 0.0f, 1.0f };
+    else
+        newScale = { 1.0f, 1.0f, 1.0f };
+    
+    uintptr_t contentTransform = (uintptr_t)pet.viewHandler->contentTransform;
+    Transform_set_localScale(contentTransform, newScale);
+
+    return Original_GetPet(pet, AMKOONDPFBD);
 }
 
 bool InitHooks()
@@ -248,11 +264,17 @@ bool InitHooks()
         return 1;
     }
 
-
     void* GetPlayerList = (void*)(g_pBaseAddress + OFFSET_GET_PLAYER_LIST);
     if (MH_CreateHook(GetPlayerList, Detour_GetPlayerList, reinterpret_cast<LPVOID*>(&Original_GetPlayerList)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour GetPlayerList", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    void* GetPet = (void*)(g_pBaseAddress + OFFSET_GET_PET);
+    if (MH_CreateHook(GetPet, Detour_GetPet, reinterpret_cast<LPVOID*>(&Original_GetPet)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour GetPet", "RotMG Internal", MB_OK);
         return 1;
     }
 

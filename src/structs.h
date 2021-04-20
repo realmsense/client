@@ -201,3 +201,4 @@ enum AutoAimTarget
 #define OFFSET_GET_PLAYER                       0x2f2850    // JFNHHLNJJKP.JJCAKPHMLKD - Random method that runs every tick to get player
 #define OFFSET_GET_ENEMY                        0xe5a1d0    // COEDKELBKMI.(HOGFGOPEKAE or FFHEDOAINJH) - Random method to get enemy 
 #define OFFSET_GET_PLAYER_LIST                  0xa3b030    // NBJLMDOACBC.CDKKNNAJIBG - random method that runs every tick, the class contains `List<JFNHHLNJJKP>` of players.
+#define OFFSET_GET_PET                          0x916bc0    // DAFEAHGLBGL.AOOJCNNGNGI - random method that runs every tick to get pets

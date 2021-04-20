@@ -39,6 +39,7 @@ bool g_bDisableFog;
 float g_fZoomAmount;
 bool g_bDisablePerspectiveEditor;
 float g_fPlayerSize;
+bool g_bHidePets;
 
 /* debug */
 bool g_bEnemyTracers;
@@ -85,6 +86,7 @@ void LoadSettings()
     g_fZoomAmount = 7.2f;
     g_bDisablePerspectiveEditor = true;
     g_fPlayerSize = 1.0f;
+    g_bHidePets = false;
 
     /* debug */
     g_bEnemyTracers = false;
