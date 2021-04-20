@@ -79,78 +79,90 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         // Hacks
         if (ImGui::BeginTabItem("Hacks"))
         {
-            // Autos
-            ImGui::Checkbox("Auto Aim", &g_bAutoAim);
-
-            // Movement
-            ImGui::Checkbox("Noclip", &g_bNoclip);
-
-            // View
-            ImGui::Checkbox("Disable Fog", &g_bDisableFog);
-
-            if (ImGui::SliderFloat("Zoom Amount", &g_fZoomAmount, 0.0f, 20.0f))
+            if (ImGui::BeginTabBar("HacksTabBar", tab_bar_flags))
             {
-                if (g_pMainCamera)
+                if (ImGui::BeginTabItem("Autos"))
                 {
-                    std::cout << "Zoom Amount: " << g_fZoomAmount << std::endl;
-                    Camera_set_orthographicSize(g_pMainCamera, g_fZoomAmount);
-                }
-            }
+                    ImGui::Checkbox("Auto Aim", &g_bAutoAim);
 
-            if (ImGui::Checkbox("Perspective Editor", &g_bDisablePerspectiveEditor))
-            {
-                if (g_pCameraManager)
+                    const char* aim_targets[] =
+                    {
+                        "Closest to Mouse",     // AutoAimTarget::ClosestMouse
+                        "Closest to Player",    // AutoAimTarget::ClosestPos
+                        "Highest Defense",      // AutoAimTarget::HighestDef
+                        "Highest Max HP (Boss)" // AutoAimTarget::HighestMaxHP
+                    };
+                    static int selected_target = 1;
+
+                    ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing() * strlen(aim_targets[3]) / 2); // set width to the widest string
+
+                    if (ImGui::Combo("Auto Aim Target", &selected_target, aim_targets, IM_ARRAYSIZE(aim_targets), IM_ARRAYSIZE(aim_targets)))
+                    {
+                        g_AutoAimTarget = AutoAimTarget(selected_target);
+                        std::cout << g_AutoAimTarget << " " << aim_targets[selected_target] << std::endl;
+                    }
+
+                    ImGui::EndTabItem();
+                }
+
+                if (ImGui::BeginTabItem("Movement"))
                 {
-                    uintptr_t cameraPerspectiveEditor = *(uintptr_t*)(g_pCameraManager + 0x48); // OOJJDIANIBF
-                    Behaviour_set_enabled(cameraPerspectiveEditor, g_bDisablePerspectiveEditor);
-                    std::cout << "CameraPerspectiveEditor: " << g_bDisablePerspectiveEditor << std::endl;
+                    ImGui::Checkbox("Noclip", &g_bNoclip);
+                    ImGui::EndTabItem();
                 }
-            }
 
-            ImGui::SliderFloat("Player Size", &g_fPlayerSize, 0.0f, 1.0f);
-
-            // Only update transforms after the slider is released, to prevent the game crashing from too many updates
-            if (ImGui::IsItemDeactivatedAfterEdit())
-            {
-                for (auto& player : g_aPlayerList)
+                if (ImGui::BeginTabItem("View"))
                 {
-                    Vector3 newScale = { g_fPlayerSize, g_fPlayerSize, 1.0f };
-                    uintptr_t contentTransform = (uintptr_t)player->viewHandler->contentTransform;
-                    Transform_set_localScale(contentTransform, newScale);
+                    ImGui::Checkbox("Disable Fog", &g_bDisableFog);
+
+                    if (ImGui::SliderFloat("Zoom Amount", &g_fZoomAmount, 0.0f, 20.0f))
+                    {
+                        if (g_pMainCamera)
+                            Camera_set_orthographicSize(g_pMainCamera, g_fZoomAmount);
+                    }
+
+                    if (ImGui::Checkbox("Perspective Editor", &g_bDisablePerspectiveEditor))
+                    {
+                        if (g_pCameraManager)
+                        {
+                            uintptr_t cameraPerspectiveEditor = *(uintptr_t*)(g_pCameraManager + 0x48); // OOJJDIANIBF
+                            Behaviour_set_enabled(cameraPerspectiveEditor, g_bDisablePerspectiveEditor);
+                            std::cout << "CameraPerspectiveEditor: " << g_bDisablePerspectiveEditor << std::endl;
+                        }
+                    }
+
+                    ImGui::SliderFloat("Player Size", &g_fPlayerSize, 0.0f, 1.0f);
+                    // Only update transforms after the slider is released, to prevent the game crashing from too many updates
+                    if (ImGui::IsItemDeactivatedAfterEdit())
+                    {
+                        for (auto& player : g_aPlayerList)
+                        {
+                            Vector3 newScale = { g_fPlayerSize, g_fPlayerSize, 1.0f };
+                            uintptr_t contentTransform = (uintptr_t)player->viewHandler->contentTransform;
+                            Transform_set_localScale(contentTransform, newScale);
+                        }
+                    }
+
+                    ImGui::Checkbox("Hide pets", &g_bHidePets);
+
+                    static bool unlimitedFPS = false;
+                    if (ImGui::Checkbox("Unlimited FPS", &unlimitedFPS))
+                    {
+                        if (unlimitedFPS)
+                        {
+                            SetVsync(0);
+                            SetFpsTarget(999);
+                        }
+                        else
+                        {
+                            SetVsync(1);
+                        }
+                    }
+
+                    ImGui::EndTabItem();
                 }
-            }
-
-            ImGui::Checkbox("Hide pets", &g_bHidePets);
-
-            static bool unlimitedFPS = false;
-            if (ImGui::Checkbox("Unlimited FPS", &unlimitedFPS))
-            {
-                if (unlimitedFPS)
-                {
-                    SetVsync(0);
-                    SetFpsTarget(999);
-                }
-                else
-                {
-                    SetVsync(1);
-                }
-            }
-
-            const char* aim_targets[] =
-            {
-                "Closest to Mouse",     // AutoAimTarget::ClosestMouse
-                "Closest to Player",    // AutoAimTarget::ClosestPos
-                "Highest Defense",      // AutoAimTarget::HighestDef
-                "Highest Max HP (Boss)" // AutoAimTarget::HighestMaxHP
-            };
-            static int selected_target = 1;
-
-            ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing() * strlen(aim_targets[3]) / 2); // set width to the widest string
-
-            if (ImGui::Combo("Auto Aim Target", &selected_target, aim_targets, IM_ARRAYSIZE(aim_targets), IM_ARRAYSIZE(aim_targets)))
-            {
-                g_AutoAimTarget = AutoAimTarget(selected_target);
-                std::cout << g_AutoAimTarget << " " << aim_targets[selected_target] << std::endl;
+                
+                ImGui::EndTabBar();
             }
 
             ImGui::EndTabItem();
