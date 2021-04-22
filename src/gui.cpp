@@ -132,16 +132,37 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                         }
                     }
 
-                    ImGui::SliderFloat("Player Size", &g_fPlayerSize, 0.0f, 1.0f);
+                    static float playerSize = 1.0f;
+                    ImGui::SliderFloat("My Player Size", &playerSize, 0.0f, 5.0f);
+                    if (ImGui::IsItemDeactivatedAfterEdit())
+                    {
+                        Vector3 newScale = { playerSize, playerSize, playerSize };
+                        uintptr_t viewTransform = (uintptr_t)g_pPlayer->viewHandler->viewTransform;
+                        ResizeCharacter(viewTransform, newScale);
+                    }
+
+                    ImGui::SliderFloat("Other Player Size", &g_fPlayerSize, 0.0f, 1.0f);
                     // Only update transforms after the slider is released, to prevent the game crashing from too many updates
                     if (ImGui::IsItemDeactivatedAfterEdit())
                     {
-                        for (auto& player : g_aPlayerList)
+                        String charlistStr;
+                        WriteUnityString(&charlistStr, "Character");
+                        uintptr_t characterListObj = GameObject_Find(&charlistStr);
+
+                        uintptr_t characterListTransf = GameObject_GetTransform(characterListObj);
+                        int childCount = Transform_get_childCount(characterListTransf);
+
+                        for (int i = 0; i < childCount; i++)
                         {
+                            uintptr_t characterTransform = Transform_GetChild(characterListTransf, i);
                             Vector3 newScale = { g_fPlayerSize, g_fPlayerSize, 1.0f };
-                            uintptr_t contentTransform = (uintptr_t)player->viewHandler->contentTransform;
-                            Transform_set_localScale(contentTransform, newScale);
+                            ResizeCharacter(characterTransform, newScale);
                         }
+
+                        // Update our player's transform
+                        Vector3 newScale = { 1.0f, 1.0f, 1.0f };
+                        uintptr_t viewTransform = (uintptr_t)g_pPlayer->viewHandler->viewTransform;
+                        ResizeCharacter(viewTransform, newScale);
                     }
 
                     ImGui::Checkbox("Hide pets", &g_bHidePets);
@@ -190,6 +211,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             }
 
             ImGui::SliderFloat("Noclip Amount", &g_fNoclipChange, 1.0, 100.0);
+
 
             ImGui::EndTabItem();
         }

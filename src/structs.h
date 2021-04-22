@@ -164,6 +164,14 @@ typedef uintptr_t(__cdecl* _GetMainCamera)(void);
 typedef void* (__cdecl* _Camera_set_orthographicSize)(uintptr_t UnityEngine_Camera, float amount);
 typedef void* (__cdecl* _Behaviour_set_enabled)(uintptr_t __this, bool value);
 typedef bool (__cdecl* _Behaviour_get_enabled)(uintptr_t __this);
+typedef uintptr_t (__cdecl* _Component_GetGameObject)(uintptr_t __this);
+typedef uintptr_t (__cdecl* _GameObject_Find)(String* name);
+typedef uintptr_t (__cdecl* _GameObject_GetTransform)(uintptr_t gameObject);
+typedef bool (__cdecl* _GameObject_GetActive)(uintptr_t gameObject);
+typedef void (__cdecl* _GameObject_SetActive)(uintptr_t gameObject, bool value);
+typedef uintptr_t (__cdecl* _Transform_GetChild)(uintptr_t transform, int index);
+typedef uintptr_t (__cdecl* _Transform_Find)(uintptr_t transform, String* name);
+typedef int (__cdecl* _Transform_get_childCount)(uintptr_t transform);
 typedef Vector3(__cdecl* _Transform_get_position)(uintptr_t transform);
 typedef void(__cdecl* _Transform_set_position)(uintptr_t transform, Vector3 scale);
 typedef Vector3 (__cdecl* _Transform_get_localScale)(uintptr_t transform);
@@ -189,6 +197,14 @@ enum AutoAimTarget
 #define OFFSET_SCREEN_TO_WORLD                  0x220f230   // UnityEngine.Camera.ScreenToWorldPoint
 #define OFFSET_BEHAVIOUR_GET_ENABLED            0x220d570   // UnityEngine.Behaviour.get_enabled
 #define OFFSET_BEHAVIOUR_SET_ENABLED            0x220d5f0   // UnityEngine.Behaviour.set_enabled
+#define OFFSET_COMPONENT_GET_GAMEOBJECT         0x2211ef0   // UnityEngine.Component.get_gameObject
+#define OFFSET_GAMEOBJECT_FIND                  0x22160c0   // UnityEngine.GameObject.Find
+#define OFFSET_GAMEOBJECT_GET_TRANSFORM         0x2216870   // UnityEngine.GameObject.get_transform
+#define OFFSET_GAMEOBJECT_GET_ACTIVE            0x2216750   // UnityEngine.GameObject.get_activeSelf
+#define OFFSET_GAMEOBJECT_SET_ACTIVE            0x2216450   // UnityEngine.GameObject.SetActive
+#define OFFSET_TRANSFORM_GET_CHILD              0x20a3de0   // UnityEngine.Transform.GetChild
+#define OFFSET_TRANSFORM_FIND                   0x20a3d40   // UnityEngine.Transform.Find
+#define OFFSET_TRANSFORM_GET_CHILD_COUNT        0x20a4bb0   // UnityEngine.Transform.get_childCount
 #define OFFSET_TRANSFORM_GET_POSITION           0x20a51a0   // UnityEngine.Transform.get_position
 #define OFFSET_TRANSFORM_SET_POSITION           0x20a59f0   // UnityEngine.Transform.set_position
 #define OFFSET_TRANSFORM_GET_LOCAL_SCALE        0x20a4fb0   // UnityEngine.Transform.get_localScale

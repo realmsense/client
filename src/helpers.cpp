@@ -56,6 +56,24 @@ void WriteUnityString(String* target, const char* source)
     }
 }
 
+void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale)
+{
+    String contentStr;
+    WriteUnityString(&contentStr, "Content");
+    uintptr_t contentTransform = Transform_Find(characterTransform, &contentStr);
+    Transform_set_localScale(contentTransform, newScale);
+
+    String guiStr;
+    WriteUnityString(&guiStr, "CharacterGUI");
+    uintptr_t guiTransform = Transform_Find(characterTransform, &guiStr);
+    Transform_set_localScale(guiTransform, newScale);
+
+    String shadowStr;
+    WriteUnityString(&shadowStr, "Shadow");
+    uintptr_t shadowTransform = Transform_Find(characterTransform, &shadowStr);
+    Transform_set_localScale(shadowTransform, newScale);
+}
+
 uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)
 {
     uintptr_t addr = ptr;

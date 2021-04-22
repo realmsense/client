@@ -9,6 +9,8 @@ std::string PtrToHex(uintptr_t ptr);
 std::string ReadUnityString(String* str);
 void WriteUnityString(String* target, const char* source);
 
+void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale);
+
 template<class T>
 std::vector<T> ReadUnityList(List* source)
 {
