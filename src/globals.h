@@ -18,6 +18,7 @@ extern _Camera_set_orthographicSize Camera_set_orthographicSize;
 extern _Behaviour_set_enabled Behaviour_set_enabled;
 extern _Behaviour_get_enabled Behaviour_get_enabled;
 extern _Component_GetGameObject Component_GetGameObject;
+extern _Object_GetName Object_GetName;
 extern _GameObject_Find GameObject_Find;
 extern _GameObject_GetTransform GameObject_GetTransform;
 extern _GameObject_GetActive GameObject_GetActive;
@@ -55,6 +56,7 @@ extern bool g_bDisablePerspectiveEditor;
 extern float g_fPlayerSize;
 extern bool g_bHideTiles;
 extern bool g_bHidePets;
+extern bool g_bShowFps;
 
 /* debug */
 extern bool g_bEnemyTracers;

@@ -190,6 +190,30 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                         }
                     }
 
+                    if (ImGui::Checkbox("Show FPS", &g_bShowFps))
+                    {
+                        std::vector<uintptr_t> transfList = GetChildTransforms(FindGameObject("GameController"));
+                        for (int i = 0; i < transfList.size(); i++)
+                        {
+                            uintptr_t transform = transfList[i];
+                            std::string transformName = ReadUnityString(Object_GetName(transform));
+
+                            // We can't just do Transform.Find() because the forward slash in "Fps/Stats" is treated as a path name
+                            if (transformName != "Fps/Stats")
+                                continue;
+
+                            uintptr_t fpsStatsObj = Component_GetGameObject(transform);
+
+                            String str;
+                            WriteUnityString(&str, "FPS ---------------------------");
+                            uintptr_t fpsTransf = Transform_Find(transform, &str);
+                            uintptr_t fpsObj = Component_GetGameObject(fpsTransf);
+
+                            GameObject_SetActive(fpsStatsObj, g_bShowFps);
+                            GameObject_SetActive(fpsObj, g_bShowFps);
+                        }
+                    }
+
                     ImGui::EndTabItem();
                 }
                 

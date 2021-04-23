@@ -13,6 +13,7 @@ _Camera_set_orthographicSize Camera_set_orthographicSize;
 _Behaviour_get_enabled Behaviour_get_enabled;
 _Behaviour_set_enabled Behaviour_set_enabled;
 _Component_GetGameObject Component_GetGameObject;
+_Object_GetName Object_GetName;
 _GameObject_Find GameObject_Find;
 _GameObject_GetTransform GameObject_GetTransform;
 _GameObject_GetActive GameObject_GetActive;
@@ -52,6 +53,7 @@ bool g_bDisablePerspectiveEditor;
 float g_fPlayerSize;
 bool g_bHideTiles;
 bool g_bHidePets;
+bool g_bShowFps;
 
 /* debug */
 bool g_bEnemyTracers;
@@ -70,6 +72,7 @@ void InitPointers()
     Behaviour_get_enabled = (_Behaviour_get_enabled)(g_pBaseAddress + OFFSET_BEHAVIOUR_GET_ENABLED);
     Behaviour_set_enabled = (_Behaviour_set_enabled)(g_pBaseAddress + OFFSET_BEHAVIOUR_SET_ENABLED);
     Component_GetGameObject = (_Component_GetGameObject)(g_pBaseAddress + OFFSET_COMPONENT_GET_GAMEOBJECT);
+    Object_GetName = (_Object_GetName)(g_pBaseAddress + OFFSET_OBJECT_GET_NAME);
     GameObject_Find = (_GameObject_Find)(g_pBaseAddress + OFFSET_GAMEOBJECT_FIND);
     GameObject_GetTransform = (_GameObject_GetTransform)(g_pBaseAddress + OFFSET_GAMEOBJECT_GET_TRANSFORM);
     GameObject_GetActive = (_GameObject_GetActive)(g_pBaseAddress + OFFSET_GAMEOBJECT_GET_ACTIVE);
@@ -111,6 +114,7 @@ void LoadSettings()
     g_fPlayerSize = 1.0f;
     g_bHideTiles = false;
     g_bHidePets = false;
+    g_bShowFps = false;
 
     /* debug */
     g_bEnemyTracers = false;
