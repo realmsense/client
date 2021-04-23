@@ -21,6 +21,8 @@ _GameObject_SetActive GameObject_SetActive;
 _Transform_Find Transform_Find;
 _Transform_GetChild Transform_GetChild;
 _Transform_get_childCount Transform_get_childCount;
+_Transform_get_position Transform_get_position;
+_Transform_set_position Transform_set_position;
 _Transform_get_localScale Transform_get_localScale;
 _Transform_set_localScale Transform_set_localScale;
 _WorldToScreen WorldToScreen;
@@ -80,6 +82,8 @@ void InitPointers()
     Transform_Find = (_Transform_Find)(g_pBaseAddress + OFFSET_TRANSFORM_FIND);
     Transform_GetChild = (_Transform_GetChild)(g_pBaseAddress + OFFSET_TRANSFORM_GET_CHILD);
     Transform_get_childCount = (_Transform_get_childCount)(g_pBaseAddress + OFFSET_TRANSFORM_GET_CHILD_COUNT);
+    Transform_get_position = (_Transform_get_position)(g_pBaseAddress + OFFSET_TRANSFORM_GET_POSITION);
+    Transform_set_position = (_Transform_set_position)(g_pBaseAddress + OFFSET_TRANSFORM_SET_POSITION);
     Transform_get_localScale = (_Transform_get_localScale)(g_pBaseAddress + OFFSET_TRANSFORM_GET_LOCAL_SCALE);
     Transform_set_localScale = (_Transform_set_localScale)(g_pBaseAddress + OFFSET_TRANSFORM_SET_LOCAL_SCALE);
     WorldToScreen = (_WorldToScreen)(g_pBaseAddress + OFFSET_WORLD_TO_SCREEN);

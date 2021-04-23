@@ -26,6 +26,8 @@ extern _GameObject_SetActive GameObject_SetActive;
 extern _Transform_Find Transform_Find;
 extern _Transform_GetChild Transform_GetChild;
 extern _Transform_get_childCount Transform_get_childCount;
+extern _Transform_get_position Transform_get_position;
+extern _Transform_set_position Transform_set_position;
 extern _Transform_get_localScale Transform_get_localScale;
 extern _Transform_set_localScale Transform_set_localScale;
 extern _WorldToScreen WorldToScreen;
