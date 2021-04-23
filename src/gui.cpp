@@ -165,6 +165,32 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                         ResizeCharacter(viewTransform, newScale);
                     }
 
+                    if (ImGui::Checkbox("Hide Tiles", &g_bHideTiles))
+                    {
+                        String tilelistStr;
+                        WriteUnityString(&tilelistStr, "ComboTile");
+                        uintptr_t tileListObj = GameObject_Find(&tilelistStr);
+
+                        uintptr_t tileListTransf = GameObject_GetTransform(tileListObj);
+                        int childCount = Transform_get_childCount(tileListTransf);
+
+                        for (int i = 0; i < childCount; i++)
+                        {
+                            uintptr_t tileTransform = Transform_GetChild(tileListTransf, i);
+
+                            if (g_bHideTiles)
+                            {
+                                Vector3 newScale = { 0.0f, 0.0f, 1.0f };
+                                Transform_set_localScale(tileTransform, newScale);
+                            }
+                            else
+                            {
+                                Vector3 newScale = { 1.0f, 1.0f, 1.0f };
+                                Transform_set_localScale(tileTransform, newScale);
+                            }
+                        }
+                    }
+
                     ImGui::Checkbox("Hide pets", &g_bHidePets);
 
                     static bool unlimitedFPS = false;

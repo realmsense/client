@@ -53,6 +53,7 @@ extern bool g_bDisableFog;
 extern float g_fZoomAmount;
 extern bool g_bDisablePerspectiveEditor;
 extern float g_fPlayerSize;
+extern bool g_bHideTiles;
 extern bool g_bHidePets;
 
 /* debug */

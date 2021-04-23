@@ -50,6 +50,7 @@ bool g_bDisableFog;
 float g_fZoomAmount;
 bool g_bDisablePerspectiveEditor;
 float g_fPlayerSize;
+bool g_bHideTiles;
 bool g_bHidePets;
 
 /* debug */
