@@ -93,7 +93,7 @@ void LoadSettings()
     g_bMenuOpen = true;
 
     /* autos */
-    g_bAutoAim = true;
+    g_bAutoAim = false;
     g_AutoAimTarget = AutoAimTarget::ClosestPos;
 
     /* movement */
@@ -109,6 +109,7 @@ void LoadSettings()
     g_fZoomAmount = 7.2f;
     g_bDisablePerspectiveEditor = true;
     g_fPlayerSize = 1.0f;
+    g_bHideTiles = false;
     g_bHidePets = false;
 
     /* debug */

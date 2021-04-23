@@ -9,6 +9,9 @@ std::string PtrToHex(uintptr_t ptr);
 std::string ReadUnityString(String* str);
 void WriteUnityString(String* target, const char* source);
 
+uintptr_t FindGameObject(const char* name);
+std::vector<uintptr_t> GetChildTransforms(uintptr_t gameObject);
+
 void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale);
 
 template<class T>

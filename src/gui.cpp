@@ -145,53 +145,36 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                     // Only update transforms after the slider is released, to prevent the game crashing from too many updates
                     if (ImGui::IsItemDeactivatedAfterEdit())
                     {
-                        String charlistStr;
-                        WriteUnityString(&charlistStr, "Character");
-                        uintptr_t characterListObj = GameObject_Find(&charlistStr);
-
-                        uintptr_t characterListTransf = GameObject_GetTransform(characterListObj);
-                        int childCount = Transform_get_childCount(characterListTransf);
-
-                        for (int i = 0; i < childCount; i++)
+                        std::vector<uintptr_t> characterList = GetChildTransforms(FindGameObject("Character"));
+                        for (int i = 0; i < characterList.size(); i++)
                         {
-                            uintptr_t characterTransform = Transform_GetChild(characterListTransf, i);
+                            uintptr_t character = characterList[i];
                             Vector3 newScale = { g_fPlayerSize, g_fPlayerSize, 1.0f };
-                            ResizeCharacter(characterTransform, newScale);
+                            ResizeCharacter(character, newScale);
                         }
-
-                        // Update our player's transform
-                        Vector3 newScale = { 1.0f, 1.0f, 1.0f };
-                        uintptr_t viewTransform = (uintptr_t)g_pPlayer->viewHandler->viewTransform;
-                        ResizeCharacter(viewTransform, newScale);
                     }
 
                     if (ImGui::Checkbox("Hide Tiles", &g_bHideTiles))
                     {
-                        String tilelistStr;
-                        WriteUnityString(&tilelistStr, "ComboTile");
-                        uintptr_t tileListObj = GameObject_Find(&tilelistStr);
-
-                        uintptr_t tileListTransf = GameObject_GetTransform(tileListObj);
-                        int childCount = Transform_get_childCount(tileListTransf);
-
-                        for (int i = 0; i < childCount; i++)
+                        std::vector<uintptr_t> tileList = GetChildTransforms(FindGameObject("ComboTile"));
+                        for (int i = 0; i < tileList.size(); i++)
                         {
-                            uintptr_t tileTransform = Transform_GetChild(tileListTransf, i);
+                            uintptr_t tile = tileList[i];
 
                             if (g_bHideTiles)
                             {
                                 Vector3 newScale = { 0.0f, 0.0f, 1.0f };
-                                Transform_set_localScale(tileTransform, newScale);
+                                Transform_set_localScale(tile, newScale);
                             }
                             else
                             {
                                 Vector3 newScale = { 1.0f, 1.0f, 1.0f };
-                                Transform_set_localScale(tileTransform, newScale);
+                                Transform_set_localScale(tile, newScale);
                             }
                         }
                     }
 
-                    ImGui::Checkbox("Hide pets", &g_bHidePets);
+                    ImGui::Checkbox("Hide Pets", &g_bHidePets);
 
                     static bool unlimitedFPS = false;
                     if (ImGui::Checkbox("Unlimited FPS", &unlimitedFPS))

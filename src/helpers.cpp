@@ -56,6 +56,30 @@ void WriteUnityString(String* target, const char* source)
     }
 }
 
+uintptr_t FindGameObject(const char* name)
+{
+    String objName;
+    WriteUnityString(&objName, name);
+    uintptr_t gameObject = GameObject_Find(&objName);
+    return gameObject;
+}
+
+std::vector<uintptr_t> GetChildTransforms(uintptr_t gameObject)
+{
+    std::vector<uintptr_t> vec;
+
+    uintptr_t mainTransform = GameObject_GetTransform(gameObject);
+    int childCount = Transform_get_childCount(mainTransform);
+
+    for (int i = 0; i < childCount; i++)
+    {
+        uintptr_t childTransform = Transform_GetChild(mainTransform, i);
+        vec.push_back(childTransform);
+    }
+
+    return vec;
+}
+
 void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale)
 {
     String contentStr;
