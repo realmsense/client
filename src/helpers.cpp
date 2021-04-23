@@ -80,22 +80,25 @@ std::vector<uintptr_t> GetChildTransforms(uintptr_t gameObject)
     return vec;
 }
 
+std::vector<uintptr_t> FindChildTransforms(uintptr_t parentTransform, std::vector<std::string> names)
+{
+    std::vector<uintptr_t> vec;
+    for (auto& name : names)
+    {
+        String str;
+        WriteUnityString(&str, name.c_str());
+        uintptr_t childTransform = Transform_Find(parentTransform, &str);
+        vec.push_back(childTransform);
+    }
+    return vec;
+}
+
 void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale)
 {
-    String contentStr;
-    WriteUnityString(&contentStr, "Content");
-    uintptr_t contentTransform = Transform_Find(characterTransform, &contentStr);
-    Transform_set_localScale(contentTransform, newScale);
-
-    String guiStr;
-    WriteUnityString(&guiStr, "CharacterGUI");
-    uintptr_t guiTransform = Transform_Find(characterTransform, &guiStr);
-    Transform_set_localScale(guiTransform, newScale);
-
-    String shadowStr;
-    WriteUnityString(&shadowStr, "Shadow");
-    uintptr_t shadowTransform = Transform_Find(characterTransform, &shadowStr);
-    Transform_set_localScale(shadowTransform, newScale);
+    std::vector<std::string> names { "Content", "CharacterGUI", "Shadow" };
+    std::vector<uintptr_t> transformList = FindChildTransforms(characterTransform, names);
+    for (int i = 0; i < transformList.size(); i++)
+        Transform_set_localScale(transformList[i], newScale);
 }
 
 uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)

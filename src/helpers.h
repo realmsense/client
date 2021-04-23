@@ -11,6 +11,7 @@ void WriteUnityString(String* target, const char* source);
 
 uintptr_t FindGameObject(const char* name);
 std::vector<uintptr_t> GetChildTransforms(uintptr_t gameObject);
+std::vector<uintptr_t> FindChildTransforms(uintptr_t parentTransform, std::vector<std::string> names);
 
 void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale);
 
