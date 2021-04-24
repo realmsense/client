@@ -60,6 +60,7 @@ bool g_bShowFps;
 
 /* other */
 bool g_bDisableAfkKicker;
+int g_iReconDelay;
 
 /* debug */
 bool g_bEnemyTracers;
@@ -126,6 +127,7 @@ void LoadSettings()
 
     /* other */
     g_bDisableAfkKicker = true;
+    g_iReconDelay = 0;
 
     /* debug */
     g_bEnemyTracers = false;

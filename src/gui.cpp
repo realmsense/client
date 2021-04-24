@@ -225,6 +225,8 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                             Behaviour_set_enabled(g_pIdleWatcher, !g_bDisableAfkKicker);
                     }
 
+                    ImGui::SliderInt("Reconnect Delay", &g_iReconDelay, 0, 30, "%d sec");
+
                     ImGui::EndTabItem();
                 }
 
@@ -256,6 +258,79 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
             ImGui::SliderFloat("Noclip Amount", &g_fNoclipChange, 1.0, 100.0);
 
+            const char* bruh[] = { "aaa", "aaa" };
+
+            static bool ComboTile = true;
+            static bool Character = true;
+            static bool MapObject = true;
+            static bool DrawOnGroundObject = true;
+            static bool Table = true;
+            static bool ParticleObject = true;
+            static bool MapObjectGUI = true;
+            static bool StaticSizeParticleObject = true;
+            static bool BitmapParticleObject = true;
+            static bool BardContainer = true;
+
+            std::map<std::string, bool*> map;
+            map.insert(std::pair<std::string, bool*>("ComboTile", &ComboTile));
+            map.insert(std::pair<std::string, bool*>("Character", &Character));
+            map.insert(std::pair<std::string, bool*>("MapObject", &MapObject));
+            map.insert(std::pair<std::string, bool*>("DrawOnGroundObject", &DrawOnGroundObject));
+            map.insert(std::pair<std::string, bool*>("Table", &Table));
+            map.insert(std::pair<std::string, bool*>("ParticleObject", &ParticleObject));
+            map.insert(std::pair<std::string, bool*>("MapObjectGUI", &MapObjectGUI));
+            map.insert(std::pair<std::string, bool*>("StaticSizeParticleObject", &StaticSizeParticleObject));
+            map.insert(std::pair<std::string, bool*>("BitmapParticleObject", &BitmapParticleObject));
+            map.insert(std::pair<std::string, bool*>("BardContainer", &BardContainer));
+
+            for (auto& item : map)
+            {
+                const char* name = item.first.c_str();
+                bool* enabled = item.second;
+                if (ImGui::Checkbox(item.first.c_str(), enabled))
+                {
+                    std::vector<uintptr_t> transfList = GetChildTransforms(FindGameObject(name));
+                    for (int i = 0; i < transfList.size(); i++)
+                    {
+                        uintptr_t transform = transfList[i];
+
+                        Vector3 newScale;
+
+                        if (*enabled)
+                            newScale = { 1.0f, 1.0f, 1.0f };
+                        else
+                            newScale = { 0.0f, 0.0f, 1.0f };
+
+                        if (item.first == "Character")
+                        {
+                            std::vector<std::string> names{ "Content", "CharacterGUI", "Shadow" };
+                            std::vector<uintptr_t> transformList = FindChildTransforms(transform, names);
+                            for (int j = 0; j < transformList.size(); j++)
+                                Transform_set_localScale(transformList[j], newScale);
+                        }
+                        else if (item.first == "MapObject")
+                        {
+                            std::vector<std::string> names{ "Content", "Shadow", "Loot Container" };
+                            std::vector<uintptr_t> transformList = FindChildTransforms(transform, names);
+                            for (int j = 0; j < transformList.size(); j++)
+                                Transform_set_localScale(transformList[j], newScale);
+                        }
+                        else if (item.first == "Table")
+                        {
+                            std::vector<std::string> names{ "Mesh1_Model", "Shadow" };
+                            std::vector<uintptr_t> transformList = FindChildTransforms(transform, names);
+                            for (int j = 0; j < transformList.size(); j++)
+                                Transform_set_localScale(transformList[j], newScale);
+                        }
+                        else
+                        {
+                            Transform_set_localScale(transform, newScale);
+                        }
+                    }
+
+                    std::cout << name << " " << *enabled << std::endl;
+                }
+            }
 
             ImGui::EndTabItem();
         }

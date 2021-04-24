@@ -224,6 +224,21 @@ void* Detour_IdleWatcher_Update(uintptr_t __this)
     return Original_IdleWatcher_Update(__this);
 }
 
+typedef void* (__cdecl* _SocketManager_Connect)(SocketManager __this, String* FAEOEJAKJCD, int NDDFJGMCEAI, String* HJLKEICEIGB, String* OJPAJEEOJMC);
+_SocketManager_Connect Original_SocketManager_Connect = nullptr;
+void* Detour_SocketManager_Connect(SocketManager __this, String* address, int port, String* OUTGOING_KEY, String* INCOMING_KEY)
+{
+    std::cout << "Connecting to " << ReadUnityString(address) << ":" << port << std::endl;
+
+    if (g_iReconDelay > 0)
+    {
+        std::cout << "Delaying for " << g_iReconDelay << " seconds..." << std::endl;
+        Sleep(g_iReconDelay * 1000);
+    }
+    
+    return Original_SocketManager_Connect(__this, address, port, OUTGOING_KEY, INCOMING_KEY);
+}
+
 bool InitHooks()
 {
     MH_Initialize();
@@ -296,6 +311,13 @@ bool InitHooks()
     if (MH_CreateHook(IdleWatcher_Update, Detour_IdleWatcher_Update, reinterpret_cast<LPVOID*>(&Original_IdleWatcher_Update)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour IdleWatcher_Update", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    void* SocketManager_Connect = (void*)(g_pBaseAddress + OFFSET_SOCKET_CONNECT);
+    if (MH_CreateHook(SocketManager_Connect, Detour_SocketManager_Connect, reinterpret_cast<LPVOID*>(&Original_SocketManager_Connect)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour SocketManager_Connect", "RotMG Internal", MB_OK);
         return 1;
     }
 

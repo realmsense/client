@@ -63,6 +63,7 @@ extern bool g_bShowFps;
 
 /* other */
 extern bool g_bDisableAfkKicker;
+extern int g_iReconDelay;
 
 /* debug */
 extern bool g_bEnemyTracers;

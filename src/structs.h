@@ -155,6 +155,15 @@ public:
     char pad_0028[32]; //0x0028
 }; //Size: 0x0048
 
+class SocketManager
+{
+public:
+    char pad_0000[56]; //0x0000
+    bool connecting; //0x0038
+    bool connected; //0x0039
+    char pad_003A[2054]; //0x003A
+}; //Size: 0x0840
+
 /////////////////
 // END RECLASS //
 /////////////////
@@ -216,6 +225,7 @@ enum AutoAimTarget
 #define OFFSET_ADD_DYNAMIC_OBJECT               0x1716760   // DecaGames.RotMG.Managers.MiniMap.MiniMapManager.AddDynamicObjectToMap
 #define OFFSET_REMOVE_DYNAMIC_OBJECT            0x1721ab0   // DecaGames.RotMG.Managers.MiniMap.MiniMapManager.RemoveDynamicObjectFromMap
 #define OFFSET_SOCKET_SENDMESSAGE               0x650e40    // DecaGames.RotMG.Managers.Net.SocketManager.NPMFAPBMCPI (SendMessage)
+#define OFFSET_SOCKET_CONNECT                   0x64ef70    // DecaGames.RotMG.Managers.Net.SocketManager.Connect
 #define OFFSET_CAMERAMANAGER_UPDATE             0x301a70    // DecaGames.RotMG.Managers.CameraManager.Update
 #define OFFSET_UNITYTHREAD_UPDATE               0x498900    // DecaGames.RotMG.Extensions.UnityThread.Update
 #define OFFSET_IDLE_WATCHER_UPDATE              0xf8c980    // DecaGames.RotMG.Managers.Services.IdleWatcher.Update
