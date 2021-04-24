@@ -58,6 +58,12 @@
     <ClCompile Include="src\minhook\src\hde\hde64.c">
       <Filter>Source Files\minhook</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\module_manager.cpp">
+      <Filter>Source Files\module</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\module.cpp">
+      <Filter>Source Files\module</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h">
@@ -129,6 +135,15 @@
     <ClInclude Include="src\minhook\src\hde\table64.h">
       <Filter>Source Files\minhook</Filter>
     </ClInclude>
+    <ClInclude Include="src\module\module_manager.h">
+      <Filter>Source Files\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\module.h">
+      <Filter>Source Files\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\module_list.h">
+      <Filter>Source Files\module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
@@ -148,6 +163,12 @@
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{80841d27-735c-49f0-a7a0-70dca6b5e95e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\module">
+      <UniqueIdentifier>{e8d50ba9-2a81-412d-a83a-34fbdf8b069a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\module\modules">
+      <UniqueIdentifier>{0176278c-a113-4b4a-b533-8d1c756acdc2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

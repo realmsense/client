@@ -12,6 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
+#include <unordered_map>
 #include "structs.h"
 #include "helpers.h"
 #include "globals.h"

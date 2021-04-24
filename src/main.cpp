@@ -1,8 +1,9 @@
 #include "pch.h"
 
-#include "globals.h"
 #include "gui.h"
 #include "hooks.h"
+#include "module/module_list.h"
+#include "module/module_manager.h"
 
 #include <sstream>
 
@@ -13,6 +14,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
     InitPointers();
     InitHooks();
     LoadSettings();
+    LoadModules();
 
     while (true)
     {
@@ -126,11 +128,14 @@ DWORD WINAPI MainThread(HMODULE hModule)
             g_bNoclip = !g_bNoclip;
         }
 
+        CallEvent(ModuleEvent::MainLoop);
+
         Sleep(5);
     }
 
     RemoveConsole();
     RemoveHooks();
+    UnloadModules();
     RemoveGui();
     FreeLibraryAndExitThread(hModule, 0);
     return TRUE;

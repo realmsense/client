@@ -200,6 +200,18 @@ enum AutoAimTarget
     HighestMaxHP
 };
 
+enum class ModuleCategory {
+    VIEW,
+    MOVEMENT,
+    AUTO,
+    OTHER
+};
+
+enum class ModuleEvent
+{
+    MainLoop,
+};
+
 // Offsets
 #define OFFSET_GET_MAINCAMERA                   0x220fc10   // UnityEngine.Camera.get_main
 #define OFFSET_SET_ORTHOGRAPHICSIZE             0x2210430   // UnityEngine.Camera.set_orthographicSize
