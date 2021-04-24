@@ -42,7 +42,6 @@ bool g_bAutoAim;
 AutoAimTarget g_AutoAimTarget;
 
 /* movement */
-bool g_bNoclip;
 float g_fNoclipChange;
 float g_fWalkAmount;
 
@@ -109,7 +108,6 @@ void LoadSettings()
     g_AutoAimTarget = AutoAimTarget::ClosestPos;
 
     /* movement */
-    g_bNoclip = false;
     g_fNoclipChange = 1.0f;
     g_fWalkAmount = 2.0f;
 

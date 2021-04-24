@@ -46,7 +46,6 @@ extern bool g_bAutoAim;
 extern AutoAimTarget g_AutoAimTarget;
 
 /* movement */
-extern bool g_bNoclip;
 extern float g_fNoclipChange;
 extern float g_fWalkAmount;
 

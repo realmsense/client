@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "globals.h"
 
+#include "module/module_manager.h"
+
 #include <d3d11.h>
 #include "kiero/kiero.h"
 #include "imgui/imgui.h"
@@ -107,7 +109,10 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                 if (ImGui::BeginTabItem("Movement"))
                 {
-                    ImGui::Checkbox("Noclip", &g_bNoclip);
+                    static Module* noclipModule = GetModule(ModuleList::NoclipModule);
+                    if (ImGui::Checkbox("Noclip", &noclipModule->enabled))
+                        noclipModule->setEnabled(noclipModule->enabled, true);
+
                     ImGui::SliderFloat("Walk Amount", &g_fWalkAmount, 1.0f, 10.0f);
                     ImGui::EndTabItem();
                 }
@@ -244,13 +249,13 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             {
                 if (niggmode)
                 {
-                    g_bNoclip = true;
+                    GetModule(ModuleList::NoclipModule)->setEnabled(true, true);
                     g_fNoclipChange = 77.7f;
                     PlaySound(TEXT("C:\\Users\\Extacy\\Desktop\\picture_cut.wav"), NULL, SND_FILENAME | SND_ASYNC);
                 }
                 else
                 {
-                    g_bNoclip = false;
+                    GetModule(ModuleList::NoclipModule)->setEnabled(false, true);
                     g_fNoclipChange = 1.0f;
                     PlaySound(NULL, NULL, SND_ASYNC);
                 }

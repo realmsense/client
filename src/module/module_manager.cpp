@@ -10,6 +10,8 @@ void LoadModules()
     // TODO: use settings to enable/disable modules
     // some modules (such as noclip) should stay disabled though
 
+    NoclipModule* noclipModule = new NoclipModule("Noclip", false, ModuleCategory::MOVEMENT);
+    modules.insert(std::pair<Module*, ModuleList>(noclipModule, ModuleList::NoclipModule));
 }
 
 void UnloadModules()

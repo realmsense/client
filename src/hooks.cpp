@@ -2,13 +2,15 @@
 #include "globals.h"
 #include "minhook/include/MinHook.h"
 
+#include "module/module_manager.h"
+
 typedef void* (__cdecl* _UnityThread_Update)(uintptr_t __this);
 _UnityThread_Update Original_UnityThread_Update = nullptr;
 void* Detour_UnityThread_Update(uintptr_t __this)
 {
-    if (g_bNoclip) {
+    if (!CallEvent(ModuleEvent::UnityThread_Update))
         return nullptr;
-    }
+
     return Original_UnityThread_Update(__this);
 }
 
@@ -171,19 +173,19 @@ Vector3 Detour_Input_GetMousePos(uintptr_t __this)
     return mousePos;
 }
 
-typedef void*(__cdecl* _SocketManager_SendMessage)(uintptr_t __this, uintptr_t packet);
-_SocketManager_SendMessage Original_SocketManager_SendMessage = nullptr;
-void* Detour_SocketManager_SendMessage(uintptr_t __this, uintptr_t packet)
-{
-    int packetId = *(int*)(packet + 0x18);
-    if (g_bNoclip
-        && packetId == 42 // move
-    ) {
-        return nullptr;
-    }
-
-    return Original_SocketManager_SendMessage(__this, packet);
-}
+//typedef void*(__cdecl* _SocketManager_SendMessage)(uintptr_t __this, uintptr_t packet);
+//_SocketManager_SendMessage Original_SocketManager_SendMessage = nullptr;
+//void* Detour_SocketManager_SendMessage(uintptr_t __this, uintptr_t packet)
+//{
+//    int packetId = *(int*)(packet + 0x18);
+//    if (g_bNoclip
+//        && packetId == 42 // move
+//    ) {
+//        return nullptr;
+//    }
+//
+//    return Original_SocketManager_SendMessage(__this, packet);
+//}
 
 typedef void* (__cdecl* _GetPlayerList)(NBJLMDOACBC __this, int EGHLCCGKEDH);
 _GetPlayerList Original_GetPlayerList = nullptr;
@@ -286,12 +288,12 @@ bool InitHooks()
         return 1;
     }
 
-    void* SocketManager_SendMessage = (void*)(g_pBaseAddress + OFFSET_SOCKET_SENDMESSAGE);
-    if (MH_CreateHook(SocketManager_SendMessage, Detour_SocketManager_SendMessage, reinterpret_cast<LPVOID*>(&Original_SocketManager_SendMessage)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour SocketManager_SendMessage", "RotMG Internal", MB_OK);
-        return 1;
-    }
+    //void* SocketManager_SendMessage = (void*)(g_pBaseAddress + OFFSET_SOCKET_SENDMESSAGE);
+    //if (MH_CreateHook(SocketManager_SendMessage, Detour_SocketManager_SendMessage, reinterpret_cast<LPVOID*>(&Original_SocketManager_SendMessage)) != MH_OK)
+    //{
+    //    MessageBoxA(NULL, "Failed to Detour SocketManager_SendMessage", "RotMG Internal", MB_OK);
+    //    return 1;
+    //}
 
     void* GetPlayerList = (void*)(g_pBaseAddress + OFFSET_GET_PLAYER_LIST);
     if (MH_CreateHook(GetPlayerList, Detour_GetPlayerList, reinterpret_cast<LPVOID*>(&Original_GetPlayerList)) != MH_OK)

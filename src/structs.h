@@ -1,4 +1,4 @@
-#include <cstdint>
+#pragma once
 
 struct Vector2 { float x, y; };
 struct Vector3 { float x, y, z; };
@@ -210,6 +210,7 @@ enum class ModuleCategory {
 enum class ModuleEvent
 {
     MainLoop,
+    UnityThread_Update
 };
 
 // Offsets

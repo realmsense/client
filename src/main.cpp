@@ -10,11 +10,11 @@
 DWORD WINAPI MainThread(HMODULE hModule)
 {
     CreateConsole();
-    InitGui();
     InitPointers();
     InitHooks();
     LoadSettings();
     LoadModules();
+    InitGui();
 
     while (true)
     {
@@ -98,14 +98,6 @@ DWORD WINAPI MainThread(HMODULE hModule)
             break;
         }
 
-        if (g_bNoclip && g_pPlayer)
-        {
-            if (GetAsyncKeyState(0x57)) g_pPlayer->pos.y -= 0.01f * g_fNoclipChange; // w - up
-            if (GetAsyncKeyState(0x41)) g_pPlayer->pos.x -= 0.01f * g_fNoclipChange; // a - left
-            if (GetAsyncKeyState(0x53)) g_pPlayer->pos.y += 0.01f * g_fNoclipChange; // s - down
-            if (GetAsyncKeyState(0x44)) g_pPlayer->pos.x += 0.01f * g_fNoclipChange; // d - right
-        }
-
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
 
@@ -124,8 +116,8 @@ DWORD WINAPI MainThread(HMODULE hModule)
         // v key - toggle noclip
         if (GetAsyncKeyState(0x56) & 1)
         {
-            // TODO: test if the current tile is walkable
-            g_bNoclip = !g_bNoclip;
+            static Module* noclipModule = GetModule(ModuleList::NoclipModule);
+            noclipModule->toggleModule();
         }
 
         CallEvent(ModuleEvent::MainLoop);
