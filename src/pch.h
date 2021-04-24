@@ -10,6 +10,8 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <iostream>
+#include <vector>
+#include <unordered_set>
 #include "structs.h"
 #include "helpers.h"
 #include "globals.h"

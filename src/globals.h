@@ -1,5 +1,6 @@
+#pragma once
+
 #include "pch.h"
-#include <unordered_set>
 
 void InitPointers();
 void LoadSettings();
