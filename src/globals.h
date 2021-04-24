@@ -10,8 +10,7 @@ extern Entity* g_pPlayer;
 extern NBJLMDOACBC* g_pNBJLMDOACBC;
 extern uintptr_t g_pMainCamera;
 extern uintptr_t g_pCameraManager;
-extern _SetVsync SetVsync;
-extern _SetFpsTarget SetFpsTarget;
+extern uintptr_t g_pIdleWatcher;
 
 // Functions
 extern _Camera_set_orthographicSize Camera_set_orthographicSize;
@@ -32,6 +31,8 @@ extern _Transform_get_localScale Transform_get_localScale;
 extern _Transform_set_localScale Transform_set_localScale;
 extern _WorldToScreen WorldToScreen;
 extern _ScreenToWorld ScreenToWorld;
+extern _SetVsync SetVsync;
+extern _SetFpsTarget SetFpsTarget;
 
 // Variables / Settings
 extern bool g_bWindowFocused;
@@ -59,6 +60,9 @@ extern float g_fPlayerSize;
 extern bool g_bHideTiles;
 extern bool g_bHidePets;
 extern bool g_bShowFps;
+
+/* other */
+extern bool g_bDisableAfkKicker;
 
 /* debug */
 extern bool g_bEnemyTracers;

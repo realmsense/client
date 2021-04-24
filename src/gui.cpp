@@ -216,7 +216,18 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                     ImGui::EndTabItem();
                 }
-                
+
+                if (ImGui::BeginTabItem("Other"))
+                {
+                    if (ImGui::Checkbox("Disable AFK Kicker", &g_bDisableAfkKicker))
+                    {
+                        if (g_pIdleWatcher)
+                            Behaviour_set_enabled(g_pIdleWatcher, !g_bDisableAfkKicker);
+                    }
+
+                    ImGui::EndTabItem();
+                }
+
                 ImGui::EndTabBar();
             }
 

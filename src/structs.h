@@ -218,6 +218,7 @@ enum AutoAimTarget
 #define OFFSET_SOCKET_SENDMESSAGE               0x650e40    // DecaGames.RotMG.Managers.Net.SocketManager.NPMFAPBMCPI (SendMessage)
 #define OFFSET_CAMERAMANAGER_UPDATE             0x301a70    // DecaGames.RotMG.Managers.CameraManager.Update
 #define OFFSET_UNITYTHREAD_UPDATE               0x498900    // DecaGames.RotMG.Extensions.UnityThread.Update
+#define OFFSET_IDLE_WATCHER_UPDATE              0xf8c980    // DecaGames.RotMG.Managers.Services.IdleWatcher.Update
 #define OFFSET_GET_PLAYER                       0x2f2850    // JFNHHLNJJKP.JJCAKPHMLKD - Random method that runs every tick to get player
 #define OFFSET_GET_ENEMY                        0xe5a1d0    // COEDKELBKMI.(HOGFGOPEKAE or FFHEDOAINJH) - Random method to get enemy 
 #define OFFSET_GET_PLAYER_LIST                  0xa3b030    // NBJLMDOACBC.CDKKNNAJIBG - random method that runs every tick, the class contains `List<JFNHHLNJJKP>` of players.

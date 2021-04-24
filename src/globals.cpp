@@ -7,6 +7,7 @@ Entity* g_pPlayer;
 NBJLMDOACBC* g_pNBJLMDOACBC; // TODO: think of a name for this
 uintptr_t g_pMainCamera;
 uintptr_t g_pCameraManager;
+uintptr_t g_pIdleWatcher;
 
 // Functions
 _Camera_set_orthographicSize Camera_set_orthographicSize;
@@ -56,6 +57,9 @@ float g_fPlayerSize;
 bool g_bHideTiles;
 bool g_bHidePets;
 bool g_bShowFps;
+
+/* other */
+bool g_bDisableAfkKicker;
 
 /* debug */
 bool g_bEnemyTracers;
@@ -119,6 +123,9 @@ void LoadSettings()
     g_bHideTiles = false;
     g_bHidePets = false;
     g_bShowFps = false;
+
+    /* other */
+    g_bDisableAfkKicker = true;
 
     /* debug */
     g_bEnemyTracers = false;

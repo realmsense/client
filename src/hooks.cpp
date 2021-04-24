@@ -210,6 +210,20 @@ void* Detour_GetPet(Entity pet, bool AMKOONDPFBD)
     return Original_GetPet(pet, AMKOONDPFBD);
 }
 
+typedef void* (__cdecl* _IdleWatcher_Update)(uintptr_t __this);
+_IdleWatcher_Update Original_IdleWatcher_Update = nullptr;
+void* Detour_IdleWatcher_Update(uintptr_t __this)
+{
+    g_pIdleWatcher = __this;
+
+    std::cout << std::hex << __this << std::endl;
+
+    if (g_bDisableAfkKicker)
+        Behaviour_set_enabled(__this, false);
+
+    return Original_IdleWatcher_Update(__this);
+}
+
 bool InitHooks()
 {
     MH_Initialize();
@@ -275,6 +289,13 @@ bool InitHooks()
     if (MH_CreateHook(GetPet, Detour_GetPet, reinterpret_cast<LPVOID*>(&Original_GetPet)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour GetPet", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    void* IdleWatcher_Update = (void*)(g_pBaseAddress + OFFSET_IDLE_WATCHER_UPDATE);
+    if (MH_CreateHook(IdleWatcher_Update, Detour_IdleWatcher_Update, reinterpret_cast<LPVOID*>(&Original_IdleWatcher_Update)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour IdleWatcher_Update", "RotMG Internal", MB_OK);
         return 1;
     }
 
