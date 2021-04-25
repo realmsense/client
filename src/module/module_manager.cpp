@@ -26,27 +26,9 @@ void UnloadModules()
     }
 }
 
-Module* GetModule(std::string name)
+std::unordered_map<Module*, ModuleList> GetAllModules()
 {
-    for (auto& x : modules)
-    {
-        Module* module = x.first;
-        if (module->name == name)
-            return module;
-    }
-
-    return nullptr;
-}
-
-Module* GetModule(ModuleList type)
-{
-    for (auto& x : modules)
-    {
-        if (x.second == type)
-            return x.first;
-    }
-
-    return nullptr;
+    return modules;
 }
 
 // Return value is if the function should continue

@@ -85,7 +85,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             {
                 if (ImGui::BeginTabItem("Autos"))
                 {
-                    static Module* autoAimModule = GetModule(ModuleList::AutoAimModule);
+                    static AutoAimModule* autoAimModule = GetModule<AutoAimModule>(ModuleList::AutoAimModule);
                     if (ImGui::Checkbox("Auto Aim", &autoAimModule->enabled))
                         autoAimModule->setEnabled(autoAimModule->enabled, true);
 
@@ -111,7 +111,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                 if (ImGui::BeginTabItem("Movement"))
                 {
-                    static Module* noclipModule = GetModule(ModuleList::NoclipModule);
+                    static NoclipModule* noclipModule = GetModule< NoclipModule>(ModuleList::NoclipModule);
                     if (ImGui::Checkbox("Noclip", &noclipModule->enabled))
                         noclipModule->setEnabled(noclipModule->enabled, true);
 
