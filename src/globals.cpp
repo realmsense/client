@@ -41,7 +41,6 @@ std::vector<Entity*> g_aPlayerList;
 AutoAimTarget g_AutoAimTarget;
 
 /* movement */
-float g_fNoclipChange;
 float g_fWalkAmount;
 
 /* meme */
@@ -106,7 +105,6 @@ void LoadSettings()
     g_AutoAimTarget = AutoAimTarget::ClosestPos;
 
     /* movement */
-    g_fNoclipChange = 1.0f;
     g_fWalkAmount = 2.0f;
 
     /* meme */

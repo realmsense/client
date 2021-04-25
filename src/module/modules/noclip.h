@@ -7,6 +7,8 @@ class NoclipModule : public Module {
 public:
     NoclipModule(std::string name, bool enabled, ModuleCategory category);
 
+    float noclipSpeed;
+
     void onEnable();
     void onDisable();
     bool onEvent(ModuleEvent event, CDataPack* dp);

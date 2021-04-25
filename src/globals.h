@@ -45,7 +45,6 @@ extern std::vector<Entity*> g_aPlayerList;
 extern AutoAimTarget g_AutoAimTarget;
 
 /* movement */
-extern float g_fNoclipChange;
 extern float g_fWalkAmount;
 
 /* meme */

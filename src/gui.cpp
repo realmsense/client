@@ -247,23 +247,24 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         if (ImGui::BeginTabItem(":realtrollblack:"))
         {
             static bool niggmode = false;
+            static NoclipModule* noclipModule = GetModule< NoclipModule>(ModuleList::NoclipModule);
             if (ImGui::Checkbox("nigga mode", &niggmode))
             {
                 if (niggmode)
                 {
-                    GetModule(ModuleList::NoclipModule)->setEnabled(true, true);
-                    g_fNoclipChange = 77.7f;
+                    noclipModule->setEnabled(true, true);
+                    noclipModule->noclipSpeed = 77.7f;
                     PlaySound(TEXT("C:\\Users\\Extacy\\Desktop\\picture_cut.wav"), NULL, SND_FILENAME | SND_ASYNC);
                 }
                 else
                 {
-                    GetModule(ModuleList::NoclipModule)->setEnabled(false, true);
-                    g_fNoclipChange = 1.0f;
+                    noclipModule->setEnabled(false, true);
+                    noclipModule->noclipSpeed = 1.0f;
                     PlaySound(NULL, NULL, SND_ASYNC);
                 }
             }
 
-            ImGui::SliderFloat("Noclip Amount", &g_fNoclipChange, 1.0, 100.0);
+            ImGui::SliderFloat("Noclip Amount", &noclipModule->noclipSpeed, 1.0, 100.0);
 
             const char* bruh[] = { "aaa", "aaa" };
 
