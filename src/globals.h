@@ -41,9 +41,6 @@ extern bool g_bMenuOpen;
 extern std::unordered_set<Entity*> g_aEnemyList;
 extern std::vector<Entity*> g_aPlayerList;
 
-/* movement */
-extern float g_fWalkAmount;
-
 /* view */
 extern bool g_bDisableFog;
 extern float g_fZoomAmount;

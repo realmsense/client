@@ -111,11 +111,13 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                 if (ImGui::BeginTabItem("Movement"))
                 {
-                    static NoclipModule* noclipModule = GetModule< NoclipModule>(ModuleList::NoclipModule);
+                    static NoclipModule* noclipModule = GetModule<NoclipModule>(ModuleList::NoclipModule);
                     if (ImGui::Checkbox("Noclip", &noclipModule->enabled))
                         noclipModule->setEnabled(noclipModule->enabled, true);
 
-                    ImGui::SliderFloat("Walk Amount", &g_fWalkAmount, 1.0f, 10.0f);
+                    static WalkModule* walkModule = GetModule<WalkModule>(ModuleList::WalkModule);
+                    ImGui::SliderFloat("Walk Modifier", &walkModule->walkModifier, 1.0f, 10.0f);
+
                     ImGui::EndTabItem();
                 }
 

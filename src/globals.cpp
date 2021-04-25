@@ -37,9 +37,6 @@ bool g_bMenuOpen;
 std::unordered_set<Entity*> g_aEnemyList;
 std::vector<Entity*> g_aPlayerList;
 
-/* movement */
-float g_fWalkAmount;
-
 /* view */
 bool g_bDisableFog;
 float g_fZoomAmount;
@@ -94,9 +91,6 @@ void LoadSettings()
     // TODO: load from save settings
 
     g_bMenuOpen = true;
-
-    /* movement */
-    g_fWalkAmount = 2.0f;
 
     /* view */
     g_bDisableFog = true;

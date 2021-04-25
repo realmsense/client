@@ -12,6 +12,9 @@ void LoadModules()
     NoclipModule* noclipModule = new NoclipModule("Noclip", false, ModuleCategory::MOVEMENT);
     modules.insert(std::pair<Module*, ModuleList>(noclipModule, ModuleList::NoclipModule));
 
+    WalkModule* walkModule = new WalkModule("Walk", false, ModuleCategory::MOVEMENT);
+    modules.insert(std::pair<Module*, ModuleList>(walkModule, ModuleList::WalkModule));
+
     AutoAimModule* autoAimModule = new AutoAimModule("Auto Aim", false, ModuleCategory::AUTO);
     modules.insert(std::pair<Module*, ModuleList>(autoAimModule, ModuleList::AutoAimModule));
 }

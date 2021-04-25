@@ -73,6 +73,9 @@
     <ClCompile Include="src\module\modules\autoaim.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\modules\walk.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h">
@@ -160,6 +163,9 @@
       <Filter>Source Files\other</Filter>
     </ClInclude>
     <ClInclude Include="src\module\modules\autoaim.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\walk.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
   </ItemGroup>

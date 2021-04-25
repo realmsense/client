@@ -73,6 +73,7 @@
     <ClCompile Include="src\module\module.cpp" />
     <ClCompile Include="src\module\modules\autoaim.cpp" />
     <ClCompile Include="src\module\modules\noclip.cpp" />
+    <ClCompile Include="src\module\modules\walk.cpp" />
     <ClCompile Include="src\module\module_manager.cpp" />
     <ClCompile Include="src\other\CDataPack.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -109,6 +110,7 @@
     <ClInclude Include="src\module\module.h" />
     <ClInclude Include="src\module\modules\autoaim.h" />
     <ClInclude Include="src\module\modules\noclip.h" />
+    <ClInclude Include="src\module\modules\walk.h" />
     <ClInclude Include="src\module\module_list.h" />
     <ClInclude Include="src\module\module_manager.h" />
     <ClInclude Include="src\other\CDataPack.h" />
