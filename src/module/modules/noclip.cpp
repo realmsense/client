@@ -20,7 +20,7 @@ void NoclipModule::onDisable()
     std::cout << this->name << " disabled" << std::endl;
 }
 
-bool NoclipModule::onEvent(ModuleEvent event, void* args)
+bool NoclipModule::onEvent(ModuleEvent event, CDataPack* dp)
 {
     switch (event)
     {

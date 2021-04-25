@@ -6,4 +6,4 @@ void LoadModules();
 void UnloadModules();
 Module* GetModule(std::string name);
 Module* GetModule(ModuleList type);
-bool CallEvent(ModuleEvent event);
+bool CallEvent(ModuleEvent event, CDataPack* dp);

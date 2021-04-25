@@ -42,7 +42,6 @@ extern std::unordered_set<Entity*> g_aEnemyList;
 extern std::vector<Entity*> g_aPlayerList;
 
 /* autos */
-extern bool g_bAutoAim;
 extern AutoAimTarget g_AutoAimTarget;
 
 /* movement */

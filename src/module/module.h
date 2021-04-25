@@ -14,7 +14,7 @@ public:
 
     void setEnabled(bool enabled, bool callHandlers);
     void toggleModule();
-    virtual bool onEvent(ModuleEvent event, void* args) = 0;
+    virtual bool onEvent(ModuleEvent event, CDataPack* dp) = 0;
 
 protected:
 

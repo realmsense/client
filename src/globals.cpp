@@ -38,7 +38,6 @@ std::unordered_set<Entity*> g_aEnemyList;
 std::vector<Entity*> g_aPlayerList;
 
 /* autos */
-bool g_bAutoAim;
 AutoAimTarget g_AutoAimTarget;
 
 /* movement */
@@ -104,7 +103,6 @@ void LoadSettings()
     g_bMenuOpen = true;
 
     /* autos */
-    g_bAutoAim = false;
     g_AutoAimTarget = AutoAimTarget::ClosestPos;
 
     /* movement */

@@ -71,8 +71,13 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\module\module.cpp" />
+    <ClCompile Include="src\module\modules\autoaim.cpp" />
     <ClCompile Include="src\module\modules\noclip.cpp" />
     <ClCompile Include="src\module\module_manager.cpp" />
+    <ClCompile Include="src\other\CDataPack.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -102,9 +107,11 @@
     <ClInclude Include="src\minhook\src\hde\table64.h" />
     <ClInclude Include="src\minhook\src\trampoline.h" />
     <ClInclude Include="src\module\module.h" />
+    <ClInclude Include="src\module\modules\autoaim.h" />
     <ClInclude Include="src\module\modules\noclip.h" />
     <ClInclude Include="src\module\module_list.h" />
     <ClInclude Include="src\module\module_manager.h" />
+    <ClInclude Include="src\other\CDataPack.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\structs.h" />
   </ItemGroup>

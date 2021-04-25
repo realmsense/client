@@ -210,7 +210,8 @@ enum class ModuleCategory {
 enum class ModuleEvent
 {
     MainLoop,
-    UnityThread_Update
+    UnityThread_Update,
+    GetMousePos
 };
 
 // Offsets

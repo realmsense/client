@@ -85,7 +85,9 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             {
                 if (ImGui::BeginTabItem("Autos"))
                 {
-                    ImGui::Checkbox("Auto Aim", &g_bAutoAim);
+                    static Module* autoAimModule = GetModule(ModuleList::AutoAimModule);
+                    if (ImGui::Checkbox("Auto Aim", &autoAimModule->enabled))
+                        autoAimModule->setEnabled(autoAimModule->enabled, true);
 
                     const char* aim_targets[] =
                     {

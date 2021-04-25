@@ -120,7 +120,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
             noclipModule->toggleModule();
         }
 
-        CallEvent(ModuleEvent::MainLoop);
+        CallEvent(ModuleEvent::MainLoop, nullptr);
 
         Sleep(5);
     }

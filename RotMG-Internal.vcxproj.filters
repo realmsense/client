@@ -67,6 +67,12 @@
     <ClCompile Include="src\module\module.cpp">
       <Filter>Source Files\module</Filter>
     </ClCompile>
+    <ClCompile Include="src\other\CDataPack.cpp">
+      <Filter>Source Files\other</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\modules\autoaim.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h">
@@ -150,6 +156,12 @@
     <ClInclude Include="src\module\module_list.h">
       <Filter>Source Files\module</Filter>
     </ClInclude>
+    <ClInclude Include="src\other\CDataPack.h">
+      <Filter>Source Files\other</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\autoaim.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
@@ -175,6 +187,9 @@
     </Filter>
     <Filter Include="Source Files\module\modules">
       <UniqueIdentifier>{0176278c-a113-4b4a-b533-8d1c756acdc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\other">
+      <UniqueIdentifier>{63be5454-49c6-4caf-8709-075b9e6a06a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
