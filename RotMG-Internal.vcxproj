@@ -74,6 +74,7 @@
     <ClCompile Include="src\module\modules\autoaim.cpp" />
     <ClCompile Include="src\module\modules\disable_fog.cpp" />
     <ClCompile Include="src\module\modules\noclip.cpp" />
+    <ClCompile Include="src\module\modules\unlimited_zoom.cpp" />
     <ClCompile Include="src\module\modules\walk.cpp" />
     <ClCompile Include="src\module\module_manager.cpp" />
     <ClCompile Include="src\other\CDataPack.cpp">
@@ -112,6 +113,7 @@
     <ClInclude Include="src\module\modules\autoaim.h" />
     <ClInclude Include="src\module\modules\disable_fog.h" />
     <ClInclude Include="src\module\modules\noclip.h" />
+    <ClInclude Include="src\module\modules\unlimited_zoom.h" />
     <ClInclude Include="src\module\modules\walk.h" />
     <ClInclude Include="src\module\module_list.h" />
     <ClInclude Include="src\module\module_manager.h" />

@@ -38,8 +38,6 @@ std::unordered_set<Entity*> g_aEnemyList;
 std::vector<Entity*> g_aPlayerList;
 
 /* view */
-float g_fZoomAmount;
-bool g_bDisablePerspectiveEditor;
 float g_fPlayerSize;
 bool g_bHideTiles;
 bool g_bHidePets;
@@ -92,8 +90,6 @@ void LoadSettings()
     g_bMenuOpen = true;
 
     /* view */
-    g_fZoomAmount = 7.2f;
-    g_bDisablePerspectiveEditor = true;
     g_fPlayerSize = 1.0f;
     g_bHideTiles = false;
     g_bHidePets = false;

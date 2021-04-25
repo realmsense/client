@@ -13,6 +13,9 @@ void LoadModules()
     DisableFogModule* disableFogModule = new DisableFogModule("Disable Fog", true, ModuleCategory::VIEW);
     modules.insert(std::pair<Module*, ModuleList>(disableFogModule, ModuleList::DisableFogModule));
 
+    UnlimitedZoomModule* unlimitedZoomModule = new UnlimitedZoomModule("Unlimited Zoom", true, ModuleCategory::VIEW);
+    modules.insert(std::pair<Module*, ModuleList>(unlimitedZoomModule, ModuleList::UnlimitedZoom));
+
     // Movement
     NoclipModule* noclipModule = new NoclipModule("Noclip", false, ModuleCategory::MOVEMENT);
     modules.insert(std::pair<Module*, ModuleList>(noclipModule, ModuleList::NoclipModule));

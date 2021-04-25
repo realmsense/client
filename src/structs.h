@@ -204,7 +204,8 @@ enum class ModuleEvent
     MainLoop,
     UnityThread_Update,
     GetMousePos,
-    Tile_SetColor
+    Tile_SetColor,
+    CameraManager_Update
 };
 
 // Offsets

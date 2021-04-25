@@ -79,8 +79,8 @@ void* Detour_CameraManager_Update(uintptr_t cameraManager)
 {
     g_pCameraManager = cameraManager;
 
-    uintptr_t cameraPerspectiveEditor = *(uintptr_t*)(g_pCameraManager + 0x48); // OOJJDIANIBF
-    g_bDisablePerspectiveEditor = Behaviour_get_enabled(cameraPerspectiveEditor);
+    if (!CallEvent(ModuleEvent::CameraManager_Update, NULL))
+        return nullptr;
 
     return Original_CameraManager_Update(cameraManager);
 }

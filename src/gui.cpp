@@ -126,21 +126,12 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                     static DisableFogModule* disableFogModule = GetModule<DisableFogModule>(ModuleList::DisableFogModule);
                     ImGui::Checkbox("Disable Fog", &disableFogModule->enabled);
 
-                    if (ImGui::SliderFloat("Zoom Amount", &g_fZoomAmount, 0.0f, 20.0f))
-                    {
-                        if (g_pMainCamera)
-                            Camera_set_orthographicSize(g_pMainCamera, g_fZoomAmount);
-                    }
+                    static UnlimitedZoomModule* unlimitedZoomModule = GetModule<UnlimitedZoomModule>(ModuleList::UnlimitedZoom);
+                    if (ImGui::SliderFloat("Zoom Amount", &unlimitedZoomModule->zoomAmount, 0.0f, 20.0f))
+                        unlimitedZoomModule->Zoom(unlimitedZoomModule->zoomAmount);
 
-                    if (ImGui::Checkbox("Perspective Editor", &g_bDisablePerspectiveEditor))
-                    {
-                        if (g_pCameraManager)
-                        {
-                            uintptr_t cameraPerspectiveEditor = *(uintptr_t*)(g_pCameraManager + 0x48); // OOJJDIANIBF
-                            Behaviour_set_enabled(cameraPerspectiveEditor, g_bDisablePerspectiveEditor);
-                            std::cout << "CameraPerspectiveEditor: " << g_bDisablePerspectiveEditor << std::endl;
-                        }
-                    }
+                    if (ImGui::Checkbox("Perspective Editor", &unlimitedZoomModule->perspectiveEditorEnabled))
+                        unlimitedZoomModule->TogglePerspectiveEditor(unlimitedZoomModule->perspectiveEditorEnabled);
 
                     static float playerSize = 1.0f;
                     ImGui::SliderFloat("My Player Size", &playerSize, 0.0f, 5.0f);
