@@ -56,13 +56,20 @@ typedef void* (__cdecl* _TileSetColor)(uintptr_t __this, Color value);
 _TileSetColor Original_Tile_SetColor = nullptr;
 void* Detour_Tile_SetColor(uintptr_t __this, Color value)
 {
-    // don't change the tile color if it is being darkened
-    if (g_bDisableFog
-        && (value.r != 1 || value.g != 1 || value.b != 1 || value.a != 1)
-        ) {
-        return nullptr;
-    }
+    CDataPack dp;
+    dp.PackFloat(value.r);
+    dp.PackFloat(value.g);
+    dp.PackFloat(value.b);
+    dp.PackFloat(value.a);
 
+    if (!CallEvent(ModuleEvent::Tile_SetColor, &dp))
+        return nullptr;
+
+    dp.Reset();
+    value.r = dp.ReadFloat();
+    value.g = dp.ReadFloat();
+    value.b = dp.ReadFloat();
+    value.a = dp.ReadFloat();
     return Original_Tile_SetColor(__this, value);
 }
 

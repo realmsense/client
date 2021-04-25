@@ -9,14 +9,22 @@ void LoadModules()
     // TODO: use settings to enable/disable modules
     // some modules (such as noclip) should stay disabled though
 
+    // View
+    DisableFogModule* disableFogModule = new DisableFogModule("Disable Fog", true, ModuleCategory::VIEW);
+    modules.insert(std::pair<Module*, ModuleList>(disableFogModule, ModuleList::DisableFogModule));
+
+    // Movement
     NoclipModule* noclipModule = new NoclipModule("Noclip", false, ModuleCategory::MOVEMENT);
     modules.insert(std::pair<Module*, ModuleList>(noclipModule, ModuleList::NoclipModule));
 
     WalkModule* walkModule = new WalkModule("Walk", false, ModuleCategory::MOVEMENT);
     modules.insert(std::pair<Module*, ModuleList>(walkModule, ModuleList::WalkModule));
 
+    // Auto
     AutoAimModule* autoAimModule = new AutoAimModule("Auto Aim", false, ModuleCategory::AUTO);
     modules.insert(std::pair<Module*, ModuleList>(autoAimModule, ModuleList::AutoAimModule));
+
+    // Other
 }
 
 void UnloadModules()

@@ -203,7 +203,8 @@ enum class ModuleEvent
 {
     MainLoop,
     UnityThread_Update,
-    GetMousePos
+    GetMousePos,
+    Tile_SetColor
 };
 
 // Offsets

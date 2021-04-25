@@ -42,7 +42,6 @@ extern std::unordered_set<Entity*> g_aEnemyList;
 extern std::vector<Entity*> g_aPlayerList;
 
 /* view */
-extern bool g_bDisableFog;
 extern float g_fZoomAmount;
 extern bool g_bDisablePerspectiveEditor;
 extern float g_fPlayerSize;

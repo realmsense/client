@@ -123,7 +123,8 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                 if (ImGui::BeginTabItem("View"))
                 {
-                    ImGui::Checkbox("Disable Fog", &g_bDisableFog);
+                    static DisableFogModule* disableFogModule = GetModule<DisableFogModule>(ModuleList::DisableFogModule);
+                    ImGui::Checkbox("Disable Fog", &disableFogModule->enabled);
 
                     if (ImGui::SliderFloat("Zoom Amount", &g_fZoomAmount, 0.0f, 20.0f))
                     {
