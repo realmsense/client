@@ -192,14 +192,6 @@ typedef void(__cdecl* _SetVsync)(int value);
 typedef void(__cdecl* _SetFpsTarget)(int value);
 
 // Global Structs
-enum AutoAimTarget
-{
-    ClosestMouse,
-    ClosestPos,
-    HighestDef,
-    HighestMaxHP
-};
-
 enum class ModuleCategory {
     VIEW,
     MOVEMENT,

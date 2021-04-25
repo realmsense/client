@@ -41,14 +41,8 @@ extern bool g_bMenuOpen;
 extern std::unordered_set<Entity*> g_aEnemyList;
 extern std::vector<Entity*> g_aPlayerList;
 
-/* autos */
-extern AutoAimTarget g_AutoAimTarget;
-
 /* movement */
 extern float g_fWalkAmount;
-
-/* meme */
-extern bool g_bNiggaMode;
 
 /* view */
 extern bool g_bDisableFog;

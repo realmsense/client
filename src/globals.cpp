@@ -37,14 +37,8 @@ bool g_bMenuOpen;
 std::unordered_set<Entity*> g_aEnemyList;
 std::vector<Entity*> g_aPlayerList;
 
-/* autos */
-AutoAimTarget g_AutoAimTarget;
-
 /* movement */
 float g_fWalkAmount;
-
-/* meme */
-bool g_bNiggaMode;
 
 /* view */
 bool g_bDisableFog;
@@ -101,14 +95,8 @@ void LoadSettings()
 
     g_bMenuOpen = true;
 
-    /* autos */
-    g_AutoAimTarget = AutoAimTarget::ClosestPos;
-
     /* movement */
     g_fWalkAmount = 2.0f;
-
-    /* meme */
-    g_bNiggaMode = false;
 
     /* view */
     g_bDisableFog = true;

@@ -7,7 +7,7 @@
 AutoAimModule::AutoAimModule(std::string name, bool enabled, ModuleCategory category)
     : Module(name, enabled, category)
 {
-    //
+    this->target = AutoAimTarget::ClosestMouse;
 }
 
 void AutoAimModule::onEnable()
@@ -50,7 +50,7 @@ bool AutoAimModule::onGetMousePos(CDataPack* dp)
             continue;
         }
 
-        if (g_AutoAimTarget == AutoAimTarget::ClosestPos)
+        if (this->target == AutoAimTarget::ClosestPos)
         {
             float chosenDistance = CalculateDistance(chosenEnemy->pos, g_pPlayer->pos);
             float currentDistance = CalculateDistance(enemy->pos, g_pPlayer->pos);
@@ -60,7 +60,7 @@ bool AutoAimModule::onGetMousePos(CDataPack* dp)
                 continue;
             }
         }
-        else if (g_AutoAimTarget == AutoAimTarget::ClosestMouse)
+        else if (this->target == AutoAimTarget::ClosestMouse)
         {
             Vector3 mouseWorldPos3 = ScreenToWorld(g_pMainCamera, mousePos);
             Vector2 mouseWorldPos = { mouseWorldPos3.x, mouseWorldPos3.y * -1 };
@@ -72,7 +72,7 @@ bool AutoAimModule::onGetMousePos(CDataPack* dp)
                 continue;
             }
         }
-        else if (g_AutoAimTarget == AutoAimTarget::HighestDef)
+        else if (this->target == AutoAimTarget::HighestDef)
         {
             // TODO: what happens if the enemy is armor broken?
             int chosenDef = chosenEnemy->defense;
@@ -83,7 +83,7 @@ bool AutoAimModule::onGetMousePos(CDataPack* dp)
                 continue;
             }
         }
-        else if (g_AutoAimTarget == AutoAimTarget::HighestMaxHP)
+        else if (this->target == AutoAimTarget::HighestMaxHP)
         {
             int chosenHP = chosenEnemy->maxHP;
             int currentHP = enemy->maxHP;

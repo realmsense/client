@@ -102,8 +102,8 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                     if (ImGui::Combo("Auto Aim Target", &selected_target, aim_targets, IM_ARRAYSIZE(aim_targets), IM_ARRAYSIZE(aim_targets)))
                     {
-                        g_AutoAimTarget = AutoAimTarget(selected_target);
-                        std::cout << g_AutoAimTarget << " " << aim_targets[selected_target] << std::endl;
+                        autoAimModule->target = AutoAimTarget(selected_target);
+                        std::cout << "Auto Aim Target set to: " << aim_targets[selected_target] << std::endl;
                     }
 
                     ImGui::EndTabItem();
