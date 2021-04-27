@@ -171,11 +171,11 @@ void* Detour_IdleWatcher_Update(uintptr_t __this)
     return Original_IdleWatcher_Update(__this);
 }
 
-typedef void* (__cdecl* _SocketManager_Connect)(SocketManager __this, String* FAEOEJAKJCD, int NDDFJGMCEAI, String* HJLKEICEIGB, String* OJPAJEEOJMC);
+typedef void* (__cdecl* _SocketManager_Connect)(uintptr_t __this, String address, int port, String OUTGOING_KEY, String INCOMING_KEY);
 _SocketManager_Connect Original_SocketManager_Connect = nullptr;
-void* Detour_SocketManager_Connect(SocketManager __this, String* address, int port, String* OUTGOING_KEY, String* INCOMING_KEY)
+void* Detour_SocketManager_Connect(uintptr_t __this, String address, int port, String OUTGOING_KEY, String INCOMING_KEY)
 {
-    std::cout << "Connecting to " << ReadUnityString(address) << ":" << port << std::endl;
+    std::cout << "Connecting to " << ReadUnityString(&address) << ":" << port << std::endl;
 
     if (g_iReconDelay > 0)
     {
