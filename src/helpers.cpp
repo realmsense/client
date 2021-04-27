@@ -45,6 +45,19 @@ std::string ReadUnityString(String* str)
     return sstream.str();
 }
 
+String* CreateUnityString(const char* str)
+{
+    // 0x14 is where the string's value is stored
+    // 0x2 is the size of each wchar_t
+    size_t size = 0x14 + (0x2 * strlen(str));
+    void* addr = malloc(size);
+
+    // Use placement new to not allocate memory - https://stackoverflow.com/q/29327950
+    String* string = new(addr) String();
+    WriteUnityString(string, str);
+    return string;
+}
+
 void WriteUnityString(String* target, const char* source)
 {
     uintptr_t addr = (uintptr_t)target;
