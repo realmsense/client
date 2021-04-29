@@ -171,12 +171,24 @@ void* Detour_IdleWatcher_Update(uintptr_t __this)
     return Original_IdleWatcher_Update(__this);
 }
 
-typedef void* (__cdecl* _SocketManager_Connect)(uintptr_t __this, String address, int port, String OUTGOING_KEY, String INCOMING_KEY);
+typedef void (__cdecl* _SocketManager_Connect)(uintptr_t __this, String* address, int port, String* OUTGOING_KEY, String* INCOMING_KEY);
 _SocketManager_Connect Original_SocketManager_Connect = nullptr;
-void* Detour_SocketManager_Connect(uintptr_t __this, String address, int port, String OUTGOING_KEY, String INCOMING_KEY)
+void Detour_SocketManager_Connect(uintptr_t __this, String* address, int port, String* OUTGOING_KEY, String* INCOMING_KEY)
 {
-    std::cout << "Connecting to " << ReadUnityString(&address) << ":" << port << std::endl;
+    std::string addr = ReadUnityString(address);
+    CDataPack dp;
+    dp.PackCell(addr.length());
+    dp.PackString(addr.c_str());
 
+    if (!CallEvent(ModuleEvent::SocketManager_Connect, &dp))
+        return;
+
+    dp.Reset();
+    size_t addrLen = dp.ReadCell();
+    const char* addr2 = dp.ReadString(&addrLen);
+    address = il2cpp_string_new(addr2);
+
+    std::cout << "Connecting to " << ReadUnityString(address) << ":" << std::dec << port << std::endl;
     if (g_iReconDelay > 0)
     {
         std::cout << "Delaying for " << g_iReconDelay << " seconds..." << std::endl;
@@ -283,7 +295,7 @@ bool InitHooks()
         return 1;
     }
 
-    void* SocketManager_Connect = (void*)(g_pBaseAddress + OFFSET_SOCKET_CONNECT);
+    void* SocketManager_Connect = (void*)(g_pBaseAddress + OFFSET_SOCKET_MANAGER_CONNECT);
     if (MH_CreateHook(SocketManager_Connect, Detour_SocketManager_Connect, reinterpret_cast<LPVOID*>(&Original_SocketManager_Connect)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour SocketManager_Connect", "RotMG Internal", MB_OK);
