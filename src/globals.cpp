@@ -10,11 +10,13 @@ uintptr_t g_pCameraManager;
 uintptr_t g_pIdleWatcher;
 
 // Functions
+_System_GetType System_GetType;
 _il2cpp_string_new il2cpp_string_new;
 _Camera_set_orthographicSize Camera_set_orthographicSize;
 _Behaviour_get_enabled Behaviour_get_enabled;
 _Behaviour_set_enabled Behaviour_set_enabled;
 _Component_GetGameObject Component_GetGameObject;
+_Object_FindObjectOfType Object_FindObjectOfType;
 _Object_GetName Object_GetName;
 _GameObject_Find GameObject_Find;
 _GameObject_GetTransform GameObject_GetTransform;
@@ -61,11 +63,13 @@ void InitPointers()
     _GetMainCamera getMainCamera = (_GetMainCamera)(g_pBaseAddress + OFFSET_GET_MAINCAMERA);
     g_pMainCamera = getMainCamera();
 
+    System_GetType = (_System_GetType)(g_pBaseAddress + OFFSET_SYSTEM_GET_TYPE);
     il2cpp_string_new = (_il2cpp_string_new)(g_pBaseAddress + OFFSET_IL2CPP_STRING_NEW);
     Camera_set_orthographicSize = (_Camera_set_orthographicSize)(g_pBaseAddress + OFFSET_SET_ORTHOGRAPHICSIZE);
     Behaviour_get_enabled = (_Behaviour_get_enabled)(g_pBaseAddress + OFFSET_BEHAVIOUR_GET_ENABLED);
     Behaviour_set_enabled = (_Behaviour_set_enabled)(g_pBaseAddress + OFFSET_BEHAVIOUR_SET_ENABLED);
     Component_GetGameObject = (_Component_GetGameObject)(g_pBaseAddress + OFFSET_COMPONENT_GET_GAMEOBJECT);
+    Object_FindObjectOfType = (_Object_FindObjectOfType)(g_pBaseAddress + OFFSET_OBJECT_FIND_BY_TYPE);
     Object_GetName = (_Object_GetName)(g_pBaseAddress + OFFSET_OBJECT_GET_NAME);
     GameObject_Find = (_GameObject_Find)(g_pBaseAddress + OFFSET_GAMEOBJECT_FIND);
     GameObject_GetTransform = (_GameObject_GetTransform)(g_pBaseAddress + OFFSET_GAMEOBJECT_GET_TRANSFORM);

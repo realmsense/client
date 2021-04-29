@@ -169,12 +169,14 @@ public:
 /////////////////
 
 // Global Functions
+typedef uintptr_t(__cdecl* _System_GetType)(String* assemblyQualifiedName);
 typedef String* (__cdecl* _il2cpp_string_new)(const char* str);
 typedef uintptr_t(__cdecl* _GetMainCamera)(void);
 typedef void* (__cdecl* _Camera_set_orthographicSize)(uintptr_t UnityEngine_Camera, float amount);
 typedef void* (__cdecl* _Behaviour_set_enabled)(uintptr_t __this, bool value);
 typedef bool (__cdecl* _Behaviour_get_enabled)(uintptr_t __this);
 typedef uintptr_t (__cdecl* _Component_GetGameObject)(uintptr_t __this);
+typedef uintptr_t(__cdecl* _Object_FindObjectOfType)(uintptr_t type);
 typedef String* (__cdecl* _Object_GetName)(uintptr_t object);
 typedef uintptr_t (__cdecl* _GameObject_Find)(String* name);
 typedef uintptr_t (__cdecl* _GameObject_GetTransform)(uintptr_t gameObject);
@@ -210,6 +212,7 @@ enum class ModuleEvent
 };
 
 // Offsets
+#define OFFSET_SYSTEM_GET_TYPE                  0x2de00b0   // (mscorlib.dll) System.Type.GetType(string, bool)
 #define OFFSET_IL2CPP_STRING_NEW                0x001FCA00  // il2cpp_string_new
 #define OFFSET_GET_MAINCAMERA                   0x220fc10   // UnityEngine.Camera.get_main
 #define OFFSET_SET_ORTHOGRAPHICSIZE             0x2210430   // UnityEngine.Camera.set_orthographicSize
@@ -218,6 +221,7 @@ enum class ModuleEvent
 #define OFFSET_BEHAVIOUR_GET_ENABLED            0x220d570   // UnityEngine.Behaviour.get_enabled
 #define OFFSET_BEHAVIOUR_SET_ENABLED            0x220d5f0   // UnityEngine.Behaviour.set_enabled
 #define OFFSET_COMPONENT_GET_GAMEOBJECT         0x2211ef0   // UnityEngine.Component.get_gameObject
+#define OFFSET_OBJECT_FIND_BY_TYPE              0x2328660   // UnityEngine.Object.FindObjectOfType
 #define OFFSET_OBJECT_GET_NAME                  0x2329300   // UnityEngine.Object.get_name
 #define OFFSET_GAMEOBJECT_FIND                  0x22160c0   // UnityEngine.GameObject.Find
 #define OFFSET_GAMEOBJECT_GET_TRANSFORM         0x2216870   // UnityEngine.GameObject.get_transform
