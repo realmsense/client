@@ -73,6 +73,7 @@
     <ClCompile Include="src\module\module.cpp" />
     <ClCompile Include="src\module\modules\autoaim.cpp" />
     <ClCompile Include="src\module\modules\disable_fog.cpp" />
+    <ClCompile Include="src\module\modules\name_change.cpp" />
     <ClCompile Include="src\module\modules\noclip.cpp" />
     <ClCompile Include="src\module\modules\unlimited_zoom.cpp" />
     <ClCompile Include="src\module\modules\walk.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="src\module\module.h" />
     <ClInclude Include="src\module\modules\autoaim.h" />
     <ClInclude Include="src\module\modules\disable_fog.h" />
+    <ClInclude Include="src\module\modules\name_change.h" />
     <ClInclude Include="src\module\modules\noclip.h" />
     <ClInclude Include="src\module\modules\unlimited_zoom.h" />
     <ClInclude Include="src\module\modules\walk.h" />

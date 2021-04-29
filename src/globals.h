@@ -14,7 +14,10 @@ extern uintptr_t g_pCameraManager;
 extern uintptr_t g_pIdleWatcher;
 
 // Functions
+extern _System_GetType System_GetType;
 extern _il2cpp_string_new il2cpp_string_new;
+extern _TMPText_SetText TMPText_SetText;
+extern _TMPText_SetColor TMPText_SetColor;
 extern _Camera_set_orthographicSize Camera_set_orthographicSize;
 extern _Behaviour_set_enabled Behaviour_set_enabled;
 extern _Behaviour_get_enabled Behaviour_get_enabled;

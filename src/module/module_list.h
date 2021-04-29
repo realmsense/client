@@ -4,6 +4,7 @@
 #include "modules/walk.h"
 #include "modules/disable_fog.h"
 #include "modules/unlimited_zoom.h"
+#include "modules/name_change.h"
 
 enum class ModuleList
 {
@@ -11,5 +12,6 @@ enum class ModuleList
     AutoAimModule,
     WalkModule,
     DisableFogModule,
-    UnlimitedZoom
+    UnlimitedZoom,
+    NameChange
 };

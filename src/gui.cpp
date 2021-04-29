@@ -241,6 +241,26 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                     ImGui::SliderInt("Reconnect Delay", &g_iReconDelay, 0, 30, "%d sec");
 
+                    static NameChangeModule* nameChangeModule = GetModule<NameChangeModule>(ModuleList::NameChange);
+
+                    static char customPlayerName[128] = "";
+                    if (ImGui::InputText("Custom Player Name", customPlayerName, IM_ARRAYSIZE(customPlayerName)))
+                        nameChangeModule->ChangePlayerName(customPlayerName);
+
+                    static char customGuildName[128] = "";
+                    if (ImGui::InputText("Custom Guild Name", customGuildName, IM_ARRAYSIZE(customGuildName)))
+                        nameChangeModule->ChangeGuildName(customGuildName);
+
+                    if (ImGui::Checkbox("Rainbow Name", &nameChangeModule->rainbowText))
+                    {
+                        if (!nameChangeModule->rainbowText)
+                        {
+                            // Reset name back to white text
+                            Color white{ 1.0f, 1.0f, 1.0f, 1.0f };
+                            nameChangeModule->ChangeNameColor(white);
+                        }
+                    }
+
                     ImGui::EndTabItem();
                 }
 

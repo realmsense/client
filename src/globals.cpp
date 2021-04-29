@@ -12,6 +12,9 @@ uintptr_t g_pIdleWatcher;
 // Functions
 _System_GetType System_GetType;
 _il2cpp_string_new il2cpp_string_new;
+_TMPText_SetText TMPText_SetText;
+_TMPText_SetColor TMPText_SetColor;
+_GetFullscreenMode GetFullscreenMode;
 _Camera_set_orthographicSize Camera_set_orthographicSize;
 _Behaviour_get_enabled Behaviour_get_enabled;
 _Behaviour_set_enabled Behaviour_set_enabled;
@@ -65,6 +68,8 @@ void InitPointers()
 
     System_GetType = (_System_GetType)(g_pBaseAddress + OFFSET_SYSTEM_GET_TYPE);
     il2cpp_string_new = (_il2cpp_string_new)(g_pBaseAddress + OFFSET_IL2CPP_STRING_NEW);
+    TMPText_SetText = (_TMPText_SetText)(g_pBaseAddress + OFFSET_TMP_TEXT_SET_TEXT);
+    TMPText_SetColor = (_TMPText_SetColor)(g_pBaseAddress + OFFSET_TMP_TEXT_SET_COLOR);
     Camera_set_orthographicSize = (_Camera_set_orthographicSize)(g_pBaseAddress + OFFSET_SET_ORTHOGRAPHICSIZE);
     Behaviour_get_enabled = (_Behaviour_get_enabled)(g_pBaseAddress + OFFSET_BEHAVIOUR_GET_ENABLED);
     Behaviour_set_enabled = (_Behaviour_set_enabled)(g_pBaseAddress + OFFSET_BEHAVIOUR_SET_ENABLED);

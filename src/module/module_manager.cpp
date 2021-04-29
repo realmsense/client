@@ -28,6 +28,8 @@ void LoadModules()
     modules.insert(std::pair<Module*, ModuleList>(autoAimModule, ModuleList::AutoAimModule));
 
     // Other
+    NameChangeModule* nameChangeModule = new NameChangeModule("Name Change", false, ModuleCategory::OTHER);
+    modules.insert(std::pair<Module*, ModuleList>(nameChangeModule, ModuleList::NameChange));
 }
 
 void UnloadModules()

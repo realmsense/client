@@ -186,6 +186,28 @@ void* Detour_SocketManager_Connect(uintptr_t __this, String address, int port, S
     return Original_SocketManager_Connect(__this, address, port, OUTGOING_KEY, INCOMING_KEY);
 }
 
+typedef void(__cdecl* _TMP_Text_SetText_Internal)(uintptr_t __this, String* text, bool syncTextInputBox);
+_TMP_Text_SetText_Internal Original_TMP_Text_SetText_Internal = nullptr;
+void Detour_TMP_Text_SetText_Internal(uintptr_t __this, String* text, bool syncTextInputBox)
+{
+    if (text == nullptr)
+        return Original_TMP_Text_SetText_Internal(__this, text, syncTextInputBox);
+    
+    std::string txt = ReadUnityString(text);
+    CDataPack dp;
+    dp.PackCell(txt.length());
+    dp.PackString(txt.c_str());
+
+    CallEvent(ModuleEvent::TMP_SetText, &dp);
+
+    dp.Reset();
+    size_t txtLen = dp.ReadCell();
+    const char* txt2 = dp.ReadString(&txtLen);
+    text = il2cpp_string_new(txt2);
+
+    return Original_TMP_Text_SetText_Internal(__this, text, syncTextInputBox);
+}
+
 bool InitHooks()
 {
     MH_Initialize();
@@ -265,6 +287,13 @@ bool InitHooks()
     if (MH_CreateHook(SocketManager_Connect, Detour_SocketManager_Connect, reinterpret_cast<LPVOID*>(&Original_SocketManager_Connect)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour SocketManager_Connect", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    void* TMP_Text_SetText_Internal = (void*)(g_pBaseAddress + OFFSET_TMP_TEXT_SET_TEXT_INTERNAL);
+    if (MH_CreateHook(TMP_Text_SetText_Internal, Detour_TMP_Text_SetText_Internal, reinterpret_cast<LPVOID*>(&Original_TMP_Text_SetText_Internal)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour TMP_Text_SetText_Internal", "RotMG Internal", MB_OK);
         return 1;
     }
 

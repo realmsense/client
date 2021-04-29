@@ -117,7 +117,9 @@ public:
 class ViewHandler
 {
 public:
-    char pad_0000[128]; //0x0000
+    char pad_0000[72]; //0x0000
+    void* guiManager; //0x0048
+    char pad_0050[48]; //0x0050
     class Entity* destroyEntity; //0x0080
     char pad_0088[32]; //0x0088
     void* viewTransform; //0x00A8
@@ -164,6 +166,17 @@ public:
     char pad_003A[2054]; //0x003A
 }; //Size: 0x0840
 
+class CharacterInfo_GUI
+{
+public:
+    char pad_0000[32]; //0x0000
+    void* accountName_TMP; //0x0020
+    void* guildInfo_Obj; //0x0028
+    void* guildName_TMP; //0x0030
+    void* guildIcon_Img; //0x0038
+    char pad_0040[320]; //0x0040
+}; //Size: 0x0180
+
 /////////////////
 // END RECLASS //
 /////////////////
@@ -171,6 +184,8 @@ public:
 // Global Functions
 typedef uintptr_t(__cdecl* _System_GetType)(String* assemblyQualifiedName);
 typedef String* (__cdecl* _il2cpp_string_new)(const char* str);
+typedef void (__cdecl* _TMPText_SetText)(uintptr_t __this, String* text, bool syncTextInputBox);
+typedef void* (__cdecl* _TMPText_SetColor)(uintptr_t __this, Color color);
 typedef uintptr_t(__cdecl* _GetMainCamera)(void);
 typedef void* (__cdecl* _Camera_set_orthographicSize)(uintptr_t UnityEngine_Camera, float amount);
 typedef void* (__cdecl* _Behaviour_set_enabled)(uintptr_t __this, bool value);
@@ -208,7 +223,7 @@ enum class ModuleEvent
     UnityThread_Update,
     GetMousePos,
     Tile_SetColor,
-    CameraManager_Update
+    TMP_SetText
 };
 
 // Offsets
@@ -249,3 +264,6 @@ enum class ModuleEvent
 #define OFFSET_GET_PET                          0x916bc0    // DAFEAHGLBGL.AOOJCNNGNGI - random method that runs every tick to get pets
 #define OFFSET_SET_VSYNC                        0x232fdb0   // UnityEngine.QualitySettings.set_vSyncCount
 #define OFFSET_SET_FPS_TARGET                   0x220b6e0   // UnityEngine.Application.set_targetFrameRate
+#define OFFSET_TMP_TEXT_SET_TEXT                0x7c7e90    // (Unity.TextMeshPro.dll) TMPro.TMP_Text.SetText (String* text, bool syncTextInputBox)
+#define OFFSET_TMP_TEXT_SET_TEXT_INTERNAL       0x7d2f80    // (Unity.TextMeshPro.dll) TMPro.TMP_Text.set_text (String*)
+#define OFFSET_TMP_TEXT_SET_COLOR               0x7d1df0    // TMPro.TMP_Text.set_color
