@@ -35,27 +35,19 @@ std::string PtrToHex(uintptr_t ptr)
 
 std::string ReadUnityString(String* str)
 {
-    uintptr_t addr = (uintptr_t)str;
+    return ReadUnityString((uintptr_t)str);
+}
+
+std::string ReadUnityString(uintptr_t addr)
+{
     std::stringstream sstream;
-    int length = str->length;
-    for (int i = 0; i < length; i++) {
+    int length = *(int*)(addr + 0x10);
+    for (int i = 0; i < length; i++)
+    {
         wchar_t charAt = *(wchar_t*)(addr + 0x14 + (0x2 * i));
         sstream << (char)charAt;
     }
     return sstream.str();
-}
-
-String* CreateUnityString(const char* str)
-{
-    // 0x14 is where the string's value is stored
-    // 0x2 is the size of each wchar_t
-    size_t size = 0x14 + (0x2 * strlen(str));
-    void* addr = malloc(size);
-
-    // Use placement new to not allocate memory - https://stackoverflow.com/q/29327950
-    String* string = new(addr) String();
-    WriteUnityString(string, str);
-    return string;
 }
 
 void WriteUnityString(String* target, const char* source)
@@ -71,9 +63,8 @@ void WriteUnityString(String* target, const char* source)
 
 uintptr_t FindGameObject(const char* name)
 {
-    String objName;
-    WriteUnityString(&objName, name);
-    uintptr_t gameObject = GameObject_Find(&objName);
+    String* objName = il2cpp_string_new(name);
+    uintptr_t gameObject = GameObject_Find(objName);
     return gameObject;
 }
 
@@ -83,7 +74,6 @@ std::vector<uintptr_t> GetChildTransforms(uintptr_t gameObject)
 
     uintptr_t mainTransform = GameObject_GetTransform(gameObject);
     int childCount = Transform_get_childCount(mainTransform);
-
     for (int i = 0; i < childCount; i++)
     {
         uintptr_t childTransform = Transform_GetChild(mainTransform, i);
@@ -98,9 +88,8 @@ std::vector<uintptr_t> FindChildTransforms(uintptr_t parentTransform, std::vecto
     std::vector<uintptr_t> vec;
     for (auto& name : names)
     {
-        String str;
-        WriteUnityString(&str, name.c_str());
-        uintptr_t childTransform = Transform_Find(parentTransform, &str);
+        String* str = il2cpp_string_new(name.c_str());
+        uintptr_t childTransform = Transform_Find(parentTransform, str);
         vec.push_back(childTransform);
     }
     return vec;

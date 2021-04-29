@@ -169,6 +169,7 @@ public:
 /////////////////
 
 // Global Functions
+typedef String* (__cdecl* _il2cpp_string_new)(const char* str);
 typedef uintptr_t(__cdecl* _GetMainCamera)(void);
 typedef void* (__cdecl* _Camera_set_orthographicSize)(uintptr_t UnityEngine_Camera, float amount);
 typedef void* (__cdecl* _Behaviour_set_enabled)(uintptr_t __this, bool value);
@@ -209,6 +210,7 @@ enum class ModuleEvent
 };
 
 // Offsets
+#define OFFSET_IL2CPP_STRING_NEW                0x001FCA00  // il2cpp_string_new
 #define OFFSET_GET_MAINCAMERA                   0x220fc10   // UnityEngine.Camera.get_main
 #define OFFSET_SET_ORTHOGRAPHICSIZE             0x2210430   // UnityEngine.Camera.set_orthographicSize
 #define OFFSET_WORLD_TO_SCREEN                  0x220f640   // UnityEngine.Camera.WorldToScreenPoint

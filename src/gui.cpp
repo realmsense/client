@@ -208,7 +208,20 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                             String str;
                             WriteUnityString(&str, "FPS ---------------------------");
                             uintptr_t fpsTransf = Transform_Find(transform, &str);
+
+                            //String* str = il2cpp_string_new("FPS ---------------------------");
+                            //uintptr_t fpsTransf = Transform_Find(transform, str);
                             uintptr_t fpsObj = Component_GetGameObject(fpsTransf);
+
+                            std::cout << std::hex << fpsStatsObj << std::endl;
+                            std::cout << std::hex << fpsObj << std::endl;
+
+                            std::cout << g_bShowFps << std::endl;
+
+                            // We need to enable the "Fps/Stats" GameObjecvt
+                            // ^ weird bug, we get access violations probably because the GraphyManager object isn't initialized
+                            // try enabling in unity explorer, we get a bit of lag and prboably an error (if we're debugging) when we try to enalbe FPS/Stats
+                            // dunno how to fix
 
                             GameObject_SetActive(fpsStatsObj, g_bShowFps);
                             GameObject_SetActive(fpsObj, g_bShowFps);

@@ -10,6 +10,7 @@ uintptr_t g_pCameraManager;
 uintptr_t g_pIdleWatcher;
 
 // Functions
+_il2cpp_string_new il2cpp_string_new;
 _Camera_set_orthographicSize Camera_set_orthographicSize;
 _Behaviour_get_enabled Behaviour_get_enabled;
 _Behaviour_set_enabled Behaviour_set_enabled;
@@ -60,6 +61,7 @@ void InitPointers()
     _GetMainCamera getMainCamera = (_GetMainCamera)(g_pBaseAddress + OFFSET_GET_MAINCAMERA);
     g_pMainCamera = getMainCamera();
 
+    il2cpp_string_new = (_il2cpp_string_new)(g_pBaseAddress + OFFSET_IL2CPP_STRING_NEW);
     Camera_set_orthographicSize = (_Camera_set_orthographicSize)(g_pBaseAddress + OFFSET_SET_ORTHOGRAPHICSIZE);
     Behaviour_get_enabled = (_Behaviour_get_enabled)(g_pBaseAddress + OFFSET_BEHAVIOUR_GET_ENABLED);
     Behaviour_set_enabled = (_Behaviour_set_enabled)(g_pBaseAddress + OFFSET_BEHAVIOUR_SET_ENABLED);

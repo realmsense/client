@@ -7,7 +7,7 @@ float CalculateDistance(Vector2 a, Vector2 b);
 
 std::string PtrToHex(uintptr_t ptr);
 std::string ReadUnityString(String* str);
-String* CreateUnityString(const char* str);
+std::string ReadUnityString(uintptr_t addr);
 void WriteUnityString(String* target, const char* source);
 
 uintptr_t FindGameObject(const char* name);
