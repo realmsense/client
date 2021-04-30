@@ -18,6 +18,8 @@ extern _System_GetType System_GetType;
 extern _il2cpp_string_new il2cpp_string_new;
 extern _TMPText_SetText TMPText_SetText;
 extern _TMPText_SetColor TMPText_SetColor;
+extern _Screen_GetFullscreenMode Screen_GetFullscreenMode;
+extern _Screen_SetFullscreenMode Screen_SetFullscreenMode;
 extern _Camera_set_orthographicSize Camera_set_orthographicSize;
 extern _Behaviour_set_enabled Behaviour_set_enabled;
 extern _Behaviour_get_enabled Behaviour_get_enabled;
@@ -45,12 +47,6 @@ extern bool g_bWindowFocused;
 extern bool g_bMenuOpen;
 extern std::unordered_set<Entity*> g_aEnemyList;
 extern std::vector<Entity*> g_aPlayerList;
-
-/* view */
-extern float g_fPlayerSize;
-extern bool g_bHideTiles;
-extern bool g_bHidePets;
-extern bool g_bShowFps;
 
 /* other */
 extern bool g_bDisableAfkKicker;

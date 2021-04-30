@@ -124,7 +124,8 @@ public:
     char pad_0088[32]; //0x0088
     void* viewTransform; //0x00A8
     void* contentTransform; //0x00B0
-    char pad_00B8[24]; //0x00B8
+    void* shadowTransform; //0x00B8
+    char pad_00C0[16]; //0x00C0
     class String* prefabName; //0x00D0
     char pad_00D8[3960]; //0x00D8
 }; //Size: 0x1050
@@ -186,6 +187,8 @@ typedef uintptr_t(__cdecl* _System_GetType)(String* assemblyQualifiedName);
 typedef String* (__cdecl* _il2cpp_string_new)(const char* str);
 typedef void (__cdecl* _TMPText_SetText)(uintptr_t __this, String* text, bool syncTextInputBox);
 typedef void* (__cdecl* _TMPText_SetColor)(uintptr_t __this, Color color);
+typedef int (__cdecl* _Screen_GetFullscreenMode)(void);
+typedef void (__cdecl* _Screen_SetFullscreenMode)(int mode);
 typedef uintptr_t(__cdecl* _GetMainCamera)(void);
 typedef void* (__cdecl* _Camera_set_orthographicSize)(uintptr_t UnityEngine_Camera, float amount);
 typedef void* (__cdecl* _Behaviour_set_enabled)(uintptr_t __this, bool value);
@@ -223,13 +226,17 @@ enum class ModuleEvent
     UnityThread_Update,
     GetMousePos,
     Tile_SetColor,
+    CameraManager_Update,
     SocketManager_Connect,
-    TMP_SetText
+    TMP_SetText,
+    Pet_Update
 };
 
 // Offsets
 #define OFFSET_SYSTEM_GET_TYPE                  0x2de00b0   // (mscorlib.dll) System.Type.GetType(string, bool)
 #define OFFSET_IL2CPP_STRING_NEW                0x001FCA00  // il2cpp_string_new
+#define OFFSET_SCREEN_GET_FULLSCREEN_MODE       0x2099c10   // UnityEngine.Screen.get_fullScreenMode
+#define OFFSET_SCREEN_SET_FULLSCREEN_MODE       0x2099d00   // UnityEngine.Screen.set_fullScreenMode
 #define OFFSET_GET_MAINCAMERA                   0x220fc10   // UnityEngine.Camera.get_main
 #define OFFSET_SET_ORTHOGRAPHICSIZE             0x2210430   // UnityEngine.Camera.set_orthographicSize
 #define OFFSET_WORLD_TO_SCREEN                  0x220f640   // UnityEngine.Camera.WorldToScreenPoint

@@ -95,14 +95,6 @@ std::vector<uintptr_t> FindChildTransforms(uintptr_t parentTransform, std::vecto
     return vec;
 }
 
-void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale)
-{
-    std::vector<std::string> names { "Content", "CharacterGUI", "Shadow" };
-    std::vector<uintptr_t> transformList = FindChildTransforms(characterTransform, names);
-    for (int i = 0; i < transformList.size(); i++)
-        Transform_set_localScale(transformList[i], newScale);
-}
-
 uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets)
 {
     uintptr_t addr = ptr;

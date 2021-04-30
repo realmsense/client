@@ -16,6 +16,9 @@ void LoadModules()
     UnlimitedZoomModule* unlimitedZoomModule = new UnlimitedZoomModule("Unlimited Zoom", true, ModuleCategory::VIEW);
     modules.insert(std::pair<Module*, ModuleList>(unlimitedZoomModule, ModuleList::UnlimitedZoom));
 
+    AntiLagModule* antiLagModule = new AntiLagModule("Anti Lag", true, ModuleCategory::VIEW);
+    modules.insert(std::pair<Module*, ModuleList>(antiLagModule, ModuleList::AntiLag));
+
     // Movement
     NoclipModule* noclipModule = new NoclipModule("Noclip", false, ModuleCategory::MOVEMENT);
     modules.insert(std::pair<Module*, ModuleList>(noclipModule, ModuleList::NoclipModule));

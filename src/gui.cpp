@@ -99,7 +99,6 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                     static int selected_target = 1;
 
                     ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing() * strlen(aim_targets[3]) / 2); // set width to the widest string
-
                     if (ImGui::Combo("Auto Aim Target", &selected_target, aim_targets, IM_ARRAYSIZE(aim_targets), IM_ARRAYSIZE(aim_targets)))
                     {
                         autoAimModule->target = AutoAimTarget(selected_target);
@@ -142,90 +141,38 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                         ResizeCharacter(viewTransform, newScale);
                     }
 
-                    ImGui::SliderFloat("Other Player Size", &g_fPlayerSize, 0.0f, 1.0f);
-                    // Only update transforms after the slider is released, to prevent the game crashing from too many updates
-                    if (ImGui::IsItemDeactivatedAfterEdit())
+                    static AntiLagModule* antiLagModule = GetModule<AntiLagModule>(ModuleList::AntiLag);
+
+                    ImGui::SliderFloat("Player Size", &antiLagModule->playerSize, 0.0f, 1.0f);
+                    if (ImGui::IsItemDeactivatedAfterEdit()) // Only update transforms after the slider is released, to prevent the game crashing from too many updates
+                        antiLagModule->ResizePlayers(antiLagModule->playerSize);
+
+                    if (ImGui::Checkbox("Hide Tiles", &antiLagModule->hideTiles))
+                        antiLagModule->HideTiles(antiLagModule->hideTiles);
+
+                    ImGui::Checkbox("Hide Pets", &antiLagModule->hidePets);
+
+                    if (ImGui::Checkbox("Unlimited FPS", &antiLagModule->unlimitedFPS))
+                        antiLagModule->ToggleUnlimitedFPS(antiLagModule->unlimitedFPS);
+
+                    if (ImGui::Checkbox("Show FPS", &antiLagModule->showFPS))
+                        antiLagModule->ShowFPS(antiLagModule->showFPS);
+
+
+                    const char* fullscreen_modes[] =
                     {
-                        std::vector<uintptr_t> characterList = GetChildTransforms(FindGameObject("Character"));
-                        for (int i = 0; i < characterList.size(); i++)
-                        {
-                            uintptr_t character = characterList[i];
-                            Vector3 newScale = { g_fPlayerSize, g_fPlayerSize, 1.0f };
-                            ResizeCharacter(character, newScale);
-                        }
-                    }
+                        "Exclusive Fullscreen",
+                        "Fullscreen Windowed",
+                        "Maximized Window",
+                        "Windowed"
+                    };
+                    static int selected_target = 1;
 
-                    if (ImGui::Checkbox("Hide Tiles", &g_bHideTiles))
+                    ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing()* strlen(fullscreen_modes[0]) / 2); // set width to the widest string
+                    if (ImGui::Combo("Fullscreen Mode", &selected_target, fullscreen_modes, IM_ARRAYSIZE(fullscreen_modes), IM_ARRAYSIZE(fullscreen_modes)))
                     {
-                        std::vector<uintptr_t> tileList = GetChildTransforms(FindGameObject("ComboTile"));
-                        for (int i = 0; i < tileList.size(); i++)
-                        {
-                            uintptr_t tile = tileList[i];
-
-                            if (g_bHideTiles)
-                            {
-                                Vector3 newScale = { 0.0f, 0.0f, 1.0f };
-                                Transform_set_localScale(tile, newScale);
-                            }
-                            else
-                            {
-                                Vector3 newScale = { 1.0f, 1.0f, 1.0f };
-                                Transform_set_localScale(tile, newScale);
-                            }
-                        }
-                    }
-
-                    ImGui::Checkbox("Hide Pets", &g_bHidePets);
-
-                    static bool unlimitedFPS = false;
-                    if (ImGui::Checkbox("Unlimited FPS", &unlimitedFPS))
-                    {
-                        if (unlimitedFPS)
-                        {
-                            SetVsync(0);
-                            SetFpsTarget(999);
-                        }
-                        else
-                        {
-                            SetVsync(1);
-                        }
-                    }
-
-                    if (ImGui::Checkbox("Show FPS", &g_bShowFps))
-                    {
-                        std::vector<uintptr_t> transfList = GetChildTransforms(FindGameObject("GameController"));
-                        for (int i = 0; i < transfList.size(); i++)
-                        {
-                            uintptr_t transform = transfList[i];
-                            std::string transformName = ReadUnityString(Object_GetName(transform));
-
-                            // We can't just do Transform.Find() because the forward slash in "Fps/Stats" is treated as a path name
-                            if (transformName != "Fps/Stats")
-                                continue;
-
-                            uintptr_t fpsStatsObj = Component_GetGameObject(transform);
-
-                            String str;
-                            WriteUnityString(&str, "FPS ---------------------------");
-                            uintptr_t fpsTransf = Transform_Find(transform, &str);
-
-                            //String* str = il2cpp_string_new("FPS ---------------------------");
-                            //uintptr_t fpsTransf = Transform_Find(transform, str);
-                            uintptr_t fpsObj = Component_GetGameObject(fpsTransf);
-
-                            std::cout << std::hex << fpsStatsObj << std::endl;
-                            std::cout << std::hex << fpsObj << std::endl;
-
-                            std::cout << g_bShowFps << std::endl;
-
-                            // We need to enable the "Fps/Stats" GameObjecvt
-                            // ^ weird bug, we get access violations probably because the GraphyManager object isn't initialized
-                            // try enabling in unity explorer, we get a bit of lag and prboably an error (if we're debugging) when we try to enalbe FPS/Stats
-                            // dunno how to fix
-
-                            GameObject_SetActive(fpsStatsObj, g_bShowFps);
-                            GameObject_SetActive(fpsObj, g_bShowFps);
-                        }
+                        antiLagModule->SetFullscreenMode(selected_target);
+                        std::cout << "Auto Aim Target set to: " << fullscreen_modes[selected_target] << std::endl;
                     }
 
                     ImGui::EndTabItem();

@@ -144,15 +144,27 @@ typedef void* (__cdecl* _GetPet)(Entity pet, bool AMKOONDPFBD);
 _GetPet Original_GetPet = nullptr;
 void* Detour_GetPet(Entity pet, bool AMKOONDPFBD)
 {
-    // TODO: optimise this
-    Vector3 newScale;
-    if (g_bHidePets)
-        newScale = { 0.0f, 0.0f, 1.0f };
-    else
-        newScale = { 1.0f, 1.0f, 1.0f };
-    
+    Vector3 scale = { 1.0f, 1.0f, 1.0f };
+
+    CDataPack dp;
+    dp.PackFloat(scale.x);
+    dp.PackFloat(scale.y);
+    dp.PackFloat(scale.z);
+
+    CallEvent(ModuleEvent::Pet_Update, &dp);
+
+    dp.Reset();
+    scale.x = dp.ReadFloat();
+    scale.y = dp.ReadFloat();
+    scale.z = dp.ReadFloat();
+
     uintptr_t contentTransform = (uintptr_t)pet.viewHandler->contentTransform;
-    Transform_set_localScale(contentTransform, newScale);
+    uintptr_t shadowTransform = (uintptr_t)pet.viewHandler->shadowTransform;
+    Transform_set_localScale(contentTransform, scale);
+    Transform_set_localScale(shadowTransform, scale);
+
+    // TODO: Optimise this
+    // we shouldn't be updating transforms every tick
 
     return Original_GetPet(pet, AMKOONDPFBD);
 }
