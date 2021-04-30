@@ -39,8 +39,8 @@ _SetVsync SetVsync;
 _SetFpsTarget SetFpsTarget;
 
 // Variables / Settings
-bool g_bWindowFocused;
 bool g_bMenuOpen;
+bool g_bWindowFocused;
 std::unordered_set<Entity*> g_aEnemyList;
 std::vector<Entity*> g_aPlayerList;
 

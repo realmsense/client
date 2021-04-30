@@ -18,6 +18,17 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
     while (true)
     {
+        if (GetAsyncKeyState(VK_END) & 1)
+        {
+            break;
+        }
+
+        // ` - toggle menu
+        if (GetAsyncKeyState(VK_OEM_3) & 1)
+        {
+            g_bMenuOpen = !g_bMenuOpen;
+        }
+
         // Remove enemies that no longer exist - https://stackoverflow.com/a/15662547
         for (auto it = g_aEnemyList.begin(); it != g_aEnemyList.end();)
         {
@@ -28,56 +39,6 @@ DWORD WINAPI MainThread(HMODULE hModule)
                 it++;
         }
 
-        if (g_pNBJLMDOACBC)
-        {
-            std::vector<Entity*> playerList = ReadUnityList<Entity*>(g_pNBJLMDOACBC->playerList);
-
-            // added - local is not in global
-            for (auto& player : playerList)
-            {
-                if (!player) continue;
-
-                bool exists = std::find(g_aPlayerList.begin(), g_aPlayerList.end(), player) != g_aPlayerList.end();
-                if (!exists)
-                {
-                    Vector3 newScale = { g_fPlayerSize, g_fPlayerSize, 1.0f };
-                    uintptr_t contentTransform = (uintptr_t)player->viewHandler->contentTransform;
-                    Transform_set_localScale(contentTransform, newScale);
-                }
-            }
-
-            // removed - global is not in local
-            //for (auto& player : g_aPlayerList)
-            //{
-            //    bool exists = std::find(playerList.begin(), playerList.end(), player) != playerList.end();
-            //    if (!exists)
-            //    {
-            //        // can't update transform here
-            //        // todo: we need to update our player's transform when we load into a new map
-            //        std::cout << "Player was removed " << ReadUnityString(player->name) << std::endl;
-            //    }
-            //}
-
-            g_aPlayerList = playerList;
-        }
-
-        // Ignore keybinds if window isn't focused
-        if (!g_bWindowFocused)
-        {
-            continue;
-        }
-
-        // ` - toggle menu
-        if (GetAsyncKeyState(VK_OEM_3) & 1)
-        {
-            g_bMenuOpen = !g_bMenuOpen;
-        }
-
-        if (GetAsyncKeyState(VK_END) & 1)
-        {
-            break;
-        }
-
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
 
@@ -85,12 +46,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         if (GetAsyncKeyState(VK_DELETE) & 1)
         {
-            //std::cout << std::hex << g_pPlayer->viewHandler << std::endl;
 
-
-            //std::cout << std::hex << gameObject << std::endl;
-
-           // g_pPlayer->viewHandler->gameObject
         }
 
         // v key - toggle noclip

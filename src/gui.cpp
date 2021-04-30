@@ -69,6 +69,8 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
         init = true;
     }
 
+    g_bWindowFocused = GetForegroundWindow() == g_hWindow;
+
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
@@ -463,9 +465,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     }
 
     RECT windowRect;
-    g_bWindowFocused = GetClientRect(g_hWindow, &windowRect);
-
-    if (g_bWindowFocused && g_pPlayer)
+    if (GetClientRect(g_hWindow, &windowRect) && g_pPlayer)
     {
         /*
         * For some reason unity flips the Y coordinate when using WorldToSreen/ScreenToWorld
