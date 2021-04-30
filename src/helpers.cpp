@@ -50,17 +50,6 @@ std::string ReadUnityString(uintptr_t addr)
     return sstream.str();
 }
 
-void WriteUnityString(String* target, const char* source)
-{
-    uintptr_t addr = (uintptr_t)target;
-    size_t length = strlen(source);
-    target->length = length;
-    for (int i = 0; i < length; i++)
-    {
-        *(wchar_t*)(addr + 0x14 + (0x2 * i)) = (char)source[i];
-    }
-}
-
 uintptr_t FindGameObject(const char* name)
 {
     String* objName = il2cpp_string_new(name);
