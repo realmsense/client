@@ -71,6 +71,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="src\module\module.cpp" />
+    <ClCompile Include="src\module\modules\anti_afk.cpp" />
     <ClCompile Include="src\module\modules\anti_lag.cpp" />
     <ClCompile Include="src\module\modules\autoaim.cpp" />
     <ClCompile Include="src\module\modules\disable_fog.cpp" />
@@ -112,6 +113,7 @@
     <ClInclude Include="src\minhook\src\hde\table64.h" />
     <ClInclude Include="src\minhook\src\trampoline.h" />
     <ClInclude Include="src\module\module.h" />
+    <ClInclude Include="src\module\modules\anti_afk.h" />
     <ClInclude Include="src\module\modules\anti_lag.h" />
     <ClInclude Include="src\module\modules\autoaim.h" />
     <ClInclude Include="src\module\modules\disable_fog.h" />

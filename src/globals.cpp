@@ -45,7 +45,6 @@ std::unordered_set<Entity*> g_aEnemyList;
 std::vector<Entity*> g_aPlayerList;
 
 /* other */
-bool g_bDisableAfkKicker;
 int g_iReconDelay;
 
 /* debug */
@@ -98,7 +97,6 @@ void LoadSettings()
     g_bMenuOpen = true;
 
     /* other */
-    g_bDisableAfkKicker = true;
     g_iReconDelay = 0;
 
     /* debug */

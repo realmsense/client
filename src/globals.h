@@ -49,7 +49,6 @@ extern std::unordered_set<Entity*> g_aEnemyList;
 extern std::vector<Entity*> g_aPlayerList;
 
 /* other */
-extern bool g_bDisableAfkKicker;
 extern int g_iReconDelay;
 
 /* debug */

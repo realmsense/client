@@ -33,6 +33,9 @@ void LoadModules()
     // Other
     NameChangeModule* nameChangeModule = new NameChangeModule("Name Change", false, ModuleCategory::OTHER);
     modules.insert(std::pair<Module*, ModuleList>(nameChangeModule, ModuleList::NameChange));
+
+    AntiAfkModule* antiAFKModule = new AntiAfkModule("Anti AFK", false, ModuleCategory::OTHER);
+    modules.insert(std::pair<Module*, ModuleList>(antiAFKModule, ModuleList::AntiAFK));
 }
 
 void UnloadModules()

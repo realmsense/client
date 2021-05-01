@@ -16,6 +16,11 @@ void Module::toggleModule()
     this->setEnabled(!this->enabled, true);
 }
 
+void Module::toggleModule(bool enabled)
+{
+    this->setEnabled(enabled, true);
+}
+
 void Module::setEnabled(bool enabled, bool callHandlers)
 {
     if (enabled)

@@ -6,6 +6,7 @@
 #include "modules/unlimited_zoom.h"
 #include "modules/anti_lag.h"
 #include "modules/name_change.h"
+#include "modules/anti_afk.h"
 
 enum class ModuleList
 {
@@ -15,5 +16,6 @@ enum class ModuleList
     DisableFogModule,
     UnlimitedZoom,
     AntiLag,
-    NameChange
+    NameChange,
+    AntiAFK
 };

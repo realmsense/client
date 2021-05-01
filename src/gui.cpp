@@ -182,11 +182,10 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
                 if (ImGui::BeginTabItem("Other"))
                 {
-                    if (ImGui::Checkbox("Disable AFK Kicker", &g_bDisableAfkKicker))
-                    {
-                        if (g_pIdleWatcher)
-                            Behaviour_set_enabled(g_pIdleWatcher, !g_bDisableAfkKicker);
-                    }
+                    static AntiAfkModule* antiAFKModule = GetModule<AntiAfkModule>(ModuleList::AntiAFK);
+
+                    if (ImGui::Checkbox("Disable AFK Kicker", &antiAFKModule->enabled))
+                        antiAFKModule->toggleModule(antiAFKModule->enabled);
 
                     ImGui::SliderInt("Reconnect Delay", &g_iReconDelay, 0, 30, "%d sec");
 

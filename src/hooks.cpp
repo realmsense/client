@@ -169,20 +169,6 @@ void* Detour_GetPet(Entity pet, bool AMKOONDPFBD)
     return Original_GetPet(pet, AMKOONDPFBD);
 }
 
-typedef void* (__cdecl* _IdleWatcher_Update)(uintptr_t __this);
-_IdleWatcher_Update Original_IdleWatcher_Update = nullptr;
-void* Detour_IdleWatcher_Update(uintptr_t __this)
-{
-    g_pIdleWatcher = __this;
-
-    std::cout << std::hex << __this << std::endl;
-
-    if (g_bDisableAfkKicker)
-        Behaviour_set_enabled(__this, false);
-
-    return Original_IdleWatcher_Update(__this);
-}
-
 typedef void (__cdecl* _SocketManager_Connect)(uintptr_t __this, String* address, int port, String* OUTGOING_KEY, String* INCOMING_KEY);
 _SocketManager_Connect Original_SocketManager_Connect = nullptr;
 void Detour_SocketManager_Connect(uintptr_t __this, String* address, int port, String* OUTGOING_KEY, String* INCOMING_KEY)
@@ -199,6 +185,9 @@ void Detour_SocketManager_Connect(uintptr_t __this, String* address, int port, S
     size_t addrLen = dp.ReadCell();
     const char* addr2 = dp.ReadString(&addrLen);
     address = il2cpp_string_new(addr2);
+
+    // too fucking difficult to move this to a module
+    // TODO: display a timer on screen with a button to skip this
 
     std::cout << "Connecting to " << ReadUnityString(address) << ":" << std::dec << port << std::endl;
     if (g_iReconDelay > 0)
@@ -297,13 +286,6 @@ bool InitHooks()
     if (MH_CreateHook(GetPet, Detour_GetPet, reinterpret_cast<LPVOID*>(&Original_GetPet)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour GetPet", "RotMG Internal", MB_OK);
-        return 1;
-    }
-
-    void* IdleWatcher_Update = (void*)(g_pBaseAddress + OFFSET_IDLE_WATCHER_UPDATE);
-    if (MH_CreateHook(IdleWatcher_Update, Detour_IdleWatcher_Update, reinterpret_cast<LPVOID*>(&Original_IdleWatcher_Update)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour IdleWatcher_Update", "RotMG Internal", MB_OK);
         return 1;
     }
 
