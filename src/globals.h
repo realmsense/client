@@ -8,7 +8,6 @@ void LoadSettings();
 // Pointers (game objects)
 extern uintptr_t g_pBaseAddress;
 extern Entity* g_pPlayer;
-extern NBJLMDOACBC* g_pNBJLMDOACBC;
 extern uintptr_t g_pMainCamera;
 extern uintptr_t g_pCameraManager;
 extern uintptr_t g_pIdleWatcher;

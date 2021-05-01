@@ -4,7 +4,6 @@
 
 #include "module/module_manager.h"
 
-typedef void* (__cdecl* _UnityThread_Update)(uintptr_t __this);
 _UnityThread_Update Original_UnityThread_Update = nullptr;
 void* Detour_UnityThread_Update(uintptr_t __this)
 {
@@ -14,9 +13,8 @@ void* Detour_UnityThread_Update(uintptr_t __this)
     return Original_UnityThread_Update(__this);
 }
 
-typedef void* (__cdecl* _GetPlayer)(Entity __this);
-_GetPlayer Original_GetPlayer = nullptr;
-void* Detour_GetPlayer(Entity player)
+_PlayerUpdate Original_PlayerUpdate = nullptr;
+void* Detour_PlayerUpdate(Entity player)
 {
     if (&player != g_pPlayer)
     {
@@ -27,17 +25,16 @@ void* Detour_GetPlayer(Entity player)
     g_pPlayer = &player;
 
     //std::cout << std::hex << *(uintptr_t*)&player << std::endl;
-    return Original_GetPlayer(player);
+    return Original_PlayerUpdate(player);
 }
 
-typedef void* (__cdecl* _GetEntity)(Entity entity);
-_GetEntity Original_GetEntity = nullptr;
-void* Detour_GetEntity(Entity entity)
+_EntityUpdate Original_EntityUpdate = nullptr;
+void* Detour_EntityUpdate(Entity entity)
 {
     // ignore if this is our player
     if (&entity == g_pPlayer)
     {
-        return Detour_GetEntity(entity);
+        return Detour_EntityUpdate(entity);
     }
 
     // TODO: we should probably be using one std::map?
@@ -49,10 +46,9 @@ void* Detour_GetEntity(Entity entity)
         g_aEnemyList.insert(&entity);
     }
 
-    return Original_GetEntity(entity);
+    return Original_EntityUpdate(entity);
 }
 
-typedef void* (__cdecl* _TileSetColor)(uintptr_t __this, Color value);
 _TileSetColor Original_Tile_SetColor = nullptr;
 void* Detour_Tile_SetColor(uintptr_t __this, Color value)
 {
@@ -73,7 +69,6 @@ void* Detour_Tile_SetColor(uintptr_t __this, Color value)
     return Original_Tile_SetColor(__this, value);
 }
 
-typedef void* (__cdecl* _CameraManagerUpdate)(uintptr_t cameraManager);
 _CameraManagerUpdate Original_CameraManager_Update = nullptr;
 void* Detour_CameraManager_Update(uintptr_t cameraManager)
 {
@@ -85,22 +80,6 @@ void* Detour_CameraManager_Update(uintptr_t cameraManager)
     return Original_CameraManager_Update(cameraManager);
 }
 
-typedef void* (__cdecl* _Add_Dynamic_Object)(uintptr_t __this, float x, float y, Color color, uintptr_t entity);
-_Add_Dynamic_Object Original_Add_Dynamic_Object = nullptr;
-void* Detour_Add_Dynamic_Object(uintptr_t __this, float x, float y, Color color, uintptr_t entity)
-{
-    if (entity)
-    {
-        std::cout << x << "," << y << std::endl;
-        std::cout << color.r << "," << color.g << "," << color.b << std::endl;
-        std::cout << std::hex << entity << std::endl;
-        std::cout << std::endl;
-    }
-
-    return Original_Add_Dynamic_Object(__this, x, y, color, entity);
-}
-
-typedef Vector3 (__cdecl* _Input_GetMousePos)(uintptr_t __this);
 _Input_GetMousePos Original_Input_GetMousePos = nullptr;
 Vector3 Detour_Input_GetMousePos(uintptr_t __this)
 {
@@ -118,31 +97,8 @@ Vector3 Detour_Input_GetMousePos(uintptr_t __this)
     return mousePos;
 }
 
-//typedef void*(__cdecl* _SocketManager_SendMessage)(uintptr_t __this, uintptr_t packet);
-//_SocketManager_SendMessage Original_SocketManager_SendMessage = nullptr;
-//void* Detour_SocketManager_SendMessage(uintptr_t __this, uintptr_t packet)
-//{
-//    int packetId = *(int*)(packet + 0x18);
-//    if (g_bNoclip
-//        && packetId == 42 // move
-//    ) {
-//        return nullptr;
-//    }
-//
-//    return Original_SocketManager_SendMessage(__this, packet);
-//}
-
-typedef void* (__cdecl* _GetPlayerList)(NBJLMDOACBC __this, int EGHLCCGKEDH);
-_GetPlayerList Original_GetPlayerList = nullptr;
-void* Detour_GetPlayerList(NBJLMDOACBC __this, int EGHLCCGKEDH)
-{
-    g_pNBJLMDOACBC = &__this;
-    return Original_GetPlayerList(__this, EGHLCCGKEDH);
-}
-
-typedef void* (__cdecl* _GetPet)(Entity pet, bool AMKOONDPFBD);
-_GetPet Original_GetPet = nullptr;
-void* Detour_GetPet(Entity pet, bool AMKOONDPFBD)
+_PetUpdate Original_PetUpdate = nullptr;
+void* Detour_PetUpdate(Entity pet, bool AMKOONDPFBD)
 {
     Vector3 scale = { 1.0f, 1.0f, 1.0f };
 
@@ -166,10 +122,9 @@ void* Detour_GetPet(Entity pet, bool AMKOONDPFBD)
     // TODO: Optimise this
     // we shouldn't be updating transforms every tick
 
-    return Original_GetPet(pet, AMKOONDPFBD);
+    return Original_PetUpdate(pet, AMKOONDPFBD);
 }
 
-typedef void (__cdecl* _SocketManager_Connect)(uintptr_t __this, String* address, int port, String* OUTGOING_KEY, String* INCOMING_KEY);
 _SocketManager_Connect Original_SocketManager_Connect = nullptr;
 void Detour_SocketManager_Connect(uintptr_t __this, String* address, int port, String* OUTGOING_KEY, String* INCOMING_KEY)
 {
@@ -199,7 +154,6 @@ void Detour_SocketManager_Connect(uintptr_t __this, String* address, int port, S
     return Original_SocketManager_Connect(__this, address, port, OUTGOING_KEY, INCOMING_KEY);
 }
 
-typedef void(__cdecl* _TMP_Text_SetText_Internal)(uintptr_t __this, String* text, bool syncTextInputBox);
 _TMP_Text_SetText_Internal Original_TMP_Text_SetText_Internal = nullptr;
 void Detour_TMP_Text_SetText_Internal(uintptr_t __this, String* text, bool syncTextInputBox)
 {
@@ -233,17 +187,17 @@ bool InitHooks()
         return false;
     }
 
-    void* GetPlayer = (void*)(g_pBaseAddress + OFFSET_GET_PLAYER);
-    if (MH_CreateHook(GetPlayer, Detour_GetPlayer, reinterpret_cast<LPVOID*>(&Original_GetPlayer)) != MH_OK)
+    void* PlayerUpdate = (void*)(g_pBaseAddress + OFFSET_PLAYER_UPDATE);
+    if (MH_CreateHook(PlayerUpdate, Detour_PlayerUpdate, reinterpret_cast<LPVOID*>(&Original_PlayerUpdate)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour GetPlayer", "RotMGInternal", MB_OK);
+        MessageBoxA(NULL, "Failed to Detour PlayerUpdate", "RotMGInternal", MB_OK);
         return false;
     }
 
-    void* GetEntity = (void*)(g_pBaseAddress + OFFSET_GET_ENEMY);
-    if (MH_CreateHook(GetEntity, Detour_GetEntity, reinterpret_cast<LPVOID*>(&Original_GetEntity)) != MH_OK)
+    void* EntityUpdate = (void*)(g_pBaseAddress + OFFSET_ENTITY_UPDATE);
+    if (MH_CreateHook(EntityUpdate, Detour_EntityUpdate, reinterpret_cast<LPVOID*>(&Original_EntityUpdate)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour GetEntity", "RotMG Internal", MB_OK);
+        MessageBoxA(NULL, "Failed to Detour EntityUpdate", "RotMG Internal", MB_OK);
         return 1;
     }
 
@@ -268,24 +222,10 @@ bool InitHooks()
         return 1;
     }
 
-    //void* SocketManager_SendMessage = (void*)(g_pBaseAddress + OFFSET_SOCKET_SENDMESSAGE);
-    //if (MH_CreateHook(SocketManager_SendMessage, Detour_SocketManager_SendMessage, reinterpret_cast<LPVOID*>(&Original_SocketManager_SendMessage)) != MH_OK)
-    //{
-    //    MessageBoxA(NULL, "Failed to Detour SocketManager_SendMessage", "RotMG Internal", MB_OK);
-    //    return 1;
-    //}
-
-    void* GetPlayerList = (void*)(g_pBaseAddress + OFFSET_GET_PLAYER_LIST);
-    if (MH_CreateHook(GetPlayerList, Detour_GetPlayerList, reinterpret_cast<LPVOID*>(&Original_GetPlayerList)) != MH_OK)
+    void* PetUpdate = (void*)(g_pBaseAddress + OFFSET_PET_UPDATE);
+    if (MH_CreateHook(PetUpdate, Detour_PetUpdate, reinterpret_cast<LPVOID*>(&Original_PetUpdate)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour GetPlayerList", "RotMG Internal", MB_OK);
-        return 1;
-    }
-    
-    void* GetPet = (void*)(g_pBaseAddress + OFFSET_GET_PET);
-    if (MH_CreateHook(GetPet, Detour_GetPet, reinterpret_cast<LPVOID*>(&Original_GetPet)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour GetPet", "RotMG Internal", MB_OK);
+        MessageBoxA(NULL, "Failed to Detour PetUpdate", "RotMG Internal", MB_OK);
         return 1;
     }
 

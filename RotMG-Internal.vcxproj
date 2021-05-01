@@ -84,6 +84,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\other\scan.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -91,7 +92,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\fake_ntdl.h" />
     <ClInclude Include="src\globals.h" />
     <ClInclude Include="src\gui.h" />
     <ClInclude Include="src\hooks.h" />
@@ -124,6 +124,10 @@
     <ClInclude Include="src\module\module_list.h" />
     <ClInclude Include="src\module\module_manager.h" />
     <ClInclude Include="src\other\CDataPack.h" />
+    <ClInclude Include="src\other\fake_ntdl.h" />
+    <ClInclude Include="src\other\offsets.h" />
+    <ClInclude Include="src\other\reclass.h" />
+    <ClInclude Include="src\other\scan.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\structs.h" />
   </ItemGroup>

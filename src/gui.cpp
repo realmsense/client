@@ -362,28 +362,6 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                     ImGui::TreePop();
                 }
 
-                //if (ImGui::TreeNode("Player List"))
-                //{
-                //    ImGui::Text("Length: %i", g_pNBJLMDOACBC->playerList->size);
-                //    std::vector<Entity*> playerList = ReadUnityList<Entity*>(g_pNBJLMDOACBC->playerList);
-                //    for (int i = 0; i < playerList.size(); i++)
-                //    {
-                //        Entity* player = playerList[i];
-                //        std::string playerName = ReadUnityString(player->name);
-                //        std::string playerPtrHex = PtrToHex((uintptr_t)player).c_str();
-                //
-                //        ImGui::PushID(playerName.c_str());
-                //        ImGui::Text(playerName.c_str());
-                //        ImGui::SameLine(140);
-                //        ImGui::Text(playerPtrHex.c_str());
-                //        ImGui::SameLine(240);
-                //        if (ImGui::Button("Copy")) ImGui::SetClipboardText(playerPtrHex.c_str());
-                //        ImGui::PopID();
-                //    }
-                //
-                //    ImGui::TreePop();
-                //}
-
                 ImGui::TreePop();
             }
 

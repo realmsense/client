@@ -4,7 +4,6 @@
 // Pointers (game objects)
 uintptr_t g_pBaseAddress;
 Entity* g_pPlayer;
-NBJLMDOACBC* g_pNBJLMDOACBC; // TODO: think of a name for this
 uintptr_t g_pMainCamera;
 uintptr_t g_pCameraManager;
 uintptr_t g_pIdleWatcher;
