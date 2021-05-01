@@ -209,6 +209,8 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
                         }
                     }
 
+                    ImGui::Checkbox("Block inputs when GUI is open", &g_bGUIBlockInputs);
+
                     ImGui::EndTabItem();
                 }
 

@@ -44,6 +44,8 @@
 
 // UnityEngine.InputLegacyModule.dll
 #define OFFSET_GET_MOUSEPOS                     0x30ad000   // UnityEngine.Input.get_mousePosition
+#define OFFSET_GET_KEY_DOWN                     0x30acc60   // UnityEngine.Input.GetKeyDown
+#define OFFSET_GET_KEY                          0x30acca0   // UnityEngine.Input.GetKey
 
 // Unity.TextMeshPro.dll
 #define OFFSET_TMP_TEXT_SET_TEXT                0x7c7e90    // TMPro.TMP_Text.SetText (String* text, bool syncTextInputBox)

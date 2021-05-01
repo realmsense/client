@@ -52,6 +52,7 @@ typedef void(__cdecl* _SetFpsTarget)(int value);                                
 
 // UnityEngine.InputLegacyModule.dll
 typedef Vector3(__cdecl* _Input_GetMousePos)(uintptr_t __this);                                             // OFFSET_GET_MOUSEPOS
+typedef bool(__cdecl* _Input_GetKey)(void* keyCode);                                                        // OFFSET_GET_KEY_DOWN, OFFSET_GET_KEY
 
 // Unity.TextMeshPro.dll
 typedef void(__cdecl* _TMPText_SetText)(uintptr_t __this, String* text, bool syncTextInputBox);             // OFFSET_TMP_TEXT_SET_TEXT

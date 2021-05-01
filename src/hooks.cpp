@@ -175,6 +175,24 @@ void Detour_TMP_Text_SetText_Internal(uintptr_t __this, String* text, bool syncT
     return Original_TMP_Text_SetText_Internal(__this, text, syncTextInputBox);
 }
 
+_Input_GetKey Original_Input_GetKey = nullptr;
+bool Detour_Input_GetKey(void* keyCode)
+{
+    if (g_bGUIBlockInputs && g_bMenuOpen)
+        return false;
+    else
+        return Original_Input_GetKey(keyCode);
+}
+
+_Input_GetKey Original_Input_GetKeyDown = nullptr;
+bool Detour_Input_GetKeyDown(void* keyCode)
+{
+    if (g_bGUIBlockInputs && g_bMenuOpen)
+        return false;
+    else
+        return Original_Input_GetKeyDown(keyCode);
+}
+
 bool InitHooks()
 {
     MH_Initialize();
@@ -240,6 +258,20 @@ bool InitHooks()
     if (MH_CreateHook(TMP_Text_SetText_Internal, Detour_TMP_Text_SetText_Internal, reinterpret_cast<LPVOID*>(&Original_TMP_Text_SetText_Internal)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour TMP_Text_SetText_Internal", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    void* Input_GetKeyDown = (void*)(g_pBaseAddress + OFFSET_GET_KEY_DOWN);
+    if (MH_CreateHook(Input_GetKeyDown, Detour_Input_GetKeyDown, reinterpret_cast<LPVOID*>(&Original_Input_GetKeyDown)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour Input_GetKeyDown", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    void* Input_GetKey = (void*)(g_pBaseAddress + OFFSET_GET_KEY);
+    if (MH_CreateHook(Input_GetKey, Detour_Input_GetKey, reinterpret_cast<LPVOID*>(&Original_Input_GetKey)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour Input_GetKey", "RotMG Internal", MB_OK);
         return 1;
     }
 
