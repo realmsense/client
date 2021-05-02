@@ -14,12 +14,16 @@ UnlimitedZoomModule::UnlimitedZoomModule(std::string name, bool enabled, ModuleC
 
 void UnlimitedZoomModule::onEnable()
 {
-    std::cout << this->name << " enabled" << std::endl;
+    this->log.color = Color32_GREEN;
+    this->log.floatingText = true;
+    this->log << this->name << " enabled" << std::endl;
 }
 
 void UnlimitedZoomModule::onDisable()
 {
-    std::cout << this->name << " disabled" << std::endl;
+    this->log.color = Color32_RED;
+    this->log.floatingText = true;
+    this->log << this->name << " disabled" << std::endl;
 }
 
 bool UnlimitedZoomModule::onEvent(ModuleEvent event, CDataPack* dp)

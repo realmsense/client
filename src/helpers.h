@@ -8,7 +8,6 @@ float CalculateDistance(Vector2 a, Vector2 b);
 std::string PtrToHex(uintptr_t ptr);
 std::string ReadUnityString(String* str);
 std::string ReadUnityString(uintptr_t addr);
-void WriteUnityString(String* target, const char* source);
 
 uintptr_t FindGameObject(const char* name);
 std::vector<uintptr_t> GetChildTransforms(uintptr_t gameObject);
@@ -30,8 +29,4 @@ std::vector<T> ReadUnityList(List* source)
     return arr;
 }
 
-uintptr_t FindDMAAddy(uintptr_t ptr, std::vector<unsigned int> offsets);
-
-char* ScanBasic(char* pattern, char* mask, char* begin, intptr_t size);
-char* ScanInternal(char* pattern, char* mask, char* begin, intptr_t size);
-char* ScanModIn(char* pattern, char* mask, std::string modName);
+void ShowFloatingText(const char* text, FloatingText type, __int64 colour);

@@ -78,3 +78,12 @@ std::vector<uintptr_t> FindChildTransforms(uintptr_t parentTransform, std::vecto
     }
     return vec;
 }
+
+void ShowFloatingText(const char* text, FloatingText type, __int64 colour)
+{
+    uintptr_t guiManager = (uintptr_t)g_pPlayer->viewHandler->guiManager;
+    String* msg = il2cpp_string_new(text);
+
+    uintptr_t player = *(uintptr_t*)g_pPlayer;
+    __ShowFloatingText(guiManager, type, msg, colour, 0.0f);
+}

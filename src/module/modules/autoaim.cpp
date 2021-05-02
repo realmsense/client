@@ -12,12 +12,16 @@ AutoAimModule::AutoAimModule(std::string name, bool enabled, ModuleCategory cate
 
 void AutoAimModule::onEnable()
 {
-    std::cout << this->name << " enabled" << std::endl;
+    this->log.color = Color32_GREEN;
+    this->log.floatingText = true;
+    this->log << this->name << " enabled" << std::endl;
 }
 
 void AutoAimModule::onDisable()
 {
-    std::cout << this->name << " disabled" << std::endl;
+    this->log.color = Color32_RED;
+    this->log.floatingText = true;
+    this->log << this->name << " disabled" << std::endl;
 }
 
 bool AutoAimModule::onEvent(ModuleEvent event, CDataPack* dp)

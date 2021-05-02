@@ -1,14 +1,20 @@
 #include "pch.h"
 #include "module.h"
 #include "module_list.h"
+#include "module_logger.h"
+
 
 Module::Module(std::string name, bool enabled, ModuleCategory category)
 {
     this->name = name;
     this->enabled = enabled;
     this->category = category;
+    this->log = ModuleLogger();
 
-    std::cout << "Loaded Module: " << this->name << std::endl;
+    this->log.floatingText = true;
+    this->log << "Loaded Module: " << this->name << std::endl;
+
+    //std::cout << "Loaded Module: " << this->name << std::endl;
 }
 
 void Module::toggleModule()

@@ -40,6 +40,7 @@ extern _WorldToScreen WorldToScreen;
 extern _ScreenToWorld ScreenToWorld;
 extern _SetVsync SetVsync;
 extern _SetFpsTarget SetFpsTarget;
+extern _ShowFloatingText __ShowFloatingText;
 
 // Variables / Settings
 extern bool g_bMenuOpen;

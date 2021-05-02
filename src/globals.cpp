@@ -36,6 +36,7 @@ _WorldToScreen WorldToScreen;
 _ScreenToWorld ScreenToWorld;
 _SetVsync SetVsync;
 _SetFpsTarget SetFpsTarget;
+_ShowFloatingText __ShowFloatingText;
 
 // Variables / Settings
 bool g_bMenuOpen;
@@ -87,6 +88,7 @@ void InitPointers()
     ScreenToWorld = (_ScreenToWorld)(g_pBaseAddress + OFFSET_SCREEN_TO_WORLD);
     SetVsync = (_SetVsync)(g_pBaseAddress + OFFSET_SET_VSYNC);
     SetFpsTarget = (_SetFpsTarget)(g_pBaseAddress + OFFSET_SET_FPS_TARGET);
+    __ShowFloatingText = (_ShowFloatingText)(g_pBaseAddress + OFFSET_SHOW_FLOATING_TEXT);
 }
 
 void LoadSettings()

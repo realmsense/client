@@ -22,12 +22,16 @@ NameChangeModule::NameChangeModule(std::string name, bool enabled, ModuleCategor
 
 void NameChangeModule::onEnable()
 {
-    std::cout << this->name << " enabled" << std::endl;
+    this->log.color = Color32_GREEN;
+    this->log.floatingText = true;
+    this->log << this->name << " enabled" << std::endl;
 }
 
 void NameChangeModule::onDisable()
 {
-    std::cout << this->name << " disabled" << std::endl;
+    this->log.color = Color32_RED;
+    this->log.floatingText = true;
+    this->log << this->name << " disabled" << std::endl;
 }
 
 bool NameChangeModule::onEvent(ModuleEvent event, CDataPack* dp)

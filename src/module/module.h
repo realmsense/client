@@ -1,6 +1,7 @@
 #pragma once
 
-#include "pch.h"
+#include "pch.h" // what
+#include "module_logger.h"
 
 class Module {
 public:
@@ -8,6 +9,7 @@ public:
     bool enabled;
     std::string name;
     ModuleCategory category;
+    ModuleLogger log;
     // hotkey
 
     Module(std::string name, bool enabled, ModuleCategory category);

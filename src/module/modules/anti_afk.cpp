@@ -15,10 +15,12 @@ void AntiAfkModule::onEnable()
     if (!this->GetIdleWatcher())
         return;
 
-    std::cout << std::hex << this->idleWatcherObj << std::endl;
+    //std::cout << std::hex << this->idleWatcherObj << std::endl;
     Behaviour_set_enabled(this->idleWatcherObj, false);
 
-    std::cout << this->name << " enabled" << std::endl;
+    this->log.color = Color32_GREEN;
+    this->log.floatingText = true;
+    this->log << this->name << " enabled" << std::endl;
 }
 
 void AntiAfkModule::onDisable()
@@ -26,10 +28,12 @@ void AntiAfkModule::onDisable()
     if (!this->GetIdleWatcher())
         return;
 
-    std::cout << std::hex << this->idleWatcherObj << std::endl;
+    //std::cout << std::hex << this->idleWatcherObj << std::endl;
     Behaviour_set_enabled(this->idleWatcherObj, true);
 
-    std::cout << this->name << " disabled" << std::endl;
+    this->log.color = Color32_RED;
+    this->log.floatingText = true;
+    this->log << this->name << " disabled" << std::endl;
 }
 
 bool AntiAfkModule::onEvent(ModuleEvent event, CDataPack* dp)

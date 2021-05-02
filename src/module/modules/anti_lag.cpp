@@ -33,14 +33,16 @@ AntiLagModule::AntiLagModule(std::string name, bool enabled, ModuleCategory cate
 
 void AntiLagModule::onEnable()
 {
-    if (!g_pPlayer) return;
+    this->log.color = Color32_GREEN;
+    this->log.floatingText = true;
+    this->log << this->name << " enabled" << std::endl;
 }
 
 void AntiLagModule::onDisable()
 {
-    if (!g_pPlayer) return;
-
-    std::cout << this->name << " disabled" << std::endl;
+    this->log.color = Color32_RED;
+    this->log.floatingText = true;
+    this->log << this->name << " disabled" << std::endl;
 }
 
 bool AntiLagModule::onEvent(ModuleEvent event, CDataPack* dp)
@@ -127,6 +129,19 @@ void AntiLagModule::HideTiles(bool hide)
             Transform_set_localScale(tile, newScale);
         }
     }
+
+    if (this->hideTiles)
+    {
+        this->log.color = Color32_GREEN;
+        this->log.floatingText = true;
+        this->log << "Hide Tiles enabled" << std::endl;
+    }
+    else
+    {
+        this->log.color = Color32_RED;
+        this->log.floatingText = true;
+        this->log << "Hide Tiles disabled" << std::endl;
+    }
 }
 
 void AntiLagModule::ShowFPS(bool show)
@@ -162,7 +177,18 @@ void AntiLagModule::ShowFPS(bool show)
         break;
     }
 
-    std::cout << "[" << this->name << "] Show FPS: " << (this->showFPS ? "on" : "off") << std::endl;
+    if (this->showFPS)
+    {
+        this->log.color = Color32_GREEN;
+        this->log.floatingText = true;
+        this->log << "Show FPS enabled" << std::endl;
+    }
+    else
+    {
+        this->log.color = Color32_RED;
+        this->log.floatingText = true;
+        this->log << "Show FPS disabled" << std::endl;
+    }
 }
 
 
@@ -180,7 +206,18 @@ void AntiLagModule::ToggleUnlimitedFPS(bool on)
         SetVsync(1);
     }
 
-    std::cout << "[" << this->name << "] Unlimited FPS: " << (this->showFPS ? "on" : "off") << std::endl;
+    if (this->unlimitedFPS)
+    {
+        this->log.color = Color32_GREEN;
+        this->log.floatingText = true;
+        this->log << "Unlimited FPS enabled" << std::endl;
+    }
+    else
+    {
+        this->log.color = Color32_RED;
+        this->log.floatingText = true;
+        this->log << "Unlimited FPS disabled" << std::endl;
+    }
 }
 
 void AntiLagModule::SetFullscreenMode(int mode)

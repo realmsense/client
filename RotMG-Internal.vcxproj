@@ -79,6 +79,7 @@
     <ClCompile Include="src\module\modules\noclip.cpp" />
     <ClCompile Include="src\module\modules\unlimited_zoom.cpp" />
     <ClCompile Include="src\module\modules\walk.cpp" />
+    <ClCompile Include="src\module\module_logger.cpp" />
     <ClCompile Include="src\module\module_manager.cpp" />
     <ClCompile Include="src\other\CDataPack.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -122,6 +123,7 @@
     <ClInclude Include="src\module\modules\unlimited_zoom.h" />
     <ClInclude Include="src\module\modules\walk.h" />
     <ClInclude Include="src\module\module_list.h" />
+    <ClInclude Include="src\module\module_logger.h" />
     <ClInclude Include="src\module\module_manager.h" />
     <ClInclude Include="src\other\CDataPack.h" />
     <ClInclude Include="src\other\fake_ntdl.h" />
