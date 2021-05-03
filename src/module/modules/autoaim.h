@@ -13,7 +13,7 @@ enum class AutoAimTarget
 
 class AutoAimModule : public Module {
 public:
-    AutoAimModule(std::string name, bool enabled, ModuleCategory category);
+    AutoAimModule();
 
     AutoAimTarget target;
 

@@ -4,9 +4,14 @@
 
 #include "AutoAim.h"
 
-AutoAimModule::AutoAimModule(std::string name, bool enabled, ModuleCategory category)
-    : Module(name, enabled, category)
+AutoAimModule::AutoAimModule()
+    : Module()
 {
+    this->name = "Auto Aim";
+    this->enabled = false;
+    this->type = ModuleList::AutoAimModule;
+    this->category = ModuleCategory::AUTO;
+
     this->target = AutoAimTarget::ClosestMouse;
 }
 

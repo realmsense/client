@@ -4,10 +4,13 @@
 
 #include "disable_fog.h"
 
-DisableFogModule::DisableFogModule(std::string name, bool enabled, ModuleCategory category)
-    : Module(name, enabled, category)
+DisableFogModule::DisableFogModule()
+    : Module()
 {
-
+    this->name = "Disable Fog";
+    this->enabled = false;
+    this->type = ModuleList::DisableFogModule;
+    this->category = ModuleCategory::VIEW;
 }
 
 void DisableFogModule::onEnable()

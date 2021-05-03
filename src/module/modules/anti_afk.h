@@ -5,7 +5,7 @@
 
 class AntiAfkModule : public Module {
 public:
-    AntiAfkModule(std::string name, bool enabled, ModuleCategory category);
+    AntiAfkModule();
 
     uintptr_t idleWatcherObj;
 

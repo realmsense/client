@@ -5,7 +5,7 @@
 
 class DisableFogModule : public Module {
 public:
-    DisableFogModule(std::string name, bool enabled, ModuleCategory category);
+    DisableFogModule();
 
     void onEnable();
     void onDisable();

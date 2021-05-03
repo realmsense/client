@@ -4,9 +4,14 @@
 
 #include "anti_afk.h"
 
-AntiAfkModule::AntiAfkModule(std::string name, bool enabled, ModuleCategory category)
-    : Module(name, enabled, category)
+AntiAfkModule::AntiAfkModule()
+    : Module()
 {
+    this->name = "Anti AFK";
+    this->enabled = false;
+    this->type = ModuleList::AntiAFK;
+    this->category = ModuleCategory::OTHER;
+
     this->idleWatcherObj = 0;
 }
 

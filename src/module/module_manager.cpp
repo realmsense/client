@@ -2,7 +2,7 @@
 #include "module.h"
 #include "module_list.h"
 
-std::unordered_map<Module*, ModuleList> modules;
+std::vector<Module*> modules;
 
 void LoadModules()
 {
@@ -10,45 +10,31 @@ void LoadModules()
     // some modules (such as noclip) should stay disabled though
 
     // View
-    DisableFogModule* disableFogModule = new DisableFogModule("Disable Fog", true, ModuleCategory::VIEW);
-    modules.insert(std::pair<Module*, ModuleList>(disableFogModule, ModuleList::DisableFogModule));
-
-    UnlimitedZoomModule* unlimitedZoomModule = new UnlimitedZoomModule("Unlimited Zoom", true, ModuleCategory::VIEW);
-    modules.insert(std::pair<Module*, ModuleList>(unlimitedZoomModule, ModuleList::UnlimitedZoom));
-
-    AntiLagModule* antiLagModule = new AntiLagModule("Anti Lag", true, ModuleCategory::VIEW);
-    modules.insert(std::pair<Module*, ModuleList>(antiLagModule, ModuleList::AntiLag));
+    modules.push_back(new DisableFogModule());
+    modules.push_back(new UnlimitedZoomModule());
+    modules.push_back(new AntiLagModule());
 
     // Movement
-    NoclipModule* noclipModule = new NoclipModule("Noclip", false, ModuleCategory::MOVEMENT);
-    modules.insert(std::pair<Module*, ModuleList>(noclipModule, ModuleList::NoclipModule));
-
-    WalkModule* walkModule = new WalkModule("Walk", false, ModuleCategory::MOVEMENT);
-    modules.insert(std::pair<Module*, ModuleList>(walkModule, ModuleList::WalkModule));
+    modules.push_back(new NoclipModule());
+    modules.push_back(new WalkModule());
 
     // Auto
-    AutoAimModule* autoAimModule = new AutoAimModule("Auto Aim", false, ModuleCategory::AUTO);
-    modules.insert(std::pair<Module*, ModuleList>(autoAimModule, ModuleList::AutoAimModule));
-
+    modules.push_back(new AutoAimModule());
+    
     // Other
-    NameChangeModule* nameChangeModule = new NameChangeModule("Name Change", false, ModuleCategory::OTHER);
-    modules.insert(std::pair<Module*, ModuleList>(nameChangeModule, ModuleList::NameChange));
-
-    AntiAfkModule* antiAFKModule = new AntiAfkModule("Anti AFK", false, ModuleCategory::OTHER);
-    modules.insert(std::pair<Module*, ModuleList>(antiAFKModule, ModuleList::AntiAFK));
+    modules.push_back(new AntiAfkModule());
 }
 
 void UnloadModules()
 {
-    for (auto& x : modules)
+    for (auto& module : modules)
     {
-        Module* module = x.first;
         module->setEnabled(false, false);
         delete module;
     }
 }
 
-std::unordered_map<Module*, ModuleList> GetAllModules()
+std::vector<Module*> GetAllModules()
 {
     return modules;
 }
@@ -57,9 +43,8 @@ std::unordered_map<Module*, ModuleList> GetAllModules()
 bool CallEvent(ModuleEvent event, CDataPack* dp)
 {
     bool returnValue = true;
-    for (auto& x : modules)
+    for (auto& module : modules)
     {
-        Module* module = x.first;
         if (!module->onEvent(event, dp))
             returnValue = false;
     }

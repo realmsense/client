@@ -5,9 +5,14 @@
 #include "name_change.h"
 #include "imgui/imgui.h" // for colors
 
-NameChangeModule::NameChangeModule(std::string name, bool enabled, ModuleCategory category)
-    : Module(name, enabled, category)
+NameChangeModule::NameChangeModule()
+    : Module()
 {
+    this->name = "Name Change";
+    this->enabled = false;
+    this->type = ModuleList::NameChange;
+    this->category = ModuleCategory::OTHER;
+
     this->charInfoObj = 0;
 
     this->customPlayerName = "";

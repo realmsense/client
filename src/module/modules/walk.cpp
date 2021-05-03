@@ -4,9 +4,14 @@
 
 #include "Walk.h"
 
-WalkModule::WalkModule(std::string name, bool enabled, ModuleCategory category)
-    : Module(name, enabled, category)
+WalkModule::WalkModule()
+    : Module()
 {
+    this->name = "Walk";
+    this->enabled = false;
+    this->type = ModuleList::WalkModule;
+    this->category = ModuleCategory::MOVEMENT;
+
     this->oldSpeed = 0.0f;
     this->walkModifier = 2.0f;
 }

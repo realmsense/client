@@ -21,9 +21,14 @@ void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale)
     }
 }
 
-AntiLagModule::AntiLagModule(std::string name, bool enabled, ModuleCategory category)
-    : Module(name, enabled, category)
+AntiLagModule::AntiLagModule()
+    : Module()
 {
+    this->name = "Anti Lag";
+    this->enabled = false;
+    this->type = ModuleList::AntiLag;
+    this->category = ModuleCategory::VIEW;
+
     this->playerSize = 1.0f;
     this->hideTiles = false;
     this->hidePets = false;

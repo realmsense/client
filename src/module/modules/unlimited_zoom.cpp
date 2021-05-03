@@ -4,9 +4,14 @@
 
 #include "unlimited_zoom.h"
 
-UnlimitedZoomModule::UnlimitedZoomModule(std::string name, bool enabled, ModuleCategory category)
-    : Module(name, enabled, category)
+UnlimitedZoomModule::UnlimitedZoomModule()
+    : Module()
 {
+    this->name = "Unlimited Zoom";
+    this->enabled = false;
+    this->type = ModuleList::UnlimitedZoom;
+    this->category = ModuleCategory::VIEW;
+
     this->zoomAmount = 7.2f;
     this->perspectiveEditorEnabled = false;
     this->cameraPerspectiveEditor = 0;

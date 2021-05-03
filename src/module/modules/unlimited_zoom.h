@@ -5,7 +5,7 @@
 
 class UnlimitedZoomModule : public Module {
 public:
-    UnlimitedZoomModule(std::string name, bool enabled, ModuleCategory category);
+    UnlimitedZoomModule();
 
     float zoomAmount;
     bool perspectiveEditorEnabled;

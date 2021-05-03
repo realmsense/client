@@ -5,7 +5,7 @@
 
 class NoclipModule : public Module {
 public:
-    NoclipModule(std::string name, bool enabled, ModuleCategory category);
+    NoclipModule();
 
     float noclipSpeed;
 

@@ -5,7 +5,7 @@
 
 class NameChangeModule : public Module {
 public:
-    NameChangeModule(std::string name, bool enabled, ModuleCategory category);
+    NameChangeModule();
 
     void onEnable();
     void onDisable();

@@ -4,9 +4,14 @@
 
 #include "noclip.h"
 
-NoclipModule::NoclipModule(std::string name, bool enabled, ModuleCategory category)
-    : Module(name, enabled, category)
+NoclipModule::NoclipModule()
+    : Module()
 {
+    this->name = "Noclip";
+    this->enabled = false;
+    this->type = ModuleList::NoclipModule;
+    this->category = ModuleCategory::MOVEMENT;
+
     this->noclipSpeed = 1.0f;
 }
 

@@ -5,7 +5,7 @@
 
 class WalkModule : public Module {
 public:
-    WalkModule(std::string name, bool enabled, ModuleCategory category);
+    WalkModule();
 
     float walkModifier;
     float oldSpeed;

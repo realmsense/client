@@ -5,7 +5,7 @@
 
 class AntiLagModule : public Module {
 public:
-    AntiLagModule(std::string name, bool enabled, ModuleCategory category);
+    AntiLagModule();
 
     float playerSize;
     bool hideTiles;

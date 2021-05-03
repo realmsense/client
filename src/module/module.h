@@ -6,13 +6,14 @@
 class Module {
 public:
 
-    bool enabled;
     std::string name;
+    bool enabled;
+    ModuleList type;
     ModuleCategory category;
     ModuleLogger log;
     // hotkey
 
-    Module(std::string name, bool enabled, ModuleCategory category);
+    Module();
 
     void setEnabled(bool enabled, bool callHandlers);
     void toggleModule();

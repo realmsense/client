@@ -4,12 +4,13 @@
 #include "module_logger.h"
 
 
-Module::Module(std::string name, bool enabled, ModuleCategory category)
+Module::Module()
 {
-    this->name = name;
-    this->enabled = enabled;
-    this->category = category;
-    this->log = ModuleLogger();
+    // set in parent ctor
+    //this->name = name;
+    //this->enabled = enabled;
+    //this->category = category;
+    //this->log = ModuleLogger();
 
     this->log.floatingText = true;
     this->log << "Loaded Module: " << this->name << std::endl;
