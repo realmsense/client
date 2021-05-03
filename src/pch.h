@@ -14,6 +14,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include "other/CDataPack.h"
+#include "module/module_enums.h"
 #include "structs.h"
 #include "helpers.h"
 #include "globals.h"

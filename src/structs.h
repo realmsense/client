@@ -62,23 +62,3 @@ typedef bool(__cdecl* _Input_GetKey)(void* keyCode);                            
 typedef void(__cdecl* _TMPText_SetText)(uintptr_t __this, String* text, bool syncTextInputBox);             // OFFSET_TMP_TEXT_SET_TEXT
 typedef void(__cdecl* _TMP_Text_SetText_Internal)(uintptr_t __this, String* text, bool syncTextInputBox);   // OFFSET_TMP_TEXT_SET_TEXT_INTERNAL
 typedef void* (__cdecl* _TMPText_SetColor)(uintptr_t __this, Color color);                                  // OFFSET_TMP_TEXT_SET_COLOR
-
-
-// Global Structs - TODO: move to own module include file
-enum class ModuleEvent
-{
-    MainLoop,
-    UnityThread_Update,
-    GetMousePos,
-    Tile_SetColor,
-    CameraManager_Update,
-    SocketManager_Connect,
-    TMP_SetText,
-    Pet_Update
-};
-enum class ModuleCategory {
-    VIEW,
-    MOVEMENT,
-    AUTO,
-    OTHER
-};

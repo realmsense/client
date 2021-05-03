@@ -8,15 +8,3 @@
 #include "modules/anti_lag.h"
 #include "modules/name_change.h"
 #include "modules/anti_afk.h"
-
-enum class ModuleList
-{
-    NoclipModule,
-    AutoAimModule,
-    WalkModule,
-    DisableFogModule,
-    UnlimitedZoom,
-    AntiLag,
-    NameChange,
-    AntiAFK
-};

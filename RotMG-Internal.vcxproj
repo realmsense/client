@@ -122,6 +122,7 @@
     <ClInclude Include="src\module\modules\noclip.h" />
     <ClInclude Include="src\module\modules\unlimited_zoom.h" />
     <ClInclude Include="src\module\modules\walk.h" />
+    <ClInclude Include="src\module\module_enums.h" />
     <ClInclude Include="src\module\module_list.h" />
     <ClInclude Include="src\module\module_logger.h" />
     <ClInclude Include="src\module\module_manager.h" />

@@ -216,6 +216,9 @@
     <ClInclude Include="src\module\module_logger.h">
       <Filter>Source Files\module</Filter>
     </ClInclude>
+    <ClInclude Include="src\module\module_enums.h">
+      <Filter>Source Files\module</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
