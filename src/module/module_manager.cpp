@@ -39,6 +39,17 @@ std::vector<Module*> GetAllModules()
     return modules;
 }
 
+std::vector<Module*> GetModules(ModuleCategory category)
+{
+    std::vector<Module*> ret;
+    for (auto module : modules)
+    {
+        if (module->category == category)
+            ret.push_back(module);
+    }
+    return ret;
+}
+
 // Return value is if the function should continue
 bool CallEvent(ModuleEvent event, CDataPack* dp)
 {

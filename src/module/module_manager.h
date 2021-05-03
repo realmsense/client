@@ -5,6 +5,7 @@
 void LoadModules();
 void UnloadModules();
 std::vector<Module*> GetAllModules();
+std::vector<Module*> GetModules(ModuleCategory category);
 bool CallEvent(ModuleEvent event, CDataPack* dp);
 
 //template<class T>

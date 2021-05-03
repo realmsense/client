@@ -16,7 +16,8 @@ enum class ModuleCategory {
     VIEW,
     MOVEMENT,
     AUTO,
-    OTHER
+    OTHER,
+    Count
 };
 
 enum class ModuleList
