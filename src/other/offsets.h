@@ -1,7 +1,7 @@
 #pragma once
 
 // il2cpp
-#define OFFSET_IL2CPP_STRING_NEW                 0xc0d70        // Il2CppString * il2cpp_string_new(char * str)
+#define OFFSET_IL2CPP_STRING_NEW                 0xc0170        // Il2CppString * il2cpp_string_new(char * str)
 
 // Assembly-CSharp.dll
 #define OFFSET_SOCKET_MANAGER_CONNECT            0x1b68a50      // void SocketManager_1_Connect(SocketManager_1 * this, String * FAEOEJAKJCD, int32_t NDDFJGMCEAI, String * HJLKEICEIGB, String * OJPAJEEOJMC, MethodInfo * method)
