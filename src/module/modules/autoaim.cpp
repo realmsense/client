@@ -30,6 +30,11 @@ void AutoAimModule::onDisable()
     this->log << this->name << " disabled" << std::endl;
 }
 
+void AutoAimModule::renderGUI()
+{
+
+}
+
 bool AutoAimModule::onEvent(ModuleEvent event, CDataPack* dp)
 {
     if (!this->enabled)

@@ -21,6 +21,7 @@ public:
     void toggleModule();
     void toggleModule(bool enabled);
     virtual bool onEvent(ModuleEvent event, CDataPack* dp) = 0;
+    virtual void renderGUI() = 0;
 
 protected:
 

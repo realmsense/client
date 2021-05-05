@@ -11,6 +11,7 @@ public:
 
     void onEnable();
     void onDisable();
+    void renderGUI();
     bool onEvent(ModuleEvent event, CDataPack* dp);
 
 private:

@@ -41,6 +41,11 @@ void NameChangeModule::onDisable()
     this->log << this->name << " disabled" << std::endl;
 }
 
+void NameChangeModule::renderGUI()
+{
+
+}
+
 bool NameChangeModule::onEvent(ModuleEvent event, CDataPack* dp)
 {
     switch (event)

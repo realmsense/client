@@ -505,8 +505,6 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
     // We want main window, containin
 
-    static int bruh = 0;
-
     // view first, other last
     for (int i = 0; i < (int)ModuleCategory::Count; i++)
     {
@@ -518,7 +516,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
         for (auto module : modules)
         {
-            bruh++;
+            if (!module->intialized) continue;
 
             const char* module_name = module->name.c_str();
             ImGui::PushID(module_name);
@@ -526,19 +524,14 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             ImGui::Checkbox("", &module->enabled);
             ImGui::SameLine();
 
-            ImGuiTreeNodeFlags flags = 0;
-            if (bruh % 2 == 0)
-                flags |= ImGuiTreeNodeFlags_Leaf; // no dropdown
-
-            ImGui::CollapsingHeader(module_name, flags);
+            if (ImGui::CollapsingHeader(module_name))
+                module->renderGUI();
 
             ImGui::PopID();
         }
 
         ImGui::End();
     }
-
-    bruh = 0;
 
     //ImGui::End();
 

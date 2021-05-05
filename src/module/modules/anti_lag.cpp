@@ -52,6 +52,11 @@ void AntiLagModule::onDisable()
     this->log << this->name << " disabled" << std::endl;
 }
 
+void AntiLagModule::renderGUI()
+{
+
+}
+
 bool AntiLagModule::onEvent(ModuleEvent event, CDataPack* dp)
 {
     switch (event)

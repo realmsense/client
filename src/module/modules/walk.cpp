@@ -35,6 +35,11 @@ void WalkModule::onDisable()
     g_pPlayer->speed = oldSpeed;
 }
 
+void WalkModule::renderGUI()
+{
+
+}
+
 bool WalkModule::onEvent(ModuleEvent event, CDataPack* dp)
 {
     switch (event)

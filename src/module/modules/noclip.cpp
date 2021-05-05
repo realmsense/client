@@ -31,6 +31,11 @@ void NoclipModule::onDisable()
     this->log << this->name << " disabled" << std::endl;
 }
 
+void NoclipModule::renderGUI()
+{
+
+}
+
 bool NoclipModule::onEvent(ModuleEvent event, CDataPack* dp)
 {
     switch (event)

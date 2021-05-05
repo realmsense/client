@@ -33,6 +33,11 @@ void UnlimitedZoomModule::onDisable()
     this->log << this->name << " disabled" << std::endl;
 }
 
+void UnlimitedZoomModule::renderGUI()
+{
+
+}
+
 bool UnlimitedZoomModule::onEvent(ModuleEvent event, CDataPack* dp)
 {
     switch (event)
