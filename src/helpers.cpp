@@ -52,6 +52,14 @@ uintptr_t FindGameObject(const char* name)
     return gameObject;
 }
 
+uintptr_t FindObjectByQualifiedName(const char* assemblyQualifiedName)
+{
+    String* qualifiedName = il2cpp_string_new(assemblyQualifiedName);
+    uintptr_t type = System_GetType(qualifiedName);
+    uintptr_t obj = Object_FindObjectOfType(type);
+    return obj;
+}
+
 std::vector<uintptr_t> GetChildTransforms(uintptr_t gameObject)
 {
     std::vector<uintptr_t> vec;

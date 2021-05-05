@@ -180,12 +180,10 @@ bool NameChangeModule::GetCharInfoObject()
     if (this->charInfoObj)
         return true; // pointer is persistent
 
-    String* charInfo_QualifiedName = il2cpp_string_new("DecaGames.RotMG.UI.GUI.CharacterInfo, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
-    uintptr_t charInfo_Type = System_GetType(charInfo_QualifiedName);
-    uintptr_t charInfo_Obj = Object_FindObjectOfType(charInfo_Type);
-    if (charInfo_Obj)
+    uintptr_t charInfoObj = FindObjectByQualifiedName("DecaGames.RotMG.UI.GUI.CharacterInfo, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
+    if (charInfoObj)
     {
-        this->charInfoObj = (CharacterInfo_GUI*)charInfo_Obj;
+        this->charInfoObj = (CharacterInfo_GUI*)charInfoObj;
         return true;
     }
 

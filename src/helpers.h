@@ -10,6 +10,7 @@ std::string ReadUnityString(String* str);
 std::string ReadUnityString(uintptr_t addr);
 
 uintptr_t FindGameObject(const char* name);
+uintptr_t FindObjectByQualifiedName(const char* assemblyQualifiedName);
 std::vector<uintptr_t> GetChildTransforms(uintptr_t gameObject);
 std::vector<uintptr_t> FindChildTransforms(uintptr_t parentTransform, std::vector<std::string> names);
 

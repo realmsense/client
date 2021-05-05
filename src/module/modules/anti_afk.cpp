@@ -63,14 +63,9 @@ bool AntiAfkModule::GetIdleWatcher()
     if (this->idleWatcherObj)
         return true;
 
-    String* idleWatcher_QualifiedName = il2cpp_string_new("DecaGames.RotMG.Managers.Services.IdleWatcher, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
-    uintptr_t idleWatcher_Type = System_GetType(idleWatcher_QualifiedName);
-    uintptr_t idleWatcher_Obj = Object_FindObjectOfType(idleWatcher_Type);
-    if (idleWatcher_Obj)
-    {
-        this->idleWatcherObj = (uintptr_t)idleWatcher_Obj; // pointer??
+    this->idleWatcherObj = FindObjectByQualifiedName("DecaGames.RotMG.Managers.Services.IdleWatcher, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
+    if (this->idleWatcherObj)
         return true;
-    }
 
     return false;
 }
