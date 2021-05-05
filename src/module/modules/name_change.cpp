@@ -43,7 +43,23 @@ void NameChangeModule::onDisable()
 
 void NameChangeModule::renderGUI()
 {
+    static char customPlayerName[128] = "";
+    if (ImGui::InputText("Custom Player Name", customPlayerName, IM_ARRAYSIZE(customPlayerName)))
+        this->ChangePlayerName(customPlayerName);
 
+    if (ImGui::Checkbox("Rainbow Name", &this->rainbowText))
+    {
+        if (!this->rainbowText)
+        {
+            // Reset name back to white text
+            Color white{ 1.0f, 1.0f, 1.0f, 1.0f };
+            this->ChangeNameColor(white);
+        }
+    }
+
+    static char customGuildName[128] = "";
+    if (ImGui::InputText("Custom Guild Name", customGuildName, IM_ARRAYSIZE(customGuildName)))
+        this->ChangeGuildName(customGuildName);
 }
 
 bool NameChangeModule::onEvent(ModuleEvent event, CDataPack* dp)
@@ -121,7 +137,6 @@ void NameChangeModule::ChangeNameColor(Color color)
         return;
 
     uintptr_t accountName = (uintptr_t)this->charInfoObj->accountName_TMP;
-    std::cout << std::hex << accountName << std::endl;
     TMPText_SetColor(accountName, color);
 }
 
@@ -143,7 +158,8 @@ void NameChangeModule::ChangePlayerName(const char* name)
     String* str = il2cpp_string_new(name);
     TMPText_SetText(accountName_TMP, str, true);
 
-    std::cout << "[" << this->name << "] Changed player name to: " << name << std::endl;
+    this->log.floatingText = false;
+    this->log << "[" << this->name << "] Changed player name to: " << name << std::endl;
 }
 
 void NameChangeModule::ChangeGuildName(const char* name)
@@ -172,7 +188,9 @@ void NameChangeModule::ChangeGuildName(const char* name)
     bool showGuildName = strlen(this->customGuildName) != 0;
     GameObject_SetActive(guildInfo_Obj, showGuildName);
     GameObject_SetActive(guildName_Obj, showGuildName);
-    std::cout << "[" << this->name << "] Changed guild name to: " << name << std::endl;
+
+    this->log.floatingText = false;
+    this->log << "[" << this->name << "] Changed guild name to: " << name << std::endl;
 }
 
 bool NameChangeModule::GetCharInfoObject()

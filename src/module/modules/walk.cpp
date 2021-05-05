@@ -2,6 +2,7 @@
 #include "../module.h"
 #include "../module_manager.h"
 
+#include "imgui/imgui.h"
 #include "Walk.h"
 
 WalkModule::WalkModule()
@@ -37,7 +38,7 @@ void WalkModule::onDisable()
 
 void WalkModule::renderGUI()
 {
-
+    ImGui::SliderFloat("Walk Modifier", &this->walkModifier, 1.0f, 10.0f);
 }
 
 bool WalkModule::onEvent(ModuleEvent event, CDataPack* dp)

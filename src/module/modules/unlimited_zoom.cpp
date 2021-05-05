@@ -2,6 +2,7 @@
 #include "../module.h"
 #include "../module_manager.h"
 
+#include "imgui/imgui.h"
 #include "unlimited_zoom.h"
 
 UnlimitedZoomModule::UnlimitedZoomModule()
@@ -35,7 +36,11 @@ void UnlimitedZoomModule::onDisable()
 
 void UnlimitedZoomModule::renderGUI()
 {
+    if (ImGui::SliderFloat("Zoom Amount", &this->zoomAmount, 0.0f, 20.0f))
+        this->Zoom(this->zoomAmount);
 
+    if (ImGui::Checkbox("Perspective Editor", &this->perspectiveEditorEnabled))
+        this->TogglePerspectiveEditor(this->perspectiveEditorEnabled);
 }
 
 bool UnlimitedZoomModule::onEvent(ModuleEvent event, CDataPack* dp)
@@ -59,6 +64,7 @@ bool UnlimitedZoomModule::onCameraManagerUpdate()
 
 void UnlimitedZoomModule::Zoom(float amount)
 {
+    // TODO: GetObjectByType
     if (!g_pMainCamera)
     {
         std::cout << "[" << this->name << "] g_pMainCamera is nullptr!" << std::endl;

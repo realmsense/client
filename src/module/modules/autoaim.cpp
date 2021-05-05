@@ -2,6 +2,7 @@
 #include "../module.h"
 #include "../module_manager.h"
 
+#include "imgui/imgui.h"
 #include "AutoAim.h"
 
 AutoAimModule::AutoAimModule()
@@ -32,7 +33,22 @@ void AutoAimModule::onDisable()
 
 void AutoAimModule::renderGUI()
 {
+    const char* aim_targets[] =
+    {
+        "Closest to Mouse",     // AutoAimTarget::ClosestMouse
+        "Closest to Player",    // AutoAimTarget::ClosestPos
+        "Highest Defense",      // AutoAimTarget::HighestDef
+        "Highest Max HP (Boss)" // AutoAimTarget::HighestMaxHP
+    };
 
+    static int selected_target = 1;
+    ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing() * strlen(aim_targets[3]) / 2); // set width to the widest string
+    if (ImGui::Combo("Auto Aim Target", &selected_target, aim_targets, IM_ARRAYSIZE(aim_targets), IM_ARRAYSIZE(aim_targets)))
+    {
+        this->target = AutoAimTarget(selected_target);
+        this->log.floatingText = false;
+        this->log << "Auto Aim Target: " << aim_targets[selected_target] << std::endl;
+    }
 }
 
 bool AutoAimModule::onEvent(ModuleEvent event, CDataPack* dp)

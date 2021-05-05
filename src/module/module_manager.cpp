@@ -23,6 +23,7 @@ void LoadModules()
     
     // Other
     modules.push_back(new AntiAfkModule());
+    modules.push_back(new NameChangeModule());
 }
 
 void UnloadModules()

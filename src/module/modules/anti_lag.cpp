@@ -2,6 +2,7 @@
 #include "../module.h"
 #include "../module_manager.h"
 
+#include "imgui/imgui.h"
 #include <chrono>
 #include <thread>
 #include <future>
@@ -54,7 +55,39 @@ void AntiLagModule::onDisable()
 
 void AntiLagModule::renderGUI()
 {
+    ImGui::SliderFloat("Player Size", &this->playerSize, 0.0f, 1.0f);
+    if (ImGui::IsItemDeactivatedAfterEdit()) // Only update transforms after the slider is released, to prevent the game crashing from too many updates
+        this->ResizePlayers(this->playerSize);
 
+    if (ImGui::Checkbox("Hide Tiles", &this->hideTiles))
+        this->HideTiles(this->hideTiles);
+
+    // use FindObjectsByType and resize all transforms
+    //ImGui::Checkbox("Hide Pets")
+
+    if (ImGui::Checkbox("Unlimited FPS", &this->unlimitedFPS))
+        this->ToggleUnlimitedFPS(this->unlimitedFPS);
+
+    if (ImGui::Checkbox("Show FPS", &this->showFPS))
+        this->ShowFPS(this->showFPS);
+
+    const char* fullscreen_modes[] =
+    {
+        "Exclusive Fullscreen",
+        "Fullscreen Windowed",
+        "Maximized Window",
+        "Windowed"
+    };
+
+    this->fullscreenMode = 1;
+
+    ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing() * strlen(fullscreen_modes[0]) / 2); // set width to the widest string
+    if (ImGui::Combo("Fullscreen Mode", &this->fullscreenMode, fullscreen_modes, IM_ARRAYSIZE(fullscreen_modes), IM_ARRAYSIZE(fullscreen_modes)))
+    {
+        this->SetFullscreenMode(this->fullscreenMode);
+        this->log.floatingText = true;
+        this->log << "Fullscreen Mode set to: " << fullscreen_modes[this->fullscreenMode] << std::endl;
+    }
 }
 
 bool AntiLagModule::onEvent(ModuleEvent event, CDataPack* dp)
@@ -115,9 +148,12 @@ void AntiLagModule::ResizePlayers(float scale)
     }
 
     // Reset our player's size
-    Vector3 newScale = { 1.0f, 1.0f, 1.0f };
-    uintptr_t viewTransform = (uintptr_t)g_pPlayer->viewHandler->viewTransform;
-    ResizeCharacter(viewTransform, newScale);
+    if (g_pPlayer)
+    {
+        Vector3 newScale = { 1.0f, 1.0f, 1.0f };
+        uintptr_t viewTransform = (uintptr_t)g_pPlayer->viewHandler->viewTransform;
+        ResizeCharacter(viewTransform, newScale);
+    }
 }
 
 void AntiLagModule::HideTiles(bool hide)

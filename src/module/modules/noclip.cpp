@@ -2,6 +2,8 @@
 #include "../module.h"
 #include "../module_manager.h"
 
+#include "imgui/imgui.h"
+
 #include "noclip.h"
 
 NoclipModule::NoclipModule()
@@ -33,7 +35,7 @@ void NoclipModule::onDisable()
 
 void NoclipModule::renderGUI()
 {
-
+    
 }
 
 bool NoclipModule::onEvent(ModuleEvent event, CDataPack* dp)
