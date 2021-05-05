@@ -8,6 +8,7 @@ public:
 
     std::string name;
     bool enabled;
+    bool intialized;
     ModuleList type;
     ModuleCategory category;
     ModuleLogger log;
@@ -15,6 +16,7 @@ public:
 
     Module();
 
+    void ready();
     void setEnabled(bool enabled, bool callHandlers);
     void toggleModule();
     void toggleModule(bool enabled);

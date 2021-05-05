@@ -13,6 +13,7 @@ AntiAfkModule::AntiAfkModule()
     this->category = ModuleCategory::OTHER;
 
     this->idleWatcherObj = 0;
+    this->ready();
 }
 
 void AntiAfkModule::onEnable()

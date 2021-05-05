@@ -15,6 +15,8 @@ UnlimitedZoomModule::UnlimitedZoomModule()
     this->zoomAmount = 7.2f;
     this->perspectiveEditorEnabled = false;
     this->cameraPerspectiveEditor = 0;
+
+    this->ready();
 }
 
 void UnlimitedZoomModule::onEnable()

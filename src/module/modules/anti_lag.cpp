@@ -34,6 +34,8 @@ AntiLagModule::AntiLagModule()
     this->hidePets = false;
     this->showFPS = false;
     this->unlimitedFPS = false;
+
+    this->ready();
 }
 
 void AntiLagModule::onEnable()

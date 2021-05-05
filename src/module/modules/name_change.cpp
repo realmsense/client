@@ -23,6 +23,8 @@ NameChangeModule::NameChangeModule()
     Color white{ 1.0f, 1.0f, 1.0f, 1.0f };
     this->rainbowText = false;
     this->nameColor = white;
+
+    this->ready();
 }
 
 void NameChangeModule::onEnable()

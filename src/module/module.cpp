@@ -3,19 +3,17 @@
 #include "module_list.h"
 #include "module_logger.h"
 
-
 Module::Module()
 {
-    // set in parent ctor
-    //this->name = name;
-    //this->enabled = enabled;
-    //this->category = category;
-    //this->log = ModuleLogger();
+    this->intialized = false;
+    this->log = ModuleLogger();
+}
 
-    this->log.floatingText = true;
+void Module::ready()
+{
+    this->log.floatingText = false;
     this->log << "Loaded Module: " << this->name << std::endl;
-
-    //std::cout << "Loaded Module: " << this->name << std::endl;
+    this->intialized = true;
 }
 
 void Module::toggleModule()

@@ -13,6 +13,8 @@ NoclipModule::NoclipModule()
     this->category = ModuleCategory::MOVEMENT;
 
     this->noclipSpeed = 1.0f;
+
+    this->ready();
 }
 
 void NoclipModule::onEnable()

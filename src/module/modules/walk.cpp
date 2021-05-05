@@ -14,6 +14,8 @@ WalkModule::WalkModule()
 
     this->oldSpeed = 0.0f;
     this->walkModifier = 2.0f;
+
+    this->ready();
 }
 
 void WalkModule::onEnable()
