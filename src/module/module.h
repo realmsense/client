@@ -9,6 +9,7 @@ public:
     std::string name;
     bool enabled;
     bool intialized;
+    bool hasGuiElements;
     ModuleList type;
     ModuleCategory category;
     ModuleLogger log;

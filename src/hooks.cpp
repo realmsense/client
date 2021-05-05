@@ -197,83 +197,83 @@ bool InitHooks()
 {
     MH_Initialize();
 
-    // TODO: Use sig scan here
+    //// TODO: Use sig scan here
     void* UnityThread_Update = (void*)(g_pBaseAddress + OFFSET_UNITYTHREAD_UPDATE);
     if (MH_CreateHook(UnityThread_Update, Detour_UnityThread_Update, reinterpret_cast<LPVOID*>(&Original_UnityThread_Update)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour UnityThread_Update", "RotMGInternal", MB_OK);
         return false;
     }
-
+    
     void* PlayerUpdate = (void*)(g_pBaseAddress + OFFSET_PLAYER_UPDATE);
     if (MH_CreateHook(PlayerUpdate, Detour_PlayerUpdate, reinterpret_cast<LPVOID*>(&Original_PlayerUpdate)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour PlayerUpdate", "RotMGInternal", MB_OK);
         return false;
     }
-
-    void* EntityUpdate = (void*)(g_pBaseAddress + OFFSET_ENTITY_UPDATE);
-    if (MH_CreateHook(EntityUpdate, Detour_EntityUpdate, reinterpret_cast<LPVOID*>(&Original_EntityUpdate)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour EntityUpdate", "RotMG Internal", MB_OK);
-        return 1;
-    }
-
-    void* SpriteRenderer_SetColor = (void*)(g_pBaseAddress + OFFSET_SPRITE_SET_COLOR);
-    if (MH_CreateHook(SpriteRenderer_SetColor, Detour_Tile_SetColor, reinterpret_cast<LPVOID*>(&Original_Tile_SetColor)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour SpriteRenderer_SetColor", "RotMGInternal", MB_OK);
-        return false;
-    }
-
-    void* CameraManager_Update = (void*)(g_pBaseAddress + OFFSET_CAMERAMANAGER_UPDATE);
-    if (MH_CreateHook(CameraManager_Update, Detour_CameraManager_Update, reinterpret_cast<LPVOID*>(&Original_CameraManager_Update)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour CameraManager_Update", "RotMG Internal", MB_OK);
-        return 1;
-    }
-
-    void* Input_GetMousePos = (void*)(g_pBaseAddress + OFFSET_GET_MOUSEPOS);
-    if (MH_CreateHook(Input_GetMousePos, Detour_Input_GetMousePos, reinterpret_cast<LPVOID*>(&Original_Input_GetMousePos)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour Input_GetMousePos", "RotMG Internal", MB_OK);
-        return 1;
-    }
-
-    //void* PetUpdate = (void*)(g_pBaseAddress + OFFSET_PET_UPDATE);
-    //if (MH_CreateHook(PetUpdate, Detour_PetUpdate, reinterpret_cast<LPVOID*>(&Original_PetUpdate)) != MH_OK)
+    
+    //void* EntityUpdate = (void*)(g_pBaseAddress + OFFSET_ENTITY_UPDATE);
+    //if (MH_CreateHook(EntityUpdate, Detour_EntityUpdate, reinterpret_cast<LPVOID*>(&Original_EntityUpdate)) != MH_OK)
     //{
-    //    MessageBoxA(NULL, "Failed to Detour PetUpdate", "RotMG Internal", MB_OK);
+    //    MessageBoxA(NULL, "Failed to Detour EntityUpdate", "RotMG Internal", MB_OK);
     //    return 1;
     //}
-
-    void* SocketManager_Connect = (void*)(g_pBaseAddress + OFFSET_SOCKET_MANAGER_CONNECT);
-    if (MH_CreateHook(SocketManager_Connect, Detour_SocketManager_Connect, reinterpret_cast<LPVOID*>(&Original_SocketManager_Connect)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour SocketManager_Connect", "RotMG Internal", MB_OK);
-        return 1;
-    }
-
-    void* TMP_Text_SetText_Internal = (void*)(g_pBaseAddress + OFFSET_TMP_TEXT_SET_TEXT_INTERNAL);
-    if (MH_CreateHook(TMP_Text_SetText_Internal, Detour_TMP_Text_SetText_Internal, reinterpret_cast<LPVOID*>(&Original_TMP_Text_SetText_Internal)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour TMP_Text_SetText_Internal", "RotMG Internal", MB_OK);
-        return 1;
-    }
-
-    void* Input_GetKeyDown = (void*)(g_pBaseAddress + OFFSET_GET_KEY_DOWN);
-    if (MH_CreateHook(Input_GetKeyDown, Detour_Input_GetKeyDown, reinterpret_cast<LPVOID*>(&Original_Input_GetKeyDown)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour Input_GetKeyDown", "RotMG Internal", MB_OK);
-        return 1;
-    }
-
-    void* Input_GetKey = (void*)(g_pBaseAddress + OFFSET_GET_KEY);
-    if (MH_CreateHook(Input_GetKey, Detour_Input_GetKey, reinterpret_cast<LPVOID*>(&Original_Input_GetKey)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour Input_GetKey", "RotMG Internal", MB_OK);
-        return 1;
-    }
+    //
+    //void* SpriteRenderer_SetColor = (void*)(g_pBaseAddress + OFFSET_SPRITE_SET_COLOR);
+    //if (MH_CreateHook(SpriteRenderer_SetColor, Detour_Tile_SetColor, reinterpret_cast<LPVOID*>(&Original_Tile_SetColor)) != MH_OK)
+    //{
+    //    MessageBoxA(NULL, "Failed to Detour SpriteRenderer_SetColor", "RotMGInternal", MB_OK);
+    //    return false;
+    //}
+    //
+    //void* CameraManager_Update = (void*)(g_pBaseAddress + OFFSET_CAMERAMANAGER_UPDATE);
+    //if (MH_CreateHook(CameraManager_Update, Detour_CameraManager_Update, reinterpret_cast<LPVOID*>(&Original_CameraManager_Update)) != MH_OK)
+    //{
+    //    MessageBoxA(NULL, "Failed to Detour CameraManager_Update", "RotMG Internal", MB_OK);
+    //    return 1;
+    //}
+    //
+    //void* Input_GetMousePos = (void*)(g_pBaseAddress + OFFSET_GET_MOUSEPOS);
+    //if (MH_CreateHook(Input_GetMousePos, Detour_Input_GetMousePos, reinterpret_cast<LPVOID*>(&Original_Input_GetMousePos)) != MH_OK)
+    //{
+    //    MessageBoxA(NULL, "Failed to Detour Input_GetMousePos", "RotMG Internal", MB_OK);
+    //    return 1;
+    //}
+    //
+    ////void* PetUpdate = (void*)(g_pBaseAddress + OFFSET_PET_UPDATE);
+    ////if (MH_CreateHook(PetUpdate, Detour_PetUpdate, reinterpret_cast<LPVOID*>(&Original_PetUpdate)) != MH_OK)
+    ////{
+    ////    MessageBoxA(NULL, "Failed to Detour PetUpdate", "RotMG Internal", MB_OK);
+    ////    return 1;
+    ////}
+    //
+    //void* SocketManager_Connect = (void*)(g_pBaseAddress + OFFSET_SOCKET_MANAGER_CONNECT);
+    //if (MH_CreateHook(SocketManager_Connect, Detour_SocketManager_Connect, reinterpret_cast<LPVOID*>(&Original_SocketManager_Connect)) != MH_OK)
+    //{
+    //    MessageBoxA(NULL, "Failed to Detour SocketManager_Connect", "RotMG Internal", MB_OK);
+    //    return 1;
+    //}
+    //
+    //void* TMP_Text_SetText_Internal = (void*)(g_pBaseAddress + OFFSET_TMP_TEXT_SET_TEXT_INTERNAL);
+    //if (MH_CreateHook(TMP_Text_SetText_Internal, Detour_TMP_Text_SetText_Internal, reinterpret_cast<LPVOID*>(&Original_TMP_Text_SetText_Internal)) != MH_OK)
+    //{
+    //    MessageBoxA(NULL, "Failed to Detour TMP_Text_SetText_Internal", "RotMG Internal", MB_OK);
+    //    return 1;
+    //}
+    //
+    //void* Input_GetKeyDown = (void*)(g_pBaseAddress + OFFSET_GET_KEY_DOWN);
+    //if (MH_CreateHook(Input_GetKeyDown, Detour_Input_GetKeyDown, reinterpret_cast<LPVOID*>(&Original_Input_GetKeyDown)) != MH_OK)
+    //{
+    //    MessageBoxA(NULL, "Failed to Detour Input_GetKeyDown", "RotMG Internal", MB_OK);
+    //    return 1;
+    //}
+    //
+    //void* Input_GetKey = (void*)(g_pBaseAddress + OFFSET_GET_KEY);
+    //if (MH_CreateHook(Input_GetKey, Detour_Input_GetKey, reinterpret_cast<LPVOID*>(&Original_Input_GetKey)) != MH_OK)
+    //{
+    //    MessageBoxA(NULL, "Failed to Detour Input_GetKey", "RotMG Internal", MB_OK);
+    //    return 1;
+    //}
 
     if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)
     {

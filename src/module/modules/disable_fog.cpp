@@ -11,6 +11,7 @@ DisableFogModule::DisableFogModule()
     this->enabled = false;
     this->type = ModuleList::DisableFogModule;
     this->category = ModuleCategory::VIEW;
+    this->hasGuiElements = false;
 
     this->ready();
 }

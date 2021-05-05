@@ -12,6 +12,7 @@ WalkModule::WalkModule()
     this->enabled = false;
     this->type = ModuleList::WalkModule;
     this->category = ModuleCategory::MOVEMENT;
+    this->hasGuiElements = true;
 
     this->oldSpeed = 0.0f;
     this->walkModifier = 2.0f;

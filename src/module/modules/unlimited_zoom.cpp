@@ -12,6 +12,7 @@ UnlimitedZoomModule::UnlimitedZoomModule()
     this->enabled = false;
     this->type = ModuleList::UnlimitedZoom;
     this->category = ModuleCategory::VIEW;
+    this->hasGuiElements = true;
 
     this->zoomAmount = 7.2f;
     this->perspectiveEditorEnabled = false;

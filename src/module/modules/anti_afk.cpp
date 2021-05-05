@@ -11,6 +11,7 @@ AntiAfkModule::AntiAfkModule()
     this->enabled = false;
     this->type = ModuleList::AntiAFK;
     this->category = ModuleCategory::OTHER;
+    this->hasGuiElements = false;
 
     this->idleWatcherObj = 0;
     this->ready();

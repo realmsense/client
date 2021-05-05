@@ -29,6 +29,7 @@ AntiLagModule::AntiLagModule()
     this->enabled = false;
     this->type = ModuleList::AntiLag;
     this->category = ModuleCategory::VIEW;
+    this->hasGuiElements = true;
 
     this->playerSize = 1.0f;
     this->hideTiles = false;

@@ -527,11 +527,19 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             const ImVec2 checkboxSize = ImGui::GetItemRectSize();
 
             ImGui::SameLine();
-            if (ImGui::CollapsingHeader(module_name))
+
+            if (!module->hasGuiElements)
             {
-                ImGui::Indent(checkboxSize.x + 5.0f);
-                module->renderGUI();
-                ImGui::Unindent(checkboxSize.x + 5.0f);
+                ImGui::CollapsingHeader(module_name, ImGuiTreeNodeFlags_Leaf);
+            }
+            else
+            {
+                if (ImGui::CollapsingHeader(module_name))
+                {
+                    ImGui::Indent(checkboxSize.x + 5.0f);
+                    module->renderGUI();
+                    ImGui::Unindent(checkboxSize.x + 5.0f);
+                }
             }
 
             ImGui::PopID();

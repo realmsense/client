@@ -12,6 +12,7 @@ AutoAimModule::AutoAimModule()
     this->enabled = false;
     this->type = ModuleList::AutoAimModule;
     this->category = ModuleCategory::AUTO;
+    this->hasGuiElements = true;
 
     this->target = AutoAimTarget::ClosestMouse;
     this->ready();

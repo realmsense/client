@@ -12,6 +12,7 @@ NameChangeModule::NameChangeModule()
     this->enabled = false;
     this->type = ModuleList::NameChange;
     this->category = ModuleCategory::OTHER;
+    this->hasGuiElements = true;
 
     this->charInfoObj = 0;
 

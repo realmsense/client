@@ -41,7 +41,13 @@ DWORD WINAPI MainThread(HMODULE hModule)
 
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
+            uintptr_t obj = FindObjectByQualifiedName("CharacterGUIInfoSection, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+            std::cout << std::hex << obj << std::endl;
 
+            //String* player_QualifiedName = il2cpp_string_new("JFNHHLNJJKP, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+            //uintptr_t player_Type = System_GetType(player_QualifiedName);
+            //uintptr_t player_Obj = Object_FindObjectOfType(player_Type);
+            //std::cout << std::hex << player_Obj << std::endl;
         }
 
         if (GetAsyncKeyState(VK_DELETE) & 1)

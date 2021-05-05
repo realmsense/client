@@ -13,6 +13,7 @@ NoclipModule::NoclipModule()
     this->enabled = false;
     this->type = ModuleList::NoclipModule;
     this->category = ModuleCategory::MOVEMENT;
+    this->hasGuiElements = false;
 
     this->noclipSpeed = 1.0f;
 
