@@ -240,12 +240,12 @@ bool InitHooks()
         return 1;
     }
 
-    void* PetUpdate = (void*)(g_pBaseAddress + OFFSET_PET_UPDATE);
-    if (MH_CreateHook(PetUpdate, Detour_PetUpdate, reinterpret_cast<LPVOID*>(&Original_PetUpdate)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour PetUpdate", "RotMG Internal", MB_OK);
-        return 1;
-    }
+    //void* PetUpdate = (void*)(g_pBaseAddress + OFFSET_PET_UPDATE);
+    //if (MH_CreateHook(PetUpdate, Detour_PetUpdate, reinterpret_cast<LPVOID*>(&Original_PetUpdate)) != MH_OK)
+    //{
+    //    MessageBoxA(NULL, "Failed to Detour PetUpdate", "RotMG Internal", MB_OK);
+    //    return 1;
+    //}
 
     void* SocketManager_Connect = (void*)(g_pBaseAddress + OFFSET_SOCKET_MANAGER_CONNECT);
     if (MH_CreateHook(SocketManager_Connect, Detour_SocketManager_Connect, reinterpret_cast<LPVOID*>(&Original_SocketManager_Connect)) != MH_OK)
