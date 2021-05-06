@@ -24,6 +24,9 @@ typedef void* (__cdecl* _UnityThread_Update)(uintptr_t __this);                 
 typedef void* (__cdecl* _PlayerUpdate)(Entity __this);                                                      // OFFSET_PLAYER_UPDATE
 typedef void* (__cdecl* _EntityUpdate)(Entity entity);                                                      // OFFSET_ENTITY_UPDATE
 typedef void* (__cdecl* _PetUpdate)(Entity pet, bool AMKOONDPFBD);                                          // OFFSET_PET_UPDATE
+typedef void  (__cdecl* _Map_ViewHelper_Update)(uintptr_t __this, int gameOpenTimeMS);                      // OFFSET_MAP_VIEWHELPER_UPDATE
+typedef void(__cdecl* _DisableFog)(uintptr_t FJBJOOHPBDL);                                                  // OFFSET_DISABLE_FOG
+typedef void(__cdecl* _EnableFog)(uintptr_t FJBJOOHPBDL);                                                   // OFFSET_ENABLE_FOG
 
 // mscorlib.dll
 typedef uintptr_t(__cdecl* _System_GetType)(String* assemblyQualifiedName);                                 // OFFSET_SYSTEM_GET_TYPE
@@ -51,7 +54,6 @@ typedef Vector3(__cdecl* _Transform_get_position)(uintptr_t transform);         
 typedef void(__cdecl* _Transform_set_position)(uintptr_t transform, Vector3 scale);                         // OFFSET_TRANSFORM_SET_POSITION
 typedef Vector3(__cdecl* _Transform_get_localScale)(uintptr_t transform);                                   // OFFSET_TRANSFORM_GET_LOCAL_SCALE
 typedef void(__cdecl* _Transform_set_localScale)(uintptr_t transform, Vector3 scale);                       // OFFSET_TRANSFORM_SET_LOCAL_SCALE
-typedef void* (__cdecl* _TileSetColor)(uintptr_t __this, Color value);                                      // OFFSET_SPRITE_SET_COLOR
 typedef void(__cdecl* _SetVsync)(int value);                                                                // OFFSET_SET_VSYNC
 typedef void(__cdecl* _SetFpsTarget)(int value);                                                            // OFFSET_SET_FPS_TARGET 
 

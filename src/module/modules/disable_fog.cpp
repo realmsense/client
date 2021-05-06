@@ -18,16 +18,24 @@ DisableFogModule::DisableFogModule()
 
 void DisableFogModule::onEnable()
 {
+    if (!g_pMapViewHelper)
+        return;
+
     this->log.color = Color32_GREEN;
     this->log.floatingText = true;
     this->log << this->name << " enabled" << std::endl;
+    DisableFog(g_pMapViewHelper);
 }
 
 void DisableFogModule::onDisable()
 {
+    if (!g_pMapViewHelper)
+        return;
+
     this->log.color = Color32_RED;
     this->log.floatingText = true;
     this->log << this->name << " disabled" << std::endl;
+    EnableFog(g_pMapViewHelper);
 }
 
 void DisableFogModule::renderGUI()
@@ -39,28 +47,25 @@ bool DisableFogModule::onEvent(ModuleEvent event, CDataPack* dp)
 {
     switch (event)
     {
-    case ModuleEvent::Tile_SetColor:
-        return this->onTileSetColor(dp);
+    case ModuleEvent::MainLoop:
+        this->onMainLoop();
     default:
         return true;
     }
 }
 
-bool DisableFogModule::onTileSetColor(CDataPack* dp)
+
+bool DisableFogModule::onMainLoop()
 {
-    if (!this->enabled)
-        return true;
+    static uintptr_t old_MapViewHelper = 0;
 
-    Color color;
-    dp->Reset();
-    color.r = dp->ReadFloat();
-    color.g = dp->ReadFloat();
-    color.b = dp->ReadFloat();
-    color.a = dp->ReadFloat();
+    if (old_MapViewHelper != g_pMapViewHelper)
+    {
+        if (this->enabled)
+            this->onEnable();
+        // no need to call onDisable, as fog is disabled by default.
+    }
 
-    // Don't change the tile's color if it is being darkened
-    if (color.r != 1 || color.g != 1 || color.b != 1 || color.a != 1)
-        return false;
-
+    old_MapViewHelper = g_pMapViewHelper;
     return true;
 }

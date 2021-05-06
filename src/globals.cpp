@@ -7,10 +7,13 @@ Entity* g_pPlayer;
 uintptr_t g_pMainCamera;
 uintptr_t g_pCameraManager;
 uintptr_t g_pIdleWatcher;
+uintptr_t g_pMapViewHelper;
 
 // Functions
 _System_GetType System_GetType;
 _il2cpp_string_new il2cpp_string_new;
+_DisableFog DisableFog;
+_EnableFog EnableFog;
 _TMPText_SetText TMPText_SetText;
 _TMPText_SetColor TMPText_SetColor;
 _Screen_GetFullscreenMode Screen_GetFullscreenMode;
@@ -63,6 +66,8 @@ void InitPointers()
 
     System_GetType = (_System_GetType)(g_pBaseAddress + OFFSET_SYSTEM_GET_TYPE);
     il2cpp_string_new = (_il2cpp_string_new)(g_pBaseAddress + OFFSET_IL2CPP_STRING_NEW);
+    DisableFog = (_DisableFog)(g_pBaseAddress + OFFSET_DISABLE_FOG);
+    EnableFog = (_EnableFog)(g_pBaseAddress + OFFSET_ENABLE_FOG);
     TMPText_SetText = (_TMPText_SetText)(g_pBaseAddress + OFFSET_TMP_TEXT_SET_TEXT);
     TMPText_SetColor = (_TMPText_SetColor)(g_pBaseAddress + OFFSET_TMP_TEXT_SET_COLOR);
     Screen_GetFullscreenMode = (_Screen_GetFullscreenMode)(g_pBaseAddress + OFFSET_SCREEN_GET_FULLSCREEN_MODE);

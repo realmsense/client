@@ -11,10 +11,13 @@ extern Entity* g_pPlayer;
 extern uintptr_t g_pMainCamera;
 extern uintptr_t g_pCameraManager;
 extern uintptr_t g_pIdleWatcher;
+extern uintptr_t g_pMapViewHelper;
 
 // Functions
 extern _System_GetType System_GetType;
 extern _il2cpp_string_new il2cpp_string_new;
+extern _DisableFog DisableFog;
+extern _EnableFog EnableFog;
 extern _TMPText_SetText TMPText_SetText;
 extern _TMPText_SetColor TMPText_SetColor;
 extern _Screen_GetFullscreenMode Screen_GetFullscreenMode;

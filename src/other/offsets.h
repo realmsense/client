@@ -8,6 +8,9 @@
 #define OFFSET_CAMERAMANAGER_UPDATE              0x16230e0      // void CameraManager_Update(CameraManager * this, MethodInfo * method)
 #define OFFSET_SHOW_FLOATING_TEXT                0x1a87870      // void MapObjectUIManager_ShowFloatingText_1(MapObjectUIManager * this, CLEPBEMBHAJ__Enum DBMPDNFHFNL, String * OBEFKMANGCK, Nullable_1_UnityEngine_Color32_ HNDHLEHECGE, float MPNAHCHFHMD, MethodInfo * method)
 #define OFFSET_UNITYTHREAD_UPDATE                0x241ccf0      // void UnityThread_Update(UnityThread * this, MethodInfo * method)
+#define OFFSET_MAP_VIEWHELPER_UPDATE             0x1aed960      // void FJBJOOHPBDL_CFJPIMCKPHI(FJBJOOHPBDL * this, int32_t EGHLCCGKEDH, MethodInfo * method)
+#define OFFSET_DISABLE_FOG                       0x1ae90e0      // void FJBJOOHPBDL_ABGIDOJPCFN(FJBJOOHPBDL * this, MethodInfo * method)
+#define OFFSET_ENABLE_FOG                        0x1b064b0      // void FJBJOOHPBDL_MAEKPBAECML(FJBJOOHPBDL * this, MethodInfo * method)
 
 // TODO: use FindObjectsByType
 #define OFFSET_PLAYER_UPDATE                    0x17528a0    // JFNHHLNJJKP.JJCAKPHMLKD - Random method that runs every tick to get player
@@ -42,7 +45,6 @@
 #define OFFSET_TRANSFORM_SET_POSITION            0xd4f500       // void Transform_set_position(Transform * this, Vector3 value, MethodInfo * method)
 #define OFFSET_TRANSFORM_GET_LOCAL_SCALE         0xd4eac0       // Vector3 Transform_get_localScale(Transform * this, MethodInfo * method)
 #define OFFSET_TRANSFORM_SET_LOCAL_SCALE         0xd4f3b0       // void Transform_set_localScale(Transform * this, Vector3 value, MethodInfo * method)
-#define OFFSET_SPRITE_SET_COLOR                  0xd46290       // void SpriteRenderer_set_color(SpriteRenderer * this, Color value, MethodInfo * method)
 #define OFFSET_SET_VSYNC                         0xec97d0       // void QualitySettings_set_vSyncCount(int32_t value, MethodInfo * method)
 #define OFFSET_SET_FPS_TARGET                    0xe0b6e0       // void Application_set_targetFrameRate(int32_t value, MethodInfo * method)
 

@@ -13,5 +13,5 @@ public:
     bool onEvent(ModuleEvent event, CDataPack* dp);
 
 private:
-    bool onTileSetColor(CDataPack* dp);
+    bool onMainLoop();
 };

@@ -49,26 +49,6 @@ void* Detour_EntityUpdate(Entity entity)
     return Original_EntityUpdate(entity);
 }
 
-_TileSetColor Original_Tile_SetColor = nullptr;
-void* Detour_Tile_SetColor(uintptr_t __this, Color value)
-{
-    CDataPack dp;
-    dp.PackFloat(value.r);
-    dp.PackFloat(value.g);
-    dp.PackFloat(value.b);
-    dp.PackFloat(value.a);
-
-    if (!CallEvent(ModuleEvent::Tile_SetColor, &dp))
-        return nullptr;
-
-    dp.Reset();
-    value.r = dp.ReadFloat();
-    value.g = dp.ReadFloat();
-    value.b = dp.ReadFloat();
-    value.a = dp.ReadFloat();
-    return Original_Tile_SetColor(__this, value);
-}
-
 _CameraManagerUpdate Original_CameraManager_Update = nullptr;
 void* Detour_CameraManager_Update(uintptr_t cameraManager)
 {
@@ -193,11 +173,18 @@ bool Detour_Input_GetKeyDown(void* keyCode)
         return Original_Input_GetKeyDown(keyCode);
 }
 
+_Map_ViewHelper_Update Original_Map_ViewHelper_Update = nullptr;
+void Detour_Map_ViewHelper_Update(uintptr_t __this, int gameOpenTimeMS)
+{
+    g_pMapViewHelper = __this;
+    return Original_Map_ViewHelper_Update(__this, gameOpenTimeMS);
+}
+
 bool InitHooks()
 {
     MH_Initialize();
 
-    //// TODO: Use sig scan here
+    // TODO: Use sig scan here
     void* UnityThread_Update = (void*)(g_pBaseAddress + OFFSET_UNITYTHREAD_UPDATE);
     if (MH_CreateHook(UnityThread_Update, Detour_UnityThread_Update, reinterpret_cast<LPVOID*>(&Original_UnityThread_Update)) != MH_OK)
     {
@@ -219,13 +206,6 @@ bool InitHooks()
         return 1;
     }
 
-    void* SpriteRenderer_SetColor = (void*)(g_pBaseAddress + OFFSET_SPRITE_SET_COLOR);
-    if (MH_CreateHook(SpriteRenderer_SetColor, Detour_Tile_SetColor, reinterpret_cast<LPVOID*>(&Original_Tile_SetColor)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour SpriteRenderer_SetColor", "RotMGInternal", MB_OK);
-        return false;
-    }
-    
     void* CameraManager_Update = (void*)(g_pBaseAddress + OFFSET_CAMERAMANAGER_UPDATE);
     if (MH_CreateHook(CameraManager_Update, Detour_CameraManager_Update, reinterpret_cast<LPVOID*>(&Original_CameraManager_Update)) != MH_OK)
     {
@@ -272,6 +252,13 @@ bool InitHooks()
     if (MH_CreateHook(Input_GetKey, Detour_Input_GetKey, reinterpret_cast<LPVOID*>(&Original_Input_GetKey)) != MH_OK)
     {
         MessageBoxA(NULL, "Failed to Detour Input_GetKey", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    void* Map_ViewHelper_Update = (void*)(g_pBaseAddress + OFFSET_MAP_VIEWHELPER_UPDATE);
+    if (MH_CreateHook(Map_ViewHelper_Update, Detour_Map_ViewHelper_Update, reinterpret_cast<LPVOID*>(&Original_Map_ViewHelper_Update)) != MH_OK)
+    {
+        MessageBoxA(NULL, "Failed to Detour Map_ViewHelper_Update", "RotMG Internal", MB_OK);
         return 1;
     }
 
