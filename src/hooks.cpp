@@ -4,17 +4,19 @@
 
 #include "module/module_manager.h"
 
-_UnityThread_Update Original_UnityThread_Update = nullptr;
-void* Detour_UnityThread_Update(uintptr_t __this)
+_UnityThread_Update original_unity_thread_update = nullptr;
+
+auto detour_unity_thread_update(uintptr_t __this) -> void*
 {
     if (!CallEvent(ModuleEvent::UnityThread_Update, nullptr))
         return nullptr;
 
-    return Original_UnityThread_Update(__this);
+    return original_unity_thread_update(__this);
 }
 
-_PlayerUpdate Original_PlayerUpdate = nullptr;
-void* Detour_PlayerUpdate(Entity player)
+_PlayerUpdate original_player_update = nullptr;
+
+auto detour_player_update(Entity player) -> void*
 {
     if (&player != g_pPlayer)
     {
@@ -25,16 +27,17 @@ void* Detour_PlayerUpdate(Entity player)
     g_pPlayer = &player;
 
     //std::cout << std::hex << *(uintptr_t*)&player << std::endl;
-    return Original_PlayerUpdate(player);
+    return original_player_update(player);
 }
 
-_EntityUpdate Original_EntityUpdate = nullptr;
-void* Detour_EntityUpdate(Entity entity)
+_EntityUpdate original_entity_update = nullptr;
+
+auto detour_entity_update(Entity entity) -> void*
 {
     // ignore if this is our player
     if (&entity == g_pPlayer)
     {
-        return Detour_EntityUpdate(entity);
+        return detour_entity_update(entity);
     }
 
     // TODO: we should probably be using one std::map?
@@ -46,39 +49,42 @@ void* Detour_EntityUpdate(Entity entity)
         g_aEnemyList.insert(&entity);
     }
 
-    return Original_EntityUpdate(entity);
+    return original_entity_update(entity);
 }
 
-_CameraManagerUpdate Original_CameraManager_Update = nullptr;
-void* Detour_CameraManager_Update(uintptr_t cameraManager)
+_CameraManagerUpdate original_camera_manager_update = nullptr;
+
+auto detour_camera_manager_update(uintptr_t cameraManager) -> void*
 {
     g_pCameraManager = cameraManager;
 
-    if (!CallEvent(ModuleEvent::CameraManager_Update, NULL))
+    if (!CallEvent(ModuleEvent::CameraManager_Update, nullptr))
         return nullptr;
 
-    return Original_CameraManager_Update(cameraManager);
+    return original_camera_manager_update(cameraManager);
 }
 
-_Input_GetMousePos Original_Input_GetMousePos = nullptr;
-Vector3 Detour_Input_GetMousePos(uintptr_t __this)
+_Input_GetMousePos original_input_get_mouse_pos = nullptr;
+
+auto detour_input_get_mouse_pos(uintptr_t __this) -> Vector3
 {
-    Vector3 mousePos = Original_Input_GetMousePos(__this);
+    auto mouse_pos = original_input_get_mouse_pos(__this);
 
     CDataPack dp;
-    dp.PackFloat(mousePos.x);
-    dp.PackFloat(mousePos.y);
+    dp.PackFloat(mouse_pos.x);
+    dp.PackFloat(mouse_pos.y);
 
     CallEvent(ModuleEvent::GetMousePos, &dp);
 
     dp.Reset();
-    mousePos.x = dp.ReadFloat();
-    mousePos.y = dp.ReadFloat();
-    return mousePos;
+    mouse_pos.x = dp.ReadFloat();
+    mouse_pos.y = dp.ReadFloat();
+    return mouse_pos;
 }
 
-_PetUpdate Original_PetUpdate = nullptr;
-void* Detour_PetUpdate(Entity pet, bool AMKOONDPFBD)
+_PetUpdate original_pet_update = nullptr;
+
+auto detour_pet_update(Entity pet, bool AMKOONDPFBD) -> void*
 {
     Vector3 scale = { 1.0f, 1.0f, 1.0f };
 
@@ -94,21 +100,25 @@ void* Detour_PetUpdate(Entity pet, bool AMKOONDPFBD)
     scale.y = dp.ReadFloat();
     scale.z = dp.ReadFloat();
 
-    uintptr_t contentTransform = (uintptr_t)pet.view_handler->content_transform;
-    uintptr_t shadowTransform = (uintptr_t)pet.view_handler->shadow_transform;
-    Transform_set_localScale(contentTransform, scale);
-    Transform_set_localScale(shadowTransform, scale);
+    // try to use auto if you're casting, line looks cleaner with no duplicates
+    auto content_transform = (uintptr_t)pet.view_handler->content_transform;
+    auto shadow_transform = (uintptr_t)pet.view_handler->shadow_transform;
+    Transform_set_localScale(content_transform, scale);
+    Transform_set_localScale(shadow_transform, scale);
 
     // TODO: Optimise this
     // we shouldn't be updating transforms every tick
 
-    return Original_PetUpdate(pet, AMKOONDPFBD);
+    return original_pet_update(pet, AMKOONDPFBD);
 }
 
-_SocketManager_Connect Original_SocketManager_Connect = nullptr;
-void Detour_SocketManager_Connect(uintptr_t __this, String* address, int port, String* OUTGOING_KEY, String* INCOMING_KEY)
+_SocketManager_Connect original_socket_manager_connect = nullptr;
+
+auto detour_socket_manager_connect(uintptr_t __this, String* address, int port,
+                                    String* OUTGOING_KEY,
+                                    String* INCOMING_KEY) -> void
 {
-    std::string addr = ReadUnityString(address);
+    const std::string addr = ReadUnityString(address);
     CDataPack dp;
     dp.PackCell(addr.length());
     dp.PackString(addr.c_str());
@@ -117,8 +127,8 @@ void Detour_SocketManager_Connect(uintptr_t __this, String* address, int port, S
         return;
 
     dp.Reset();
-    size_t addrLen = dp.ReadCell();
-    const char* addr2 = dp.ReadString(&addrLen);
+    size_t addr_len = dp.ReadCell();
+    const char* addr2 = dp.ReadString(&addr_len);
     address = il2cpp_string_new(addr2);
 
     // too fucking difficult to move this to a module
@@ -131,16 +141,17 @@ void Detour_SocketManager_Connect(uintptr_t __this, String* address, int port, S
         Sleep(g_iReconDelay * 1000);
     }
     
-    return Original_SocketManager_Connect(__this, address, port, OUTGOING_KEY, INCOMING_KEY);
+    return original_socket_manager_connect(__this, address, port, OUTGOING_KEY, INCOMING_KEY);
 }
 
-_TMP_Text_SetText_Internal Original_TMP_Text_SetText_Internal = nullptr;
-void Detour_TMP_Text_SetText_Internal(uintptr_t __this, String* text, bool syncTextInputBox)
+_TMP_Text_SetText_Internal original_tmp_text_set_text_internal = nullptr;
+
+auto detour_tmp_text_set_text_internal(uintptr_t __this, String* text, bool syncTextInputBox) -> void
 {
     if (text == nullptr)
-        return Original_TMP_Text_SetText_Internal(__this, text, syncTextInputBox);
-    
-    std::string txt = ReadUnityString(text);
+        return original_tmp_text_set_text_internal(__this, text, syncTextInputBox);
+
+    const std::string txt = ReadUnityString(text);
     CDataPack dp;
     dp.PackCell(txt.length());
     dp.PackString(txt.c_str());
@@ -148,29 +159,31 @@ void Detour_TMP_Text_SetText_Internal(uintptr_t __this, String* text, bool syncT
     CallEvent(ModuleEvent::TMP_SetText, &dp);
 
     dp.Reset();
-    size_t txtLen = dp.ReadCell();
-    const char* txt2 = dp.ReadString(&txtLen);
+    size_t txt_len = dp.ReadCell();
+    const char* txt2 = dp.ReadString(&txt_len);
     text = il2cpp_string_new(txt2);
 
-    return Original_TMP_Text_SetText_Internal(__this, text, syncTextInputBox);
+    return original_tmp_text_set_text_internal(__this, text, syncTextInputBox);
 }
 
-_Input_GetKey Original_Input_GetKey = nullptr;
-bool Detour_Input_GetKey(void* keyCode)
+_Input_GetKey original_input_get_key = nullptr;
+
+auto detour_input_get_key(void* keyCode) -> bool
 {
     if (g_bGUIBlockInputs && g_bMenuOpen)
         return false;
     else
-        return Original_Input_GetKey(keyCode);
+        return original_input_get_key(keyCode);
 }
 
-_Input_GetKey Original_Input_GetKeyDown = nullptr;
-bool Detour_Input_GetKeyDown(void* keyCode)
+_Input_GetKey original_input_get_key_down = nullptr;
+
+auto detour_input_get_key_down(void* keyCode) -> bool
 {
     if (g_bGUIBlockInputs && g_bMenuOpen)
         return false;
     else
-        return Original_Input_GetKeyDown(keyCode);
+        return original_input_get_key_down(keyCode);
 }
 
 _Map_ViewHelper_Update Original_Map_ViewHelper_Update = nullptr;
@@ -180,98 +193,105 @@ void Detour_Map_ViewHelper_Update(uintptr_t __this, int gameOpenTimeMS)
     return Original_Map_ViewHelper_Update(__this, gameOpenTimeMS);
 }
 
-bool InitHooks()
+/**
+ * @brief Try to implement all of the function hooks we need with minhook
+ * @return : true if all hooks initialized, false if one of the hooks failed
+ */
+auto init_hooks() -> bool
 {
     MH_Initialize();
 
+    // TODO: reverse all the MH_CreateHook checks and this will look 10x cleaner and more readable  // NOLINT
+    // TODO: also, we probably shouldn't return FALSE if just one hook fails, either add fallbacks or disable the related module
+
     // TODO: Use sig scan here
-    void* UnityThread_Update = (void*)(g_pBaseAddress + OFFSET_UNITYTHREAD_UPDATE);
-    if (MH_CreateHook(UnityThread_Update, Detour_UnityThread_Update, reinterpret_cast<LPVOID*>(&Original_UnityThread_Update)) != MH_OK)
+    const auto UnityThread_Update = (void*)(g_pBaseAddress + OFFSET_UNITYTHREAD_UPDATE);
+    if (MH_CreateHook(UnityThread_Update, detour_unity_thread_update, reinterpret_cast<LPVOID*>(&original_unity_thread_update)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour UnityThread_Update", "RotMGInternal", MB_OK);
+        // TODO: remove all of these message boxes in production and log them in debug mode
+
+        MessageBoxA(nullptr, "Failed to Detour UnityThread_Update", "RotMGInternal", MB_OK);
         return false;
     }
-    
-    void* PlayerUpdate = (void*)(g_pBaseAddress + OFFSET_PLAYER_UPDATE);
-    if (MH_CreateHook(PlayerUpdate, Detour_PlayerUpdate, reinterpret_cast<LPVOID*>(&Original_PlayerUpdate)) != MH_OK)
+
+    const auto PlayerUpdate = (void*)(g_pBaseAddress + OFFSET_PLAYER_UPDATE);
+    if (MH_CreateHook(PlayerUpdate, detour_player_update, reinterpret_cast<LPVOID*>(&original_player_update)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour PlayerUpdate", "RotMGInternal", MB_OK);
+        MessageBoxA(nullptr, "Failed to Detour PlayerUpdate", "RotMGInternal", MB_OK);
         return false;
     }
-    
-    void* EntityUpdate = (void*)(g_pBaseAddress + OFFSET_ENTITY_UPDATE);
-    if (MH_CreateHook(EntityUpdate, Detour_EntityUpdate, reinterpret_cast<LPVOID*>(&Original_EntityUpdate)) != MH_OK)
+
+    const auto EntityUpdate = (void*)(g_pBaseAddress + OFFSET_ENTITY_UPDATE);
+    if (MH_CreateHook(EntityUpdate, detour_entity_update, reinterpret_cast<LPVOID*>(&original_entity_update)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour EntityUpdate", "RotMG Internal", MB_OK);
+        MessageBoxA(nullptr, "Failed to Detour EntityUpdate", "RotMG Internal", MB_OK);
         return 1;
     }
 
-    void* CameraManager_Update = (void*)(g_pBaseAddress + OFFSET_CAMERAMANAGER_UPDATE);
-    if (MH_CreateHook(CameraManager_Update, Detour_CameraManager_Update, reinterpret_cast<LPVOID*>(&Original_CameraManager_Update)) != MH_OK)
+    const auto CameraManager_Update = (void*)(g_pBaseAddress + OFFSET_CAMERAMANAGER_UPDATE);
+    if (MH_CreateHook(CameraManager_Update, detour_camera_manager_update, reinterpret_cast<LPVOID*>(&original_camera_manager_update)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour CameraManager_Update", "RotMG Internal", MB_OK);
+        MessageBoxA(nullptr, "Failed to Detour CameraManager_Update", "RotMG Internal", MB_OK);
         return 1;
     }
-    
-    void* Input_GetMousePos = (void*)(g_pBaseAddress + OFFSET_GET_MOUSEPOS);
-    if (MH_CreateHook(Input_GetMousePos, Detour_Input_GetMousePos, reinterpret_cast<LPVOID*>(&Original_Input_GetMousePos)) != MH_OK)
+
+    const auto Input_GetMousePos = (void*)(g_pBaseAddress + OFFSET_GET_MOUSEPOS);
+    if (MH_CreateHook(Input_GetMousePos, detour_input_get_mouse_pos, reinterpret_cast<LPVOID*>(&original_input_get_mouse_pos)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour Input_GetMousePos", "RotMG Internal", MB_OK);
-        return 1;
+        MessageBoxA(nullptr, "Failed to Detour Input_GetMousePos", "RotMG Internal", MB_OK);
     }
     
     //void* PetUpdate = (void*)(g_pBaseAddress + OFFSET_PET_UPDATE);
     //if (MH_CreateHook(PetUpdate, Detour_PetUpdate, reinterpret_cast<LPVOID*>(&Original_PetUpdate)) != MH_OK)
     //{
-    //    MessageBoxA(NULL, "Failed to Detour PetUpdate", "RotMG Internal", MB_OK);
-    //    return 1;
+    //    MessageBoxA(nullptr, "Failed to Detour PetUpdate", "RotMG Internal", MB_OK);
     //}
-    
-    void* SocketManager_Connect = (void*)(g_pBaseAddress + OFFSET_SOCKET_MANAGER_CONNECT);
-    if (MH_CreateHook(SocketManager_Connect, Detour_SocketManager_Connect, reinterpret_cast<LPVOID*>(&Original_SocketManager_Connect)) != MH_OK)
+
+    const auto SocketManager_Connect = (void*)(g_pBaseAddress + OFFSET_SOCKET_MANAGER_CONNECT);
+    if (MH_CreateHook(SocketManager_Connect, detour_socket_manager_connect, reinterpret_cast<LPVOID*>(&original_socket_manager_connect)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour SocketManager_Connect", "RotMG Internal", MB_OK);
+        MessageBoxA(nullptr, "Failed to Detour SocketManager_Connect", "RotMG Internal", MB_OK);
         return 1;
     }
 
-    void* TMP_Text_SetText_Internal = (void*)(g_pBaseAddress + OFFSET_TMP_TEXT_SET_TEXT_INTERNAL);
-    if (MH_CreateHook(TMP_Text_SetText_Internal, Detour_TMP_Text_SetText_Internal, reinterpret_cast<LPVOID*>(&Original_TMP_Text_SetText_Internal)) != MH_OK)
+    const auto TMP_Text_SetText_Internal = (void*)(g_pBaseAddress + OFFSET_TMP_TEXT_SET_TEXT_INTERNAL);
+    if (MH_CreateHook(TMP_Text_SetText_Internal, detour_tmp_text_set_text_internal, reinterpret_cast<LPVOID*>(&original_tmp_text_set_text_internal)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour TMP_Text_SetText_Internal", "RotMG Internal", MB_OK);
-        return 1;
-    }
-    
-    void* Input_GetKeyDown = (void*)(g_pBaseAddress + OFFSET_GET_KEY_DOWN);
-    if (MH_CreateHook(Input_GetKeyDown, Detour_Input_GetKeyDown, reinterpret_cast<LPVOID*>(&Original_Input_GetKeyDown)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour Input_GetKeyDown", "RotMG Internal", MB_OK);
-        return 1;
-    }
-    
-    void* Input_GetKey = (void*)(g_pBaseAddress + OFFSET_GET_KEY);
-    if (MH_CreateHook(Input_GetKey, Detour_Input_GetKey, reinterpret_cast<LPVOID*>(&Original_Input_GetKey)) != MH_OK)
-    {
-        MessageBoxA(NULL, "Failed to Detour Input_GetKey", "RotMG Internal", MB_OK);
+        MessageBoxA(nullptr, "Failed to Detour TMP_Text_SetText_Internal", "RotMG Internal", MB_OK);
         return 1;
     }
 
-    void* Map_ViewHelper_Update = (void*)(g_pBaseAddress + OFFSET_MAP_VIEWHELPER_UPDATE);
+    const auto Input_GetKeyDown = (void*)(g_pBaseAddress + OFFSET_GET_KEY_DOWN);
+    if (MH_CreateHook(Input_GetKeyDown, detour_input_get_key_down, reinterpret_cast<LPVOID*>(&original_input_get_key_down)) != MH_OK)
+    {
+        MessageBoxA(nullptr, "Failed to Detour Input_GetKeyDown", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    const auto Input_GetKey = (void*)(g_pBaseAddress + OFFSET_GET_KEY);
+    if (MH_CreateHook(Input_GetKey, detour_input_get_key, reinterpret_cast<LPVOID*>(&original_input_get_key)) != MH_OK)
+    {
+        MessageBoxA(nullptr, "Failed to Detour Input_GetKey", "RotMG Internal", MB_OK);
+        return 1;
+    }
+
+    const auto Map_ViewHelper_Update = (void*)(g_pBaseAddress + OFFSET_MAP_VIEWHELPER_UPDATE);
     if (MH_CreateHook(Map_ViewHelper_Update, Detour_Map_ViewHelper_Update, reinterpret_cast<LPVOID*>(&Original_Map_ViewHelper_Update)) != MH_OK)
     {
-        MessageBoxA(NULL, "Failed to Detour Map_ViewHelper_Update", "RotMG Internal", MB_OK);
+        MessageBoxA(nullptr, "Failed to Detour Map_ViewHelper_Update", "RotMG Internal", MB_OK);
         return 1;
     }
 
     if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)
     {
-        MessageBoxA(NULL, "Faild To Activate MinHook Hooks", "RotMG Internal", MB_OK);
+        MessageBoxA(nullptr, "Failed To Activate MinHook Hooks", "RotMG Internal", MB_OK);
         return false;
     }
-
+    
     return true;
 }
 
-void RemoveHooks()
+auto remove_hooks() -> void
 {
     MH_DisableHook(MH_ALL_HOOKS);
     MH_RemoveHook(MH_ALL_HOOKS);

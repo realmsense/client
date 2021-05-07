@@ -11,7 +11,7 @@ DWORD WINAPI MainThread(const HMODULE hModule)
 {
     CreateConsole();
     InitPointers();
-    InitHooks();
+    init_hooks();
     LoadSettings();
     LoadModules();
     InitGui();

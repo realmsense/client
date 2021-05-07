@@ -1,4 +1,4 @@
 #pragma once
 
-bool InitHooks();
-void RemoveHooks();
+bool init_hooks();
+void remove_hooks();
