@@ -80,7 +80,9 @@ public:
     EntityType entityType; //0x00BC
     char pad_00C0[152]; //0x00C0
     class String* name; //0x0158
-    char pad_0160[108]; //0x0160
+    char pad_0160[52]; //0x0160
+    int32_t skinID; //0x0194
+    char pad_0198[52]; //0x0198
     int32_t maxHP; //0x01CC
     int32_t hp; //0x01D0
     char pad_01D4[464]; //0x01D4

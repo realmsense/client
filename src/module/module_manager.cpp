@@ -13,6 +13,7 @@ void LoadModules()
     modules.push_back(new DisableFogModule());
     modules.push_back(new UnlimitedZoomModule());
     modules.push_back(new AntiLagModule());
+    modules.push_back(new SkinChangeModule());
 
     // Movement
     modules.push_back(new NoclipModule());
