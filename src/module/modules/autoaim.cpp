@@ -3,7 +3,7 @@
 #include "../module_manager.h"
 
 #include "imgui/imgui.h"
-#include "autoAim.h"
+#include "autoaim.h"
 
 AutoAimModule::AutoAimModule()
     : Module()
