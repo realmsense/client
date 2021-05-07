@@ -30,4 +30,4 @@ std::vector<T> ReadUnityList(List* source)
     return arr;
 }
 
-void ShowFloatingText(const char* text, FloatingText type, __int64 colour);
+void ShowFloatingText(const char* text, FloatingTextTypes type, __int64 colour);

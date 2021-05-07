@@ -41,7 +41,7 @@ void* Detour_EntityUpdate(Entity entity)
     // to store one large entity list but the enum EntityType
 
     // Weird naming by DECA, but "Character" is really an enemy
-    if (entity.entityType == EntityType::Character)
+    if (entity.entity_type == EntityType::Character)
     {
         g_aEnemyList.insert(&entity);
     }
@@ -94,8 +94,8 @@ void* Detour_PetUpdate(Entity pet, bool AMKOONDPFBD)
     scale.y = dp.ReadFloat();
     scale.z = dp.ReadFloat();
 
-    uintptr_t contentTransform = (uintptr_t)pet.viewHandler->contentTransform;
-    uintptr_t shadowTransform = (uintptr_t)pet.viewHandler->shadowTransform;
+    uintptr_t contentTransform = (uintptr_t)pet.view_handler->content_transform;
+    uintptr_t shadowTransform = (uintptr_t)pet.view_handler->shadow_transform;
     Transform_set_localScale(contentTransform, scale);
     Transform_set_localScale(shadowTransform, scale);
 
