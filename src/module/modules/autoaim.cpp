@@ -3,7 +3,7 @@
 #include "../module_manager.h"
 
 #include "imgui/imgui.h"
-#include "AutoAim.h"
+#include "autoAim.h"
 
 AutoAimModule::AutoAimModule()
     : Module()
@@ -14,6 +14,7 @@ AutoAimModule::AutoAimModule()
     this->category = ModuleCategory::AUTO;
     this->hasGuiElements = true;
 
+    // TODO: load the target option from config or default to closest mouse
     this->target = AutoAimTarget::ClosestMouse;
     this->ready();
 }
@@ -46,7 +47,7 @@ void AutoAimModule::renderGUI()
     ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing() * strlen(aim_targets[3]) / 2); // set width to the widest string
     if (ImGui::Combo("Auto Aim Target", &selected_target, aim_targets, IM_ARRAYSIZE(aim_targets), IM_ARRAYSIZE(aim_targets)))
     {
-        this->target = AutoAimTarget(selected_target);
+        this->target = static_cast<AutoAimTarget>(selected_target);
         this->log.floatingText = false;
         this->log << "Auto Aim Target: " << aim_targets[selected_target] << std::endl;
     }
@@ -69,77 +70,72 @@ bool AutoAimModule::onEvent(ModuleEvent event, CDataPack* dp)
 bool AutoAimModule::onGetMousePos(CDataPack* dp)
 {
     dp->Reset();
-    Vector3 mousePos;
-    mousePos.x = dp->ReadFloat();
-    mousePos.y = dp->ReadFloat();
+    Vector3 mouse_pos{};
+    mouse_pos.x = dp->ReadFloat();
+    mouse_pos.y = dp->ReadFloat();
 
-    Entity* chosenEnemy = nullptr;
+    Entity* chosen_enemy = nullptr;
+
     for (auto& enemy : g_aEnemyList)
     {
-        if (chosenEnemy == nullptr)
+        if (chosen_enemy == nullptr)
         {
-            chosenEnemy = enemy;
+            chosen_enemy = enemy;
             continue;
         }
 
         if (this->target == AutoAimTarget::ClosestPos)
         {
-            float chosenDistance = CalculateDistance(chosenEnemy->pos, g_pPlayer->pos);
-            float currentDistance = CalculateDistance(enemy->pos, g_pPlayer->pos);
-            if (currentDistance < chosenDistance)
-            {
-                chosenEnemy = enemy;
-                continue;
-            }
+            const float chosen_distance = CalculateDistance(chosen_enemy->pos, g_pPlayer->pos);
+            const float current_distance = CalculateDistance(enemy->pos, g_pPlayer->pos);
+
+            if (current_distance < chosen_distance)
+                chosen_enemy = enemy;
         }
         else if (this->target == AutoAimTarget::ClosestMouse)
         {
-            Vector3 mouseWorldPos3 = ScreenToWorld(g_pMainCamera, mousePos);
-            Vector2 mouseWorldPos = { mouseWorldPos3.x, mouseWorldPos3.y * -1 };
-            float chosenDistance = CalculateDistance(chosenEnemy->pos, mouseWorldPos);
-            float currentdistance = CalculateDistance(enemy->pos, mouseWorldPos);
-            if (currentdistance < chosenDistance)
-            {
-                chosenEnemy = enemy;
-                continue;
-            }
+            const Vector3 mouse_world_pos3 = ScreenToWorld(g_pMainCamera, mouse_pos);
+            const Vector2 mouse_world_pos = { mouse_world_pos3.x, mouse_world_pos3.y * -1 };
+
+            const float chosen_distance = CalculateDistance(chosen_enemy->pos, mouse_world_pos);
+            const float currentdistance = CalculateDistance(enemy->pos, mouse_world_pos);
+
+            if (currentdistance < chosen_distance) 
+                chosen_enemy = enemy;
+
         }
         else if (this->target == AutoAimTarget::HighestDef)
         {
             // TODO: what happens if the enemy is armor broken?
-            int chosenDef = chosenEnemy->defense;
-            int currentDefense = enemy->defense;
-            if (currentDefense > chosenDef)
-            {
-                chosenEnemy = enemy;
-                continue;
-            }
+            // (abrn) I don't think this matters because the defense itself doesn't change on armor break
+            const int chosen_def = chosen_enemy->defense;
+            const int current_defense = enemy->defense;
+
+            if (current_defense > chosen_def)
+                chosen_enemy = enemy;
         }
         else if (this->target == AutoAimTarget::HighestMaxHP)
         {
-            int chosenHP = chosenEnemy->maxHP;
-            int currentHP = enemy->maxHP;
-            if (chosenHP > currentHP)
-            {
-                chosenEnemy = enemy;
-                continue;
-            }
+            const int chosen_hp = chosen_enemy->max_hp;
+            const int current_hp = enemy->max_hp;
+            if (chosen_hp > current_hp)
+                chosen_enemy = enemy;
         }
         else
-        {
-            chosenEnemy = enemy;
+            chosen_enemy = enemy;
+
+        if (chosen_enemy != nullptr)
             break;
-        }
     }
 
-    if (chosenEnemy)
+    if (chosen_enemy)
     {
-        Vector3 enemyPos = { chosenEnemy->pos.x, (chosenEnemy->pos.y) * -1, 0.0f };
-        Vector3 enemyScreenPos = WorldToScreen(g_pMainCamera, enemyPos);
+        const Vector3 enemy_pos = { chosen_enemy->pos.x, (chosen_enemy->pos.y) * -1, 0.0f };
+        const Vector3 enemy_screen_pos = WorldToScreen(g_pMainCamera, enemy_pos);
 
         dp->Reset();
-        dp->PackFloat(enemyScreenPos.x);
-        dp->PackFloat(enemyScreenPos.y);
+        dp->PackFloat(enemy_screen_pos.x);
+        dp->PackFloat(enemy_screen_pos.y);
     }
 
     //std::cout << mousePos.x << "," << mousePos.y << std::endl;

@@ -3,7 +3,7 @@
 #include "../module_manager.h"
 
 #include "imgui/imgui.h"
-#include "Walk.h"
+#include "walk.h"
 
 WalkModule::WalkModule()
     : Module()
