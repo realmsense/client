@@ -15,8 +15,8 @@ void RemoveConsole()
 
 float CalculateDistance(Vector2 a, Vector2 b)
 {
-    float diffX = a.x - b.x;
-    float diffY = a.y - b.y;
+    const float diffX = a.x - b.x;
+    const float diffY = a.y - b.y;
     return sqrt((diffX * diffX) + (diffY * diffY));
 }
 
@@ -36,10 +36,10 @@ std::string ReadUnityString(String* str)
 std::string ReadUnityString(uintptr_t addr)
 {
     std::stringstream sstream;
-    int length = *(int*)(addr + 0x10);
+    const int length = *(int*)(addr + 0x10);
     for (int i = 0; i < length; i++)
     {
-        wchar_t charAt = *(wchar_t*)(addr + 0x14 + (0x2 * i));
+        const wchar_t charAt = *(wchar_t*)(addr + 0x14 + (0x2 * i));
         sstream << (char)charAt;
     }
     return sstream.str();
@@ -47,16 +47,16 @@ std::string ReadUnityString(uintptr_t addr)
 
 uintptr_t FindGameObject(const char* name)
 {
-    String* objName = il2cpp_string_new(name);
-    uintptr_t gameObject = GameObject_Find(objName);
+    String* obj_name = il2cpp_string_new(name);
+    const uintptr_t gameObject = GameObject_Find(obj_name);
     return gameObject;
 }
 
 uintptr_t FindObjectByQualifiedName(const char* assemblyQualifiedName)
 {
-    String* qualifiedName = il2cpp_string_new(assemblyQualifiedName);
-    uintptr_t type = System_GetType(qualifiedName);
-    uintptr_t obj = Object_FindObjectOfType(type);
+    String* qualified_name = il2cpp_string_new(assemblyQualifiedName);
+    const uintptr_t type = System_GetType(qualified_name);
+    const uintptr_t obj = Object_FindObjectOfType(type);
     return obj;
 }
 
@@ -64,12 +64,12 @@ std::vector<uintptr_t> GetChildTransforms(uintptr_t gameObject)
 {
     std::vector<uintptr_t> vec;
 
-    uintptr_t mainTransform = GameObject_GetTransform(gameObject);
-    int childCount = Transform_get_childCount(mainTransform);
-    for (int i = 0; i < childCount; i++)
+    const uintptr_t main_transform = GameObject_GetTransform(gameObject);
+    const int child_count = Transform_get_childCount(main_transform);
+    for (int i = 0; i < child_count; i++)
     {
-        uintptr_t childTransform = Transform_GetChild(mainTransform, i);
-        vec.push_back(childTransform);
+        uintptr_t child_transform = Transform_GetChild(main_transform, i);
+        vec.push_back(child_transform);
     }
 
     return vec;
@@ -87,9 +87,9 @@ std::vector<uintptr_t> FindChildTransforms(uintptr_t parentTransform, std::vecto
     return vec;
 }
 
-void ShowFloatingText(const char* text, FloatingText type, __int64 colour)
+void ShowFloatingText(const char* text, FloatingTextTypes type, __int64 colour)
 {
-    uintptr_t guiManager = (uintptr_t)g_pPlayer->viewHandler->guiManager;
+    const uintptr_t guiManager = (uintptr_t)g_pPlayer->view_handler->gui_manager;
     String* msg = il2cpp_string_new(text);
 
     uintptr_t player = *(uintptr_t*)g_pPlayer;
