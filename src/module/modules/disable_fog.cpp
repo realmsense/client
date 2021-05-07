@@ -18,24 +18,22 @@ DisableFogModule::DisableFogModule()
 
 void DisableFogModule::onEnable()
 {
-    if (!g_pMapViewHelper)
-        return;
-
     this->log.color = Color32_GREEN;
     this->log.floatingText = true;
     this->log << this->name << " enabled" << std::endl;
-    DisableFog(g_pMapViewHelper);
+
+    if (g_pMapViewHelper)
+        DisableFog(g_pMapViewHelper);
 }
 
 void DisableFogModule::onDisable()
 {
-    if (!g_pMapViewHelper)
-        return;
-
     this->log.color = Color32_RED;
     this->log.floatingText = true;
     this->log << this->name << " disabled" << std::endl;
-    EnableFog(g_pMapViewHelper);
+
+    if (g_pMapViewHelper)
+        EnableFog(g_pMapViewHelper);
 }
 
 void DisableFogModule::renderGUI()

@@ -4,7 +4,6 @@ struct Vector2 { float x, y; };
 struct Vector3 { float x, y, z; };
 struct Color { float r, g, b, a; };
 
-// 0x1FFBBGGRR
 #define Color32_GREEN 0x1FF44ed15
 #define Color32_RED 0x1FF2626d4
 

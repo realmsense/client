@@ -24,20 +24,29 @@ void WalkModule::onEnable()
 {
     if (!g_pPlayer) return;
 
+    this->log.color = Color32_GREEN;
     this->log.floatingText = false;
     this->log << this->name << " enabled" << std::endl;
 
-    this->oldSpeed = g_pPlayer->speed;
-    g_pPlayer->speed /= this->walkModifier;
+    if (g_pPlayer)
+    {
+        this->oldSpeed = g_pPlayer->speed;
+        g_pPlayer->speed /= this->walkModifier;
+    }
 }
 
 void WalkModule::onDisable()
 {
     if (!g_pPlayer) return;
 
+    this->log.color = Color32_RED;
     this->log.floatingText = false;
     this->log << this->name << " disabled" << std::endl;
-    g_pPlayer->speed = oldSpeed;
+
+    if (g_pPlayer)
+    {
+        g_pPlayer->speed = oldSpeed;
+    }
 }
 
 void WalkModule::renderGUI()
