@@ -71,7 +71,7 @@ DWORD WINAPI MainThread(const HMODULE hModule)
     }
 
     RemoveConsole();
-    RemoveHooks();
+    remove_hooks();
     UnloadModules();
     RemoveGui();
     FreeLibraryAndExitThread(hModule, 0);
