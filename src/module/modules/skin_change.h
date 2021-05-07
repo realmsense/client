@@ -13,6 +13,10 @@ public:
     void renderGUI();
     bool onEvent(ModuleEvent event, CDataPack* dp);
 
+    void ChangeSkin(int skin_id);
+
+    int skin_id;
+
 private:
     bool onMainLoop();
 };

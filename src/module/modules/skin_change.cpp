@@ -15,17 +15,21 @@ SkinChangeModule::SkinChangeModule()
     this->category = ModuleCategory::OTHER;
     this->hasGuiElements = true;
 
+    this->skin_id = 0;
+
     this->ready();
 }
 
 void SkinChangeModule::onEnable()
 {
+    this->log.color = Color32_GREEN;
     this->log.floatingText = true;
     this->log << this->name << " enabled" << std::endl;
 }
 
 void SkinChangeModule::onDisable()
 {
+    this->log.color = Color32_RED;
     this->log.floatingText = true;
     this->log << this->name << " disabled" << std::endl;
 }
@@ -63,11 +67,13 @@ void SkinChangeModule::renderGUI()
                     ImGui::PushID(skin->name.c_str());
     
                     void* texture_id = (void*)skin->Load();
-                    ImVec2 image_size(img_size, img_size);
+                    ImVec2 image_size((float)img_size, (float)img_size);
                     if (ImGui::ImageButton(texture_id, image_size))
                     {
-                        g_pPlayer->skinID = skin->skin_id;
-                        this->log << "Selected: " << skin->skin_id << std::endl;
+                        this->ChangeSkin(skin->skin_id);
+                        this->log.floatingText = false;
+                        this->log << "Change Skin to: " << skin->skin_id << std::endl;
+                        this->setEnabled(true, false);
                     }
 
                     if (ImGui::IsItemHovered())
@@ -88,7 +94,7 @@ void SkinChangeModule::renderGUI()
                 }
 
                 // add extra height after skins, hotfix for bug with wrapping
-                ImGui::Dummy(ImVec2(0.0f, img_size));
+                ImGui::Dummy(ImVec2(0.0f, (float)img_size));
                 ImGui::EndTabItem();
             }
         }
@@ -110,9 +116,26 @@ bool SkinChangeModule::onEvent(ModuleEvent event, CDataPack* dp)
 
 bool SkinChangeModule::onMainLoop()
 {
+    static uintptr_t old_player_addr;
+    if (old_player_addr != (uintptr_t)g_pPlayer)
+    {
+        if (this->enabled)
+            this->ChangeSkin(this->skin_id);
+    }
 
+    old_player_addr = (uintptr_t)g_pPlayer;
     return true;
 }
+
+void SkinChangeModule::ChangeSkin(int skin_id)
+{
+    if (g_pPlayer)
+    {
+        this->skin_id = skin_id;
+        g_pPlayer->skinID = skin_id;
+    }
+}
+
 
 Skin::Skin(std::string name, std::string file_name, int skin_id)
     : Image(file_name)
