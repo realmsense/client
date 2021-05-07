@@ -9,7 +9,7 @@ DisableFogModule::DisableFogModule()
 {
     this->name = "Disable Fog";
     this->enabled = false;
-    this->type = ModuleList::DisableFogModule;
+    this->type = ModuleList::DisableFog;
     this->category = ModuleCategory::VIEW;
     this->hasGuiElements = false;
 

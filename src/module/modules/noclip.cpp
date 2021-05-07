@@ -11,7 +11,7 @@ NoclipModule::NoclipModule()
 {
     this->name = "Noclip";
     this->enabled = false;
-    this->type = ModuleList::NoclipModule;
+    this->type = ModuleList::Noclip;
     this->category = ModuleCategory::MOVEMENT;
     this->hasGuiElements = false;
 

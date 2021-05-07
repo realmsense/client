@@ -10,7 +10,7 @@ AutoAimModule::AutoAimModule()
 {
     this->name = "Auto Aim";
     this->enabled = false;
-    this->type = ModuleList::AutoAimModule;
+    this->type = ModuleList::AutoAim;
     this->category = ModuleCategory::AUTO;
     this->hasGuiElements = true;
 

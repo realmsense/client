@@ -58,7 +58,7 @@ DWORD WINAPI MainThread(HMODULE hModule)
         // v key - toggle noclip
         if (GetAsyncKeyState(0x56) & 1)
         {
-            static NoclipModule* noclipModule = GetModule<NoclipModule>(ModuleList::NoclipModule);
+            static NoclipModule* noclipModule = GetModule<NoclipModule>(ModuleList::Noclip);
             noclipModule->toggleModule();
         }
 

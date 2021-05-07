@@ -22,12 +22,12 @@ enum class ModuleCategory {
 
 enum class ModuleList
 {
-    NoclipModule,
-    AutoAimModule,
+    Noclip,
+    AutoAim,
     WalkModule,
-    DisableFogModule,
+    DisableFog,
     UnlimitedZoom,
     AntiLag,
     NameChange,
-    AntiAFK
+    AntiAFK,
 };
