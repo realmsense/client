@@ -2,6 +2,7 @@
 
 #include "structs.h"
 #include "../module.h"
+#include "gui.h"
 
 class SkinChangeModule : public Module {
 public:
@@ -14,4 +15,12 @@ public:
 
 private:
     bool onMainLoop();
+};
+
+struct Skin : Image
+{
+    Skin(std::string name, std::string file_name, int skin_id);
+
+    std::string name;
+    int skin_id;
 };

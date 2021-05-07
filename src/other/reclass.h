@@ -4,6 +4,28 @@
 
 // Created with ReClass.NET 1.2 by KN4CK3R
 
+enum class ClassList {
+    Any,
+    Rogue,
+    Archer,
+    Wizard,
+    Priest,
+    Warrior,
+    Knight,
+    Paladin,
+    Assassin,
+    Necromancer,
+    Huntress,
+    Mystic,
+    Trickster,
+    Sorcerer,
+    Ninja,
+    Samurai,
+    Bard,
+    Summoner,
+    Count
+};
+
 enum class EntityType : int32_t
 {
     ArenaPortal = 5,

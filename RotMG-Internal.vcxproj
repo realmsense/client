@@ -133,6 +133,7 @@
     <ClInclude Include="src\other\offsets.h" />
     <ClInclude Include="src\other\reclass.h" />
     <ClInclude Include="src\other\scan.h" />
+    <ClInclude Include="src\other\skins.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\structs.h" />
   </ItemGroup>

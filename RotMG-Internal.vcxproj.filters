@@ -225,6 +225,9 @@
     <ClInclude Include="src\module\modules\skin_change.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
+    <ClInclude Include="src\other\skins.h">
+      <Filter>Source Files\other</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

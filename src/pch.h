@@ -13,6 +13,7 @@
 #include <vector>
 #include <unordered_set>
 #include <unordered_map>
+#include <map>
 #include "other/CDataPack.h"
 #include "module/module_enums.h"
 #include "structs.h"
