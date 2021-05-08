@@ -5,6 +5,8 @@
 bool InitGui();
 void RemoveGui();
 
+void GUI_WrapInLoop(int i, int length);
+
 bool LoadTextureFromFile(const char* filename, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height);
 
 struct Image

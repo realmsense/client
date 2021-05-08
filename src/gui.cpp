@@ -76,7 +76,6 @@ bool LoadTextureFromFile(const char* filename, ID3D11ShaderResourceView** out_sr
     return true;
 }
 
-
 Image::Image(std::string file_name)
 {
     this->file_name = file_name;
@@ -94,6 +93,18 @@ ID3D11ShaderResourceView* Image::Load()
     return this->texture;
 }
 
+void GUI_WrapInLoop(int i, int length)
+{
+    ImGuiStyle& style = ImGui::GetStyle();
+    float window_visible_x = ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x;
+
+    float button_size_x = ImGui::GetItemRectSize().x;
+    float pos_x = ImGui::GetItemRectMax().x;
+    float next_x = pos_x + style.ItemSpacing.x + button_size_x;
+    bool wrap_next = i + 1 < length && next_x < window_visible_x;
+    if (wrap_next)
+        ImGui::SameLine();
+}
 
 LRESULT WINAPI WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {

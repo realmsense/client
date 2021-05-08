@@ -12,7 +12,7 @@ SkinChangeModule::SkinChangeModule()
     this->name = "Skin Change";
     this->enabled = false;
     this->type = ModuleList::SkinChange;
-    this->category = ModuleCategory::OTHER;
+    this->category = ModuleCategory::VIEW;
     this->hasGuiElements = true;
 
     this->skin_id = 0;
@@ -36,7 +36,7 @@ void SkinChangeModule::onDisable()
 
 void SkinChangeModule::renderGUI()
 {
-    static int img_size = 52;
+    static int img_size = 30;
     ImGui::SliderInt("Icon Size", &img_size, 0, 100);
 
     // move to another function, where we #include "skins.h"
@@ -48,59 +48,48 @@ void SkinChangeModule::renderGUI()
         init = true;
     }
 
-    const char* class_names[] = { "All", "Rogue", "Archer", "Wizard", "Priest", "Warrior", "Knight", "Paladin", "Assassin", "Necromancer", "Huntress", "Mystic", "Trickster", "Sorcerer", "Ninja", "Samurai", "Bard", "Summoner" };
+    const char* class_names[] = { "Any", "Rogue", "Archer", "Wizard", "Priest", "Warrior", "Knight", "Paladin", "Assassin", "Necromancer", "Huntress", "Mystic", "Trickster", "Sorcerer", "Ninja", "Samurai", "Bard", "Summoner" };
+    static ClassList active_class = ClassList(0);
 
-    ImGuiStyle& style = ImGui::GetStyle();
-    float window_visible_x2 = ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x;
-
-    // TODO: wrap tab bar
-    if (ImGui::BeginTabBar("Skin Changer"))
+    for (int i = 0; i < (int)ClassList::Count; i++)
     {
-        for (int i = 0; i < (int)ClassList::Count; i++)
+        ClassList current_class = ClassList(i);
+        const char* class_name = class_names[i];
+
+        if (ImGui::Button(class_name))
         {
-            ClassList current_class = ClassList(i);
-            const char* class_name = class_names[i];
-            if (ImGui::BeginTabItem(class_name))
-            {
-                for (Skin* skin : skinList[current_class])
-                {
-                    ImGui::PushID(skin->name.c_str());
-    
-                    void* texture_id = (void*)skin->Load();
-                    ImVec2 image_size((float)img_size, (float)img_size);
-                    if (ImGui::ImageButton(texture_id, image_size))
-                    {
-                        this->ChangeSkin(skin->skin_id);
-                        this->log.floatingText = false;
-                        this->log << "Change Skin to: " << skin->skin_id << std::endl;
-                        this->setEnabled(true, false);
-                    }
-
-                    if (ImGui::IsItemHovered())
-                    {
-                        ImGui::BeginTooltip();
-                        ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
-                        ImGui::TextUnformatted(skin->name.c_str());
-                        ImGui::PopTextWrapPos();
-                        ImGui::EndTooltip();
-                    }
-
-                    float last_button_x2 = ImGui::GetItemRectMax().x;
-                    float next_button_x2 = last_button_x2 + style.ItemSpacing.x + img_size; // Expected position if next button was on same line
-                    if (i + 1 < (int)ClassList::Count && next_button_x2 < window_visible_x2)
-                        ImGui::SameLine();
-
-                    ImGui::PopID();
-                }
-
-                // add extra height after skins, hotfix for bug with wrapping
-                ImGui::Dummy(ImVec2(0.0f, (float)img_size));
-                ImGui::EndTabItem();
-            }
+            active_class = current_class;
         }
-    
-        ImGui::EndTabBar();
+
+        GUI_WrapInLoop(i, (int)ClassList::Count);
     }
+
+    for (int i = 0; i < skinList[active_class].size(); i++)
+    {
+        Skin* skin = skinList[active_class][i];
+
+        void* texture_id = (void*)skin->Load();
+        ImVec2 image_size((float)img_size, (float)img_size);
+        if (ImGui::ImageButton(texture_id, image_size))
+        {
+            this->ChangeSkin(skin->skin_id);
+            this->log.floatingText = false;
+            this->log << "Change Skin to: " << skin->skin_id << std::endl;
+            this->setEnabled(true, false);
+        }
+
+        if (ImGui::IsItemHovered())
+        {
+            ImGui::BeginTooltip();
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+            ImGui::TextUnformatted(skin->name.c_str());
+            ImGui::PopTextWrapPos();
+            ImGui::EndTooltip();
+        }
+
+        GUI_WrapInLoop(i, skinList[active_class].size());
+    }
+
 }
 
 bool SkinChangeModule::onEvent(ModuleEvent event, CDataPack* dp)
