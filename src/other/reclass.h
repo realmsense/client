@@ -4,6 +4,28 @@
 
 // Created with ReClass.NET 1.2 by KN4CK3R
 
+enum class ClassList {
+    Any,
+    Rogue,
+    Archer,
+    Wizard,
+    Priest,
+    Warrior,
+    Knight,
+    Paladin,
+    Assassin,
+    Necromancer,
+    Huntress,
+    Mystic,
+    Trickster,
+    Sorcerer,
+    Ninja,
+    Samurai,
+    Bard,
+    Summoner,
+    Count
+};
+
 enum class EntityType : int32_t
 {
     ArenaPortal = 5,
@@ -80,6 +102,9 @@ public:
     EntityType entity_type; //0x00BC
     char pad_00C0[152]; //0x00C0
     class String* name; //0x0158
+    char pad_0160[52]; //0x0160
+    int32_t skinID; //0x0194
+    char pad_0198[52]; //0x0198
     char pad_0160[108]; //0x0160
     int32_t max_hp; //0x01CC
     int32_t hp; //0x01D0

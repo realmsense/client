@@ -97,6 +97,9 @@
     <ClCompile Include="src\module\module_logger.cpp">
       <Filter>Source Files\module</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\modules\skin_change.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h">
@@ -218,6 +221,12 @@
     </ClInclude>
     <ClInclude Include="src\module\module_enums.h">
       <Filter>Source Files\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\skin_change.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\other\skins.h">
+      <Filter>Source Files\other</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

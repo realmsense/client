@@ -8,3 +8,4 @@
 #include "modules/anti_lag.h"
 #include "modules/name_change.h"
 #include "modules/anti_afk.h"
+#include "modules/skin_change.h"

@@ -30,4 +30,5 @@ enum class ModuleList
     AntiLag,
     NameChange,
     AntiAFK,
+    SkinChange
 };

@@ -77,6 +77,7 @@
     <ClCompile Include="src\module\modules\disable_fog.cpp" />
     <ClCompile Include="src\module\modules\name_change.cpp" />
     <ClCompile Include="src\module\modules\noclip.cpp" />
+    <ClCompile Include="src\module\modules\skin_change.cpp" />
     <ClCompile Include="src\module\modules\unlimited_zoom.cpp" />
     <ClCompile Include="src\module\modules\walk.cpp" />
     <ClCompile Include="src\module\module_logger.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="src\module\modules\disable_fog.h" />
     <ClInclude Include="src\module\modules\name_change.h" />
     <ClInclude Include="src\module\modules\noclip.h" />
+    <ClInclude Include="src\module\modules\skin_change.h" />
     <ClInclude Include="src\module\modules\unlimited_zoom.h" />
     <ClInclude Include="src\module\modules\walk.h" />
     <ClInclude Include="src\module\module_enums.h" />
@@ -131,6 +133,7 @@
     <ClInclude Include="src\other\offsets.h" />
     <ClInclude Include="src\other\reclass.h" />
     <ClInclude Include="src\other\scan.h" />
+    <ClInclude Include="src\other\skins.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\structs.h" />
   </ItemGroup>
