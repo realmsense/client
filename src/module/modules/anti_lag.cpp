@@ -152,7 +152,7 @@ void AntiLagModule::ResizePlayers(float scale)
     if (g_pPlayer)
     {
         Vector3 newScale = { 1.0f, 1.0f, 1.0f };
-        uintptr_t viewTransform = (uintptr_t)g_pPlayer->viewHandler->viewTransform;
+        uintptr_t viewTransform = (uintptr_t)g_pPlayer->view_handler->view_transform;
         ResizeCharacter(viewTransform, newScale);
     }
 }

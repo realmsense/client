@@ -1,6 +1,6 @@
 #pragma once
 #include "../structs.h"
-#include <stdint.h>
+#include <cstdint>
 
 // Created with ReClass.NET 1.2 by KN4CK3R
 
@@ -74,7 +74,7 @@ enum class EntityType : int32_t
     YardUpgrader = 36
 };
 
-enum class FloatingText : int32_t
+enum class FloatingTextTypes : int32_t
 {
     ConditionEffect = 6,
     Damage = 1,
@@ -91,21 +91,22 @@ class Entity
 {
 public:
     char pad_0000[16]; //0x0000
-    class ViewHandler* viewHandler; //0x0010
-    class ObjectProperties* objectProps; //0x0018
+    class ViewHandler* view_handler; //0x0010
+    class ObjectProperties* object_props; //0x0018
     char pad_0020[28]; //0x0020
     Vector2 pos; //0x003C
     char pad_0044[20]; //0x0044
-    class Tile* standingTile; //0x0058
+    class Tile* standing_tile; //0x0058
     bool alive; //0x0060
     char pad_0061[91]; //0x0061
-    EntityType entityType; //0x00BC
+    EntityType entity_type; //0x00BC
     char pad_00C0[152]; //0x00C0
     class String* name; //0x0158
     char pad_0160[52]; //0x0160
     int32_t skinID; //0x0194
     char pad_0198[52]; //0x0198
-    int32_t maxHP; //0x01CC
+    char pad_0160[108]; //0x0160
+    int32_t max_hp; //0x01CC
     int32_t hp; //0x01D0
     char pad_01D4[464]; //0x01D4
     int32_t attack; //0x03A4
@@ -116,7 +117,7 @@ public:
     char pad_03B8[80]; //0x03B8
     int32_t defense; //0x0408
     char pad_040C[76]; //0x040C
-    int32_t maxMP; //0x0458
+    int32_t max_mp; //0x0458
     float mp; //0x045C
     char pad_0460[8280]; //0x0460
 }; //Size: 0x24B8
@@ -125,8 +126,8 @@ class Tile
 {
 public:
     char pad_0000[60]; //0x0000
-    int32_t posX; //0x003C
-    int32_t posY; //0x0040
+    int32_t pos_x; //0x003C
+    int32_t pos_y; //0x0040
     char pad_0044[20]; //0x0044
     class ObjectProperties* OBGKICHNIDN; //0x0058
     char pad_0060[1000]; //0x0060
@@ -151,15 +152,15 @@ class ViewHandler
 {
 public:
     char pad_0000[72]; //0x0000
-    void* guiManager; //0x0048
+    void* gui_manager; //0x0048
     char pad_0050[48]; //0x0050
-    class Entity* destroyEntity; //0x0080
+    class Entity* destroy_entity; //0x0080
     char pad_0088[32]; //0x0088
-    void* viewTransform; //0x00A8
-    void* contentTransform; //0x00B0
-    void* shadowTransform; //0x00B8
+    void* view_transform; //0x00A8
+    void* content_transform; //0x00B0
+    void* shadow_transform; //0x00B8
     char pad_00C0[16]; //0x00C0
-    class String* prefabName; //0x00D0
+    class String* prefab_name; //0x00D0
     char pad_00D8[3960]; //0x00D8
 }; //Size: 0x1050
 
@@ -167,7 +168,7 @@ class NBJLMDOACBC
 {
 public:
     char pad_0000[32]; //0x0000
-    class List* playerList; //0x0020
+    class List* player_list; //0x0020
     char pad_0028[280]; //0x0028
 }; //Size: 0x0140
 
@@ -185,9 +186,9 @@ class ListItems
 {
 public:
     char pad_0000[24]; //0x0000
-    int32_t Count; //0x0018
+    int32_t count; //0x0018
     char pad_001C[4]; //0x001C
-    void* itemsArr; //0x0020
+    void* items_arr; //0x0020
     char pad_0028[32]; //0x0028
 }; //Size: 0x0048
 
@@ -204,9 +205,9 @@ class CharacterInfo_GUI
 {
 public:
     char pad_0000[32]; //0x0000
-    void* accountName_TMP; //0x0020
-    void* guildInfo_Obj; //0x0028
-    void* guildName_TMP; //0x0030
-    void* guildIcon_Img; //0x0038
+    void* account_name_tmp; //0x0020
+    void* guild_info_obj; //0x0028
+    void* guild_name_tmp; //0x0030
+    void* guild_icon_img; //0x0038
     char pad_0040[320]; //0x0040
 }; //Size: 0x0180

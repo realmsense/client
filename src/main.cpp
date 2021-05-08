@@ -7,11 +7,11 @@
 
 #include <sstream>
 
-DWORD WINAPI MainThread(HMODULE hModule)
+DWORD WINAPI MainThread(const HMODULE hModule)
 {
     CreateConsole();
     InitPointers();
-    InitHooks();
+    init_hooks();
     LoadSettings();
     LoadModules();
     InitGui();
@@ -36,7 +36,9 @@ DWORD WINAPI MainThread(HMODULE hModule)
             if (!enemy->alive)
                 it = g_aEnemyList.erase(it);
             else
-                it++;
+                // we are incrementing an incrementor while looping inside a loop here
+                // if we postfix instead of prefix 
+                ++it;
         }
 
         if (GetAsyncKeyState(VK_INSERT) & 1)
@@ -56,19 +58,20 @@ DWORD WINAPI MainThread(HMODULE hModule)
         }
 
         // v key - toggle noclip
+        // TODO: replace with a key config and keycode enum
         if (GetAsyncKeyState(0x56) & 1)
         {
-            static NoclipModule* noclipModule = GetModule<NoclipModule>(ModuleList::Noclip);
-            noclipModule->toggleModule();
+            static auto* noclip_module = GetModule<NoclipModule>(ModuleList::Noclip);
+            noclip_module->toggleModule();
         }
 
+        // keep all module main functions running by calling every 4ms (game tick speed)
         CallEvent(ModuleEvent::MainLoop, nullptr);
-
-        Sleep(5);
+        Sleep(4);
     }
 
     RemoveConsole();
-    RemoveHooks();
+    remove_hooks();
     UnloadModules();
     RemoveGui();
     FreeLibraryAndExitThread(hModule, 0);
@@ -82,15 +85,16 @@ BOOL WINAPI DllMain(HMODULE hModule, DWORD fdwReason, LPVOID lpReserved)
         case DLL_PROCESS_ATTACH:
         {
             DisableThreadLibraryCalls(hModule);
-            HANDLE mainThread = CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)MainThread, hModule, 0, nullptr);
-            if (mainThread) CloseHandle(mainThread);
+
+            HANDLE main_thread = CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)MainThread, hModule, 0, nullptr);
+            if (main_thread) CloseHandle(main_thread);
         }
         break;
         case DLL_THREAD_ATTACH:
         case DLL_THREAD_DETACH:
         case DLL_PROCESS_DETACH:
-            break;
+        default:
+            return FALSE;
     }
-
     return TRUE;
 }

@@ -137,7 +137,7 @@ void NameChangeModule::ChangeNameColor(Color color)
     if (!this->GetCharInfoObject())
         return;
 
-    uintptr_t accountName = (uintptr_t)this->charInfoObj->accountName_TMP;
+    uintptr_t accountName = (uintptr_t)this->charInfoObj->account_name_tmp;
     TMPText_SetColor(accountName, color);
 }
 
@@ -148,7 +148,7 @@ void NameChangeModule::ChangePlayerName(const char* name)
     if (!this->GetCharInfoObject())
         return;
 
-    uintptr_t accountName_TMP = (uintptr_t)this->charInfoObj->accountName_TMP;
+    uintptr_t accountName_TMP = (uintptr_t)this->charInfoObj->account_name_tmp;
 
     if (this->oldPlayerName == "\0")
     {
@@ -170,8 +170,8 @@ void NameChangeModule::ChangeGuildName(const char* name)
     if (!this->GetCharInfoObject())
         return;
 
-    uintptr_t guildInfo_Obj = (uintptr_t)this->charInfoObj->guildInfo_Obj;
-    uintptr_t guildName_TMP = (uintptr_t)this->charInfoObj->guildName_TMP;
+    uintptr_t guildInfo_Obj = (uintptr_t)this->charInfoObj->guild_info_obj;
+    uintptr_t guildName_TMP = (uintptr_t)this->charInfoObj->guild_name_tmp;
 
     uintptr_t guildInfo_Transform = GameObject_GetTransform(guildInfo_Obj);
     String* guildName_str = il2cpp_string_new("Guildname");
