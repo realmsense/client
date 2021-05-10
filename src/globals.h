@@ -8,8 +8,8 @@ void LoadSettings();
 // Pointers (game objects)
 extern uintptr_t g_pBaseAddress;
 extern Entity* g_pPlayer;
+extern CameraManager* g_pCameraManager;
 extern uintptr_t g_pMainCamera;
-extern uintptr_t g_pCameraManager;
 extern uintptr_t g_pIdleWatcher;
 extern uintptr_t g_pMapViewHelper;
 

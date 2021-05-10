@@ -16,7 +16,6 @@ UnlimitedZoomModule::UnlimitedZoomModule()
 
     this->zoomAmount = 7.2f;
     this->perspectiveEditorEnabled = false;
-    this->cameraPerspectiveEditor = 0;
 
     this->ready();
 }
@@ -48,27 +47,18 @@ bool UnlimitedZoomModule::onEvent(ModuleEvent event, CDataPack* dp)
 {
     switch (event)
     {
-    case ModuleEvent::CameraManager_Update:
-        return this->onCameraManagerUpdate();
     default:
         return true;
     }
 }
 
-bool UnlimitedZoomModule::onCameraManagerUpdate()
-{
-    uintptr_t cameraPerspectiveEditor = *(uintptr_t*)(g_pCameraManager + 0x48); // OOJJDIANIBF
-    this->cameraPerspectiveEditor = cameraPerspectiveEditor;
-    this->perspectiveEditorEnabled = Behaviour_get_enabled(cameraPerspectiveEditor);
-    return true;
-}
-
 void UnlimitedZoomModule::Zoom(float amount)
 {
-    // TODO: GetObjectByType
     if (!g_pMainCamera)
     {
-        std::cout << "[" << this->name << "] g_pMainCamera is nullptr!" << std::endl;
+        this->log.color = Color32_RED;
+        this->log.floatingText = true;
+        this->log << "g_pMainCamera is null!" << std::endl;
         return;
     }
 
@@ -78,12 +68,15 @@ void UnlimitedZoomModule::Zoom(float amount)
 
 void UnlimitedZoomModule::TogglePerspectiveEditor(bool enabled)
 {
-    if (!this->cameraPerspectiveEditor)
+    uintptr_t perspective_editor = (uintptr_t)g_pCameraManager->camera_perspective_editor;
+    if (!perspective_editor)
     {
-        std::cout << "[" << this->name << "] cameraPerspectiveEditor is nullptr!" << std::endl;
+        this->log.color = Color32_RED;
+        this->log.floatingText = true;
+        this->log << "Camera Perspective Editor is null!" << std::endl;
         return;
     }
 
     this->perspectiveEditorEnabled = enabled;
-    Behaviour_set_enabled(this->cameraPerspectiveEditor, enabled);
+    Behaviour_set_enabled(perspective_editor, enabled);
 }

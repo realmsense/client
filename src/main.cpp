@@ -7,6 +7,20 @@
 
 #include <sstream>
 
+void UpdatePointers()
+{
+    // static objects, (DontDestroyOnLoad)
+    if (!g_pCameraManager)
+        g_pCameraManager = (CameraManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.CameraManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+
+    // dynamic objects
+    if (g_pCameraManager)
+    {
+        g_pMainCamera = (uintptr_t)g_pCameraManager->main_camera;
+        g_pPlayer = g_pCameraManager->N00000A56->player;
+    }
+}
+
 DWORD WINAPI MainThread(const HMODULE hModule)
 {
     CreateConsole();
@@ -67,6 +81,7 @@ DWORD WINAPI MainThread(const HMODULE hModule)
 
         // keep all module main functions running by calling every 4ms (game tick speed)
         CallEvent(ModuleEvent::MainLoop, nullptr);
+        UpdatePointers();
         Sleep(4);
     }
 

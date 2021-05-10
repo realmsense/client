@@ -9,7 +9,6 @@ public:
 
     float zoomAmount;
     bool perspectiveEditorEnabled;
-    uintptr_t cameraPerspectiveEditor;
 
     void onEnable();
     void onDisable();
@@ -20,5 +19,5 @@ public:
     void TogglePerspectiveEditor(bool enabled);
 
 private:
-    bool onCameraManagerUpdate();
+    //
 };

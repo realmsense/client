@@ -3,11 +3,10 @@
 
 // Pointers (game objects)
 uintptr_t g_pBaseAddress;
+CameraManager* g_pCameraManager;
 Entity* g_pPlayer;
 uintptr_t g_pMainCamera;
-uintptr_t g_pCameraManager;
-uintptr_t g_pIdleWatcher;
-uintptr_t g_pMapViewHelper;
+uintptr_t g_pMapViewHelper; // TODO: Get from g_pCameraManager static fields (DILPMFEEJCP 0x28)
 
 // Functions
 _System_GetType System_GetType;
@@ -57,12 +56,7 @@ bool g_bEnemyNames;
 
 void InitPointers()
 {
-    // Load pointers we can get easily from functions
-    // The remaining pointers will be set from detoured functions
     g_pBaseAddress = (uintptr_t)GetModuleHandle(L"GameAssembly.dll");
-
-    _GetMainCamera getMainCamera = (_GetMainCamera)(g_pBaseAddress + OFFSET_GET_MAINCAMERA);
-    g_pMainCamera = getMainCamera();
 
     System_GetType = (_System_GetType)(g_pBaseAddress + OFFSET_SYSTEM_GET_TYPE);
     il2cpp_string_new = (_il2cpp_string_new)(g_pBaseAddress + OFFSET_IL2CPP_STRING_NEW);

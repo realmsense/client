@@ -14,24 +14,7 @@ auto detour_unity_thread_update(uintptr_t __this) -> void*
     return original_unity_thread_update(__this);
 }
 
-_PlayerUpdate original_player_update = nullptr;
-
-auto detour_player_update(Entity player) -> void*
-{
-    if (&player != g_pPlayer)
-    {
-        // changed map, clear stuff
-        g_aEnemyList.clear();
-    }
-
-    g_pPlayer = &player;
-
-    //std::cout << std::hex << *(uintptr_t*)&player << std::endl;
-    return original_player_update(player);
-}
-
 _EntityUpdate original_entity_update = nullptr;
-
 auto detour_entity_update(Entity entity) -> void*
 {
     // ignore if this is our player
@@ -52,20 +35,7 @@ auto detour_entity_update(Entity entity) -> void*
     return original_entity_update(entity);
 }
 
-_CameraManagerUpdate original_camera_manager_update = nullptr;
-
-auto detour_camera_manager_update(uintptr_t cameraManager) -> void*
-{
-    g_pCameraManager = cameraManager;
-
-    if (!CallEvent(ModuleEvent::CameraManager_Update, nullptr))
-        return nullptr;
-
-    return original_camera_manager_update(cameraManager);
-}
-
 _Input_GetMousePos original_input_get_mouse_pos = nullptr;
-
 auto detour_input_get_mouse_pos(uintptr_t __this) -> Vector3
 {
     auto mouse_pos = original_input_get_mouse_pos(__this);
@@ -214,24 +184,10 @@ auto init_hooks() -> bool
         return false;
     }
 
-    const auto PlayerUpdate = (void*)(g_pBaseAddress + OFFSET_PLAYER_UPDATE);
-    if (MH_CreateHook(PlayerUpdate, detour_player_update, reinterpret_cast<LPVOID*>(&original_player_update)) != MH_OK)
-    {
-        MessageBoxA(nullptr, "Failed to Detour PlayerUpdate", "RotMGInternal", MB_OK);
-        return false;
-    }
-
     const auto EntityUpdate = (void*)(g_pBaseAddress + OFFSET_ENTITY_UPDATE);
     if (MH_CreateHook(EntityUpdate, detour_entity_update, reinterpret_cast<LPVOID*>(&original_entity_update)) != MH_OK)
     {
         MessageBoxA(nullptr, "Failed to Detour EntityUpdate", "RotMG Internal", MB_OK);
-        return 1;
-    }
-
-    const auto CameraManager_Update = (void*)(g_pBaseAddress + OFFSET_CAMERAMANAGER_UPDATE);
-    if (MH_CreateHook(CameraManager_Update, detour_camera_manager_update, reinterpret_cast<LPVOID*>(&original_camera_manager_update)) != MH_OK)
-    {
-        MessageBoxA(nullptr, "Failed to Detour CameraManager_Update", "RotMG Internal", MB_OK);
         return 1;
     }
 

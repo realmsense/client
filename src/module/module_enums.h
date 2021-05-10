@@ -6,7 +6,6 @@ enum class ModuleEvent
     UnityThread_Update,
     GetMousePos,
     Tile_SetColor,
-    CameraManager_Update,
     SocketManager_Connect,
     TMP_SetText,
     Pet_Update
