@@ -1,36 +1,13 @@
-#pragma once
-#include "../structs.h"
-#include <cstdint>
-
 // Created with ReClass.NET 1.2 by KN4CK3R
-
-enum class ClassList {
-    Any,
-    Rogue,
-    Archer,
-    Wizard,
-    Priest,
-    Warrior,
-    Knight,
-    Paladin,
-    Assassin,
-    Necromancer,
-    Huntress,
-    Mystic,
-    Trickster,
-    Sorcerer,
-    Ninja,
-    Samurai,
-    Bard,
-    Summoner,
-    Count
-};
 
 enum class EntityType : int32_t
 {
-    ArenaPortal = 5,
     BasicMapObject = 0,
-    Blacksmith = 43,
+    Projectile = 1,
+    Particle = 2,
+    ParticleEffect = 3,
+    MapObject = 4,
+    ArenaPortal = 5,
     CaveWall = 6,
     Character = 7,
     CharacterChanger = 8,
@@ -40,51 +17,71 @@ enum class EntityType : int32_t
     ConnectedWall = 12,
     Container = 13,
     DailyLoginRewards = 14,
-    DoubleWall = 37,
-    Empty = 38,
+    GuildHallPortal = 15,
+    GuildRegister = 16,
     GuildBoard = 17,
     GuildChronicle = 18,
-    GuildHallPortal = 15,
     GuildMerchant = 19,
-    GuildRegister = 16,
-    MapObject = 4,
     Merchant = 20,
     MoneyChanger = 21,
     MysteryBoxGround = 22,
     NameChanger = 23,
     OneWayContainer = 24,
-    Particle = 2,
-    ParticleEffect = 3,
     Pet = 25,
     PetUpgrader = 26,
     Player = 27,
     Portal = 28,
-    PremiumVaultContainer = 42,
-    Projectile = 1,
-    QuestRewards = 30,
     ReskinVendor = 29,
+    QuestRewards = 30,
     SellableObject = 31,
-    Sign = 34,
     SpiderWeb = 32,
     Stalagmite = 33,
-    VaultContainer = 41,
-    VaultGiftContainer = 40,
+    Sign = 34,
     Wall = 35,
+    YardUpgrader = 36,
+    DoubleWall = 37,
+    Empty = 38,
     WallOfFame = 39,
-    YardUpgrader = 36
+    VaultGiftContainer = 40,
+    VaultContainer = 41,
+    PremiumVaultContainer = 42,
+    Blacksmith = 43
 };
 
-enum class FloatingTextTypes : int32_t
+enum class FloatingTextType : int32_t
 {
-    ConditionEffect = 6,
+    Xp = 0,
     Damage = 1,
-    Exaltation = 8,
     Fame = 2,
     LevelUp = 3,
-    NewClassUnlock = 5,
-    Notification = 7,
     QuestComplete = 4,
-    Xp = 0
+    NewClassUnlock = 5,
+    ConditionEffect = 6,
+    Notification = 7,
+    Exaltation = 8
+};
+
+enum class ClassList : int32_t
+{
+    Any = 0,
+    Rogue = 1,
+    Archer = 2,
+    Wizard = 3,
+    Priest = 4,
+    Warrior = 5,
+    Knight = 6,
+    Paladin = 7,
+    Assassin = 8,
+    Necromancer = 9,
+    Huntress = 10,
+    Mystic = 11,
+    Trickster = 12,
+    Sorcerer = 13,
+    Ninja = 14,
+    Samurai = 15,
+    Bard = 16,
+    Summoner = 17,
+    Count = 18
 };
 
 class Entity
@@ -100,12 +97,13 @@ public:
     bool alive; //0x0060
     char pad_0061[91]; //0x0061
     EntityType entity_type; //0x00BC
-    char pad_00C0[152]; //0x00C0
+    char pad_00C0[8]; //0x00C0
+    class Settings* settings; //0x00C8
+    char pad_00D0[136]; //0x00D0
     class String* name; //0x0158
     char pad_0160[52]; //0x0160
-    int32_t skinID; //0x0194
+    int32_t skin_id; //0x0194
     char pad_0198[52]; //0x0198
-    char pad_0160[108]; //0x0160
     int32_t max_hp; //0x01CC
     int32_t hp; //0x01D0
     char pad_01D4[464]; //0x01D4
@@ -129,7 +127,7 @@ public:
     int32_t pos_x; //0x003C
     int32_t pos_y; //0x0040
     char pad_0044[20]; //0x0044
-    class ObjectProperties* OBGKICHNIDN; //0x0058
+    class ObjectProperties* properties; //0x0058
     char pad_0060[1000]; //0x0060
 }; //Size: 0x0448
 
@@ -163,14 +161,6 @@ public:
     class String* prefab_name; //0x00D0
     char pad_00D8[3960]; //0x00D8
 }; //Size: 0x1050
-
-class NBJLMDOACBC
-{
-public:
-    char pad_0000[32]; //0x0000
-    class List* player_list; //0x0020
-    char pad_0028[280]; //0x0028
-}; //Size: 0x0140
 
 class List
 {
@@ -211,3 +201,71 @@ public:
     void* guild_icon_img; //0x0038
     char pad_0040[320]; //0x0040
 }; //Size: 0x0180
+
+class MapViewHelper
+{
+public:
+    char pad_0000[16]; //0x0000
+    int32_t map_width; //0x0010
+    int32_t map_height; //0x0014
+    char pad_0018[36]; //0x0018
+    float fog_distance; //0x003C
+    float fog_opacity; //0x0040
+    float loaded_tile_distance; //0x0044
+    float unloaded_tile_distance; //0x0048
+    int32_t pos_x; //0x004C
+    int32_t pos_y; //0x0050
+    char pad_0054[92]; //0x0054
+    void* game_controller; //0x00B0
+    char pad_00B8[144]; //0x00B8
+}; //Size: 0x0148
+
+class Settings
+{
+public:
+    char pad_0000[212]; //0x0000
+    float rotate_speed; //0x00D4
+    char pad_00D8[1896]; //0x00D8
+}; //Size: 0x0840
+
+class CameraManager
+{
+public:
+    char pad_0000[32]; //0x0000
+    void* main_camera_container_transf; //0x0020
+    char pad_0028[8]; //0x0028
+    void* pro_camera_2d; //0x0030
+    void* pro_camera_2d_pixelperf; //0x0038
+    void* main_camera; //0x0040
+    void* camera_perspective_editor; //0x0048
+    char pad_0050[24]; //0x0050
+    class DKMLMKFGPCC* N00000A56; //0x0068
+    char pad_0070[80]; //0x0070
+}; //Size: 0x00C0
+
+class DKMLMKFGPCC
+{
+public:
+    char pad_0000[56]; //0x0000
+    class Entity* player; //0x0038
+    char pad_0040[144]; //0x0040
+    int32_t map_width; //0x00D0
+    int32_t map_height; //0x00D4
+    class String* map_name; //0x00D8
+    char pad_00E0[64]; //0x00E0
+    void* socket_manager; //0x0120
+    void* game_controller; //0x0128
+    char pad_0130[56]; //0x0130
+    class ServerInfo* server_info; //0x0168
+    char pad_0170[664]; //0x0170
+}; //Size: 0x0408
+
+class ServerInfo
+{
+public:
+    char pad_0000[16]; //0x0000
+    class String* name; //0x0010
+    class String* server_address; //0x0018
+    int32_t port; //0x0020
+    char pad_0024[996]; //0x0024
+}; //Size: 0x0408

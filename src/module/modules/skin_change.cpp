@@ -118,10 +118,10 @@ bool SkinChangeModule::onMainLoop()
 
 void SkinChangeModule::ChangeSkin(int skin_id)
 {
+    this->skin_id = skin_id;
     if (g_pPlayer)
     {
-        this->skin_id = skin_id;
-        g_pPlayer->skinID = skin_id;
+        g_pPlayer->skin_id = this->skin_id;
     }
 }
 

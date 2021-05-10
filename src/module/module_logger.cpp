@@ -29,7 +29,7 @@ void ModuleLogger::log(char c)
 
         if (this->floatingText && g_pPlayer)
         {
-            ShowFloatingText(stream.str().c_str(), FloatingTextTypes(0), this->color);
+            ShowFloatingText(stream.str().c_str(), FloatingTextType(0), this->color);
         }
 
         stream.str("");
