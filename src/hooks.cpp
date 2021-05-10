@@ -17,6 +17,8 @@ auto detour_unity_thread_update(uintptr_t __this) -> void*
 _EntityUpdate original_entity_update = nullptr;
 auto detour_entity_update(Entity entity) -> void*
 {
+    // TODO: probably a list of entities somewhere. maybe a static field
+
     // ignore if this is our player
     if (&entity == g_pPlayer)
     {

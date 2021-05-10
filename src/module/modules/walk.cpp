@@ -28,11 +28,8 @@ void WalkModule::onEnable()
     this->log.floatingText = false;
     this->log << this->name << " enabled" << std::endl;
 
-    if (g_pPlayer)
-    {
-        this->oldSpeed = g_pPlayer->speed;
-        g_pPlayer->speed /= this->walkModifier;
-    }
+    this->oldSpeed = g_pPlayer->speed;
+    g_pPlayer->speed /= this->walkModifier;
 }
 
 void WalkModule::onDisable()
@@ -43,10 +40,7 @@ void WalkModule::onDisable()
     this->log.floatingText = false;
     this->log << this->name << " disabled" << std::endl;
 
-    if (g_pPlayer)
-    {
-        g_pPlayer->speed = oldSpeed;
-    }
+    g_pPlayer->speed = oldSpeed;
 }
 
 void WalkModule::renderGUI()

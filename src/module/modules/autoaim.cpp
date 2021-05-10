@@ -69,6 +69,9 @@ bool AutoAimModule::onEvent(ModuleEvent event, CDataPack* dp)
 
 bool AutoAimModule::onGetMousePos(CDataPack* dp)
 {
+    if (!g_pCameraManager) return true;
+    if (!g_pPlayer) return true;
+
     dp->Reset();
     Vector3 mouse_pos{};
     mouse_pos.x = dp->ReadFloat();

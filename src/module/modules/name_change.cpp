@@ -145,16 +145,12 @@ void NameChangeModule::ChangePlayerName(const char* name)
 {
     this->customPlayerName = name;
 
-    if (!this->GetCharInfoObject())
-        return;
+    if (!this->GetCharInfoObject()) return;
+    if (!g_pPlayer) return;
 
     uintptr_t accountName_TMP = (uintptr_t)this->charInfoObj->account_name_tmp;
-
     if (this->oldPlayerName == "\0")
-    {
-        //String* accountName_txt = *(String**)(accountName_TMP + 0xc8); // m_text, too lazy to make TMPro_Text in reclass for just 1 prop
         this->oldPlayerName = ReadUnityString(g_pPlayer->name);
-    }
 
     String* str = il2cpp_string_new(name);
     TMPText_SetText(accountName_TMP, str, true);

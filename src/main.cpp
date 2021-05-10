@@ -9,7 +9,7 @@
 
 void UpdatePointers()
 {
-    // static objects, (DontDestroyOnLoad)
+    // static objects, only set once (DontDestroyOnLoad)
     if (!g_pCameraManager)
         g_pCameraManager = (CameraManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.CameraManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
 
