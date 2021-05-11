@@ -9,7 +9,8 @@ enum class ModuleEvent
     SocketManager_Connect,
     TMP_SetText,
     Pet_Update,
-    MapChange
+    MapChange,
+    GetKeyDown
 };
 
 enum class ModuleCategory {

@@ -139,23 +139,31 @@ auto detour_tmp_text_set_text_internal(uintptr_t __this, String* text, bool sync
 }
 
 _Input_GetKey original_input_get_key = nullptr;
-
-auto detour_input_get_key(void* keyCode) -> bool
+bool detour_input_get_key(int keyCode)
 {
-    if (g_bGUIBlockInputs && g_bMenuOpen)
+    CDataPack dp;
+    dp.PackCell(keyCode);
+
+    if (!CallEvent(ModuleEvent::GetKeyDown, &dp))
         return false;
-    else
-        return original_input_get_key(keyCode);
+
+    dp.Reset();
+    keyCode = dp.ReadCell();
+    return original_input_get_key(keyCode);
 }
 
 _Input_GetKey original_input_get_key_down = nullptr;
-
-auto detour_input_get_key_down(void* keyCode) -> bool
+bool detour_input_get_key_down(int keyCode)
 {
-    if (g_bGUIBlockInputs && g_bMenuOpen)
+    CDataPack dp;
+    dp.PackCell(keyCode);
+
+    if (!CallEvent(ModuleEvent::GetKeyDown, &dp))
         return false;
-    else
-        return original_input_get_key_down(keyCode);
+
+    dp.Reset();
+    keyCode = dp.ReadCell();
+    return original_input_get_key_down(keyCode);
 }
 
 _Map_ViewHelper_Update Original_Map_ViewHelper_Update = nullptr;

@@ -15,6 +15,7 @@ NameChangeModule::NameChangeModule()
     this->hasGuiElements = true;
 
     this->charInfoObj = 0;
+    this->input_focused = false;
 
     this->customPlayerName = "";
     this->originalPlayerName = "\0";
@@ -56,9 +57,12 @@ void NameChangeModule::onDisable()
 
 void NameChangeModule::renderGUI()
 {
+    bool input_focused = false;
+
     static char customPlayerName[128] = "";
     if (ImGui::InputText("Custom Player Name", customPlayerName, IM_ARRAYSIZE(customPlayerName)))
         this->ChangePlayerName(customPlayerName);
+    if (ImGui::IsItemFocused()) input_focused = true;
 
     if (ImGui::Checkbox("Rainbow Name", &this->rainbowName))
         this->ToggleRainbowName(this->rainbowName);
@@ -66,6 +70,9 @@ void NameChangeModule::renderGUI()
     static char customGuildName[128] = "";
     if (ImGui::InputText("Custom Guild Name", customGuildName, IM_ARRAYSIZE(customGuildName)))
         this->ChangeGuildName(customGuildName);
+    if (ImGui::IsItemFocused()) input_focused = true;
+
+    this->input_focused = input_focused;
 }
 
 bool NameChangeModule::onEvent(ModuleEvent event, CDataPack* dp)
@@ -74,6 +81,8 @@ bool NameChangeModule::onEvent(ModuleEvent event, CDataPack* dp)
     {
     case ModuleEvent::MainLoop:
         return this->onMainLoop();
+    case ModuleEvent::GetKeyDown:
+        return this->onGetKeyDown();
     case ModuleEvent::MapChange:
         return this->onMapChange();
     case ModuleEvent::TMP_SetText:
@@ -103,6 +112,11 @@ bool NameChangeModule::onMainLoop()
     }
 
     return true;
+}
+
+bool NameChangeModule::onGetKeyDown()
+{
+    return !this->input_focused; // block inputs if input focused
 }
 
 bool NameChangeModule::onMapChange()

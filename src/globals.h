@@ -47,7 +47,6 @@ extern _ShowFloatingText __ShowFloatingText;
 
 // Variables / Settings
 extern bool g_bMenuOpen;
-extern bool g_bGUIBlockInputs;
 extern bool g_bWindowFocused;
 extern std::unordered_set<Entity*> g_aEnemyList;
 extern std::vector<Entity*> g_aPlayerList;

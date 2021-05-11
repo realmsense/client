@@ -11,9 +11,9 @@ public:
     void onDisable();
     void renderGUI();
     bool onEvent(ModuleEvent event, CDataPack* dp);
-    bool onMainLoop();
-    bool onTMPSetText(CDataPack* dp);
-    bool onMapChange();
+
+
+    bool input_focused;
 
     const char* customGuildName;
     std::string originalGuildName;
@@ -31,4 +31,9 @@ public:
 private:
     CharacterInfo_GUI* charInfoObj;
     bool GetCharInfoObject();
+
+    bool onMainLoop();
+    bool onGetKeyDown();
+    bool onTMPSetText(CDataPack* dp);
+    bool onMapChange();
 };
