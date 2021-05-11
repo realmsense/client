@@ -17,13 +17,14 @@ NameChangeModule::NameChangeModule()
     this->charInfoObj = 0;
 
     this->customPlayerName = "";
+    this->originalPlayerName = "\0";
+
     this->customGuildName = "";
-    this->oldGuildName = "\0";
-    this->oldPlayerName = "\0";
+    this->originalGuildName = "\0";
 
     Color white{ 1.0f, 1.0f, 1.0f, 1.0f };
-    this->rainbowText = false;
-    this->nameColor = white;
+    this->rainbowName = false;
+    this->customNameColor = white;
 
     this->ready();
 }
@@ -40,6 +41,17 @@ void NameChangeModule::onDisable()
     this->log.color = Color32_RED;
     this->log.floatingText = true;
     this->log << this->name << " disabled" << std::endl;
+
+    // Reset to original names / color
+    if (this->originalPlayerName != "\0")
+        this->ChangePlayerName(this->originalPlayerName.c_str());
+
+    if (this->originalGuildName != "\0")
+        this->ChangeGuildName(this->originalGuildName.c_str());
+
+    this->rainbowName = false;
+    Color white{ 1.0f, 1.0f, 1.0f, 1.0f };
+    this->ChangeNameColor(white);
 }
 
 void NameChangeModule::renderGUI()
@@ -48,15 +60,8 @@ void NameChangeModule::renderGUI()
     if (ImGui::InputText("Custom Player Name", customPlayerName, IM_ARRAYSIZE(customPlayerName)))
         this->ChangePlayerName(customPlayerName);
 
-    if (ImGui::Checkbox("Rainbow Name", &this->rainbowText))
-    {
-        if (!this->rainbowText)
-        {
-            // Reset name back to white text
-            Color white{ 1.0f, 1.0f, 1.0f, 1.0f };
-            this->ChangeNameColor(white);
-        }
-    }
+    if (ImGui::Checkbox("Rainbow Name", &this->rainbowName))
+        this->ToggleRainbowName(this->rainbowName);
 
     static char customGuildName[128] = "";
     if (ImGui::InputText("Custom Guild Name", customGuildName, IM_ARRAYSIZE(customGuildName)))
@@ -78,16 +83,21 @@ bool NameChangeModule::onEvent(ModuleEvent event, CDataPack* dp)
 
 bool NameChangeModule::onMainLoop()
 {
-    if (this->rainbowText)
+    this->enabled =
+        this->rainbowName
+        || strlen(this->customPlayerName) != 0
+        || strlen(this->customGuildName) != 0;
+
+    if (this->rainbowName)
     {
         static float hue = 1.0f;
         static float speed = 0.0035f;
         hue += speed;
         if (hue > 360.0f) hue = 1.0f;
-
         ImVec4 rainbow = (ImVec4)(ImColor)ImColor::HSV(hue, 1.0f, 1.0f);
-        this->nameColor = { rainbow.x, rainbow.y, rainbow.z, 1.0f };
-        this->ChangeNameColor(this->nameColor);
+
+        this->customNameColor = { rainbow.x, rainbow.y, rainbow.z, 1.0f };
+        this->ChangeNameColor(this->customNameColor);
     }
 
     return true;
@@ -100,28 +110,30 @@ bool NameChangeModule::onTMPSetText(CDataPack* dp)
     const char* txt2 = dp->ReadString(&txtLen);
     std::string text(txt2);
 
+    // Replace instances of our original player/guild name with our custom name
+
     if (
-        strlen(this->customPlayerName)                      // we have a custom name
-        && this->oldPlayerName != "\0"                      // old name is set
-        && this->customPlayerName != this->oldPlayerName    // custom name is not our old name
+        strlen(this->customPlayerName)                          // we have a custom name
+        && this->originalPlayerName != "\0"                     // old name is set
+        && this->customPlayerName != this->originalPlayerName   // custom name is not our old name
     ) {
         std::string::size_type n = 0;
-        while ((n = text.find(this->oldPlayerName, n)) != std::string::npos)
+        while ((n = text.find(this->originalPlayerName, n)) != std::string::npos)
         {
-            text.replace(n, this->oldPlayerName.size(), this->customPlayerName);
+            text.replace(n, this->originalPlayerName.size(), this->customPlayerName);
             n += strlen(this->customPlayerName);
         }
     }
 
     if (
-        strlen(this->customGuildName)                   // we have a custom guild name
-        && this->oldGuildName != "\0"                   // old guild name is set
-        && this->customGuildName != this->oldGuildName  // custom guild name is not our actual guild name
+        strlen(this->customGuildName)                           // we have a custom guild name
+        && this->originalGuildName != "\0"                      // old guild name is set
+        && this->customGuildName != this->originalGuildName     // custom guild name is not our actual guild name
     ) {
         std::string::size_type n = 0;
-        while ((n = text.find(this->oldGuildName, n)) != std::string::npos)
+        while ((n = text.find(this->originalGuildName, n)) != std::string::npos)
         {
-            text.replace(n, this->oldGuildName.size(), this->customGuildName);
+            text.replace(n, this->originalGuildName.size(), this->customGuildName);
             n += strlen(this->customGuildName);
         }
     }
@@ -132,10 +144,23 @@ bool NameChangeModule::onTMPSetText(CDataPack* dp)
     return true;
 }
 
+void NameChangeModule::ToggleRainbowName(bool enabled)
+{
+    this->rainbowName = enabled;
+    if (!this->rainbowName)
+    {
+        // Reset name back to white text
+        Color white{ 1.0f, 1.0f, 1.0f, 1.0f };
+        this->ChangeNameColor(white);
+    }
+}
+
 void NameChangeModule::ChangeNameColor(Color color)
 {
-    if (!this->GetCharInfoObject())
-        return;
+    this->customNameColor = color;
+
+    if (!this->GetCharInfoObject()) return;
+    if (!g_pPlayer) return;
 
     uintptr_t accountName = (uintptr_t)this->charInfoObj->account_name_tmp;
     TMPText_SetColor(accountName, color);
@@ -149,14 +174,14 @@ void NameChangeModule::ChangePlayerName(const char* name)
     if (!g_pPlayer) return;
 
     uintptr_t accountName_TMP = (uintptr_t)this->charInfoObj->account_name_tmp;
-    if (this->oldPlayerName == "\0")
-        this->oldPlayerName = ReadUnityString(g_pPlayer->name);
+    if (this->originalPlayerName == "\0")
+        this->originalPlayerName = ReadUnityString(g_pPlayer->name);
 
     String* str = il2cpp_string_new(name);
     TMPText_SetText(accountName_TMP, str, true);
 
     this->log.floatingText = false;
-    this->log << "[" << this->name << "] Changed player name to: " << name << std::endl;
+    this->log << "[" << this->name << "] Player name set to: " << name << std::endl;
 }
 
 void NameChangeModule::ChangeGuildName(const char* name)
@@ -173,10 +198,10 @@ void NameChangeModule::ChangeGuildName(const char* name)
     String* guildName_str = il2cpp_string_new("Guildname");
     uintptr_t guildName_Obj = Component_GetGameObject(Transform_Find(guildInfo_Transform, guildName_str));
 
-    if (this->oldGuildName == "\0")
+    if (this->originalGuildName == "\0")
     {
         String* guildName_txt = *(String**)(guildName_TMP + 0xc8); // m_text, too lazy to make TMPro_Text in reclass for just 1 prop
-        this->oldGuildName = ReadUnityString(guildName_txt);
+        this->originalGuildName = ReadUnityString(guildName_txt);
     }
 
     String* str = il2cpp_string_new(this->customGuildName);

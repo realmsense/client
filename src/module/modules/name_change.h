@@ -15,15 +15,16 @@ public:
     bool onTMPSetText(CDataPack* dp);
 
     const char* customGuildName;
-    std::string oldGuildName;
+    std::string originalGuildName;
     void ChangeGuildName(const char* name);
 
     const char* customPlayerName;
-    std::string oldPlayerName;
+    std::string originalPlayerName;
     void ChangePlayerName(const char* name);
 
-    bool rainbowText;
-    Color nameColor;
+    bool rainbowName;
+    Color customNameColor;
+    void ToggleRainbowName(bool enabled);
     void ChangeNameColor(Color color);
 
 private:
