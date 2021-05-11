@@ -19,6 +19,13 @@ void UpdatePointers()
         g_pMainCamera = (uintptr_t)g_pCameraManager->main_camera;
         g_pPlayer = g_pCameraManager->N00000A56->player;
     }
+
+    static Entity* old_player = g_pPlayer;
+    if (g_pPlayer != old_player && g_pPlayer != nullptr)
+    {
+        CallEvent(ModuleEvent::MapChange, NULL);
+        old_player = g_pPlayer;
+    }
 }
 
 DWORD WINAPI MainThread(const HMODULE hModule)
@@ -59,11 +66,6 @@ DWORD WINAPI MainThread(const HMODULE hModule)
         {
             uintptr_t obj = FindObjectByQualifiedName("CharacterGUIInfoSection, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
             std::cout << std::hex << obj << std::endl;
-
-            //String* player_QualifiedName = il2cpp_string_new("JFNHHLNJJKP, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
-            //uintptr_t player_Type = System_GetType(player_QualifiedName);
-            //uintptr_t player_Obj = Object_FindObjectOfType(player_Type);
-            //std::cout << std::hex << player_Obj << std::endl;
         }
 
         if (GetAsyncKeyState(VK_DELETE) & 1)

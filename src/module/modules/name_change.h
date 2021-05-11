@@ -13,6 +13,7 @@ public:
     bool onEvent(ModuleEvent event, CDataPack* dp);
     bool onMainLoop();
     bool onTMPSetText(CDataPack* dp);
+    bool onMapChange();
 
     const char* customGuildName;
     std::string originalGuildName;

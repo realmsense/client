@@ -89,30 +89,24 @@ void SkinChangeModule::renderGUI()
 
         GUI_WrapInLoop(i, skinList[active_class].size());
     }
-
 }
 
 bool SkinChangeModule::onEvent(ModuleEvent event, CDataPack* dp)
 {
     switch (event)
     {
-    case ModuleEvent::MainLoop:
-        return this->onMainLoop();
+    case ModuleEvent::MapChange:
+        return this->onMapChange();
     default:
         return true;
     }
 }
 
-bool SkinChangeModule::onMainLoop()
+bool SkinChangeModule::onMapChange()
 {
-    static uintptr_t old_player_addr;
-    if (old_player_addr != (uintptr_t)g_pPlayer)
-    {
-        if (this->enabled)
-            this->ChangeSkin(this->skin_id);
-    }
+    if (this->enabled)
+        this->ChangeSkin(this->skin_id);
 
-    old_player_addr = (uintptr_t)g_pPlayer;
     return true;
 }
 

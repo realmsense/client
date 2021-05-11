@@ -74,6 +74,8 @@ bool NameChangeModule::onEvent(ModuleEvent event, CDataPack* dp)
     {
     case ModuleEvent::MainLoop:
         return this->onMainLoop();
+    case ModuleEvent::MapChange:
+        return this->onMapChange();
     case ModuleEvent::TMP_SetText:
         return this->onTMPSetText(dp);
     default:
@@ -100,6 +102,18 @@ bool NameChangeModule::onMainLoop()
         this->ChangeNameColor(this->customNameColor);
     }
 
+    return true;
+}
+
+bool NameChangeModule::onMapChange()
+{
+    if (strlen(this->customPlayerName))
+        this->ChangePlayerName(this->customPlayerName);
+
+    if (strlen(this->customGuildName))
+        this->ChangeGuildName(this->customGuildName);
+
+    this->ChangeNameColor(this->customNameColor);
     return true;
 }
 

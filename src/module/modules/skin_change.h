@@ -18,7 +18,7 @@ public:
     int skin_id;
 
 private:
-    bool onMainLoop();
+    bool onMapChange();
 };
 
 struct Skin : Image

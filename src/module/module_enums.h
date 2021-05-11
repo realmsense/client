@@ -8,7 +8,8 @@ enum class ModuleEvent
     Tile_SetColor,
     SocketManager_Connect,
     TMP_SetText,
-    Pet_Update
+    Pet_Update,
+    MapChange
 };
 
 enum class ModuleCategory {
