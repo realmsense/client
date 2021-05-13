@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="user\main.cpp">
-      <Filter>user</Filter>
+    <ClCompile Include="src\il2cpp\framework\helpers.cpp">
+      <Filter>Source Files\il2cpp\framework</Filter>
     </ClCompile>
-    <ClCompile Include="framework\il2cpp-init.cpp">
-      <Filter>framework</Filter>
+    <ClCompile Include="src\il2cpp\framework\il2cpp-init.cpp">
+      <Filter>Source Files\il2cpp\framework</Filter>
     </ClCompile>
-    <ClCompile Include="framework\helpers.cpp">
-      <Filter>framework</Filter>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="user\main.h">
-      <Filter>user</Filter>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
     </ClInclude>
-    <ClInclude Include="appdata\il2cpp-api-functions.h">
-      <Filter>appdata</Filter>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions-ptr.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
     </ClInclude>
-    <ClInclude Include="appdata\il2cpp-api-functions-ptr.h">
-      <Filter>appdata</Filter>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-functions.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
     </ClInclude>
-    <ClInclude Include="appdata\il2cpp-functions.h">
-      <Filter>appdata</Filter>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-metadata-version.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
     </ClInclude>
-    <ClInclude Include="appdata\il2cpp-metadata-version.h">
-      <Filter>appdata</Filter>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-types.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
     </ClInclude>
-    <ClInclude Include="appdata\il2cpp-types.h">
-      <Filter>appdata</Filter>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-types-ptr.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
     </ClInclude>
-    <ClInclude Include="appdata\il2cpp-types-ptr.h">
-      <Filter>appdata</Filter>
+    <ClInclude Include="src\il2cpp\framework\helpers.h">
+      <Filter>Source Files\il2cpp\framework</Filter>
     </ClInclude>
-    <ClInclude Include="framework\il2cpp-appdata.h">
-      <Filter>framework</Filter>
+    <ClInclude Include="src\il2cpp\framework\il2cpp-appdata.h">
+      <Filter>Source Files\il2cpp\framework</Filter>
     </ClInclude>
-    <ClInclude Include="framework\il2cpp-init.h">
-      <Filter>framework</Filter>
-    </ClInclude>
-    <ClInclude Include="framework\helpers.h">
-      <Filter>framework</Filter>
+    <ClInclude Include="src\il2cpp\framework\il2cpp-init.h">
+      <Filter>Source Files\il2cpp\framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="appdata">
-      <UniqueIdentifier>{49e9fd78-3008-4038-9a43-a54dc8e0b2fd}</UniqueIdentifier>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{c3991249-53d9-4663-b823-441c82806314}</UniqueIdentifier>
     </Filter>
-    <Filter Include="framework">
-      <UniqueIdentifier>{7081e915-fc84-47bf-93c3-438297f0d7b2}</UniqueIdentifier>
+    <Filter Include="Source Files\il2cpp">
+      <UniqueIdentifier>{dc2bbb52-9536-4571-96a7-2149171c040e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="user">
-      <UniqueIdentifier>{46c0389f-bd35-4e0c-95b6-ec00007aae38}</UniqueIdentifier>
+    <Filter Include="Source Files\il2cpp\appdata">
+      <UniqueIdentifier>{546707ff-b898-48af-8038-b7dd4817781d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp\framework">
+      <UniqueIdentifier>{d7579c01-2e7e-42c3-9c03-4525d63f9370}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

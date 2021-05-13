@@ -19,27 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="framework\helpers.cpp" />
-    <ClCompile Include="framework\il2cpp-init.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="user\main.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="src\il2cpp\framework\helpers.cpp" />
+    <ClCompile Include="src\il2cpp\framework\il2cpp-init.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="appdata\il2cpp-api-functions.h" />
-    <ClInclude Include="appdata\il2cpp-api-functions-ptr.h" />
-    <ClInclude Include="appdata\il2cpp-functions.h" />
-    <ClInclude Include="appdata\il2cpp-metadata-version.h" />
-    <ClInclude Include="appdata\il2cpp-types-ptr.h" />
-    <ClInclude Include="appdata\il2cpp-types.h" />
-    <ClInclude Include="framework\helpers.h" />
-    <ClInclude Include="framework\il2cpp-appdata.h" />
-    <ClInclude Include="framework\il2cpp-init.h" />
-    <ClInclude Include="user\main.h" />
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions-ptr.h" />
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h" />
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-functions.h" />
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-metadata-version.h" />
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-types-ptr.h" />
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-types.h" />
+    <ClInclude Include="src\il2cpp\framework\helpers.h" />
+    <ClInclude Include="src\il2cpp\framework\il2cpp-appdata.h" />
+    <ClInclude Include="src\il2cpp\framework\il2cpp-init.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <!--<VCProjectVersion>16.0</VCProjectVersion>-->
@@ -156,7 +149,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch-il2cpp.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(ProjectDir)appdata;$(ProjectDir)framework;$(ProjectDir)user</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\il2cpp\appdata;$(ProjectDir)src\il2cpp\framework</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -175,7 +168,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch-il2cpp.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(ProjectDir)appdata;$(ProjectDir)framework;$(ProjectDir)user</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src\il2cpp\appdata;$(ProjectDir)src\il2cpp\framework</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
