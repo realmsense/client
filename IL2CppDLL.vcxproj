@@ -22,6 +22,10 @@
     <ClCompile Include="src\il2cpp\framework\helpers.cpp" />
     <ClCompile Include="src\il2cpp\framework\il2cpp-init.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions-ptr.h" />
@@ -33,6 +37,7 @@
     <ClInclude Include="src\il2cpp\framework\helpers.h" />
     <ClInclude Include="src\il2cpp\framework\il2cpp-appdata.h" />
     <ClInclude Include="src\il2cpp\framework\il2cpp-init.h" />
+    <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <!--<VCProjectVersion>16.0</VCProjectVersion>-->
@@ -146,10 +151,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;IL2CPPDLL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch-il2cpp.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\il2cpp\appdata;$(ProjectDir)src\il2cpp\framework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)src\il2cpp\appdata;$(ProjectDir)src\il2cpp\framework</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -165,10 +170,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;IL2CPPDLL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch-il2cpp.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(ProjectDir)src\il2cpp\appdata;$(ProjectDir)src\il2cpp\framework</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)src\il2cpp\appdata;$(ProjectDir)src\il2cpp\framework</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
