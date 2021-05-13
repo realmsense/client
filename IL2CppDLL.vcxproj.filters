@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="user\main.cpp">
+      <Filter>user</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\dllmain.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\helpers.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\il2cpp-init.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\pch-il2cpp.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="user\main.h">
+      <Filter>user</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-api-functions.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-api-functions-ptr.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-functions.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-metadata-version.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-types.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="appdata\il2cpp-types-ptr.h">
+      <Filter>appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\helpers.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\il2cpp-appdata.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\il2cpp-init.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\pch-il2cpp.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="appdata">
+      <UniqueIdentifier>{49e9fd78-3008-4038-9a43-a54dc8e0b2fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{7081e915-fc84-47bf-93c3-438297f0d7b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="user">
+      <UniqueIdentifier>{46c0389f-bd35-4e0c-95b6-ec00007aae38}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
