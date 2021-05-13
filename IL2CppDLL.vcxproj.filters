@@ -4,13 +4,10 @@
     <ClCompile Include="user\main.cpp">
       <Filter>user</Filter>
     </ClCompile>
-    <ClCompile Include="framework\dllmain.cpp">
+    <ClCompile Include="framework\il2cpp-init.cpp">
       <Filter>framework</Filter>
     </ClCompile>
     <ClCompile Include="framework\helpers.cpp">
-      <Filter>framework</Filter>
-    </ClCompile>
-    <ClCompile Include="framework\il2cpp-init.cpp">
       <Filter>framework</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,13 +33,13 @@
     <ClInclude Include="appdata\il2cpp-types-ptr.h">
       <Filter>appdata</Filter>
     </ClInclude>
-    <ClInclude Include="framework\helpers.h">
-      <Filter>framework</Filter>
-    </ClInclude>
     <ClInclude Include="framework\il2cpp-appdata.h">
       <Filter>framework</Filter>
     </ClInclude>
     <ClInclude Include="framework\il2cpp-init.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\helpers.h">
       <Filter>framework</Filter>
     </ClInclude>
   </ItemGroup>
