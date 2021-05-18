@@ -19,10 +19,10 @@ typedef String* (__cdecl* _il2cpp_string_new)(const char* str);                 
 typedef void(__cdecl* _SocketManager_Connect)(uintptr_t __this, String* address, int port, String* OUTGOING_KEY, String* INCOMING_KEY); // OFFSET_SOCKET_MANAGER_CONNECT
 typedef void* (__cdecl* _CameraManagerUpdate)(uintptr_t cameraManager);                                     // OFFSET_CAMERAMANAGER_UPDATE
 typedef void(__cdecl* _ShowFloatingText)(uintptr_t MapObjectUIManager, FloatingTextType type, String* str, __int64 color, float holdTime); // OFFSET_SHOW_FLOATING_TEXT
-typedef void* (__cdecl* _UnityThread_Update)(uintptr_t __this);                                             // OFFSET_UNITYTHREAD_UPDATE
+typedef void (__cdecl* _UnityThread_Update)(uintptr_t __this);                                              // OFFSET_UNITYTHREAD_UPDATE
 typedef void* (__cdecl* _PlayerUpdate)(Entity __this);                                                      // OFFSET_PLAYER_UPDATE
-typedef void* (__cdecl* _EntityUpdate)(Entity entity);                                                      // OFFSET_ENTITY_UPDATE
-typedef void* (__cdecl* _PetUpdate)(Entity pet, bool AMKOONDPFBD);                                          // OFFSET_PET_UPDATE
+typedef void (__cdecl* _EntityUpdate)(Entity entity);                                                       // OFFSET_ENTITY_UPDATE
+typedef void (__cdecl* _PetUpdate)(Entity pet, bool AMKOONDPFBD);                                           // OFFSET_PET_UPDATE
 typedef void  (__cdecl* _Map_ViewHelper_Update)(uintptr_t __this, int gameOpenTimeMS);                      // OFFSET_MAP_VIEWHELPER_UPDATE
 typedef void(__cdecl* _DisableFog)(uintptr_t FJBJOOHPBDL);                                                  // OFFSET_DISABLE_FOG
 typedef void(__cdecl* _EnableFog)(uintptr_t FJBJOOHPBDL);                                                   // OFFSET_ENABLE_FOG

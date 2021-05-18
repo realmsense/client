@@ -5,8 +5,6 @@
 #include "module/module_list.h"
 #include "module/module_manager.h"
 
-#include <sstream>
-
 void UpdatePointers()
 {
     // static objects, only set once (DontDestroyOnLoad)
@@ -28,14 +26,16 @@ void UpdatePointers()
     }
 }
 
-DWORD WINAPI MainThread(const HMODULE hModule)
+void MainThread(HMODULE hModule)
 {
     CreateConsole();
     InitPointers();
-    init_hooks();
+    InitHooks();
     LoadSettings();
     LoadModules();
     InitGui();
+
+    // TODO: Exit if hooks are not succesfully initialized
 
     while (true)
     {
@@ -50,27 +50,17 @@ DWORD WINAPI MainThread(const HMODULE hModule)
             g_bMenuOpen = !g_bMenuOpen;
         }
 
-        // Remove enemies that no longer exist - https://stackoverflow.com/a/15662547
-        for (auto it = g_aEnemyList.begin(); it != g_aEnemyList.end();)
-        {
-            Entity* enemy = *it;
-            if (!enemy->alive)
-                it = g_aEnemyList.erase(it);
-            else
-                // we are incrementing an incrementor while looping inside a loop here
-                // if we postfix instead of prefix 
-                ++it;
-        }
-
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
-            uintptr_t obj = FindObjectByQualifiedName("CharacterGUIInfoSection, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
-            std::cout << std::hex << obj << std::endl;
+            CameraManager* cameraManager = (CameraManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.CameraManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+            Entity* player = cameraManager->N00000A56->player;
+            std::string player_name = ReadUnityString(player->name);
+            std::cout << player_name << std::endl;
         }
 
         if (GetAsyncKeyState(VK_DELETE) & 1)
         {
-
+            //
         }
 
         // v key - toggle noclip
@@ -81,18 +71,16 @@ DWORD WINAPI MainThread(const HMODULE hModule)
             noclip_module->toggleModule();
         }
 
-        // keep all module main functions running by calling every 4ms (game tick speed)
         CallEvent(ModuleEvent::MainLoop, nullptr);
-        UpdatePointers();
-        Sleep(4);
+        Sleep(5);
     }
 
     RemoveConsole();
-    remove_hooks();
+    RemoveHooks();
     UnloadModules();
     RemoveGui();
     FreeLibraryAndExitThread(hModule, 0);
-    return TRUE;
+    return;
 }
 
 BOOL WINAPI DllMain(HMODULE hModule, DWORD fdwReason, LPVOID lpReserved)

@@ -36,10 +36,10 @@ std::string ReadUnityString(String* str)
 std::string ReadUnityString(uintptr_t addr)
 {
     std::stringstream sstream;
-    const int length = *(int*)(addr + 0x10);
+    int length = *(int*)(addr + 0x10);
     for (int i = 0; i < length; i++)
     {
-        const wchar_t charAt = *(wchar_t*)(addr + 0x14 + (0x2 * i));
+        wchar_t charAt = *(wchar_t*)(addr + 0x14 + (0x2 * i));
         sstream << (char)charAt;
     }
     return sstream.str();
@@ -48,7 +48,7 @@ std::string ReadUnityString(uintptr_t addr)
 uintptr_t FindGameObject(const char* name)
 {
     String* obj_name = il2cpp_string_new(name);
-    const uintptr_t gameObject = GameObject_Find(obj_name);
+    uintptr_t gameObject = GameObject_Find(obj_name);
     return gameObject;
 }
 
