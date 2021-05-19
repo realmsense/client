@@ -30,7 +30,7 @@ namespace app {
 void init_il2cpp()
 {
 	// Get base address of IL2CPP module
-	uintptr_t baseAddress = il2cppi_get_base_address();
+	uintptr_t baseAddress = GetBaseAddress();
 
 	using namespace app;
 
