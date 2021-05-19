@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "il2cpp-init.h"
 #include "helpers.h"
+#include "gui.h"
 
 using namespace app;
 
@@ -8,6 +9,7 @@ DWORD WINAPI MainThread(const HMODULE hModule)
 {
     il2cpp_thread_attach(il2cpp_domain_get());
     CreateConsole();
+    InitGui();
 
     while (true)
     {
@@ -22,6 +24,7 @@ DWORD WINAPI MainThread(const HMODULE hModule)
         }
     }
 
+    RemoveGui();
     RemoveConsole();
     FreeLibraryAndExitThread(hModule, 0);
     return TRUE;

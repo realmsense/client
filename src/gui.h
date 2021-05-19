@@ -1,0 +1,2 @@
+bool InitGui();
+void RemoveGui();
