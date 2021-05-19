@@ -3,6 +3,9 @@
 #include "helpers.h"
 #include "gui.h"
 
+#include "module/module_list.h"
+#include "module/module_manager.h"
+
 using namespace app;
 
 DWORD WINAPI MainThread(const HMODULE hModule)
@@ -10,6 +13,7 @@ DWORD WINAPI MainThread(const HMODULE hModule)
     il2cpp_thread_attach(il2cpp_domain_get());
     CreateConsole();
     InitGui();
+    ModuleManager::LoadModules();
 
     while (true)
     {
@@ -22,8 +26,16 @@ DWORD WINAPI MainThread(const HMODULE hModule)
         {
             std::cout << "Hello, World!" << std::endl;
         }
+
+        // V key - toggle noclip
+        if (GetAsyncKeyState(0x56) & 1)
+        {
+            NoclipModule* noclip = ModuleManager::FindModule<NoclipModule>(ModuleList::Noclip);
+            noclip->toggleModule();
+        }
     }
 
+    ModuleManager::UnloadModules();
     RemoveGui();
     RemoveConsole();
     FreeLibraryAndExitThread(hModule, 0);

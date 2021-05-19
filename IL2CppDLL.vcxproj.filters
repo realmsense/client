@@ -55,6 +55,15 @@
     <ClCompile Include="src\minhook\src\hde\hde64.c">
       <Filter>Source Files\minhook</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\module_manager.cpp">
+      <Filter>Source Files\module</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\module.cpp">
+      <Filter>Source Files\module</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\modules\noclip.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h">
@@ -102,9 +111,6 @@
     <ClInclude Include="src\imgui\imgui_internal.h">
       <Filter>Source Files\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="src\gui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\kiero\kiero.h">
       <Filter>Source Files\kiero</Filter>
     </ClInclude>
@@ -128,6 +134,24 @@
     </ClInclude>
     <ClInclude Include="src\minhook\src\hde\table64.h">
       <Filter>Source Files\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\module_manager.h">
+      <Filter>Source Files\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\module.h">
+      <Filter>Source Files\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\noclip.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\module_list.h">
+      <Filter>Source Files\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\module_enums.h">
+      <Filter>Source Files\module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +178,12 @@
     </Filter>
     <Filter Include="Source Files\minhook">
       <UniqueIdentifier>{61ae7d89-0003-43ae-9a00-d0efea67afe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\module">
+      <UniqueIdentifier>{73c5f675-5e99-4458-b5c2-ce6a7a6de1a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\module\modules">
+      <UniqueIdentifier>{93271a72-b9a3-4134-8e46-eab7ded76b66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

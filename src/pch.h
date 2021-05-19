@@ -8,5 +8,8 @@
 #include <windows.h>
 #include <iostream>
 #include <string>
+#include <vector>
+
+#include "module/module_enums.h"
 
 #endif //PCH_H

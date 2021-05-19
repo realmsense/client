@@ -3,8 +3,9 @@
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_win32.h"
 #include "imgui/imgui_impl_dx11.h"
-
 #include <d3d11.h>
+
+#include "module/module_manager.h"
 
 typedef HRESULT(__stdcall* Present) (IDXGISwapChain* pSwapChain, UINT SyncInterval, UINT Flags);
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -64,7 +65,16 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::ShowDemoWindow();
+    //ImGui::ShowDemoWindow();
+
+    ImGui::Begin("RotMG Internal");
+
+    for (Module* module : ModuleManager::modules)
+    {
+        ImGui::Text(module->name.c_str());
+    }
+
+    ImGui::End();
 
     ImGui::Render();
     g_pContext->OMSetRenderTargets(1, &g_pRenderTargetView, NULL);
