@@ -6,6 +6,8 @@ class Module {
 public:
 
 	bool initialized;
+
+	// set in parent ctor
 	std::string name;
 	bool enabled;
 	ModuleCategory category;

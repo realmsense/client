@@ -24,9 +24,6 @@ void MainThread(HMODULE hModule)
 
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
-            String* qualifiedName = reinterpret_cast<String*>(il2cpp_string_new("DecaGames.RotMG.Extensions.UnityThread, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null"));
-            Type* unityThreadType = Type_GetType_2(qualifiedName, nullptr);
-
             std::cout << "Hello, World!" << std::endl;
         }
 

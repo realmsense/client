@@ -1,6 +1,8 @@
 #include "pch.h"
 #include <codecvt>
 
+using namespace app;
+
 uintptr_t GetBaseAddress()
 {
     return (uintptr_t)GetModuleHandle(L"GameAssembly.dll");
@@ -27,7 +29,15 @@ std::string il2cppi_to_string(Il2CppString* str)
 }
 
 // Convert System.String to std::string - can simply be casted
-std::string il2cppi_to_string(app::String* str)
+std::string il2cppi_to_string(String* str)
 {
     return il2cppi_to_string(reinterpret_cast<Il2CppString*>(str));
+}
+
+Object_1* FindObjectByQualifiedName(const char* assemblyQualifiedName)
+{
+    String* qualified_name = (String*)il2cpp_string_new(assemblyQualifiedName);
+    Type* type = Type_GetType_2(qualified_name, nullptr);
+    Object_1* object = Object_1_FindObjectOfType(type, nullptr);
+    return object;
 }
