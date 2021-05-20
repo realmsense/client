@@ -8,7 +8,7 @@
 
 using namespace app;
 
-DWORD WINAPI MainThread(const HMODULE hModule)
+void MainThread(HMODULE hModule)
 {
     il2cpp_thread_attach(il2cpp_domain_get());
     CreateConsole();
@@ -24,6 +24,9 @@ DWORD WINAPI MainThread(const HMODULE hModule)
 
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
+            String* qualifiedName = reinterpret_cast<String*>(il2cpp_string_new("DecaGames.RotMG.Extensions.UnityThread, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null"));
+            Type* unityThreadType = Type_GetType_2(qualifiedName, nullptr);
+
             std::cout << "Hello, World!" << std::endl;
         }
 
@@ -39,7 +42,6 @@ DWORD WINAPI MainThread(const HMODULE hModule)
     RemoveGui();
     RemoveConsole();
     FreeLibraryAndExitThread(hModule, 0);
-    return TRUE;
 }
 
 BOOL WINAPI DllMain(HMODULE hModule, DWORD fdwReason, LPVOID lpReserved)

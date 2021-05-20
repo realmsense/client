@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 uintptr_t GetBaseAddress();
 void CreateConsole();
 void RemoveConsole();

@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="src\il2cpp\framework\il2cpp-init.cpp">
-      <Filter>Source Files\il2cpp\framework</Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0927fe21-a2cc-4bb7-b887-fe71b340d42d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp">
+      <UniqueIdentifier>{04ace69b-532b-44c3-a971-7987c512104e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp\appdata">
+      <UniqueIdentifier>{65156da5-f6a3-4d94-97c4-c2271a3cac89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp\framework">
+      <UniqueIdentifier>{ef24a836-2875-42ca-8550-a7bf287f30a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{85f00ee9-0de3-4d07-84b4-873d33059ce4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\helpers.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\il2cpp\framework\il2cpp-init.cpp">
+      <Filter>Source Files\il2cpp\framework</Filter>
     </ClCompile>
     <ClCompile Include="src\pch.cpp">
       <Filter>Header Files</Filter>
@@ -66,6 +86,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\helpers.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h">
       <Filter>Source Files\il2cpp\appdata</Filter>
     </ClInclude>
