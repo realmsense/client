@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "noclip.h"
+#include "helpers.h"
 
 #include "imgui/imgui.h"
 
@@ -16,18 +17,22 @@ NoclipModule::NoclipModule()
 void NoclipModule::onEnable()
 {
 	std::cout << "[" << this->name << "] " << "enabled" << std::endl;
-
-	// Disable UnityThread
+	this->toggleNoclip();
 }
 
 void NoclipModule::onDisable()
 {
 	std::cout << "[" << this->name << "] " << "disabled" << std::endl;
-
-	// Enable UnityThread
+	this->toggleNoclip();
 }
 
 void NoclipModule::renderGUI()
 {
 	ImGui::Text("hiii");
+}
+
+void NoclipModule::toggleNoclip()
+{
+	UnityThread* unity_thread = (UnityThread*)FindObjectByQualifiedName("DecaGames.RotMG.Extensions.UnityThread, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+	Behaviour_set_enabled((Behaviour*)unity_thread, !this->enabled, nullptr);
 }
