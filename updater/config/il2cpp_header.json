@@ -1,0 +1,23 @@
+{
+    "structs": [
+        "Type",
+        "RuntimeTypeHandle",
+        "String",
+        "Object_1",
+        "Behaviour",
+        "Component_1",
+        "MonoBehaviour",
+        "UnityThread"
+    ],
+    "dependencies": [
+        "__Class",
+        "__Fields",
+        "__StaticFields",
+        "__VTable"
+    ],
+    "functions": [
+        "Behaviour_set_enabled",
+        "Object_1_FindObjectOfType",
+        "Type_GetType_2"
+    ]
+}
