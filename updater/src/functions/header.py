@@ -22,9 +22,18 @@ def generate_il2cpp_functions():
             line = line.replace("\n", "")
             for function in functions:
                 search = f", {function},"
-                if search in line:
+                search2 = f", {function}__MethodInfo"
+                if search in line or search2 in line:
                     lines.append(line)
                     functions.remove(function)
+
+    if len(functions) > 0:
+        logger.log(logging.ERROR, "Failed to get the following functions:")
+        IndentFilter.level += 1
+
+        for function in functions:
+            logger.log(logging.INFO, function)
+        IndentFilter.level -= 1
 
     logger.log(logging.INFO, "Outputting...")
     output_functions = ROOT_DIR / "../src/il2cpp/appdata/il2cpp-functions.h"
@@ -80,7 +89,7 @@ def generate_il2cpp_types():
                 search2 = "struct __declspec(align(8)) " + struct + " {" # using regex is too slow lol
                 if search in line or search2 in line:
                     if in_struct:
-                        print(f"ERROR! {current_struct} did not end!")
+                        logger.log(logging.ERROR, f"Struct '{current_struct}' did not end!")
                         return
                     
                     in_struct = True
@@ -97,6 +106,14 @@ def generate_il2cpp_types():
             if "};" in line and in_struct:
                 in_struct = False
                 lines.append("")
+
+    if len(structs) > 0:
+        logger.log(logging.ERROR, "Failed to get the following structs:")
+        IndentFilter.level += 1
+
+        for struct in structs:
+            logger.log(logging.INFO, struct)
+        IndentFilter.level -= 1
 
     logger.log(logging.INFO, "Outputting...")
     output_types = ROOT_DIR / "../src/il2cpp/appdata/il2cpp-types.h"

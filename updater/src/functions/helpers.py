@@ -15,7 +15,7 @@ def read_json(file_path):
 
 def delete_dir_contents(dir: Path):
     shutil.rmtree(dir, ignore_errors=True)
-    sleep(1)
+    sleep(5)
     os.mkdir(dir)
 
 def parse_int(str):
