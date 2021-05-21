@@ -84,6 +84,9 @@
     <ClCompile Include="src\module\modules\noclip.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
+    <ClCompile Include="src\hooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers.h">
@@ -112,9 +115,6 @@
     </ClInclude>
     <ClInclude Include="src\il2cpp\framework\il2cpp-init.h">
       <Filter>Source Files\il2cpp\framework</Filter>
-    </ClInclude>
-    <ClInclude Include="src\pch.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\helpers.h">
       <Filter>Source Files</Filter>
@@ -175,6 +175,12 @@
     </ClInclude>
     <ClInclude Include="src\module\module_enums.h">
       <Filter>Source Files\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hooks.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

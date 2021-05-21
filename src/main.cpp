@@ -2,6 +2,7 @@
 #include "il2cpp-init.h"
 #include "helpers.h"
 #include "gui.h"
+#include "hooks.h"
 
 #include "module/module_list.h"
 #include "module/module_manager.h"
@@ -14,6 +15,7 @@ void MainThread(HMODULE hModule)
     CreateConsole();
     InitGui();
     ModuleManager::LoadModules();
+    InitHooks();
 
     while (true)
     {
@@ -35,6 +37,7 @@ void MainThread(HMODULE hModule)
         }
     }
 
+    RemoveHooks();
     ModuleManager::UnloadModules();
     RemoveGui();
     RemoveConsole();
