@@ -28,7 +28,8 @@ namespace ModuleManager
         {
             switch (event)
             {
-                //
+                case ModuleEvent::Check_TileWalkable:
+                    return module->onCheckTileWalkable(args...);
             }
         }
         

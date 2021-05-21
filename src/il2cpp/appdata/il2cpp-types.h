@@ -2619,6 +2619,93 @@ struct Behaviour__Class {
     struct Behaviour__VTable vtable;
 };
 
+struct Color {
+    float r;
+    float g;
+    float b;
+    float a;
+};
+
+struct Color__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+    VirtualInvokeData Equals_1;
+};
+
+struct Color__StaticFields {
+};
+
+struct Color__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct Color__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct Color__VTable vtable;
+};
+
+struct Vector2 {
+    float x;
+    float y;
+};
+
+struct Vector2__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+    VirtualInvokeData Equals_1;
+};
+
+struct Vector2__StaticFields {
+    struct Vector2 zeroVector;
+    struct Vector2 oneVector;
+    struct Vector2 upVector;
+    struct Vector2 downVector;
+    struct Vector2 leftVector;
+    struct Vector2 rightVector;
+    struct Vector2 positiveInfinityVector;
+    struct Vector2 negativeInfinityVector;
+};
+
+struct Vector2__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct Vector2__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct Vector2__VTable vtable;
+};
+
+struct Color32 {
+    int32_t rgba;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a;
+};
+
+struct Color32__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct Color32__StaticFields {
+};
+
+struct Color32__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct Color32__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct Color32__VTable vtable;
+};
+
 struct MonoBehaviour__Fields {
     struct Behaviour__Fields _;
 };
@@ -2646,6 +2733,208 @@ struct MonoBehaviour__Class {
     const Il2CppRGCTXData *rgctx_data;
     Il2CppClass_1 _1;
     struct MonoBehaviour__VTable vtable;
+};
+
+struct float2 {
+    float x;
+    float y;
+};
+
+struct float2__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+    VirtualInvokeData Equals_1;
+    VirtualInvokeData ToString_1;
+};
+
+struct float2__StaticFields {
+    struct float2 zero;
+};
+
+struct float2__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct float2__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct float2__VTable vtable;
+};
+
+struct float3 {
+    float x;
+    float y;
+    float z;
+};
+
+struct float3__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+    VirtualInvokeData Equals_1;
+    VirtualInvokeData ToString_1;
+};
+
+struct float3__StaticFields {
+    struct float3 zero;
+};
+
+struct float3__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct float3__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct float3__VTable vtable;
+};
+
+struct Nullable_1_UnityEngine_Color_ {
+    struct Color value;
+    bool has_value;
+};
+
+struct Nullable_1_UnityEngine_Color___VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct Nullable_1_UnityEngine_Color___StaticFields {
+};
+
+struct Nullable_1_UnityEngine_Color___Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct Nullable_1_UnityEngine_Color___StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct Nullable_1_UnityEngine_Color___VTable vtable;
+};
+
+struct Nullable_1_UnityEngine_Vector2_ {
+    struct Vector2 value;
+    bool has_value;
+};
+
+struct __declspec(align(8)) DKMLMKFGPCC__Fields {
+    bool KEBGPCLOFJH;
+    bool JAEGLFBKDCP;
+    struct DKMLMKFGPCC_DHGDODKJNJN *DFDGAGGPLEH;
+    struct DKMLMKFGPCC_OGJFGACDEKE *KDCGIKPHJFA;
+    struct DKMLMKFGPCC_MBLHFLLOMLG *FBMOOHBCNNJ;
+    int32_t BMPFOBPIKCA;
+    struct JFNHHLNJJKP *HFLGDFNPKPM;
+    bool LKIENLEAKCC;
+    struct OHMNEJGNIPN__Array *GGBKLACPDJG;
+    struct List_1_OHMNEJGNIPN_ *BHNEFPBDEJD;
+    struct List_1_System_Int32_ *CADHHCKOIMJ;
+    struct List_1_System_Int32_ *ODPFOMDICHO;
+    struct List_1_System_String_ *OMELIBMGGEM;
+    int32_t GALCMPEJEGI;
+    struct EJBODKMBEFD *HNLNPENOIMG;
+    struct HMFEDLBIEAO *BNFMGIOKBKI;
+    struct List_1_NIIFJAMEHDD_ *CIEBEOHNLJM;
+    struct Dictionary_2_System_Int32_LAAIPMHLFJN_ *HPMOKNAFJDF;
+    struct Dictionary_2_System_Int32_GJLIMCBOCJG_ *EOJEMPFIIKE;
+    struct Dictionary_2_System_Int32_GJLIMCBOCJG_ *ECKBPNLBBNE;
+    struct Dictionary_2_System_Int32_NBNNMHCOFNH_ *GBAOPNLELNC;
+    uint32_t MOGLIILDEIF;
+    uint32_t ECOFENPBFEP;
+    uint32_t IABDDGDNMNJ;
+    struct List_1_GJLIMCBOCJG_ *DMCOAMBABIP;
+    float FJDCBDNKPIK;
+    float PIOFJNLBNPE;
+    int32_t HGIHNBDFGAH;
+    int32_t AEFPEAPINFO;
+    struct String *CPPJGLAJKED;
+    int32_t ODFIDOHGPMM;
+    struct DKEACECICEK *DIDLHGAIBPK;
+    int32_t BNPKHIHMFHE;
+    struct HCLAMODFNBI *LPKIADKODHC;
+    struct KBKBDLLEGGO *DKCDBOLECHM;
+    bool KNJGHIJFLEM;
+    bool FJPFDCDBLKI;
+    bool ELCOJPBJIKC;
+    bool MNKIKAPOBOE;
+    bool GOHAALMACCK;
+    int32_t AOECHPEAAAC;
+    bool NMLFLDHNEDF;
+    struct MiniMapManager *MPDIMLPFNBE;
+    struct SocketManager_1 *HPIPJDMLKLK;
+    struct GameController *LDNGFMMIBCA;
+    struct HNCCPCHKKHG *EOBDBMDFFGH;
+    struct JILKFLHPEGF *JBLCEJJJMEA;
+    struct NBJLMDOACBC *FHBAKPDKKGL;
+    struct BALKBFECMDM *EJFBENGLNBJ;
+    struct BGBHFKICMIM *EFNINMGLFDC;
+    bool FNECHJCLHHG;
+    struct String *AJHKGIIGFOI;
+    struct CLJPCEEAFLB *FIIHLJDNBII;
+    bool DFCANKGHGPN;
+    struct String *COHMCOPEGEA;
+    bool DPDMBFLALBE;
+    struct ErrorHandlerManager *OMKOFPHFHMH;
+    struct HEHABDBIFHE *HPBIJEAGJBK;
+    bool CBHDGGBKGDF;
+    struct FHLKOBABPEJ *EAPKKHBLMOM;
+    struct FHLKOBABPEJ *NKJOBLBIDOD;
+    struct DKMLMKFGPCC_HLDDJHLCJBJ *EIGANIOKCDO;
+    struct DKMLMKFGPCC_HLDDJHLCJBJ *GDGDJPDMCME;
+};
+
+struct DKMLMKFGPCC {
+    struct DKMLMKFGPCC__Class *klass;
+    MonitorData *monitor;
+    struct DKMLMKFGPCC__Fields fields;
+};
+
+struct DKMLMKFGPCC__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct DKMLMKFGPCC__StaticFields {
+    struct String *DGLELDANGBB;
+    struct List_1_System_String_ *OEBEDLBDAMA;
+    struct List_1_System_String_ *ENPBKGPCFMN;
+    struct List_1_System_String_ *CKCELAEFOFE;
+    bool FIDKPOAMOAO;
+    bool MDJOIJMEJBJ;
+    struct FJBJOOHPBDL *DILPMFEEJCP;
+    float LFDCHMKDHKP;
+};
+
+struct DKMLMKFGPCC__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct DKMLMKFGPCC__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct DKMLMKFGPCC__VTable vtable;
+};
+
+struct Nullable_1_UnityEngine_Vector2___VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct Nullable_1_UnityEngine_Vector2___StaticFields {
+};
+
+struct Nullable_1_UnityEngine_Vector2___Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct Nullable_1_UnityEngine_Vector2___StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct Nullable_1_UnityEngine_Vector2___VTable vtable;
 };
 
 struct UnityThread__Fields {

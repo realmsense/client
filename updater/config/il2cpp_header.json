@@ -2,12 +2,24 @@
     "structs": [
         "Type",
         "RuntimeTypeHandle",
+
         "String",
+        "float3",
+        "float2",
+        
+        "Vector2",
+        "Nullable_1_UnityEngine_Vector2_",
+        "Color32",
+        "Color",
+        "Nullable_1_UnityEngine_Color_",
+
         "Object_1",
         "Behaviour",
         "Component_1",
         "MonoBehaviour",
-        "UnityThread"
+
+        "UnityThread",
+        "DKMLMKFGPCC"
     ],
     "dependencies": [
         "__Class",
@@ -18,6 +30,7 @@
     "functions": [
         "Behaviour_set_enabled",
         "Object_1_FindObjectOfType",
-        "Type_GetType_2"
+        "Type_GetType_2",
+        "DKMLMKFGPCC_NAGLHCDBGIM"
     ]
 }

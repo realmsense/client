@@ -36,3 +36,12 @@ void NoclipModule::toggleNoclip()
 	UnityThread* unity_thread = (UnityThread*)FindObjectByQualifiedName("DecaGames.RotMG.Extensions.UnityThread, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
 	Behaviour_set_enabled((Behaviour*)unity_thread, !this->enabled, nullptr);
 }
+
+bool NoclipModule::onCheckTileWalkable(bool& override)
+{
+	if (this->enabled)
+	{
+		override = true;
+		return true;
+	}
+}

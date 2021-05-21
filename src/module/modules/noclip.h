@@ -10,6 +10,8 @@ public:
 	void onDisable() override;
 	void renderGUI() override;
 
+	virtual bool onCheckTileWalkable(bool& override) override;
+
 private:
 	void toggleNoclip();
 };

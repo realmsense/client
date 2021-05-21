@@ -1,9 +1,37 @@
 #include "pch.h"
+#include "helpers.h"
 #include "minhook/include/MinHook.h"
+#include "module/module_manager.h"
+
+typedef bool(__cdecl* _DKMLMKFGPCC_NAGLHCDBGIM)(DKMLMKFGPCC* __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo* method);
+_DKMLMKFGPCC_NAGLHCDBGIM Original_DKMLMKFGPCC_NAGLHCDBGIM = nullptr;
+bool Detour_DKMLMKFGPCC_NAGLHCDBGIM(DKMLMKFGPCC* __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo* method)
+{
+	// TODO: this stuff should be automatically generated using #defines
+
+	bool override = false;
+	bool ret = ModuleManager::CallEvent(ModuleEvent::Check_TileWalkable, override);
+
+	if (override)
+		return ret;
+	
+	return Original_DKMLMKFGPCC_NAGLHCDBGIM(__this, EOOJAMLJAOM, JDEKCEFBJFP, method);
+}
 
 bool InitHooks()
 {
 	bool ret = true;
+	uintptr_t baseAddress = GetBaseAddress();
+
+	// DO_APP_FUNC(0x01235A30, bool, DKMLMKFGPCC_NAGLHCDBGIM, (DKMLMKFGPCC * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method));
+	if (MH_CreateHook(DKMLMKFGPCC_NAGLHCDBGIM, Detour_DKMLMKFGPCC_NAGLHCDBGIM, reinterpret_cast<LPVOID*>(&Original_DKMLMKFGPCC_NAGLHCDBGIM)) != MH_OK)
+	{
+		std::cout << "Failed to Detour DKMLMKFGPCC_NAGLHCDBGIM" << std::endl;
+		ret = false;
+	}
+
+	// TODO: generate hooks automatically
+	// use #define DO_APP_FUNC and #include "il2cpp-functions.h" to generate
 
 	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)
 	{
