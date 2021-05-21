@@ -20,4 +20,18 @@ namespace ModuleManager
         }
         return nullptr;
     }
+
+    template<typename... Args>
+    bool CallEvent(ModuleEvent event, Args&&... args)
+    {
+        for (Module* module : modules)
+        {
+            switch (event)
+            {
+                //
+            }
+        }
+        
+        return true;
+    }
 }
