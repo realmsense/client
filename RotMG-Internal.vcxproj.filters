@@ -90,6 +90,9 @@
     <ClCompile Include="src\module\module_logger.cpp">
       <Filter>Source Files\module</Filter>
     </ClCompile>
+    <ClCompile Include="src\globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="src\module\module_logger.h">
       <Filter>Source Files\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\globals.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

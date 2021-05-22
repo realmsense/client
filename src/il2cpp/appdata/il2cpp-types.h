@@ -2863,6 +2863,54 @@ struct Nullable_1_UnityEngine_Color___Class {
     struct Nullable_1_UnityEngine_Color___VTable vtable;
 };
 
+enum class OMIPCDPIAOC__Enum : int32_t {
+    BasicMapObject = 0x00000000,
+    Projectile = 0x00000001,
+    Particle = 0x00000002,
+    ParticleEffect = 0x00000003,
+    MapObject = 0x00000004,
+    ArenaPortal = 0x00000005,
+    CaveWall = 0x00000006,
+    Character = 0x00000007,
+    CharacterChanger = 0x00000008,
+    ClosedGiftChest = 0x00000009,
+    ClosedVaultChest = 0x0000000a,
+    ConnectedObject = 0x0000000b,
+    ConnectedWall = 0x0000000c,
+    Container = 0x0000000d,
+    DailyLoginRewards = 0x0000000e,
+    GuildHallPortal = 0x0000000f,
+    GuildRegister = 0x00000010,
+    GuildBoard = 0x00000011,
+    GuildChronicle = 0x00000012,
+    GuildMerchant = 0x00000013,
+    Merchant = 0x00000014,
+    MoneyChanger = 0x00000015,
+    MysteryBoxGround = 0x00000016,
+    NameChanger = 0x00000017,
+    OneWayContainer = 0x00000018,
+    Pet = 0x00000019,
+    PetUpgrader = 0x0000001a,
+    Player = 0x0000001b,
+    Portal = 0x0000001c,
+    ReskinVendor = 0x0000001d,
+    QuestRewards = 0x0000001e,
+    SellableObject = 0x0000001f,
+    SpiderWeb = 0x00000020,
+    Stalagmite = 0x00000021,
+    Sign = 0x00000022,
+    Wall = 0x00000023,
+    YardUpgrader = 0x00000024,
+    DoubleWall = 0x00000025,
+    Empty = 0x00000026,
+    WallOfFame = 0x00000027,
+    VaultGiftContainer = 0x00000028,
+    VaultContainer = 0x00000029,
+    PremiumVaultContainer = 0x0000002a,
+    Blacksmith = 0x0000002b,
+    Summon = 0x0000002c,
+};
+
 struct __declspec(align(8)) GJLIMCBOCJG__Fields {
     struct ViewHandler *NJGEIJDFFND;
     struct ObjectProperties *BEHCPLKDAFD;
@@ -2920,6 +2968,31 @@ struct GJLIMCBOCJG {
     struct GJLIMCBOCJG__Class *klass;
     MonitorData *monitor;
     struct GJLIMCBOCJG__Fields fields;
+};
+
+enum class HLMENPGLNDH__Enum : int32_t {
+    Interaction = 0x00000000,
+    LootBag = 0x00000001,
+    Death = 0x00000002,
+    YardUpgrader = 0x00000003,
+    Wardrobe = 0x00000004,
+    Pet = 0x00000005,
+};
+
+enum class EFBAFDICAFG__Enum : int32_t {
+    Right = 0x00000000,
+    Left = 0x00000001,
+    Down = 0x00000002,
+    Up = 0x00000003,
+    None = 0x00000004,
+    First = 0x00000005,
+};
+
+enum class BJHJLINJFAI__Enum : int32_t {
+    Stand = 0x00000000,
+    Walk = 0x00000001,
+    Attack = 0x00000002,
+    NumAction = 0x00000003,
 };
 
 struct LAAIPMHLFJN__Fields {

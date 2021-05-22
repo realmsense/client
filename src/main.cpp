@@ -35,6 +35,9 @@ void MainThread(HMODULE hModule)
             NoclipModule* noclip = ModuleManager::FindModule<NoclipModule>(ModuleList::Noclip);
             noclip->toggleModule();
         }
+
+        CleanEnemyList();
+        Sleep(5);
     }
 
     RemoveHooks();

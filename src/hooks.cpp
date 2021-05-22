@@ -24,6 +24,20 @@ bool Detour_DKMLMKFGPCC_NAGLHCDBGIM(DKMLMKFGPCC* __this, float EOOJAMLJAOM, floa
 	return Original_DKMLMKFGPCC_NAGLHCDBGIM(__this, EOOJAMLJAOM, JDEKCEFBJFP, method);
 }
 
+void Detour_GJLIMCBOCJG_GPIMPPOPDJO(GJLIMCBOCJG* __this, MethodInfo* method)
+{
+	switch (__this->fields.CDNHIOHCAIB)
+	{
+		case OMIPCDPIAOC__Enum::Character: // enemy
+		{
+			g_aEnemyList.insert((COEDKELBKMI*)__this);
+			break;
+		}
+	}
+
+	return Original_GJLIMCBOCJG_GPIMPPOPDJO(__this, method);
+}
+
 bool InitHooks()
 {
 	bool ret = true;
@@ -35,8 +49,11 @@ bool InitHooks()
 		ret = false;
 	}
 
-	// TODO: generate hooks automatically
-	// use #define DO_APP_FUNC and #include "il2cpp-functions.h" to generate
+	if (MH_CreateHook(GJLIMCBOCJG_GPIMPPOPDJO, Detour_GJLIMCBOCJG_GPIMPPOPDJO, reinterpret_cast<LPVOID*>(&Original_GJLIMCBOCJG_GPIMPPOPDJO)) != MH_OK)
+	{
+		std::cout << "Failed to Detour GJLIMCBOCJG_GPIMPPOPDJO" << std::endl;
+		ret = false;
+	}
 
 	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)
 	{

@@ -7,6 +7,8 @@
 #ifndef PCH_H
 #define PCH_H
 
+#define _CPLUSPLUS_
+
 #include "il2cpp-appdata.h"
 
 #define WIN32_LEAN_AND_MEAN
@@ -14,7 +16,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_set>
 
+#include "globals.h"
 #include "module/module_enums.h"
 
 #endif //PCH_H

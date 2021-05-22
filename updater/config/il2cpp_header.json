@@ -40,7 +40,11 @@
         "__VTable"
     ],
     "enums": [
-        "CLEPBEMBHAJ"
+        "CLEPBEMBHAJ",
+        "OMIPCDPIAOC",
+        "HLMENPGLNDH",
+        "EFBAFDICAFG",
+        "BJHJLINJFAI"
     ],
     "functions": [
         "Behaviour_set_enabled",
@@ -48,6 +52,7 @@
         "Type_GetType_2",
         "DKMLMKFGPCC_NAGLHCDBGIM",
         "ApplicationManager_get_MapViewService",
-        "MapObjectUIManager_ShowFloatingText"
+        "MapObjectUIManager_ShowFloatingText",
+        "GJLIMCBOCJG_GPIMPPOPDJO"
     ]
 }
