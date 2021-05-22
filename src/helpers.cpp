@@ -41,3 +41,11 @@ Object_1* FindObjectByQualifiedName(const char* assemblyQualifiedName)
     Object_1* object = Object_1_FindObjectOfType(type, nullptr);
     return object;
 }
+
+JFNHHLNJJKP* GetPlayer()
+{
+    ApplicationManager* application_manager = (ApplicationManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.ApplicationManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+    DKMLMKFGPCC* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
+    JFNHHLNJJKP* player = map_view_service->fields.HFLGDFNPKPM;
+    return player;
+}

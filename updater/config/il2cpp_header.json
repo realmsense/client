@@ -19,7 +19,18 @@
         "MonoBehaviour",
 
         "UnityThread",
-        "DKMLMKFGPCC"
+        "ApplicationManager",
+        "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_",
+        "DKMLMKFGPCC",
+        "ProfilerMarker",
+        "EntityManager",
+
+
+        "JFNHHLNJJKP",
+        "COEDKELBKMI",
+        "LAAIPMHLFJN",
+        "GJLIMCBOCJG",
+        "PHFEMIPMDEK"
     ],
     "dependencies": [
         "__Class",
@@ -31,6 +42,7 @@
         "Behaviour_set_enabled",
         "Object_1_FindObjectOfType",
         "Type_GetType_2",
-        "DKMLMKFGPCC_NAGLHCDBGIM"
+        "DKMLMKFGPCC_NAGLHCDBGIM",
+        "ApplicationManager_get_MapViewService"
     ]
 }
