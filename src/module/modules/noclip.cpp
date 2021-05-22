@@ -11,6 +11,7 @@ NoclipModule::NoclipModule()
 	this->enabled = false;
 	this->category = ModuleCategory::MOVEMENT;
 	this->type = ModuleList::Noclip;
+	this->has_gui_elements = false;
 	this->ready();
 }
 
@@ -32,7 +33,7 @@ void NoclipModule::onDisable()
 
 void NoclipModule::renderGUI()
 {
-	ImGui::Text("hiii");
+	//
 }
 
 void NoclipModule::toggleNoclip()

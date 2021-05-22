@@ -11,6 +11,7 @@ public:
 	// set in parent ctor
 	std::string name;
 	bool enabled;
+	bool has_gui_elements;
 	ModuleCategory category;
 	ModuleList type;
 	ModuleLogger log;

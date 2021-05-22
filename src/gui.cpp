@@ -67,14 +67,52 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
     //ImGui::ShowDemoWindow();
 
-    ImGui::Begin("RotMG Internal");
+    const char* category_names[] = {
+        "View",         // ModuleCategory::VIEW
+        "Movement",     // ModuleCategory::MOVEMENT
+        "Auto",         // ModuleCategory::AUTO
+        "Other"         // ModuleCategory::OTHER
+    };
 
-    for (Module* module : ModuleManager::modules)
+    for (int i = 0; i < (int)ModuleCategory::Count; i++)
     {
-        ImGui::Text(module->name.c_str());
-    }
+        ModuleCategory category = ModuleCategory(i);
+        const char* category_name = category_names[i];
 
-    ImGui::End();
+        ImGui::Begin(category_name);
+        for (Module* module : ModuleManager::modules)
+        {
+            if (!module->initialized) continue;
+            if (module->category != category) continue;
+
+            const char* module_name = module->name.c_str();
+            ImGui::PushID(module_name);
+
+            if (ImGui::Checkbox("", &module->enabled))
+                module->setEnabled(module->enabled, true); // just call handlers, button changes bool.
+
+            const ImVec2 checkboxSize = ImGui::GetItemRectSize();
+            ImGui::SameLine();
+            if (!module->has_gui_elements)
+            {
+                // Empty header
+                ImGui::CollapsingHeader(module_name, ImGuiTreeNodeFlags_Leaf);
+            }
+            else
+            {
+                if (ImGui::CollapsingHeader(module_name))
+                {
+                    ImGui::Indent(checkboxSize.x + 5.0f);
+                    module->renderGUI();
+                    ImGui::Unindent(checkboxSize.x + 5.0f);
+                }
+            }
+
+            ImGui::PopID();
+        }
+
+        ImGui::End();
+    }
 
     ImGui::Render();
     g_pContext->OMSetRenderTargets(1, &g_pRenderTargetView, NULL);
