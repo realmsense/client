@@ -4,11 +4,13 @@
 Module::Module()
 {
 	this->initialized = false;
+	this->log = ModuleLogger();
 }
 
 void Module::ready()
 {
 	std::cout << "Loaded Module: " << this->name << std::endl;
+	this->log.module_name = this->name;
 	this->initialized = true;
 }
 

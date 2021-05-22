@@ -3174,6 +3174,90 @@ struct JFNHHLNJJKP {
     struct JFNHHLNJJKP__Fields fields;
 };
 
+struct ViewHandler__Fields {
+    struct MonoBehaviour__Fields _;
+    struct GameObject *value;
+    struct SpriteRenderer *content;
+    struct Renderer__Array *renderers;
+    struct Material *rendererMaterial;
+    struct Color rendererMaterialColor;
+    struct MapObjectUIManager *GUIManager;
+    struct JOBKMIIMCJN *iGUIManager;
+    struct SpriteShader *spriteShader;
+    struct GameObject *shadow;
+    struct SpriteRenderer *shadowRenderer;
+    struct ShadowShader *shadowShader;
+    struct TextMeshPro *label;
+    struct PHFEMIPMDEK *destroyEntity;
+    bool hasShadow;
+    bool OGAOHDGAFJH;
+    bool isParticle;
+    bool isBitmapParticle;
+    bool isStaticSizeParticle;
+    struct SpriteMask *spriteMask;
+    struct SortingGroup *sortingGroup;
+    bool hasContent;
+    struct Transform *viewTransform;
+    struct Transform *contentTransform;
+    struct Transform *shadowTransform;
+    struct GameObject *contentGameObject;
+    bool hasRenderers;
+    bool isDrawOnGround;
+    bool hideOnStart;
+    struct String *prefabName;
+    bool CBHDGGBKGDF;
+    float JEANKOGLJDB;
+    bool isVisible;
+    struct String *objectName;
+    bool used;
+    struct Transform *lootBagContainer;
+};
+
+struct ViewHandler {
+    struct ViewHandler__Class *klass;
+    MonitorData *monitor;
+    struct ViewHandler__Fields fields;
+};
+
+struct MapObjectUIManager__Fields {
+    struct MonoBehaviour__Fields _;
+    struct GUIInfoSection *infoSection;
+    struct Transform *floatingTextsContainer;
+    struct CharacterConditionUIManager *conditionUiManager;
+    struct List_1_DecaGames_RotMG_UI_Controllers_FloatingTextController_ *floatingTextPool;
+    struct SpeechBalloon *speechBalloon;
+    struct LAAIPMHLFJN *CKEINDDMPKI;
+    bool ECINHEJBKBL;
+    bool BOMCJCJPKEN;
+    float MOFILCGLDHH;
+    struct Transform *KALELMALCCC;
+    bool OAFEFMPBEOL;
+    int32_t BDLCHNMAKMA;
+    bool JMPKHFGDNJG;
+    struct FloatingTextController *PFEFEEGLGFO;
+    bool GDFLFIOMPNP;
+    int32_t KAPPAFBCLJK;
+    bool CBHDGGBKGDF;
+};
+
+struct MapObjectUIManager {
+    struct MapObjectUIManager__Class *klass;
+    MonitorData *monitor;
+    struct MapObjectUIManager__Fields fields;
+};
+
+enum class CLEPBEMBHAJ__Enum : int32_t {
+    Xp = 0x00000000,
+    Damage = 0x00000001,
+    Fame = 0x00000002,
+    LevelUp = 0x00000003,
+    QuestComplete = 0x00000004,
+    NewClassUnlock = 0x00000005,
+    ConditionEffect = 0x00000006,
+    Notification = 0x00000007,
+    Exaltation = 0x00000008,
+};
+
 struct PHFEMIPMDEK {
     struct PHFEMIPMDEK__Class *klass;
     MonitorData *monitor;
@@ -3251,6 +3335,119 @@ struct DKMLMKFGPCC {
     struct DKMLMKFGPCC__Fields fields;
 };
 
+struct MapObjectUIManager__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+    VirtualInvokeData Init;
+    VirtualInvokeData ShowFloatingText;
+    VirtualInvokeData ShowFloatingText_1;
+    VirtualInvokeData ShowSpeechBalloon;
+    VirtualInvokeData UpdateSortingOrder;
+    VirtualInvokeData StopAllFloatingTexts;
+    VirtualInvokeData CleanConditionIcons;
+    VirtualInvokeData Clean;
+    VirtualInvokeData ShowConditionIcons;
+    VirtualInvokeData GetUIContainer;
+    VirtualInvokeData OnCameraRotationUpdate;
+    VirtualInvokeData UpdateHpBar;
+    VirtualInvokeData UpdateBreathBar;
+    VirtualInvokeData UpdateName;
+    VirtualInvokeData UpdateSize;
+    VirtualInvokeData UpdateJoinedTime;
+    VirtualInvokeData ReturnToPool;
+    VirtualInvokeData ChangeViewScale;
+    VirtualInvokeData UpdateTransparencyValue;
+    VirtualInvokeData MHMMACMFKCI;
+    VirtualInvokeData LOLMLIHMMPH;
+    VirtualInvokeData DGAGBMJBICJ;
+    VirtualInvokeData HOPCACHLBLD;
+    VirtualInvokeData PGHNCJKEAMP;
+    VirtualInvokeData OCDGLJHHPDD;
+    VirtualInvokeData CGGGKNGOGON;
+    VirtualInvokeData KDLMOLDPDJG;
+    VirtualInvokeData AEIPNAPMGPG;
+    VirtualInvokeData NABILCKANHL;
+    VirtualInvokeData CLBGCBCBMKG;
+    VirtualInvokeData KEFPPHMKNDM;
+    VirtualInvokeData OLNJONBNAPF;
+    VirtualInvokeData ELHMNLDMEKF;
+    VirtualInvokeData OOPMPAMGGNN;
+    VirtualInvokeData EOLKMPIKELD;
+    VirtualInvokeData IKGDHGCBNOJ;
+    VirtualInvokeData EHBPNHBDDBL;
+    VirtualInvokeData INHPNOPJONC;
+    VirtualInvokeData EMMFBCDFPKK;
+    VirtualInvokeData DGACNOBNAAE;
+    VirtualInvokeData UpdateName_1;
+    VirtualInvokeData ANIHHOPCEPH;
+    VirtualInvokeData MPLIIJNKEME;
+    VirtualInvokeData EHGAJCHCKCB;
+    VirtualInvokeData AJHPCCMDFLB;
+    VirtualInvokeData FAJEIEGJJCH;
+    VirtualInvokeData NHFDDLLHNBG;
+    VirtualInvokeData GBBHGKOEMAI;
+    VirtualInvokeData CLNIAPLCBAF;
+    VirtualInvokeData PACLDCBFNGK;
+    VirtualInvokeData FNOCMFHOCNC;
+    VirtualInvokeData FNDKMEFHFFF;
+    VirtualInvokeData MBACJJLOJLM;
+    VirtualInvokeData JDDNIDGJKGG;
+    VirtualInvokeData LBKOCEDOLCN;
+    VirtualInvokeData GFFOINJDEFP;
+    VirtualInvokeData CHIBKHELPFH;
+    VirtualInvokeData Init_1;
+    VirtualInvokeData DFONHDONJIE;
+    VirtualInvokeData Clean_1;
+    VirtualInvokeData GKABOHHHFFB;
+    VirtualInvokeData OAMHFANACLK;
+    VirtualInvokeData AFCFPBIMFIK;
+    VirtualInvokeData UpdateSortingOrder_1;
+    VirtualInvokeData JDDFKEGBGEH;
+    VirtualInvokeData MFMAKCLNJON;
+    VirtualInvokeData OFFCIIHHAMO;
+    VirtualInvokeData Update;
+    VirtualInvokeData DOFCFCLKFOP;
+    VirtualInvokeData KPBDPMAMLAH;
+    VirtualInvokeData BFIGONIBJMN;
+    VirtualInvokeData GGCLNGLAJCH;
+    VirtualInvokeData ALOKLHMOPBF;
+    VirtualInvokeData FIDONHNDIAD;
+    VirtualInvokeData UpdateTransparencyValue_1;
+    VirtualInvokeData PMDCOOAKDMB;
+    VirtualInvokeData LGPKALDPKDG;
+    VirtualInvokeData NCCKLFMDOPM;
+    VirtualInvokeData UpdateJoinedTime_1;
+    VirtualInvokeData EACCHMHFMIE;
+    VirtualInvokeData UpdateBreathBar_1;
+    VirtualInvokeData GHPMNJHDDNO;
+    VirtualInvokeData IFPAAAKBBKI;
+    VirtualInvokeData OAELPMLIGDB;
+    VirtualInvokeData IHJEBJMCMEM;
+    VirtualInvokeData EMALFNHGPLE;
+    VirtualInvokeData OPMOCDNAMIA;
+    VirtualInvokeData PCGBNJGNLAH;
+};
+
+struct MapObjectUIManager__StaticFields {
+    struct String *CHLDBEFGEBM;
+    struct String *JABLNPOPOEG;
+    struct String *HCJBNHBPCNO;
+    struct String *FEPHLBCDFMC;
+    struct String *ELNMEHBPDKO;
+    struct String *OFKCDBDJABC;
+};
+
+struct MapObjectUIManager__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct MapObjectUIManager__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct MapObjectUIManager__VTable vtable;
+};
+
 struct PHFEMIPMDEK__VTable {
     VirtualInvokeData OOFAOFPHFMJ;
 };
@@ -3265,6 +3462,25 @@ struct PHFEMIPMDEK__Class {
     const Il2CppRGCTXData *rgctx_data;
     Il2CppClass_1 _1;
     struct PHFEMIPMDEK__VTable vtable;
+};
+
+struct ViewHandler__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct ViewHandler__StaticFields {
+};
+
+struct ViewHandler__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct ViewHandler__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct ViewHandler__VTable vtable;
 };
 
 struct DKMLMKFGPCC__VTable {

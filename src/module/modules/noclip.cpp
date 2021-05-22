@@ -16,13 +16,17 @@ NoclipModule::NoclipModule()
 
 void NoclipModule::onEnable()
 {
-	std::cout << "[" << this->name << "] " << "enabled" << std::endl;
+	this->log.floatingText(Color32_GREEN);
+	this->log << "ON" << std::endl;
+
 	this->toggleNoclip();
 }
 
 void NoclipModule::onDisable()
 {
-	std::cout << "[" << this->name << "] " << "disabled" << std::endl;
+	this->log.floatingText(Color32_RED);
+	this->log << "OFF" << std::endl;
+
 	this->toggleNoclip();
 }
 

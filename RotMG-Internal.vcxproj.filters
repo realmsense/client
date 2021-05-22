@@ -87,6 +87,9 @@
     <ClCompile Include="src\hooks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\module_logger.cpp">
+      <Filter>Source Files\module</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="src\hooks.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\module_logger.h">
+      <Filter>Source Files\module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

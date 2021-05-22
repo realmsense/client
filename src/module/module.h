@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "module_logger.h"
 
 class Module {
 public:
@@ -12,6 +13,7 @@ public:
 	bool enabled;
 	ModuleCategory category;
 	ModuleList type;
+	ModuleLogger log;
 
 	Module();
 

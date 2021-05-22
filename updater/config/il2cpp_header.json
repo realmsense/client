@@ -22,9 +22,10 @@
         "ApplicationManager",
         "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_",
         "DKMLMKFGPCC",
+        "ViewHandler",
+        "MapObjectUIManager",
         "ProfilerMarker",
         "EntityManager",
-
 
         "JFNHHLNJJKP",
         "COEDKELBKMI",
@@ -38,11 +39,15 @@
         "__StaticFields",
         "__VTable"
     ],
+    "enums": [
+        "CLEPBEMBHAJ"
+    ],
     "functions": [
         "Behaviour_set_enabled",
         "Object_1_FindObjectOfType",
         "Type_GetType_2",
         "DKMLMKFGPCC_NAGLHCDBGIM",
-        "ApplicationManager_get_MapViewService"
+        "ApplicationManager_get_MapViewService",
+        "MapObjectUIManager_ShowFloatingText"
     ]
 }

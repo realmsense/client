@@ -54,6 +54,7 @@ def generate_il2cpp_types():
 
     structs = header_config["structs"]
     dependencies = header_config["dependencies"]
+    enums = header_config["enums"]
 
     types_file = download_file(IL2CPP_TYPES_URL, TEMP_DIR / "il2cpp-types.h")
 
@@ -95,6 +96,18 @@ def generate_il2cpp_types():
                     in_struct = True
                     current_struct = struct
                     structs.remove(struct)
+                    break
+
+            for enum in enums:
+                search = "enum class " + enum + "__Enum"
+                if search in line:
+                    if in_struct:
+                        logger.log(logging.ERROR, f"Struct '{current_struct}' did not end!")
+                        return
+
+                    in_struct = True
+                    current_struct = enum
+                    enums.remove(enum)
                     break
 
             # Append lines to current struct

@@ -49,3 +49,18 @@ JFNHHLNJJKP* GetPlayer()
     JFNHHLNJJKP* player = map_view_service->fields.HFLGDFNPKPM;
     return player;
 }
+
+void ShowFloatingText(const char* message, CLEPBEMBHAJ__Enum type, __int64 color)
+{
+    JFNHHLNJJKP* player = GetPlayer();
+    if (!player) return;
+
+    static ApplicationManager* application_manager = (ApplicationManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.ApplicationManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+    static DKMLMKFGPCC* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
+
+    ViewHandler* view_handler = reinterpret_cast<GJLIMCBOCJG*>(player)->fields.NJGEIJDFFND;
+    MapObjectUIManager* gui_manager = view_handler->fields.GUIManager;
+    String* text = reinterpret_cast<String*>(il2cpp_string_new(message));
+
+    MapObjectUIManager_ShowFloatingText(gui_manager, type, text, color, 0.0f, nullptr);
+}
