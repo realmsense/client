@@ -3,12 +3,18 @@
 #include "minhook/include/MinHook.h"
 #include "module/module_manager.h"
 
-typedef bool(__cdecl* _DKMLMKFGPCC_NAGLHCDBGIM)(DKMLMKFGPCC* __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo* method);
-_DKMLMKFGPCC_NAGLHCDBGIM Original_DKMLMKFGPCC_NAGLHCDBGIM = nullptr;
+// function typdef _FunctionName
+#define DO_APP_FUNC(a, r, n, p) typedef r (* _ ## n) p;
+#include "il2cpp-functions.h"
+#undef DO_APP_FUNC
+
+// Original_ pointer
+#define DO_APP_FUNC(a, r, n, p) _ ## n Original_ ## n = nullptr;
+#include "il2cpp-functions.h"
+#undef DO_APP_FUNC
+
 bool Detour_DKMLMKFGPCC_NAGLHCDBGIM(DKMLMKFGPCC* __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo* method)
 {
-	// TODO: this stuff should be automatically generated using #defines
-
 	bool override = false;
 	bool ret = ModuleManager::CallEvent(ModuleEvent::Check_TileWalkable, override);
 
@@ -23,7 +29,6 @@ bool InitHooks()
 	bool ret = true;
 	uintptr_t baseAddress = GetBaseAddress();
 
-	// DO_APP_FUNC(0x01235A30, bool, DKMLMKFGPCC_NAGLHCDBGIM, (DKMLMKFGPCC * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method));
 	if (MH_CreateHook(DKMLMKFGPCC_NAGLHCDBGIM, Detour_DKMLMKFGPCC_NAGLHCDBGIM, reinterpret_cast<LPVOID*>(&Original_DKMLMKFGPCC_NAGLHCDBGIM)) != MH_OK)
 	{
 		std::cout << "Failed to Detour DKMLMKFGPCC_NAGLHCDBGIM" << std::endl;
