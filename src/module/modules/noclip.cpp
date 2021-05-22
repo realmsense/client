@@ -33,7 +33,7 @@ void NoclipModule::renderGUI()
 
 void NoclipModule::toggleNoclip()
 {
-	UnityThread* unity_thread = (UnityThread*)FindObjectByQualifiedName("DecaGames.RotMG.Extensions.UnityThread, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+	static UnityThread* unity_thread = (UnityThread*)FindObjectByQualifiedName("DecaGames.RotMG.Extensions.UnityThread, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
 	Behaviour_set_enabled((Behaviour*)unity_thread, !this->enabled, nullptr);
 }
 
