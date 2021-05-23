@@ -20,19 +20,4 @@ namespace ModuleManager
         }
         return nullptr;
     }
-
-    template<typename... Args>
-    bool CallEvent(ModuleEvent event, Args&&... args)
-    {
-        for (Module* module : modules)
-        {
-            switch (event)
-            {
-                case ModuleEvent::Check_TileWalkable:
-                    return module->onCheckTileWalkable(args...);
-            }
-        }
-        
-        return true;
-    }
 }

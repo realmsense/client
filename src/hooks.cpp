@@ -16,7 +16,10 @@
 bool Detour_DKMLMKFGPCC_NAGLHCDBGIM(DKMLMKFGPCC* __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo* method)
 {
 	bool override = false;
-	bool ret = ModuleManager::CallEvent(ModuleEvent::Check_TileWalkable, override);
+	bool ret;
+
+	for (Module* module : ModuleManager::modules)
+		module->onCheckTileWalkable(override, ret);
 
 	if (override)
 		return ret;

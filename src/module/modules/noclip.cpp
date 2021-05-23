@@ -42,11 +42,11 @@ void NoclipModule::toggleNoclip()
 	Behaviour_set_enabled((Behaviour*)unity_thread, !this->enabled, nullptr);
 }
 
-bool NoclipModule::onCheckTileWalkable(bool& override)
+void NoclipModule::onCheckTileWalkable(bool& override, bool& ret)
 {
 	if (this->enabled)
 	{
 		override = true;
-		return true;
+		ret = true;
 	}
 }
