@@ -63,6 +63,35 @@ JFNHHLNJJKP* GetPlayer()
     return player;
 }
 
+DAFEAHGLBGL* GetPet()
+{
+    // Really hard to get pet
+    // There's a list of pets (and other objects) in DKMLMKFGPCC.
+    // We can get the ObjectProps for our pet's ToolTip through: DKMLMKFGPCC->EFNINMGLFDC->HMLEONMOKBC->NLODPDOFMKB
+    // so we just iterate the list and check if the object props are the same object.
+
+    static ApplicationManager* application_manager = (ApplicationManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.ApplicationManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+    static DKMLMKFGPCC* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
+    JFNHHLNJJKP* player = GetPlayer();
+
+    ObjectProperties* pet_skin_props1 = map_view_service->fields.EFNINMGLFDC->fields.HMLEONMOKBC->fields.NLODPDOFMKB;
+
+    auto list = map_view_service->fields.CIEBEOHNLJM;
+    auto items = list->fields._items->vector;
+    for (int i = 0; i < list->fields._size; i++)
+    {
+        NIIFJAMEHDD* character = items[i];
+        DAFEAHGLBGL* pet = (DAFEAHGLBGL*)character; // casting non types
+
+        ObjectProperties* pet_skin_props2 = pet->fields.BKHBOCPPAOM;
+
+        if (pet_skin_props1 == pet_skin_props2)
+            return pet;
+    }
+
+    return nullptr;
+}
+
 Vector2 GetEntityPos(GJLIMCBOCJG* entity)
 {
     float pos_x = entity->fields.EOOJAMLJAOM;

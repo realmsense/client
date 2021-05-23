@@ -9,6 +9,7 @@ def main():
     logger.setup()
 
     dump_player_skins()
+    dump_pet_skins()
     generate_il2cpp_types()
     generate_il2cpp_functions()
 

@@ -26,6 +26,11 @@ def parse_int(str):
     return int(str, base)
 
 
+def strip_non_ascii(string):
+    stripped = (c for c in string if 0 < ord(c) < 127)
+    return "".join(stripped)
+
+
 def download_file(url, output_file: Path):
     logger.log(logging.INFO, f"Downloading {url}")
     response = requests.get(url)
@@ -33,7 +38,7 @@ def download_file(url, output_file: Path):
     return output_file
 
 
-def extract_animated_sprite(output_file, spritesheet_json, spritesheet_img, sprite_name, sprite_index):
+def extract_animated_sprite(output_file, spritesheet_json, spritesheet_img, sprite_name, sprite_index, scale=33):
 
     sprite_index = parse_int(sprite_index)
     found_sprites = []
@@ -50,10 +55,10 @@ def extract_animated_sprite(output_file, spritesheet_json, spritesheet_img, spri
         if sprite["action"] < chosen_sprite["action"] and sprite["direction"] < chosen_sprite["direction"]:
             chosen_sprite = sprite
 
-    extract_from_spritesheet(output_file, spritesheet_img, chosen_sprite["spriteData"]["position"], 33)
+    extract_from_spritesheet(output_file, spritesheet_img, chosen_sprite["spriteData"]["position"], scale)
 
 
-def extract_from_spritesheet(output_file, spritesheet_img, pos, scale=1):
+def extract_from_spritesheet(output_file, spritesheet_img, pos, scale):
     left    = pos["x"]
     top     = pos["y"]
     right   = pos["x"] + pos["w"]

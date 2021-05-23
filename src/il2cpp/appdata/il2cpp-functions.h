@@ -7,6 +7,7 @@ DO_APP_FUNC(0x00D8F820, Object_1 *, Object_1_FindObjectOfType, (Type * type, Met
 DO_APP_FUNC(0x024C40A0, Vector3, Transform_get_position, (Transform * __this, MethodInfo * method));
 DO_APP_FUNC(0x024C3D70, Vector3, Transform_get_localPosition, (Transform * __this, MethodInfo * method));
 DO_APP_FUNC(0x01D97F20, void, GJLIMCBOCJG_GPIMPPOPDJO, (GJLIMCBOCJG * __this, MethodInfo * method));
+DO_APP_FUNC(0x01689560, void, DAFEAHGLBGL_KOBJNFBMICI, (DAFEAHGLBGL * __this, int32_t OGBGLIIENMF, MethodInfo * method));
 DO_APP_FUNC(0x012699C0, void, JFNHHLNJJKP_GBHNOKKCMJA, (JFNHHLNJJKP * __this, float LODCFMOPDCN, MethodInfo * method));
 DO_APP_FUNC(0x00317CF0, DKMLMKFGPCC *, ApplicationManager_get_MapViewService, (ApplicationManager * __this, MethodInfo * method));
 DO_APP_FUNC(0x01235A30, bool, DKMLMKFGPCC_NAGLHCDBGIM, (DKMLMKFGPCC * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method));

@@ -1,8 +1,10 @@
 .vs
 .vscode
 x64
+enc_temp_folder
 
-src/other/skins
+src/other/player_skins
+src/other/pet_skins
 
 # updater script
 venv
