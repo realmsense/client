@@ -89,6 +89,13 @@ void SkinChangerModule::renderGUI()
 	}
 }
 
+void SkinChangerModule::onMapChange()
+{
+	if (!this->enabled) return;
+
+	this->changeSkin(this->skin_id);
+}
+
 void SkinChangerModule::changeSkin(int skin_id)
 {
 	this->skin_id = skin_id;

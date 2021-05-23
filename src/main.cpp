@@ -36,8 +36,17 @@ void MainThread(HMODULE hModule)
             noclip->toggleModule();
         }
 
+        static JFNHHLNJJKP* old_player = nullptr;
+        JFNHHLNJJKP* player = GetPlayer();
+        bool map_change = player != old_player && player != nullptr;
         for (Module* module : ModuleManager::modules)
+        {
             module->onMainLoop();
+            
+            if (map_change)
+                module->onMapChange();
+        }
+        old_player = player;
 
         CleanEnemyList();
         Sleep(5);

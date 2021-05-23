@@ -25,6 +25,7 @@ public:
 
 	// Module Events, to be overrided in parent
 	virtual void onMainLoop() { };
+	virtual void onMapChange() { };
 	virtual void onCheckTileWalkable(bool& walkable) { };
 
 protected:

@@ -10,6 +10,7 @@ public:
 	void onEnable() override;
 	void onDisable() override;
 	void renderGUI() override;
+    void onMapChange() override;
 
 private:
 	int skin_id;
