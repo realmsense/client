@@ -85,6 +85,7 @@
     <ClCompile Include="src\module\modules\debug.cpp" />
     <ClCompile Include="src\module\modules\example.cpp" />
     <ClCompile Include="src\module\modules\noclip.cpp" />
+    <ClCompile Include="src\module\modules\skin_changer.cpp" />
     <ClCompile Include="src\module\module_logger.cpp" />
     <ClCompile Include="src\module\module_manager.cpp" />
     <ClCompile Include="src\pch.cpp">
@@ -123,10 +124,12 @@
     <ClInclude Include="src\module\modules\debug.h" />
     <ClInclude Include="src\module\modules\example.h" />
     <ClInclude Include="src\module\modules\noclip.h" />
+    <ClInclude Include="src\module\modules\skin_changer.h" />
     <ClInclude Include="src\module\module_enums.h" />
     <ClInclude Include="src\module\module_list.h" />
     <ClInclude Include="src\module\module_logger.h" />
     <ClInclude Include="src\module\module_manager.h" />
+    <ClInclude Include="src\other\stb_image.h" />
     <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

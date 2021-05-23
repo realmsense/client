@@ -26,7 +26,6 @@ void MainThread(HMODULE hModule)
 
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
-            GetMainCamera();
             std::cout << "Hello, World!" << std::endl;
         }
 

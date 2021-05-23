@@ -3,10 +3,6 @@ from functions import *
 
 header_config = read_json(CONFIG_DIR / "il2cpp_header.json")
 
-def generate_il2cpp_header():
-    generate_il2cpp_types()
-    generate_il2cpp_functions()
-
 def generate_il2cpp_functions():
 
     logger.log(logging.INFO, "Generating IL2CPP functions header...")

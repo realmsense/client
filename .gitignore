@@ -2,7 +2,9 @@
 .vscode
 x64
 
+src/other/skins
 
 # updater script
 venv
 __pycache__
+updater/output

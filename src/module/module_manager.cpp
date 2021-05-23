@@ -11,6 +11,7 @@ namespace ModuleManager
 		std::cout << "Loading Modules..." << std::endl;
 		modules.push_back(new NoclipModule());
 		modules.push_back(new AutoAimModule());
+		modules.push_back(new SkinChangerModule());
 		modules.push_back(new DebugModule());
 	}
 

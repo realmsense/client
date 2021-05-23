@@ -17,6 +17,7 @@
 #include <string>
 #include <vector>
 #include <unordered_set>
+#include <map>
 
 #include "globals.h"
 #include "module/module_enums.h"

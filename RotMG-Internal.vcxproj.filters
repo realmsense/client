@@ -16,6 +16,9 @@
     <Filter Include="Header Files">
       <UniqueIdentifier>{85f00ee9-0de3-4d07-84b4-873d33059ce4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\other">
+      <UniqueIdentifier>{1385aa1f-1fbd-4b4e-8359-0c829d801cc4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\helpers.cpp">
@@ -100,6 +103,9 @@
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
     <ClCompile Include="src\module\modules\example.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\modules\skin_changer.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
   </ItemGroup>
@@ -211,6 +217,12 @@
     </ClInclude>
     <ClInclude Include="src\module\modules\example.h">
       <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\skin_changer.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\other\stb_image.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

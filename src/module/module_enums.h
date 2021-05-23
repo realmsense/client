@@ -14,11 +14,7 @@ enum class ModuleList
 	Noclip,
     AutoAim,
     Debug,
+    SkinChanger,
     Count
 };
 
-enum class ModuleEvent
-{
-    MainLoop,
-    Check_TileWalkable
-};
