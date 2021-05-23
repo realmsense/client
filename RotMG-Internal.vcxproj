@@ -83,6 +83,7 @@
     <ClCompile Include="src\module\module.cpp" />
     <ClCompile Include="src\module\modules\autoaim.cpp" />
     <ClCompile Include="src\module\modules\debug.cpp" />
+    <ClCompile Include="src\module\modules\example.cpp" />
     <ClCompile Include="src\module\modules\noclip.cpp" />
     <ClCompile Include="src\module\module_logger.cpp" />
     <ClCompile Include="src\module\module_manager.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="src\module\module.h" />
     <ClInclude Include="src\module\modules\autoaim.h" />
     <ClInclude Include="src\module\modules\debug.h" />
+    <ClInclude Include="src\module\modules\example.h" />
     <ClInclude Include="src\module\modules\noclip.h" />
     <ClInclude Include="src\module\module_enums.h" />
     <ClInclude Include="src\module\module_list.h" />

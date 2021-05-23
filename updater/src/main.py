@@ -3,8 +3,8 @@ from functions import *
 
 def main():
 
-    delete_dir_contents(OUTPUT_DIR)
-    delete_dir_contents(TEMP_DIR)
+    # delete_dir_contents(OUTPUT_DIR)
+    # delete_dir_contents(TEMP_DIR)
 
     logger.setup()
 

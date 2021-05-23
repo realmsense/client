@@ -99,6 +99,9 @@
     <ClCompile Include="src\module\modules\autoaim.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\modules\example.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers.h">
@@ -204,6 +207,9 @@
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
     <ClInclude Include="src\module\modules\autoaim.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\example.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
   </ItemGroup>
