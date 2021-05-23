@@ -12,11 +12,13 @@ enum class ModuleCategory
 enum class ModuleList
 {
 	Noclip,
+    AutoAim,
     Debug,
     Count
 };
 
 enum class ModuleEvent
 {
+    MainLoop,
     Check_TileWalkable
 };

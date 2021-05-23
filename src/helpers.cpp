@@ -20,6 +20,12 @@ void RemoveConsole()
     FreeConsole();
 }
 
+float CalculateDistance(Vector2 a, Vector2 b)
+{
+    const float diff_x = a.x - b.x;
+    const float diff_y = a.y - b.y;
+    return sqrt((diff_x * diff_x) + (diff_y * diff_y));
+}
 
 // Convert Il2CppString to std::string
 std::string il2cppi_to_string(Il2CppString* str)
@@ -55,6 +61,14 @@ JFNHHLNJJKP* GetPlayer()
     static DKMLMKFGPCC* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
     JFNHHLNJJKP* player = map_view_service->fields.HFLGDFNPKPM;
     return player;
+}
+
+Vector2 GetEntityPos(GJLIMCBOCJG* entity)
+{
+    float pos_x = entity->fields.EOOJAMLJAOM;
+    float pos_y = entity->fields.JDEKCEFBJFP;
+    Vector2 pos = { pos_x, pos_y };
+    return pos;
 }
 
 void ShowFloatingText(const char* message, CLEPBEMBHAJ__Enum type, __int64 color)

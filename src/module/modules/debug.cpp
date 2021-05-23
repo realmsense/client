@@ -43,16 +43,14 @@ void DebugModule::renderGUI()
 		{
 			ImDrawList* draw = ImGui::GetBackgroundDrawList();
 
-			float player_x = ((GJLIMCBOCJG*)player)->fields.EOOJAMLJAOM;
-			float player_y = ((GJLIMCBOCJG*)player)->fields.JDEKCEFBJFP;
-			Vector3 player_world_pos = { player_x, player_y * -1, 0.0f };
+			Vector2 player_pos = GetEntityPos((GJLIMCBOCJG*)player);
+			Vector3 player_world_pos = { player_pos.x, player_pos.y * -1, 0.0f };
 			Vector3 player_screen_pos = Camera_WorldToScreenPoint_1(GetMainCamera(), player_world_pos, nullptr);
 
 			for (COEDKELBKMI* enemy : g_aEnemyList)
 			{
-				float enemy_x = ((GJLIMCBOCJG*)enemy)->fields.EOOJAMLJAOM;
-				float enemy_y = ((GJLIMCBOCJG*)enemy)->fields.JDEKCEFBJFP;
-				Vector3 enemy_world_pos = { enemy_x, enemy_y * -1, 0.0f };
+				Vector2 enemy_pos = GetEntityPos((GJLIMCBOCJG*)enemy);
+				Vector3 enemy_world_pos = { enemy_pos.x, enemy_pos.y * -1, 0.0f };
 				Vector3 enemy_screen_pos = Camera_WorldToScreenPoint_1(GetMainCamera(), enemy_world_pos, nullptr);
 			
 				// Invert y coordinate, unity is weird and uses y coordinate as a negative

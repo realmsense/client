@@ -8,10 +8,13 @@ uintptr_t GetBaseAddress();
 void CreateConsole();
 void RemoveConsole();
 
+float CalculateDistance(Vector2 a, Vector2 b);
+
 std::string il2cppi_to_string(Il2CppString* str);
 std::string il2cppi_to_string(String* str);
 
 Object_1* FindObjectByQualifiedName(const char* assemblyQualifiedName);
 Camera* GetMainCamera();
 JFNHHLNJJKP* GetPlayer();
+Vector2 GetEntityPos(GJLIMCBOCJG* entity);
 void ShowFloatingText(const char* message, CLEPBEMBHAJ__Enum type, __int64 color);

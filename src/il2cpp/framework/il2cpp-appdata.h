@@ -7,6 +7,7 @@
 #define Nullable_1_UnityEngine_Color32_ __int64
 #define Color32_GREEN 0x1FF44ed15
 #define Color32_RED 0x1FF2626d4
+#define Color32_BLUE 0x1FFD48926
 
 #include <cstdint>
 

@@ -37,6 +37,9 @@ void MainThread(HMODULE hModule)
             noclip->toggleModule();
         }
 
+        for (Module* module : ModuleManager::modules)
+            module->onMainLoop();
+
         CleanEnemyList();
         Sleep(5);
     }

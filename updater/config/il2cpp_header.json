@@ -59,8 +59,10 @@
         "MapObjectUIManager_ShowFloatingText",
         "GJLIMCBOCJG_GPIMPPOPDJO",
         "Camera_WorldToScreenPoint_1",
+        "Camera_ScreenToWorldPoint_1",
         "Component_1_get_transform",
         "Transform_get_position",
-        "Transform_get_localPosition"
+        "Transform_get_localPosition",
+        "JFNHHLNJJKP_GBHNOKKCMJA"
     ]
 }

@@ -24,6 +24,7 @@ public:
 	virtual void renderGUI() = 0;
 
 	// Module Events, to be overrided in parent
+	virtual void onMainLoop() { };
 	virtual void onCheckTileWalkable(bool& override, bool& ret) { };
 
 protected:
