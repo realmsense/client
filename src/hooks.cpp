@@ -15,16 +15,12 @@
 
 bool Detour_DKMLMKFGPCC_NAGLHCDBGIM(DKMLMKFGPCC* __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo* method)
 {
-	bool override = false;
-	bool ret;
+	bool walkable = Original_DKMLMKFGPCC_NAGLHCDBGIM(__this, EOOJAMLJAOM, JDEKCEFBJFP, method);
 
 	for (Module* module : ModuleManager::modules)
-		module->onCheckTileWalkable(override, ret);
+		module->onCheckTileWalkable(walkable);
 
-	if (override)
-		return ret;
-	
-	return Original_DKMLMKFGPCC_NAGLHCDBGIM(__this, EOOJAMLJAOM, JDEKCEFBJFP, method);
+	return walkable;
 }
 
 void Detour_GJLIMCBOCJG_GPIMPPOPDJO(GJLIMCBOCJG* __this, MethodInfo* method)

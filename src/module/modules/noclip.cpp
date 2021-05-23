@@ -25,6 +25,14 @@ void NoclipModule::onEnable()
 
 void NoclipModule::onDisable()
 {
+	if (!this->on_walkable_tile)
+	{
+		this->log.floatingText(Color32_BLUE);
+		this->log << "On Unwalkable Tile!" << std::endl;
+		this->enabled = true;
+		return;
+	}
+
 	this->log.floatingText(Color32_RED);
 	this->log << this->name << " OFF" << std::endl;
 
@@ -42,11 +50,11 @@ void NoclipModule::toggleNoclip()
 	Behaviour_set_enabled((Behaviour*)unity_thread, !this->enabled, nullptr);
 }
 
-void NoclipModule::onCheckTileWalkable(bool& override, bool& ret)
+void NoclipModule::onCheckTileWalkable(bool& walkable)
 {
 	if (this->enabled)
 	{
-		override = true;
-		ret = true;
+		this->on_walkable_tile = walkable;
+		walkable = true;
 	}
 }
