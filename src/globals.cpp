@@ -17,9 +17,6 @@ void CleanEnemyList()
 		else
 			it++;
 	}
-
-	std::cout << g_aEnemyList.size() << std::endl;
-
 }
 
 void LoadSettings()

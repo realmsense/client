@@ -8,6 +8,7 @@
         "float2",
         
         "Vector2",
+        "Vector3",
         "Nullable_1_UnityEngine_Vector2_",
         "Color32",
         "Color",
@@ -17,15 +18,18 @@
         "Behaviour",
         "Component_1",
         "MonoBehaviour",
+        "Transform",
 
         "UnityThread",
         "ApplicationManager",
+        "GameController",
         "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_",
         "DKMLMKFGPCC",
         "ViewHandler",
         "MapObjectUIManager",
         "ProfilerMarker",
         "EntityManager",
+        "Camera",
 
         "JFNHHLNJJKP",
         "COEDKELBKMI",
@@ -53,6 +57,10 @@
         "DKMLMKFGPCC_NAGLHCDBGIM",
         "ApplicationManager_get_MapViewService",
         "MapObjectUIManager_ShowFloatingText",
-        "GJLIMCBOCJG_GPIMPPOPDJO"
+        "GJLIMCBOCJG_GPIMPPOPDJO",
+        "Camera_WorldToScreenPoint_1",
+        "Component_1_get_transform",
+        "Transform_get_position",
+        "Transform_get_localPosition"
     ]
 }

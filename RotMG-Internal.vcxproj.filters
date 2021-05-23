@@ -93,6 +93,9 @@
     <ClCompile Include="src\globals.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\modules\debug.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers.h">
@@ -193,6 +196,9 @@
     </ClInclude>
     <ClInclude Include="src\globals.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\debug.h">
+      <Filter>Source Files\module\modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

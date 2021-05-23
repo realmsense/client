@@ -10,6 +10,7 @@ namespace ModuleManager
 	{
 		std::cout << "Loading Modules..." << std::endl;
 		modules.push_back(new NoclipModule());
+		modules.push_back(new DebugModule());
 	}
 
 	void UnloadModules()

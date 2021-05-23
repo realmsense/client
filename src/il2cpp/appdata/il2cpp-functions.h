@@ -1,6 +1,10 @@
 DO_APP_FUNC(0x00F8B4A0, Type *, Type_GetType_2, (String * typeName, MethodInfo * method));
+DO_APP_FUNC(0x02553510, Vector3, Camera_WorldToScreenPoint_1, (Camera * __this, Vector3 position, MethodInfo * method));
 DO_APP_FUNC(0x02551570, void, Behaviour_set_enabled, (Behaviour * __this, bool value, MethodInfo * method));
+DO_APP_FUNC(0x02555C70, Transform *, Component_1_get_transform, (Component_1 * __this, MethodInfo * method));
 DO_APP_FUNC(0x00D8F820, Object_1 *, Object_1_FindObjectOfType, (Type * type, MethodInfo * method));
+DO_APP_FUNC(0x024C40A0, Vector3, Transform_get_position, (Transform * __this, MethodInfo * method));
+DO_APP_FUNC(0x024C3D70, Vector3, Transform_get_localPosition, (Transform * __this, MethodInfo * method));
 DO_APP_FUNC(0x01D97F20, void, GJLIMCBOCJG_GPIMPPOPDJO, (GJLIMCBOCJG * __this, MethodInfo * method));
 DO_APP_FUNC(0x00317CF0, DKMLMKFGPCC *, ApplicationManager_get_MapViewService, (ApplicationManager * __this, MethodInfo * method));
 DO_APP_FUNC(0x01235A30, bool, DKMLMKFGPCC_NAGLHCDBGIM, (DKMLMKFGPCC * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method));

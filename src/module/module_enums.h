@@ -12,6 +12,7 @@ enum class ModuleCategory
 enum class ModuleList
 {
 	Noclip,
+    Debug,
     Count
 };
 

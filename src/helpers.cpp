@@ -42,6 +42,13 @@ Object_1* FindObjectByQualifiedName(const char* assemblyQualifiedName)
     return object;
 }
 
+Camera* GetMainCamera()
+{
+    static GameController* game_controller = (GameController*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.Game.GameController, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+    static Camera* main_camera = game_controller->fields.mainCamera;
+    return main_camera;
+}
+
 JFNHHLNJJKP* GetPlayer()
 {
     static ApplicationManager* application_manager = (ApplicationManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.ApplicationManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");

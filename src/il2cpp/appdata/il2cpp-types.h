@@ -2584,6 +2584,16 @@ struct Behaviour {
     struct Behaviour__Fields fields;
 };
 
+struct Camera__Fields {
+    struct Behaviour__Fields _;
+};
+
+struct Camera {
+    struct Camera__Class *klass;
+    MonitorData *monitor;
+    struct Camera__Fields fields;
+};
+
 struct Object_1__VTable {
     VirtualInvokeData Equals;
     VirtualInvokeData Finalize;
@@ -2642,6 +2652,28 @@ struct Behaviour__Class {
     struct Behaviour__VTable vtable;
 };
 
+struct Camera__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct Camera__StaticFields {
+    struct Camera_CameraCallback *onPreCull;
+    struct Camera_CameraCallback *onPreRender;
+    struct Camera_CameraCallback *onPostRender;
+};
+
+struct Camera__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct Camera__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct Camera__VTable vtable;
+};
+
 struct Color {
     float r;
     float g;
@@ -2667,6 +2699,42 @@ struct Color__Class {
     const Il2CppRGCTXData *rgctx_data;
     Il2CppClass_1 _1;
     struct Color__VTable vtable;
+};
+
+struct Vector3 {
+    float x;
+    float y;
+    float z;
+};
+
+struct Vector3__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+    VirtualInvokeData Equals_1;
+};
+
+struct Vector3__StaticFields {
+    struct Vector3 zeroVector;
+    struct Vector3 oneVector;
+    struct Vector3 upVector;
+    struct Vector3 downVector;
+    struct Vector3 leftVector;
+    struct Vector3 rightVector;
+    struct Vector3 forwardVector;
+    struct Vector3 backVector;
+    struct Vector3 positiveInfinityVector;
+    struct Vector3 negativeInfinityVector;
+};
+
+struct Vector3__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct Vector3__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct Vector3__VTable vtable;
 };
 
 struct Vector2 {
@@ -2727,6 +2795,36 @@ struct Color32__Class {
     const Il2CppRGCTXData *rgctx_data;
     Il2CppClass_1 _1;
     struct Color32__VTable vtable;
+};
+
+struct Transform__Fields {
+    struct Component_1__Fields _;
+};
+
+struct Transform {
+    struct Transform__Class *klass;
+    MonitorData *monitor;
+    struct Transform__Fields fields;
+};
+
+struct Transform__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+    VirtualInvokeData GetEnumerator;
+};
+
+struct Transform__StaticFields {
+};
+
+struct Transform__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct Transform__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct Transform__VTable vtable;
 };
 
 struct MonoBehaviour__Fields {
@@ -3408,6 +3506,40 @@ struct DKMLMKFGPCC {
     struct DKMLMKFGPCC__Fields fields;
 };
 
+struct GameController__Fields {
+    struct MonoBehaviour__Fields _;
+    struct WaitForEndOfFrame *GFPMIDMHPON;
+    struct Transform *mapElementsContainer;
+    struct Transform *tilesElementContainer;
+    struct Transform *projectileContainer;
+    struct Transform *playerContainer;
+    struct ExternalShopController *externalShopController;
+    struct SteamOffersController *steamOffersController;
+    struct OverlayController *overlayController;
+    struct GuiManager *guiManager;
+    struct ChatManager *chatManager;
+    struct UnlockClassManager *unlockClassManager;
+    struct NotificationManager *notificationManager;
+    struct Camera *mainCamera;
+    struct MiniMapManager *miniMapManager;
+    struct EquipmentManager *equipmentManager;
+    struct TutorialAnimationController *tutorialAnimationController;
+    struct PartyUIManager *partyUiManager;
+    struct List_1_Com_LuisPedroFonseca_ProCamera2D_ProCamera2D_ *cameras;
+    struct KBKBDLLEGGO *DKCDBOLECHM;
+    struct SocketManager_1 *HPIPJDMLKLK;
+    struct HCLAMODFNBI *LPKIADKODHC;
+    struct GOJNAJGEICA *JJAJGGLJGPE;
+    struct OBBDHEMCCLH *IAOBHHOGKLA;
+    struct Action *MGGOAFDGJDP;
+};
+
+struct GameController {
+    struct GameController__Class *klass;
+    MonitorData *monitor;
+    struct GameController__Fields fields;
+};
+
 struct MapObjectUIManager__VTable {
     VirtualInvokeData Equals;
     VirtualInvokeData Finalize;
@@ -3554,6 +3686,25 @@ struct ViewHandler__Class {
     const Il2CppRGCTXData *rgctx_data;
     Il2CppClass_1 _1;
     struct ViewHandler__VTable vtable;
+};
+
+struct GameController__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct GameController__StaticFields {
+};
+
+struct GameController__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct GameController__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct GameController__VTable vtable;
 };
 
 struct DKMLMKFGPCC__VTable {

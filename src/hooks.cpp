@@ -42,6 +42,7 @@ bool InitHooks()
 {
 	bool ret = true;
 	uintptr_t baseAddress = GetBaseAddress();
+	std::cout << "GameAssembly.dll at " << std::hex << baseAddress << std::endl;
 
 	if (MH_CreateHook(DKMLMKFGPCC_NAGLHCDBGIM, Detour_DKMLMKFGPCC_NAGLHCDBGIM, reinterpret_cast<LPVOID*>(&Original_DKMLMKFGPCC_NAGLHCDBGIM)) != MH_OK)
 	{
