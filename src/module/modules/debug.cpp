@@ -22,13 +22,13 @@ DebugModule::DebugModule()
 void DebugModule::onEnable()
 {
 	this->log.floatingText(Color32_GREEN);
-	this->log << "ON" << std::endl;
+	this->log << this->name << " ON" << std::endl;
 }
 
 void DebugModule::onDisable()
 {
 	this->log.floatingText(Color32_RED);
-	this->log << "OFF" << std::endl;
+	this->log << this->name << " OFF" << std::endl;
 }
 
 void DebugModule::renderGUI()

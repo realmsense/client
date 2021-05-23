@@ -18,7 +18,7 @@ NoclipModule::NoclipModule()
 void NoclipModule::onEnable()
 {
 	this->log.floatingText(Color32_GREEN);
-	this->log << "ON" << std::endl;
+	this->log << this->name << " ON" << std::endl;
 
 	this->toggleNoclip();
 }
@@ -26,7 +26,7 @@ void NoclipModule::onEnable()
 void NoclipModule::onDisable()
 {
 	this->log.floatingText(Color32_RED);
-	this->log << "OFF" << std::endl;
+	this->log << this->name << " OFF" << std::endl;
 
 	this->toggleNoclip();
 }

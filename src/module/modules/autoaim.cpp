@@ -22,13 +22,13 @@ AutoAimModule::AutoAimModule()
 void AutoAimModule::onEnable()
 {
 	this->log.floatingText(Color32_GREEN);
-	this->log << "ON" << std::endl;
+	this->log << this->name << " ON" << std::endl;
 }
 
 void AutoAimModule::onDisable()
 {
 	this->log.floatingText(Color32_RED);
-	this->log << "OFF" << std::endl;
+	this->log << this->name << " OFF" << std::endl;
 }
 
 void AutoAimModule::renderGUI()
