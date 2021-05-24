@@ -34,6 +34,7 @@ void UnlimitedZoomModule::renderGUI()
 		Camera* camera = GetMainCamera();
 		Camera_set_orthographicSize(camera, this->zoom, nullptr);
 		this->updatePositionShift();
+		this->setEnabled(true);
 	}
 }
 

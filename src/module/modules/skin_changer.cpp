@@ -77,7 +77,7 @@ void SkinChangerModule::renderGUI()
 			{
 				this->changePlayerSkin(skin->skin_id);
 				this->log << "Changed Player Skin to " << skin->name << " (" << skin->skin_id << ")" << std::endl;
-				this->enabled = true;
+				this->setEnabled(true);
 			}
 
 			if (ImGui::IsItemHovered())
@@ -136,7 +136,7 @@ void SkinChangerModule::renderGUI()
 				{
 					this->changePetSkin(skin->skin_id);
 					this->log << "Changed Pet Skin to " << skin->name << " (" << skin->skin_id << ")" << std::endl;
-					this->enabled = true;
+					this->setEnabled(true);
 				}
 
 				if (ImGui::IsItemHovered())

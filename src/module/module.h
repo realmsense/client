@@ -19,7 +19,7 @@ public:
 	Module();
 
 	void ready();
-	void setEnabled(bool enabled, bool callHandlers);
+	void setEnabled(bool enabled, bool force_call_handlers=false);
 	void toggleModule();
 	virtual void renderGUI() = 0;
 

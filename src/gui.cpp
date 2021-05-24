@@ -179,7 +179,7 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
             ImGui::PushID(module_name);
 
             if (ImGui::Checkbox("", &module->enabled))
-                module->setEnabled(module->enabled, true); // just call handlers, button changes bool.
+                module->setEnabled(module->enabled, true);
 
             const ImVec2 checkboxSize = ImGui::GetItemRectSize();
             ImGui::SameLine();
