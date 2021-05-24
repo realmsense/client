@@ -1,4 +1,6 @@
 DO_APP_FUNC(0x00F8B4A0, Type *, Type_GetType_2, (String * typeName, MethodInfo * method));
+DO_APP_FUNC(0x02553B50, float, Camera_get_orthographicSize, (Camera * __this, MethodInfo * method));
+DO_APP_FUNC(0x02554300, void, Camera_set_orthographicSize, (Camera * __this, float value, MethodInfo * method));
 DO_APP_FUNC(0x02553510, Vector3, Camera_WorldToScreenPoint_1, (Camera * __this, Vector3 position, MethodInfo * method));
 DO_APP_FUNC(0x02553100, Vector3, Camera_ScreenToWorldPoint_1, (Camera * __this, Vector3 position, MethodInfo * method));
 DO_APP_FUNC(0x02551570, void, Behaviour_set_enabled, (Behaviour * __this, bool value, MethodInfo * method));

@@ -86,6 +86,7 @@
     <ClCompile Include="src\module\modules\example.cpp" />
     <ClCompile Include="src\module\modules\noclip.cpp" />
     <ClCompile Include="src\module\modules\skin_changer.cpp" />
+    <ClCompile Include="src\module\modules\unlimited_zoom.cpp" />
     <ClCompile Include="src\module\module_logger.cpp" />
     <ClCompile Include="src\module\module_manager.cpp" />
     <ClCompile Include="src\pch.cpp">
@@ -125,6 +126,7 @@
     <ClInclude Include="src\module\modules\example.h" />
     <ClInclude Include="src\module\modules\noclip.h" />
     <ClInclude Include="src\module\modules\skin_changer.h" />
+    <ClInclude Include="src\module\modules\unlimited_zoom.h" />
     <ClInclude Include="src\module\module_enums.h" />
     <ClInclude Include="src\module\module_list.h" />
     <ClInclude Include="src\module\module_logger.h" />

@@ -108,6 +108,9 @@
     <ClCompile Include="src\module\modules\skin_changer.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\modules\unlimited_zoom.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers.h">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="src\other\stb_image.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\unlimited_zoom.h">
+      <Filter>Source Files\module\modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

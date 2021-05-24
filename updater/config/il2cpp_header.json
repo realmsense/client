@@ -13,6 +13,7 @@
         "Color32",
         "Color",
         "Nullable_1_UnityEngine_Color_",
+        "Matrix4x4",
 
         "Object_1",
         "Behaviour",
@@ -22,13 +23,15 @@
 
         "UnityThread",
         "ApplicationManager",
-        "GameController",
         "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_",
+        "GameController",
         "DKMLMKFGPCC",
         "ViewHandler",
         "MapObjectUIManager",
         "ProfilerMarker",
         "EntityManager",
+        "CameraManager",
+        "CameraPerspectiveEditor",
         "Camera",
 
         "DAFEAHGLBGL",
@@ -72,6 +75,8 @@
         "Transform_get_position",
         "Transform_get_localPosition",
         "JFNHHLNJJKP_GBHNOKKCMJA",
-        "DAFEAHGLBGL_KOBJNFBMICI"
+        "DAFEAHGLBGL_KOBJNFBMICI",
+        "Camera_get_orthographicSize",
+        "Camera_set_orthographicSize"
     ]
 }

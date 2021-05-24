@@ -2701,6 +2701,47 @@ struct Color__Class {
     struct Color__VTable vtable;
 };
 
+struct Matrix4x4 {
+    float m00;
+    float m10;
+    float m20;
+    float m30;
+    float m01;
+    float m11;
+    float m21;
+    float m31;
+    float m02;
+    float m12;
+    float m22;
+    float m32;
+    float m03;
+    float m13;
+    float m23;
+    float m33;
+};
+
+struct Matrix4x4__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+    VirtualInvokeData Equals_1;
+};
+
+struct Matrix4x4__StaticFields {
+    struct Matrix4x4 zeroMatrix;
+    struct Matrix4x4 identityMatrix;
+};
+
+struct Matrix4x4__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct Matrix4x4__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct Matrix4x4__VTable vtable;
+};
+
 struct Vector3 {
     float x;
     float y;
@@ -3591,6 +3632,68 @@ struct BGBHFKICMIM {
     struct BGBHFKICMIM__Fields fields;
 };
 
+struct CameraManager__Fields {
+    struct MonoBehaviour__Fields _;
+    bool JGOPOFJJPMM;
+    bool AGDBAFOEPGO;
+    float CGHMEBPNPNJ;
+    struct Transform *mainCameraContainer;
+    struct Transform *miniMapCameraTransform;
+    struct ProCamera2D *proCamera2D;
+    struct ProCamera2DPixelPerfect *BDAEGGDPHCK;
+    struct Camera *EHHILFMGPMB;
+    struct CameraPerspectiveEditor *OOJJDIANIBF;
+    bool FPNMHACOHEK;
+    struct MADPOKNCADM *COCCGGGBDFP;
+    float Z;
+    struct DKMLMKFGPCC *OHLHEKBJMOO;
+    struct MiniMapManager *MPDIMLPFNBE;
+    int32_t IKDDKAAFLEH;
+    struct Single__Array *DCGGEJPEBEC;
+    bool IGFKDKCGFAL;
+};
+
+struct CameraManager {
+    struct CameraManager__Class *klass;
+    MonitorData *monitor;
+    struct CameraManager__Fields fields;
+};
+
+struct CameraPerspectiveEditor__Fields {
+    struct MonoBehaviour__Fields _;
+    struct Vector2 lensShift;
+    bool lensShiftProportionalToAspect;
+    struct Vector2 lensTilt;
+    struct Vector2 positionShift;
+    struct Vector2 skew;
+    struct Vector2 aspectScale;
+    struct Vector2 clippingPlaneSkew;
+    float dollyZoom;
+    float dollyZoomFocalDistance;
+    struct Transform *dollyZoomFocalTarget;
+    struct Camera *JKMDPFHCOMK;
+    struct Matrix4x4 NNPDMHACCFE;
+    struct Vector2 BGBNPGMIFAL;
+    float GKIIDCAHEJP;
+    float JGFEFCNHAMA;
+    struct Matrix4x4 BLEIOHEMDHI;
+    struct Vector3 MCKDKJDBOKB;
+    bool LDFPDFCNAMI;
+    float GDOKJDLKHDD;
+    float KBHDJIPPODN;
+    float IDAFJEJKOCM;
+    float BKOJOHAKFKO;
+    float JKNJEPDPKAD;
+    float MFFPHGGKHIJ;
+    bool JCHMBOEKMDG;
+};
+
+struct CameraPerspectiveEditor {
+    struct CameraPerspectiveEditor__Class *klass;
+    MonitorData *monitor;
+    struct CameraPerspectiveEditor__Fields fields;
+};
+
 struct __declspec(align(8)) List_1_NIIFJAMEHDD___Fields {
     struct NIIFJAMEHDD__Array *_items;
     int32_t _size;
@@ -3887,6 +3990,48 @@ struct BGBHFKICMIM__Class {
     const Il2CppRGCTXData *rgctx_data;
     Il2CppClass_1 _1;
     struct BGBHFKICMIM__VTable vtable;
+};
+
+struct CameraPerspectiveEditor__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct CameraPerspectiveEditor__StaticFields {
+};
+
+struct CameraPerspectiveEditor__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct CameraPerspectiveEditor__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct CameraPerspectiveEditor__VTable vtable;
+};
+
+struct CameraManager__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct CameraManager__StaticFields {
+    struct Vector3 KBHGECFMCPC;
+    float JGBBNGIKHBG;
+    float JCAAGMANKJH;
+    float EEOOBCPFHPL;
+};
+
+struct CameraManager__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct CameraManager__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct CameraManager__VTable vtable;
 };
 
 struct GameController__VTable {
