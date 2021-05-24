@@ -73,7 +73,7 @@ void SkinChangerModule::renderGUI()
 			void* texture_id = (void*)skin->load();
 			if (!texture_id) continue;
 
-			if (ImGui::ImageButton(texture_id, ImVec2(img_size, img_size)))
+			if (ImGui::ImageButton(texture_id, ImVec2((float)img_size, (float)img_size)))
 			{
 				this->changePlayerSkin(skin->skin_id);
 				this->log << "Changed Player Skin to " << skin->name << " (" << skin->skin_id << ")" << std::endl;
@@ -89,7 +89,7 @@ void SkinChangerModule::renderGUI()
 				ImGui::EndTooltip();
 			}
 
-			GUI_WrapInLoop(i, player_skins[current_class].size());
+			GUI_WrapInLoop(i, (int)player_skins[current_class].size());
 		}
 	}
 	
@@ -132,7 +132,7 @@ void SkinChangerModule::renderGUI()
 				void* texture_id = (void*)skin->load();
 				if (!texture_id) continue;
 
-				if (ImGui::ImageButton(texture_id, ImVec2(img_size, img_size)))
+				if (ImGui::ImageButton(texture_id, ImVec2((float)img_size, (float)img_size)))
 				{
 					this->changePetSkin(skin->skin_id);
 					this->log << "Changed Pet Skin to " << skin->name << " (" << skin->skin_id << ")" << std::endl;
@@ -148,7 +148,7 @@ void SkinChangerModule::renderGUI()
 					ImGui::EndTooltip();
 				}
 
-				GUI_WrapInLoop(i, x.second.size());
+				GUI_WrapInLoop(i, (int)x.second.size());
 			}
 		}
 	}
