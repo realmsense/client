@@ -108,7 +108,7 @@
     <ClCompile Include="src\module\modules\skin_changer.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\module\modules\unlimited_zoom.cpp">
+    <ClCompile Include="src\module\modules\camera_settings.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
   </ItemGroup>
@@ -227,7 +227,7 @@
     <ClInclude Include="src\other\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\module\modules\unlimited_zoom.h">
+    <ClInclude Include="src\module\modules\camera_settings.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
   </ItemGroup>

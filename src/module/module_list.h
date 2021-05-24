@@ -3,5 +3,5 @@
 #include "modules/noclip.h"
 #include "modules/autoaim.h"
 #include "modules/skin_changer.h"
-#include "modules/unlimited_zoom.h"
+#include "modules/camera_settings.h"
 #include "modules/debug.h"

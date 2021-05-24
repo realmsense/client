@@ -15,7 +15,7 @@ enum class ModuleList
     AutoAim,
     Debug,
     SkinChanger,
-    UnlimitedZoom,
+    CameraSettings,
     Count
 };
 

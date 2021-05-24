@@ -82,11 +82,11 @@
     </ClCompile>
     <ClCompile Include="src\module\module.cpp" />
     <ClCompile Include="src\module\modules\autoaim.cpp" />
+    <ClCompile Include="src\module\modules\camera_settings.cpp" />
     <ClCompile Include="src\module\modules\debug.cpp" />
     <ClCompile Include="src\module\modules\example.cpp" />
     <ClCompile Include="src\module\modules\noclip.cpp" />
     <ClCompile Include="src\module\modules\skin_changer.cpp" />
-    <ClCompile Include="src\module\modules\unlimited_zoom.cpp" />
     <ClCompile Include="src\module\module_logger.cpp" />
     <ClCompile Include="src\module\module_manager.cpp" />
     <ClCompile Include="src\pch.cpp">
@@ -122,11 +122,11 @@
     <ClInclude Include="src\minhook\src\trampoline.h" />
     <ClInclude Include="src\module\module.h" />
     <ClInclude Include="src\module\modules\autoaim.h" />
+    <ClInclude Include="src\module\modules\camera_settings.h" />
     <ClInclude Include="src\module\modules\debug.h" />
     <ClInclude Include="src\module\modules\example.h" />
     <ClInclude Include="src\module\modules\noclip.h" />
     <ClInclude Include="src\module\modules\skin_changer.h" />
-    <ClInclude Include="src\module\modules\unlimited_zoom.h" />
     <ClInclude Include="src\module\module_enums.h" />
     <ClInclude Include="src\module\module_list.h" />
     <ClInclude Include="src\module\module_logger.h" />

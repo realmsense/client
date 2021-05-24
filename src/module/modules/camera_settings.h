@@ -2,16 +2,17 @@
 
 #include "../module.h"
 
-class UnlimitedZoomModule : public Module {
+class CameraSettingsModule : public Module {
 public:
-	UnlimitedZoomModule();
+	CameraSettingsModule();
 
 	void onEnable() override;
 	void onDisable() override;
 	void renderGUI() override;
 
 private:
-	float zoom;
+	float zoom_amount;
+	float rotate_speed;
 	void updatePositionShift();
 };
 

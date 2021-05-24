@@ -3458,6 +3458,117 @@ struct MapObjectUIManager {
     struct MapObjectUIManager__Fields fields;
 };
 
+struct __declspec(align(8)) KBKBDLLEGGO__Fields {
+    struct KBKBDLLEGGO_ABEAHFANHDO *EJMEBHGBJCL;
+    struct KBKBDLLEGGO_ABEAHFANHDO *PPIABFJPNLB;
+    struct KBKBDLLEGGO_ABEAHFANHDO *GEDNBBJBOJH;
+    struct KBKBDLLEGGO_ABEAHFANHDO *AIHFFEAPLEP;
+    struct KBKBDLLEGGO_ABEAHFANHDO *JDOMBMEFIMA;
+    struct KBKBDLLEGGO_ABEAHFANHDO *EKIBLFIHLNA;
+    struct KBKBDLLEGGO_ABEAHFANHDO *LMNBIIKCIBC;
+    struct KBKBDLLEGGO_ABEAHFANHDO *GJLIPDKMNKL;
+    struct KBKBDLLEGGO_ABEAHFANHDO *HOLHJKGBBBG;
+    bool MFKGHCMCOAO;
+    bool DFNNJCDKMPP;
+    struct String *GMMFCEFMDAG;
+    struct String *NCADAPAJGCH;
+    bool IABDPDAGMAO;
+    bool AAFACMHNKOA;
+    bool GHABKCFFJNE;
+    bool OAJDBALANDA;
+    bool GPMJPIBAPLB;
+    int32_t IIIEOIBDJCO;
+    int32_t KDAJCCBJIFP;
+    double KLDJNFIGKMG;
+    int32_t EAIOBDNIODE;
+    bool LDFJJGAHLND;
+    bool GNNEPFDIDNJ;
+    bool CKPECENJEPE;
+    bool FGPPMAMHCPN;
+    bool NPKDDILEDCD;
+    bool ALFKAAAEEGC;
+    bool MAOPEEBOHGI;
+    bool KLFLNIPLNIJ;
+    int32_t NDOPPGPKOKP;
+    int32_t AOEMJOHJCIC;
+    int32_t IBHCCBKKJHA;
+    bool HDPNFFDLEJF;
+    bool NIBDDENCPGK;
+    double ODNDBGHBKJH;
+    int32_t KNAHPICGENG;
+    int32_t HBJHMDHJIBJ;
+    bool BGOABDKDJJO;
+    bool MJBCFEMAOMG;
+    bool OLBFCLMENMC;
+    bool EGBIDAANLNB;
+    bool FDKAHNJODHG;
+    bool MOGJAOLLHBO;
+    bool NKENHCNFHCN;
+    bool JFPGLFJDLML;
+    bool PCEIIGFIFCE;
+    bool OAKPEEAGEEM;
+    bool JODODJHDPNC;
+    bool MMGCLKNNLBN;
+    bool CAJHFPEDINI;
+    int32_t FOIDIEKGGMO;
+    int32_t ELMKAAFGKFO;
+    bool MMGDJDGJOGN;
+    bool AFFNEDANILP;
+    bool AAJPJBNDHDB;
+    bool OHHMPHLPJHP;
+    float PMAAJDBAIHC;
+    bool PIFIHFFFKHD;
+    bool BPEOBLKFKIH;
+    bool NDIJJMMMALJ;
+    bool BLOCEKENAHL;
+    bool KMLPHNPNLBM;
+    bool INNFCIIFNPH;
+    bool NNONKGGJJAA;
+    bool JIOOCMJGEFF;
+    int32_t JFPJIIKHHJI;
+    int32_t LDGNLMGNHCM;
+    bool CFDLPMPOIPI;
+    bool HIHJLHDFICA;
+    bool FIGJIDMIILA;
+    bool GJLAPELHIJK;
+    bool BDECNBLGEPJ;
+    bool CCNOACAHBGP;
+    bool PJGBHBBAOJN;
+    bool DPEJPKFIAMN;
+    bool IOMNIJLINAJ;
+    bool LHGOHECAFKO;
+    bool NAEPDAHPBLO;
+    bool OICBJGINGNM;
+    float NCEGLLAMBKF;
+    struct FAKKOGNGKAB *POLGNNDOBKL;
+    int32_t GOMLFOOMJKC;
+    int32_t JKMPMNOBDBL;
+    int32_t EAEFNGJLNPM;
+    int32_t IGLKBGPGJIA;
+    struct Dictionary_2_System_Int32_System_Int32_ *FDGEJMMBPDG;
+    struct HCLAMODFNBI *LPKIADKODHC;
+    struct List_1_AMLJNMDMPNG_ *BDBPDGJIFKK;
+    struct Dictionary_2_System_Int32_AMLJNMDMPNG_ *JDMGMPKFJEE;
+    struct Dictionary_2_System_String_System_Int32_ *CNDGPOIDADC;
+    struct List_1_FDHMOPKKNGI_ *DBOJDIPICKN;
+    struct AMLJNMDMPNG *JEMEEPKJCCA;
+    struct CKMLLKPOBKP *IPNPGOLNLAC;
+    bool GNMINIBGBEG;
+    struct List_1_System_String_ *NFKNFKDFEID;
+    struct String *_NMGDJEDLAGK_k__BackingField;
+    struct String *_CLAPFHFJMJK_k__BackingField;
+    struct String *_FFIJPPMKHJC_k__BackingField;
+    struct String *_FPIKBBOPAGD_k__BackingField;
+    struct String *_MMGODEBMBML_k__BackingField;
+    struct String *_LBDCDELDPAE_k__BackingField;
+};
+
+struct KBKBDLLEGGO {
+    struct KBKBDLLEGGO__Class *klass;
+    MonitorData *monitor;
+    struct KBKBDLLEGGO__Fields fields;
+};
+
 struct __declspec(align(8)) KFAICNFFPBF__Fields {
     struct KFAICNFFPBF_LPJIECFPDBE *GJPKDPMOEPD;
     struct ObjectProperties *KHOABAJPFAC;
@@ -3789,6 +3900,35 @@ struct KFAICNFFPBF__Class {
     const Il2CppRGCTXData *rgctx_data;
     Il2CppClass_1 _1;
     struct KFAICNFFPBF__VTable vtable;
+};
+
+struct KBKBDLLEGGO__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct KBKBDLLEGGO__StaticFields {
+    int32_t PLFJCDFNABM;
+    struct Color EBOMOMCOGMK;
+    struct Color HAIKPIHAEBM;
+    struct Color NBEIOMAGNMG;
+    struct Color FLPMIAPAPOM;
+    struct Color EOHNLNLMPOJ;
+    struct Color GAOOLAGECOI;
+    float CAEGKOJBLGJ;
+    struct FAKKOGNGKAB *CMOMAIGDJFF;
+    struct Int32__Array *BBLNKPLPEMM;
+};
+
+struct KBKBDLLEGGO__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct KBKBDLLEGGO__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct KBKBDLLEGGO__VTable vtable;
 };
 
 struct MapObjectUIManager__VTable {
