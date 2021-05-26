@@ -37,7 +37,7 @@ void ModuleLogger::log(char c)
 
     if (this->floatingTextEnabled)
     {
-        ShowFloatingText(this->stream.str().c_str(), CLEPBEMBHAJ__Enum::Notification, this->floatingTextColor);
+        ShowFloatingText(this->stream.str().c_str(), FloatingTextType::Notification, this->floatingTextColor);
     }
 
     // Reset for next log

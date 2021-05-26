@@ -1,6 +1,7 @@
 import shutil
 import os
 import json
+import re as regex
 from xml.etree.ElementTree import parse
 import requests
 from time import sleep
@@ -13,6 +14,13 @@ def read_json(file_path):
         json_data = json.load(json_file)
         return json_data
 
+def read_jsonc(file_path):
+    with open(file_path) as json_file:
+        lines = json_file.read()
+        lines = regex.sub(r"\/\/.*", "", lines)
+        lines = regex.sub(r"/\*.*", "", lines)
+        json_data = json.loads(lines)
+        return json_data
 
 def delete_dir_contents(dir: Path):
     shutil.rmtree(dir, ignore_errors=True)

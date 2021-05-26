@@ -44,8 +44,8 @@ void CameraSettingsModule::renderGUI()
 	if (ImGui::SliderFloat("Rotate Speed", &this->rotate_speed, 0.01f, 4.0f))
 	{
 		static GameController* game_controller = (GameController*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.Game.GameController, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
-		KBKBDLLEGGO* settings = game_controller->fields.DKCDBOLECHM;
-		settings->fields.PMAAJDBAIHC = this->rotate_speed;
+		Settings* settings = game_controller->fields.settings;
+		settings->fields.rotate_speed = this->rotate_speed;
 		this->setEnabled(true);
 	}
 }
@@ -57,6 +57,6 @@ void CameraSettingsModule::updatePositionShift()
 	float positionShift = (10.0f / orthographicSize) * 0.5f;
 
 	static CameraManager* camera_manager = (CameraManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.CameraManager, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
-	static CameraPerspectiveEditor* camera_perspective_editor = camera_manager->fields.OOJJDIANIBF;
+	static CameraPerspectiveEditor* camera_perspective_editor = camera_manager->fields.perspective_editor;
 	camera_perspective_editor->fields.positionShift.y = positionShift;
 }

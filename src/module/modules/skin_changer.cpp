@@ -169,10 +169,10 @@ void SkinChangerModule::changePlayerSkin(int skin_id)
 {
 	this->player_skin_id = skin_id;
 
-	JFNHHLNJJKP* player = GetPlayer();
+	Player* player = GetPlayer();
 	if (!player) return;
 
-	((LAAIPMHLFJN*)player)->fields.PHNLNOOLAIO = this->player_skin_id;
+	((MapObject*)player)->fields.skin_id = this->player_skin_id;
 
 	// TODO: store old skin id so we can toggle enable
 }
@@ -180,10 +180,10 @@ void SkinChangerModule::changePlayerSkin(int skin_id)
 
 void SkinChangerModule::changePetSkin(int skin_id)
 {
-	static DAFEAHGLBGL* pet = this->pet;
+	static Pet* pet = this->pet;
 
-	static JFNHHLNJJKP* old_player = GetPlayer();
-	JFNHHLNJJKP* current_player = GetPlayer();
+	static Player* old_player = GetPlayer();
+	Player* current_player = GetPlayer();
 	if (!this->pet || old_player != current_player)
 	{
 		this->pet = GetPet();
@@ -198,5 +198,5 @@ void SkinChangerModule::changePetSkin(int skin_id)
 		return;
 	}
 
-	DAFEAHGLBGL_KOBJNFBMICI(this->pet, this->pet_skin_id, nullptr);
+	Pet_ChangeSkin(this->pet, this->pet_skin_id, nullptr);
 }

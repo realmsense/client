@@ -10,7 +10,7 @@ AutoAimModule::AutoAimModule()
 {
 	this->name = "Auto Aim";
 	this->enabled = false;
-	this->category = ModuleCategory::OTHER;
+	this->category = ModuleCategory::AUTO;
 	this->type = ModuleList::AutoAim;
 	this->has_gui_elements = true;
 
@@ -54,29 +54,29 @@ void AutoAimModule::onMainLoop()
 {
 	if (!this->enabled) return;
 
-	JFNHHLNJJKP* player = GetPlayer();
+	Player* player = GetPlayer();
 	if (!player) return;
 
-	COEDKELBKMI* enemy = this->chooseEnemy();
+	Character* enemy = this->chooseEnemy();
 	if (!enemy) return;
 
-	Vector2 player_pos = GetEntityPos((GJLIMCBOCJG*)player);
-	Vector2 enemy_pos = GetEntityPos((GJLIMCBOCJG*)enemy);
+	Vector2 player_pos = GetEntityPos((BasicObject*)player);
+	Vector2 enemy_pos = GetEntityPos((BasicObject*)enemy);
 	
 	float diff_x = enemy_pos.x - player_pos.x;
 	float diff_y = enemy_pos.y - player_pos.y;
 	float angle = atan2(diff_y, diff_x);
 
-	JFNHHLNJJKP_GBHNOKKCMJA(player, angle, nullptr);
+	Player_Shoot(player, angle, nullptr);
 }
 
-COEDKELBKMI* AutoAimModule::chooseEnemy()
+Character* AutoAimModule::chooseEnemy()
 {
-	JFNHHLNJJKP* player = GetPlayer();
+	Player* player = GetPlayer();
 	if (!player) return nullptr;
 
-	COEDKELBKMI* chosen_enemy = nullptr;
-	for (COEDKELBKMI* enemy : g_aEnemyList)
+	Character* chosen_enemy = nullptr;
+	for (Character* enemy : g_aEnemyList)
 	{
 		if (this->target_mode == AutoAim_Target::Any)
 			return enemy;
@@ -87,15 +87,15 @@ COEDKELBKMI* AutoAimModule::chooseEnemy()
 			continue;
 		}
 
-		Vector2 player_pos = GetEntityPos((GJLIMCBOCJG*)player);
-		Vector2 current_enemy_pos = GetEntityPos((GJLIMCBOCJG*)enemy);
-		Vector2 chosen_enemy_pos = GetEntityPos((GJLIMCBOCJG*)chosen_enemy);
+		Vector2 player_pos = GetEntityPos((BasicObject*)player);
+		Vector2 current_enemy_pos = GetEntityPos((BasicObject*)enemy);
+		Vector2 chosen_enemy_pos = GetEntityPos((BasicObject*)chosen_enemy);
 
 		if (this->target_mode == AutoAim_Target::ClosestMouse)
 		{
 			Camera* camera = GetMainCamera();
 			ImVec2 cursor_pos = ImGui::GetMousePos();
-			Vector3 mouse_world_pos3 = Camera_ScreenToWorldPoint_1(camera, { cursor_pos.x, cursor_pos.y * -1, 0.0f }, nullptr);
+			Vector3 mouse_world_pos3 = Camera_ScreenToWorldPoint(camera, { cursor_pos.x, cursor_pos.y * -1, 0.0f }, nullptr);
 			Vector2 mouse_world_pos = { mouse_world_pos3.x, mouse_world_pos3.y * -1 };
 
 			float chosen_distance = CalculateDistance(chosen_enemy_pos, mouse_world_pos);
@@ -114,16 +114,16 @@ COEDKELBKMI* AutoAimModule::chooseEnemy()
 
 		if (this->target_mode == AutoAim_Target::HighestDef)
 		{
-			int chosen_defense = ((LAAIPMHLFJN*)chosen_enemy)->fields.LOBGNENJGPK;
-			int current_defense = ((LAAIPMHLFJN*)enemy)->fields.LOBGNENJGPK;
+			int chosen_defense = ((MapObject*)chosen_enemy)->fields.defense;
+			int current_defense = ((MapObject*)enemy)->fields.defense;
 			if (current_defense > chosen_defense)
 				chosen_enemy = enemy;
 		}
 
 		if (this->target_mode == AutoAim_Target::HighestMaxHP)
 		{
-			int chosen_maxhp = ((LAAIPMHLFJN*)chosen_enemy)->fields.JLECINIONGJ;
-			int current_maxhp = ((LAAIPMHLFJN*)enemy)->fields.JLECINIONGJ;
+			int chosen_maxhp = ((MapObject*)chosen_enemy)->fields.max_hp;
+			int current_maxhp = ((MapObject*)enemy)->fields.max_hp;
 			if (current_maxhp > chosen_maxhp)
 				chosen_enemy = enemy;
 		}

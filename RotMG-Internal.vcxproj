@@ -102,6 +102,7 @@
     <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions-ptr.h" />
     <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h" />
     <ClInclude Include="src\il2cpp\appdata\il2cpp-functions.h" />
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-internal-types.h" />
     <ClInclude Include="src\il2cpp\appdata\il2cpp-metadata-version.h" />
     <ClInclude Include="src\il2cpp\appdata\il2cpp-types-ptr.h" />
     <ClInclude Include="src\il2cpp\appdata\il2cpp-types.h" />

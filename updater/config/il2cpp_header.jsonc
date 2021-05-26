@@ -1,0 +1,161 @@
+{
+    "replacements": [
+        // rename
+        ["Component_1", "Component"],
+        ["Object_1", "Object"],
+        
+        // Duplicate
+        ["float3", "Vector3"],
+        ["Il2CppString", "String"],
+        
+        // obfuscated
+        ["KBKBDLLEGGO", "Settings"],
+        ["DKMLMKFGPCC", "MapViewService"],
+        ["DAFEAHGLBGL", "Pet"],
+        ["JFNHHLNJJKP", "Player"],
+        ["COEDKELBKMI", "Character"],
+        ["LAAIPMHLFJN", "MapObject"],
+        ["GJLIMCBOCJG", "BasicObject"]
+    ],
+    "functions": [
+        ["Type_GetType_2", "Type_GetType"],
+        ["Camera_get_orthographicSize", "Camera_get_orthographicSize"],
+        ["Camera_set_orthographicSize", "Camera_set_orthographicSize"],
+        ["Camera_WorldToScreenPoint_1", "Camera_WorldToScreenPoint"],
+        ["Camera_ScreenToWorldPoint_1", "Camera_ScreenToWorldPoint"],
+        ["Behaviour_set_enabled", "Behaviour_set_enabled"],
+        ["Component_1_get_transform", "Component_get_transform"],
+        ["Object_1_FindObjectOfType", "Object_FindObjectOfType"],
+        ["Transform_get_position", "Transform_get_position"],
+        ["Transform_get_localPosition", "Transform_get_localPosition"],
+        ["GJLIMCBOCJG_GPIMPPOPDJO", "BasicObject_Init"],
+        ["DAFEAHGLBGL_KOBJNFBMICI", "Pet_ChangeSkin"],
+        ["JFNHHLNJJKP_GBHNOKKCMJA", "Player_Shoot"],
+        ["ApplicationManager_get_MapViewService", "ApplicationManager_get_MapViewService"],
+        ["DKMLMKFGPCC_NAGLHCDBGIM", "MapViewService_CheckTileWalkable"],
+        ["MapObjectUIManager_ShowFloatingText", "MapObjectUIManager_ShowFloatingText"]
+    ],
+    "enums": [
+        ["CLEPBEMBHAJ", "FloatingTextType"],
+        ["OMIPCDPIAOC", "MapObjectType"],
+        ["HLMENPGLNDH", "MapItem"],
+        ["EFBAFDICAFG", "EFBAFDICAFG"], // Right, Left, Down, Up, None, First
+        ["BJHJLINJFAI", "BJHJLINJFAI"]  // Stand, Walk, Attack, NumAction
+    ],
+    "structs": [
+        // C# Types with no __Fields
+        { "name": "Vector2",    "props": { } },
+        { "name": "Vector3",    "props": { } },
+        { "name": "Color",      "props": { } },
+        { "name": "Matrix4x4",  "props": { } },
+        { "name": "Nullable_1_UnityEngine_Vector2_", "props": { } },
+
+        // Unity Types
+        { "name": "String",             "props": { "__Fields": [ ] } },
+        { "name": "Type",               "props": { "__Fields": [ ] } },
+        { "name": "RuntimeTypeHandle",  "props": { } },
+        { "name": "Object_1",           "props": { "__Fields": [ ] } },
+        { "name": "Component_1",        "props": { "__Fields": [ ] } },
+        { "name": "Behaviour",          "props": { "__Fields": [ ] } },
+        { "name": "MonoBehaviour",      "props": { "__Fields": [ ] } },
+        { "name": "Transform",          "props": { "__Fields": [ ] } },
+        { "name": "Camera",             "props": { "__Fields": [ ] } },
+
+        // RotMG Types
+
+        /* managers */
+        { "name": "MapObjectUIManager", "props": { "__Fields": [ ] } },
+        { "name": "ApplicationManager", "props": { "__Fields": [ ] } },
+        { "name": "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_", "props": { "__Fields": [ ] } },
+        { "name": "EntityManager", "props": { } },
+        { "name": "ViewHandler", "props": { "__Fields": [ ] } },
+
+        {
+            "name": "GameController",
+            "props": {
+                "__Fields": [
+                    ["DKCDBOLECHM", "settings"]
+                ]
+            }
+        },
+        {
+            "name": "CameraManager",
+            "props": {
+                "__Fields": [
+                    ["OOJJDIANIBF", "perspective_editor"]
+                ]
+            }
+        },
+        {
+            "name": "CameraPerspectiveEditor",
+            "props": {
+                "__Fields": [ ]
+            }
+        },
+
+        /* random */
+        {
+            "name": "UnityThread",
+            "props": {
+                "__Fields": [ ]
+            }
+        },
+        {
+            "name": "KBKBDLLEGGO", /* Settings */
+            "props": {
+                "__Fields": [
+                    ["PMAAJDBAIHC", "rotate_speed"]
+                ]
+            }
+        },
+        {
+            "name": "DKMLMKFGPCC", /* MapViewService */
+            "props": {
+                "__Fields": [
+                    ["HFLGDFNPKPM", "player"]
+                ]
+            }
+        },
+        
+        /* entities */
+        {
+            "name": "JFNHHLNJJKP", /* Player */
+            "props": {
+                "__Fields": [ ]
+            }
+        },
+        {
+            "name": "COEDKELBKMI", /* Character */
+            "props": {
+                "__Fields": [ ]
+                }
+            },
+        {
+            "name": "LAAIPMHLFJN", /* MapObject */
+            "props": { 
+                "__Fields": [
+                    ["PHNLNOOLAIO", "skin_id"],
+                    ["LOBGNENJGPK", "defense"],
+                    ["JLECINIONGJ", "max_hp"]
+                ] 
+            }
+        },
+        {
+            "name": "GJLIMCBOCJG", /* BasicObject */
+            "props": {
+                "__Fields": [
+                    ["BIHICFBJDCC", "is_active" ]
+                ]
+            }
+        },
+        {
+            "name": "DAFEAHGLBGL",  /* Pet */
+            "props": {
+                "__Fields": [
+                    ["BKHBOCPPAOM", "object_props"]
+                ]
+            }
+        },
+        { "name": "NIIFJAMEHDD", "props": { "__Fields": [ ] } }
+    ]
+}

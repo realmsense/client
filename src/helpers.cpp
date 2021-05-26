@@ -40,11 +40,11 @@ std::string il2cppi_to_string(String* str)
     return il2cppi_to_string(reinterpret_cast<Il2CppString*>(str));
 }
 
-Object_1* FindObjectByQualifiedName(const char* assemblyQualifiedName)
+Object* FindObjectByQualifiedName(const char* assemblyQualifiedName)
 {
     String* qualified_name = (String*)il2cpp_string_new(assemblyQualifiedName);
-    Type* type = Type_GetType_2(qualified_name, nullptr);
-    Object_1* object = Object_1_FindObjectOfType(type, nullptr);
+    Type* type = Type_GetType(qualified_name, nullptr);
+    Object* object = Object_FindObjectOfType(type, nullptr);
     return object;
 }
 
@@ -55,44 +55,44 @@ Camera* GetMainCamera()
     return main_camera;
 }
 
-JFNHHLNJJKP* GetPlayer()
+Player* GetPlayer()
 {
     static ApplicationManager* application_manager = (ApplicationManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.ApplicationManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
-    static DKMLMKFGPCC* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
-    JFNHHLNJJKP* player = map_view_service->fields.HFLGDFNPKPM;
+    static MapViewService* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
+    Player* player = map_view_service->fields.player;
     return player;
 }
 
-DAFEAHGLBGL* GetPet()
+Pet* GetPet()
 {
     // Really hard to get pet
-    // There's a list of pets (and other objects) in DKMLMKFGPCC.
-    // We can get the ObjectProps for our pet's ToolTip through: DKMLMKFGPCC->EFNINMGLFDC->HMLEONMOKBC->NLODPDOFMKB
+    // There's a list of pets (and other objects) in MapViewService.
+    // We can get the ObjectProps for our pet's ToolTip through: MapViewService->EFNINMGLFDC->HMLEONMOKBC->NLODPDOFMKB
     // so we just iterate the list and check if the object props are the same object.
 
-    static ApplicationManager* application_manager = (ApplicationManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.ApplicationManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
-    static DKMLMKFGPCC* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
-    JFNHHLNJJKP* player = GetPlayer();
-
-    ObjectProperties* pet_skin_props1 = map_view_service->fields.EFNINMGLFDC->fields.HMLEONMOKBC->fields.NLODPDOFMKB;
-
-    auto list = map_view_service->fields.CIEBEOHNLJM;
-    auto items = list->fields._items->vector;
-    for (int i = 0; i < list->fields._size; i++)
-    {
-        NIIFJAMEHDD* character = items[i];
-        DAFEAHGLBGL* pet = (DAFEAHGLBGL*)character; // casting non types
-
-        ObjectProperties* pet_skin_props2 = pet->fields.BKHBOCPPAOM;
-
-        if (pet_skin_props1 == pet_skin_props2)
-            return pet;
-    }
-
+    //static ApplicationManager* application_manager = (ApplicationManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.ApplicationManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+    //static MapViewService* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
+    //Player* player = GetPlayer();
+    //
+    //ObjectProperties* pet_skin_props1 = map_view_service->fields.EFNINMGLFDC->fields.HMLEONMOKBC->fields.NLODPDOFMKB;
+    //
+    //auto list = map_view_service->fields.CIEBEOHNLJM;
+    //auto items = list->fields._items->vector;
+    //for (int i = 0; i < list->fields._size; i++)
+    //{
+    //    NIIFJAMEHDD* character = items[i];
+    //    Pet* pet = (Pet*)character; // casting non types
+    //
+    //    ObjectProperties* pet_skin_props2 = pet->fields.object_props;
+    //
+    //    if (pet_skin_props1 == pet_skin_props2)
+    //        return pet;
+    //}
+    //
     return nullptr;
 }
 
-Vector2 GetEntityPos(GJLIMCBOCJG* entity)
+Vector2 GetEntityPos(BasicObject* entity)
 {
     float pos_x = entity->fields.EOOJAMLJAOM;
     float pos_y = entity->fields.JDEKCEFBJFP;
@@ -100,15 +100,15 @@ Vector2 GetEntityPos(GJLIMCBOCJG* entity)
     return pos;
 }
 
-void ShowFloatingText(const char* message, CLEPBEMBHAJ__Enum type, __int64 color)
+void ShowFloatingText(const char* message, FloatingTextType type, __int64 color)
 {
-    JFNHHLNJJKP* player = GetPlayer();
+    Player* player = GetPlayer();
     if (!player) return;
 
     static ApplicationManager* application_manager = (ApplicationManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.ApplicationManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
-    static DKMLMKFGPCC* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
+    static MapViewService* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
 
-    ViewHandler* view_handler = reinterpret_cast<GJLIMCBOCJG*>(player)->fields.NJGEIJDFFND;
+    ViewHandler* view_handler = reinterpret_cast<BasicObject*>(player)->fields.NJGEIJDFFND;
     MapObjectUIManager* gui_manager = view_handler->fields.GUIManager;
     String* text = reinterpret_cast<String*>(il2cpp_string_new(message));
 

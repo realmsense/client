@@ -33,25 +33,27 @@ void DebugModule::onDisable()
 
 void DebugModule::renderGUI()
 {
-	ImGui::Checkbox("Draw Enemy Tracers", &this->draw_enemy_tracers);
+	if (ImGui::Checkbox("Draw Enemy Tracers", &this->draw_enemy_tracers))
+		this->setEnabled(true);
+
 	if (this->draw_enemy_tracers && this->enabled)
 	{
-		JFNHHLNJJKP* player = GetPlayer();
+		Player* player = GetPlayer();
 
 		RECT window_rect;
 		if (GetClientRect(g_hWindow, &window_rect) && player)
 		{
 			ImDrawList* draw = ImGui::GetBackgroundDrawList();
 
-			Vector2 player_pos = GetEntityPos((GJLIMCBOCJG*)player);
+			Vector2 player_pos = GetEntityPos((BasicObject*)player);
 			Vector3 player_world_pos = { player_pos.x, player_pos.y * -1, 0.0f };
-			Vector3 player_screen_pos = Camera_WorldToScreenPoint_1(GetMainCamera(), player_world_pos, nullptr);
+			Vector3 player_screen_pos = Camera_WorldToScreenPoint(GetMainCamera(), player_world_pos, nullptr);
 
-			for (COEDKELBKMI* enemy : g_aEnemyList)
+			for (Character* enemy : g_aEnemyList)
 			{
-				Vector2 enemy_pos = GetEntityPos((GJLIMCBOCJG*)enemy);
+				Vector2 enemy_pos = GetEntityPos((BasicObject*)enemy);
 				Vector3 enemy_world_pos = { enemy_pos.x, enemy_pos.y * -1, 0.0f };
-				Vector3 enemy_screen_pos = Camera_WorldToScreenPoint_1(GetMainCamera(), enemy_world_pos, nullptr);
+				Vector3 enemy_screen_pos = Camera_WorldToScreenPoint(GetMainCamera(), enemy_world_pos, nullptr);
 			
 				// Invert y coordinate, unity is weird and uses y coordinate as a negative
 				float window_height = (float)(window_rect.bottom - window_rect.top);

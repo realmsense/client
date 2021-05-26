@@ -13,9 +13,9 @@
 #include "il2cpp-functions.h"
 #undef DO_APP_FUNC
 
-bool Detour_DKMLMKFGPCC_NAGLHCDBGIM(DKMLMKFGPCC* __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo* method)
+bool Detour_MapViewService_CheckTileWalkable(MapViewService* __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo* method)
 {
-	bool walkable = Original_DKMLMKFGPCC_NAGLHCDBGIM(__this, EOOJAMLJAOM, JDEKCEFBJFP, method);
+	bool walkable = Original_MapViewService_CheckTileWalkable(__this, EOOJAMLJAOM, JDEKCEFBJFP, method);
 
 	for (Module* module : ModuleManager::modules)
 		module->onCheckTileWalkable(walkable);
@@ -23,18 +23,18 @@ bool Detour_DKMLMKFGPCC_NAGLHCDBGIM(DKMLMKFGPCC* __this, float EOOJAMLJAOM, floa
 	return walkable;
 }
 
-void Detour_GJLIMCBOCJG_GPIMPPOPDJO(GJLIMCBOCJG* __this, MethodInfo* method)
+void Detour_BasicObject_Init(BasicObject* __this, MethodInfo* method)
 {
 	switch (__this->fields.CDNHIOHCAIB)
 	{
-		case OMIPCDPIAOC__Enum::Character: // enemy
+		case MapObjectType::Character: // enemy
 		{
-			g_aEnemyList.insert((COEDKELBKMI*)__this);
+			g_aEnemyList.insert((Character*)__this);
 			break;
 		}
 	}
 
-	return Original_GJLIMCBOCJG_GPIMPPOPDJO(__this, method);
+	return Original_BasicObject_Init(__this, method);
 }
 
 bool InitHooks()
@@ -43,15 +43,15 @@ bool InitHooks()
 	uintptr_t baseAddress = GetBaseAddress();
 	std::cout << "GameAssembly.dll at " << std::hex << baseAddress << std::endl;
 
-	if (MH_CreateHook(DKMLMKFGPCC_NAGLHCDBGIM, Detour_DKMLMKFGPCC_NAGLHCDBGIM, reinterpret_cast<LPVOID*>(&Original_DKMLMKFGPCC_NAGLHCDBGIM)) != MH_OK)
+	if (MH_CreateHook(MapViewService_CheckTileWalkable, Detour_MapViewService_CheckTileWalkable, reinterpret_cast<LPVOID*>(&Original_MapViewService_CheckTileWalkable)) != MH_OK)
 	{
-		std::cout << "Failed to Detour DKMLMKFGPCC_NAGLHCDBGIM" << std::endl;
+		std::cout << "Failed to Detour MapViewService_NAGLHCDBGIM" << std::endl;
 		ret = false;
 	}
 
-	if (MH_CreateHook(GJLIMCBOCJG_GPIMPPOPDJO, Detour_GJLIMCBOCJG_GPIMPPOPDJO, reinterpret_cast<LPVOID*>(&Original_GJLIMCBOCJG_GPIMPPOPDJO)) != MH_OK)
+	if (MH_CreateHook(BasicObject_Init, Detour_BasicObject_Init, reinterpret_cast<LPVOID*>(&Original_BasicObject_Init)) != MH_OK)
 	{
-		std::cout << "Failed to Detour GJLIMCBOCJG_GPIMPPOPDJO" << std::endl;
+		std::cout << "Failed to Detour BasicObject_Init" << std::endl;
 		ret = false;
 	}
 

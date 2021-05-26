@@ -13,9 +13,9 @@ float CalculateDistance(Vector2 a, Vector2 b);
 std::string il2cppi_to_string(Il2CppString* str);
 std::string il2cppi_to_string(String* str);
 
-Object_1* FindObjectByQualifiedName(const char* assemblyQualifiedName);
+Object* FindObjectByQualifiedName(const char* assemblyQualifiedName);
 Camera* GetMainCamera();
-JFNHHLNJJKP* GetPlayer();
-DAFEAHGLBGL* GetPet();
-Vector2 GetEntityPos(GJLIMCBOCJG* entity);
-void ShowFloatingText(const char* message, CLEPBEMBHAJ__Enum type, __int64 color);
+Player* GetPlayer();
+Pet* GetPet();
+Vector2 GetEntityPos(BasicObject* entity);
+void ShowFloatingText(const char* message, FloatingTextType type, __int64 color);

@@ -23,6 +23,6 @@ public:
 
 private:
 	AutoAim_Target target_mode;
-	app::COEDKELBKMI* chooseEnemy();
+	app::Character* chooseEnemy();
 };
 

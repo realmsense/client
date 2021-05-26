@@ -13,7 +13,7 @@ public:
     void onMapChange() override;
 
 private:
-    app::DAFEAHGLBGL* pet;
+    app::Pet* pet;
 	int player_skin_id;
     int pet_skin_id;
     void changePetSkin(int skin_id);

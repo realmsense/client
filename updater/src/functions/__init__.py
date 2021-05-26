@@ -1,3 +1,3 @@
 from .helpers import *
-from .header import *
+from .il2cpp_header import *
 from .skins import *

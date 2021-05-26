@@ -26,6 +26,7 @@ void MainThread(HMODULE hModule)
 
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
+            ShowFloatingText("sex", FloatingTextType::Notification, Color32_BLUE);
             std::cout << "Hello, World!" << std::endl;
         }
 
@@ -36,8 +37,8 @@ void MainThread(HMODULE hModule)
             noclip->toggleModule();
         }
 
-        static JFNHHLNJJKP* old_player = nullptr;
-        JFNHHLNJJKP* player = GetPlayer();
+        static Player* old_player = nullptr;
+        Player* player = GetPlayer();
         bool map_change = player != old_player && player != nullptr;
         for (Module* module : ModuleManager::modules)
         {
