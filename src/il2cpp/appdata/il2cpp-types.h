@@ -710,6 +710,27 @@ struct Settings {
     struct Settings__Fields fields;
 };
 
+struct __declspec(align(8)) ChatSlot__Fields {
+    struct String *name;
+    struct String *original_message;
+    int32_t LIEBMCAGCIF;
+    int32_t JJGHMAPBNFN;
+    struct String *KJGCHNILDOK;
+    bool IEKNBEECMJC;
+    bool KMOHFBJAPMP;
+    bool NDGGAABFLKK;
+    int32_t IINBPOKGDOO;
+    struct Object *DMDLMNDFNHG;
+    struct String *formatted_message;
+    bool AMMDBPEJJGP;
+};
+
+struct ChatSlot {
+    struct ChatSlot__Class *klass;
+    MonitorData *monitor;
+    struct ChatSlot__Fields fields;
+};
+
 enum class FloatingTextType : int32_t {
     Xp = 0x00000000,
     Damage = 0x00000001,
@@ -907,6 +928,41 @@ struct GameController {
     struct GameController__Class *klass;
     MonitorData *monitor;
     struct GameController__Fields fields;
+};
+
+struct ChatManager__Fields {
+    struct MonoBehaviour__Fields _;
+    struct WaitForEndOfFrame *GFPMIDMHPON;
+    struct WaitForSeconds *BOMOMAJHOBA;
+    struct RectTransform *chatBox;
+    struct TMP_InputField *inputField;
+    struct ScrollRect *outputScrollView;
+    struct Image *outputBackground;
+    struct CanvasGroup *chatStatus;
+    struct Transform *scrollViewContainer;
+    struct List_1_DecaGames_RotMG_Chat_UI_ChatSlotController_ *CIIOPNMANMM;
+    struct List_1_ChatSlot_ *LIHBAFIGCOO;
+    struct SocketManager_1 *HPIPJDMLKLK;
+    struct PMJKJDNIDML *GIKEICFBIML;
+    bool OJDMDBNGJJG;
+    struct TMP_SelectionCaret *FJEBIKINBGO;
+    struct Image *AFKKKILEAHH;
+    struct List_1_System_String_ *PEBOJIOLAPM;
+    int32_t IILGDCNOANN;
+    struct SettingsManager *BOJJBEJPDHF;
+    struct PopupManager *KHFEOFMPGGG;
+    struct Image *EJIDGDNMOAO;
+    bool NPKAPFOJHHH;
+    struct HCLAMODFNBI *LPKIADKODHC;
+    bool interactKeyIsActive;
+    struct DelayMethodManager *EMIPKAKCMPG;
+    struct MapViewService *OHLHEKBJMOO;
+};
+
+struct ChatManager {
+    struct ChatManager__Class *klass;
+    MonitorData *monitor;
+    struct ChatManager__Fields fields;
 };
 
 struct CameraManager__Fields {

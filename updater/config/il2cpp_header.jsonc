@@ -15,7 +15,8 @@
         ["JFNHHLNJJKP", "Player"],
         ["COEDKELBKMI", "Character"],
         ["LAAIPMHLFJN", "MapObject"],
-        ["GJLIMCBOCJG", "BasicObject"]
+        ["GJLIMCBOCJG", "BasicObject"],
+        ["PIPCAMDKBDA", "ChatSlot"]
     ],
     "functions": [
         ["Type_GetType_2", "Type_GetType"],
@@ -33,7 +34,9 @@
         ["JFNHHLNJJKP_GBHNOKKCMJA", "Player_Shoot"],
         ["ApplicationManager_get_MapViewService", "ApplicationManager_get_MapViewService"],
         ["DKMLMKFGPCC_NAGLHCDBGIM", "MapViewService_CheckTileWalkable"],
-        ["MapObjectUIManager_ShowFloatingText", "MapObjectUIManager_ShowFloatingText"]
+        ["MapObjectUIManager_ShowFloatingText", "MapObjectUIManager_ShowFloatingText"],
+        ["ChatManager_AddSlot", "ChatManager_AddSlot"],
+        ["ChatManager_GetChatMessage", "ChatManager_GetChatMessage"]
     ],
     "enums": [
         ["Allocator", "Allocator__Enum"],
@@ -136,6 +139,22 @@
                 "__VTable": [ ],
                 "__StaticFields": [
                     ["APJIMGFDIOM", "view_distance"]
+                ]
+            }
+        },
+        {
+            "name": "ChatManager",
+            "props": {
+                "__Fields": [ ]
+            }
+        },
+        {
+            "name": "PIPCAMDKBDA", /* ChatSlot */
+            "props": {
+                "__Fields": [
+                    [ "HHAAMEHHGGP", "name" ],
+                    [ "FDDNDIFJIDA", "original_message" ],
+                    [ "JOGIHKDMLJM", "formatted_message" ]
                 ]
             }
         },
