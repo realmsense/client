@@ -1,1 +1,2 @@
 DO_TYPEDEF(0x03C10A90, MapViewService);
+DO_TYPEDEF(0x03C09060, FogController);

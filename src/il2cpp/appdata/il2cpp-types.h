@@ -27,6 +27,15 @@ struct Type {
     struct Type__Fields fields;
 };
 
+enum class Allocator__Enum : int32_t {
+    Invalid = 0x00000000,
+    None = 0x00000001,
+    Temp = 0x00000002,
+    TempJob = 0x00000003,
+    Persistent = 0x00000004,
+    AudioKernel = 0x00000005,
+};
+
 struct __declspec(align(8)) Object__Fields {
     void *m_CachedPtr;
 };
@@ -124,6 +133,12 @@ struct MonoBehaviour {
     struct MonoBehaviour__Fields fields;
 };
 
+struct float3 {
+    float x;
+    float y;
+    float z;
+};
+
 struct EntityManager {
     struct EntityDataAccess *m_EntityDataAccess;
 };
@@ -195,10 +210,10 @@ struct __declspec(align(8)) BasicObject__Fields {
     struct OHMNEJGNIPN *EJHKGKHGEBM;
     bool is_active;
     int32_t MAKNEMCCDAB;
-    struct Vector3 AEEEJDNCDKI;
-    struct Vector3 OGJBKGCIKDD;
+    struct float3 AEEEJDNCDKI;
+    struct float3 OGJBKGCIKDD;
     bool KFHEILLOJGN;
-    struct Vector3 BNFGLAPPMNF;
+    struct float3 BNFGLAPPMNF;
     struct MapViewService *OHLHEKBJMOO;
     bool MKIBGHFFBAA;
     float ILDPPGOMHEE;
@@ -218,7 +233,7 @@ struct __declspec(align(8)) BasicObject__Fields {
     struct MiniMapManager *MPDIMLPFNBE;
     bool HAKNGHGPLEG;
     bool JKEOLFDJLDG;
-    struct Vector3 IBAGIHEDPHP;
+    struct float3 IBAGIHEDPHP;
     bool NHJINJIKENB;
     int32_t AGMABKNHEIA;
     uint64_t KAOINAPOCHA;
@@ -500,7 +515,7 @@ struct Player__Fields {
     float BLCDBJICMOD;
     struct DKLDOPCAIHJ *NJLANKIJPDK;
     struct List_1_HDLHMJGAGEI_ *AFBNANPFPCD;
-    struct Vector3 LPCIMNBBHKL;
+    struct float3 LPCIMNBBHKL;
     bool NCFHHAPPBEM;
     struct Action *JMNILMDEAGN;
     struct Action *PGEIFEKLKJF;
@@ -779,6 +794,87 @@ struct MapViewService {
     struct MapViewService__Fields fields;
 };
 
+struct NativeList_1_Unity_Mathematics_float3_ {
+    struct UnsafeList *m_ListData;
+    #if defined(_CPLUSPLUS_)
+    Allocator__Enum m_DeprecatedAllocator;
+    #else
+    int32_t m_DeprecatedAllocator;
+    #endif
+};
+
+struct NativeList_1_FCMKBLMGMBJ_ {
+    struct UnsafeList *m_ListData;
+    #if defined(_CPLUSPLUS_)
+    Allocator__Enum m_DeprecatedAllocator;
+    #else
+    int32_t m_DeprecatedAllocator;
+    #endif
+};
+
+struct NativeList_1_NMLINFHMBBH_ {
+    struct UnsafeList *m_ListData;
+    #if defined(_CPLUSPLUS_)
+    Allocator__Enum m_DeprecatedAllocator;
+    #else
+    int32_t m_DeprecatedAllocator;
+    #endif
+};
+
+struct __declspec(align(8)) FogController__Fields {
+    int32_t AEFPEAPINFO;
+    int32_t HGIHNBDFGAH;
+    int32_t GKKEDMEEOGB;
+    struct Transform *ADGILOMJLLN;
+    struct List_1_OHMNEJGNIPN_ *EGOLEIDJMHH;
+    bool HGJJHGOMFGG;
+    int32_t NIIHPNEMAKF;
+    int32_t MOFGPKCPEHP;
+    float fog_range;
+    float fog_opacity;
+    float FBOAOELABOJ;
+    float unloaded_tile_distance;
+    int32_t IBPDNCPHBHE;
+    int32_t ENLLPBKDEOK;
+    int32_t DFFCDMIBDBH;
+    int32_t LJOCJCALFLO;
+    int32_t JHCFBPBDPBI;
+    int32_t NIHJNFBEANE;
+    int32_t DMOJKMGBALA;
+    struct Matrix4x4 LBADPIPNJOC;
+    int32_t PMPHBJKGDEE;
+    struct MapViewService *OHLHEKBJMOO;
+    struct GameController *LDNGFMMIBCA;
+    struct MJHLPJMCALH *HNAJLILMDIK;
+    struct EKPPFMHGBLO *KFPMIDMMFBK;
+    struct CFDIAGGALCM *AIJHBCJMHBG;
+    struct PPONHNHPPIG *FNLOADIDJIG;
+    struct AFCEEOKAIHB *INJOOPCFLEI;
+    struct FKKEDNEGEEC *MPGGDLCIBAO;
+    struct EKFIKBBDDIJ *KCCEEDBEMAG;
+    struct HAAOMPPIGDK *EIPHPEOCHKN;
+    struct CameraManager *KEIBIEADOBC;
+    struct List_1_System_Int32_ *GENPDIOAPAJ;
+    struct NativeList_1_Unity_Mathematics_float3_ PPPPCJNDEGK;
+    struct NativeList_1_FCMKBLMGMBJ_ HPLGDNDNBMA;
+    struct List_1_UnityEngine_Transform_ *CBDOOJGIBNC;
+    struct List_1_UnityEngine_Transform_ *ECBIMBDEEGH;
+    struct List_1_BasicObject_ *NOHFMNBMIOK;
+    struct NativeList_1_NMLINFHMBBH_ NNACKCHOCEJ;
+    struct List_1_System_Int32_ *IFJGNBANEMI;
+    struct Settings *DKCDBOLECHM;
+    int32_t BALPFPGCACI;
+    int32_t ENLKJADEKGD;
+    struct OHMNEJGNIPN *HEFOCAJCOHJ;
+    struct Vector2 GMDFAGEOKHO;
+};
+
+struct FogController {
+    struct FogController__Class *klass;
+    MonitorData *monitor;
+    struct FogController__Fields fields;
+};
+
 struct GameController__Fields {
     struct MonoBehaviour__Fields _;
     struct WaitForEndOfFrame *GFPMIDMHPON;
@@ -908,6 +1004,56 @@ struct Pet {
     struct Pet__Class *klass;
     MonitorData *monitor;
     struct Pet__Fields fields;
+};
+
+struct FogController__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct FogController__StaticFields {
+    float LHPKACGFBPO;
+    int32_t view_distance;
+    int32_t KMIFAGJEIKE;
+    int32_t LCNOIMECNPI;
+};
+
+struct FogController__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct FogController__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct FogController__VTable vtable;
+};
+
+struct MapViewService__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+};
+
+struct MapViewService__StaticFields {
+    struct String *DGLELDANGBB;
+    struct List_1_System_String_ *OEBEDLBDAMA;
+    struct List_1_System_String_ *ENPBKGPCFMN;
+    struct List_1_System_String_ *CKCELAEFOFE;
+    bool FIDKPOAMOAO;
+    bool MDJOIJMEJBJ;
+    struct FogController *DILPMFEEJCP;
+    float LFDCHMKDHKP;
+};
+
+struct MapViewService__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct MapViewService__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct MapViewService__VTable vtable;
 };
 
 struct MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager___Fields {

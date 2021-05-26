@@ -5,12 +5,12 @@
         ["Object_1", "Object"],
         
         // Duplicate
-        ["float3", "Vector3"],
         ["Il2CppString", "String"],
         
         // obfuscated
         ["KBKBDLLEGGO", "Settings"],
         ["DKMLMKFGPCC", "MapViewService"],
+        ["FJBJOOHPBDL", "FogController"],
         ["DAFEAHGLBGL", "Pet"],
         ["JFNHHLNJJKP", "Player"],
         ["COEDKELBKMI", "Character"],
@@ -36,6 +36,7 @@
         ["MapObjectUIManager_ShowFloatingText", "MapObjectUIManager_ShowFloatingText"]
     ],
     "enums": [
+        ["Allocator", "Allocator__Enum"],
         ["CLEPBEMBHAJ", "FloatingTextType"],
         ["OMIPCDPIAOC", "MapObjectType"],
         ["HLMENPGLNDH", "MapItem"],
@@ -48,7 +49,11 @@
         { "name": "Vector3",    "props": { } },
         { "name": "Color",      "props": { } },
         { "name": "Matrix4x4",  "props": { } },
+        { "name": "float3",  "props": { } },
         { "name": "Nullable_1_UnityEngine_Vector2_", "props": { } },
+        { "name": "NativeList_1_Unity_Mathematics_float3_", "props": { } },
+        { "name": "NativeList_1_FCMKBLMGMBJ_", "props": { } },
+        { "name": "NativeList_1_NMLINFHMBBH_", "props": { } },
 
         // Unity Types
         { "name": "String",             "props": { "__Fields": [ ] } },
@@ -113,6 +118,24 @@
             "props": {
                 "__Fields": [
                     ["HFLGDFNPKPM", "player"]
+                ],
+                "__Class": [ ],
+                "__VTable": [ ],
+                "__StaticFields": [ ]
+            }
+        },
+        {
+            "name": "FJBJOOHPBDL", /* FogController */
+            "props": {
+                "__Fields": [ 
+                    ["DFHJJKMFHNA", "fog_range"],
+                    ["EFFBIGGGNKG", "fog_opacity"],
+                    ["OBOIGBODLNK", "unloaded_tile_distance"]
+                ],
+                "__Class": [ ],
+                "__VTable": [ ],
+                "__StaticFields": [
+                    ["APJIMGFDIOM", "view_distance"]
                 ]
             }
         },

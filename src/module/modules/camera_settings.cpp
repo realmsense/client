@@ -48,6 +48,28 @@ void CameraSettingsModule::renderGUI()
 		settings->fields.rotate_speed = this->rotate_speed;
 		this->setEnabled(true);
 	}
+
+	if (ImGui::CollapsingHeader("Fog Settings"))
+	{
+		// TODO: needs cleaing up
+		FogController* fog_controller = (*MapViewService__TypeInfo)->static_fields->DILPMFEEJCP;
+
+		static float fog_range = 89.97056f;
+		if (ImGui::SliderFloat("Fog Range", &fog_range, 0.0f, 400.0f))
+			fog_controller->fields.fog_range = fog_range;
+
+		static float fog_opacity = 9.485281f;
+		if (ImGui::SliderFloat("Fog Opacity", &fog_opacity, 0.0f, 11.0f))
+			fog_controller->fields.fog_opacity = fog_opacity;
+
+		static float unloaded_tiles = 320.2829f;
+		if (ImGui::SliderFloat("Unloaded Tiles", &unloaded_tiles, 0.0f, 600.0f))
+			fog_controller->fields.unloaded_tile_distance = unloaded_tiles;
+
+		static int view_distance = 17;
+		if (ImGui::SliderInt("View Dist", &view_distance, 0, 20))
+			(*FogController__TypeInfo)->static_fields->view_distance = view_distance;
+	}
 }
 
 void CameraSettingsModule::updatePositionShift()
