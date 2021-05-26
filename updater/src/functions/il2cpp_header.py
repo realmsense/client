@@ -99,12 +99,25 @@ def generate_il2cpp_types():
 
         in_enum = False
 
+        in_internal_types = True
+        internal_lines = []
+
         output_lines = []
         output_lines.append('#include "il2cpp-internal-types.h"\n')
         output_lines.append("namespace app {\n")
 
         for line in file.readlines():
             line = line.replace("\n", "")
+
+            # Exit internal lines
+            # if in_internal_types and line.startswith("// * Application types from method calls"):
+            if in_internal_types and line.startswith("#pragma warning(disable : 4369)"):
+                in_internal_types = False
+                continue
+
+            if in_internal_types:
+                internal_lines.append(line)
+                continue
 
             # Enter struct
             found_struct = False
@@ -167,8 +180,13 @@ def generate_il2cpp_types():
         output_lines.append("} // end namespace app")
 
         logger.log(logging.INFO, "Outputting")
+        output_internal_types = ROOT_DIR / "../src/il2cpp/appdata/il2cpp-internal-types.h"
+        output_internal_types.write_text("\n".join(internal_lines))
+
         output_types = ROOT_DIR / "../src/il2cpp/appdata/il2cpp-types.h"
         output_types.write_text("\n".join(output_lines))
+        logger.log(logging.INFO, "Done!")
+        IndentFilter.level -= 1
 
     if len(remaining_structs) > 0:
         logger.log(logging.ERROR, "Failed to get the following structs:")

@@ -10,3 +10,4 @@ src/other/pet_skins
 venv
 __pycache__
 updater/output
+updater/output/temp
