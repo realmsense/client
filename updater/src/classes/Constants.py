@@ -13,6 +13,7 @@ CURRENT_CLIENT_URL = "https://rotmg.extacy.cc/production/client/current/"
 
 IL2CPP_FUNCTIONS_URL    = CURRENT_CLIENT_URL + "il2cpp_dump/cpp/appdata/il2cpp-functions.h"
 IL2CPP_TYPES_URL        = CURRENT_CLIENT_URL + "il2cpp_dump/cpp/appdata/il2cpp-types.h"
+IL2CPP_TYPEDEFS_URL        = CURRENT_CLIENT_URL + "il2cpp_dump/cpp/appdata/il2cpp-types-ptr.h"
 
 SPRITESHEET_URL         = CURRENT_CLIENT_URL + "extracted_assets/TextAsset/spritesheet.json"
 CHARACTERS_IMG_URL      = CURRENT_CLIENT_URL + "extracted_assets/Texture2D/characters.png"

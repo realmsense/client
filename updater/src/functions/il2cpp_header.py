@@ -67,8 +67,12 @@ def generate_il2cpp_types():
     types_file = download_file(IL2CPP_TYPES_URL, TEMP_DIR / "il2cpp-types.h")
     # types_file = TEMP_DIR / "il2cpp-types.h"
 
+    typedefs_file = download_file(IL2CPP_TYPEDEFS_URL, TEMP_DIR / "il2cpp-types-ptr.h")
+    # typedefs_file = TEMP_DIR / "il2cpp-types-ptr.h"
+
     remaining_structs = []
     remaining_enums = []
+    remaining_typedefs = []
     logger.log(logging.INFO, "Initialising JSON Data")
     for il2cpp_class in header_config["structs"]:
         remaining_structs.append({
@@ -82,6 +86,9 @@ def generate_il2cpp_types():
                 "replacements": replacements
             })
 
+            if struct_name == "__StaticFields":
+                remaining_typedefs.append(il2cpp_class["name"])
+
     for enum in header_config["enums"]:
         remaining_enums.append({
             "original": enum[0] + "__Enum",
@@ -91,7 +98,8 @@ def generate_il2cpp_types():
         header_config["replacements"].append([enum[0] + "__Enum", enum[1]])
 
     
-    logger.log(logging.INFO, "Parsing header...")
+    logger.log(logging.INFO, "Parsing types header...")
+    IndentFilter.level += 1
     with open(types_file) as file:
 
         current_struct = None
@@ -188,6 +196,26 @@ def generate_il2cpp_types():
         logger.log(logging.INFO, "Done!")
         IndentFilter.level -= 1
 
+    logger.log(logging.INFO, "Parsing typedefs header...")
+    IndentFilter.level += 1
+    with open(typedefs_file) as file:
+        output_lines = []
+        for line in file.readlines():
+            if len(remaining_typedefs) <= 0: break
+            line = line.replace("\n", "")
+            for typedef in remaining_typedefs:
+                search = ", " + typedef + ");"
+                if search in line:
+                    line = do_replace(line)
+                    output_lines.append(line)
+                    remaining_typedefs.remove(typedef)
+                    break
+
+    output_typedefs = ROOT_DIR / "../src/il2cpp/appdata/il2cpp-types-ptr.h"
+    output_typedefs.write_text("\n".join(output_lines))
+    logger.log(logging.INFO, "Done!")
+    IndentFilter.level -= 1
+
     if len(remaining_structs) > 0:
         logger.log(logging.ERROR, "Failed to get the following structs:")
         IndentFilter.level += 1
@@ -202,4 +230,12 @@ def generate_il2cpp_types():
 
         for enum in remaining_enums:
             logger.log(logging.INFO, enum["original"])
+        IndentFilter.level -= 1
+
+    if len(remaining_typedefs) > 0:
+        logger.log(logging.ERROR, "Failed to get the following typedefs:")
+        IndentFilter.level += 1
+
+        for typedef in remaining_structs:
+            logger.log(logging.INFO, typedef)
         IndentFilter.level -= 1
