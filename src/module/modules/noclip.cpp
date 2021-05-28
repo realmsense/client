@@ -11,7 +11,11 @@ NoclipModule::NoclipModule()
 	this->enabled = false;
 	this->category = ModuleCategory::MOVEMENT;
 	this->type = ModuleList::Noclip;
-	this->has_gui_elements = false;
+	this->has_gui_elements = true;
+
+	this->safe_mode = true;
+	this->on_walkable_tile = true;
+
 	this->ready();
 }
 
@@ -25,7 +29,7 @@ void NoclipModule::onEnable()
 
 void NoclipModule::onDisable()
 {
-	if (!this->on_walkable_tile)
+	if (this->safe_mode && !this->on_walkable_tile)
 	{
 		this->log.floatingText(Color32_BLUE);
 		this->log << "On Unwalkable Tile!" << std::endl;
@@ -41,7 +45,11 @@ void NoclipModule::onDisable()
 
 void NoclipModule::renderGUI()
 {
-	//
+	if (ImGui::Checkbox("Safe Mode", &this->safe_mode))
+	{
+		this->log.floatingText(Color32_BLUE);
+		this->log << "Safe Mode: " << (this->safe_mode ? "ON" : "OFF") << std::endl;
+	}
 }
 
 void NoclipModule::toggleNoclip()
