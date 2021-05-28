@@ -28,6 +28,7 @@ public:
 	virtual void onMapChange() { };
 	virtual void onCheckTileWalkable(bool& walkable) { };
 	virtual void onPlayerShoot(app::Player* __this, float& angle) { };
+	virtual void onSpriteShader_UpdateMask(app::SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth) { };
 
 protected:
 	virtual void onEnable() = 0;

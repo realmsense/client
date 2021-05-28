@@ -36,7 +36,8 @@
         ["DKMLMKFGPCC_NAGLHCDBGIM", "MapViewService_CheckTileWalkable"],
         ["MapObjectUIManager_ShowFloatingText", "MapObjectUIManager_ShowFloatingText"],
         ["ChatManager_AddSlot", "ChatManager_AddSlot"],
-        ["ChatManager_GetChatMessage", "ChatManager_GetChatMessage"]
+        ["ChatManager_GetChatMessage", "ChatManager_GetChatMessage"],
+        ["SpriteShader_UpdateMask", "SpriteShader_UpdateMask"]
     ],
     "enums": [
         ["Allocator", "Allocator__Enum"],
@@ -70,6 +71,7 @@
         { "name": "MonoBehaviour",      "props": { "__Fields": [ ] } },
         { "name": "Transform",          "props": { "__Fields": [ ] } },
         { "name": "Camera",             "props": { "__Fields": [ ] } },
+        { "name": "Rect",               "props": { } },
 
         // RotMG Types
 
@@ -79,6 +81,7 @@
         { "name": "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_", "props": { "__Fields": [ ] } },
         { "name": "EntityManager", "props": { } },
         { "name": "ViewHandler", "props": { "__Fields": [ ] } },
+        { "name": "SpriteShader", "props": { "__Fields": [ ] } },
 
         {
             "name": "GameController",

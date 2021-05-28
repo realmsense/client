@@ -10,6 +10,7 @@ DO_APP_FUNC(0x024C40A0, Vector3, Transform_get_position, (Transform * __this, Me
 DO_APP_FUNC(0x024C3D70, Vector3, Transform_get_localPosition, (Transform * __this, MethodInfo * method));
 DO_APP_FUNC(0x01242540, ChatSlot *, ChatManager_GetChatMessage, (ChatManager * __this, MethodInfo * method));
 DO_APP_FUNC(0x0123C080, void, ChatManager_AddSlot, (ChatManager * __this, ChatSlot * MJLCGOABOIA, MethodInfo * method));
+DO_APP_FUNC(0x029D8C10, void, SpriteShader_UpdateMask, (SpriteShader * __this, CGPOGAAKLFL * DLNMEAOOHKA, int32_t KDNJFAAKECF, int32_t HPGLAHDANIJ, MethodInfo * method));
 DO_APP_FUNC(0x01D97F20, void, BasicObject_Init, (BasicObject * __this, MethodInfo * method));
 DO_APP_FUNC(0x01689560, void, Pet_ChangeSkin, (Pet * __this, int32_t OGBGLIIENMF, MethodInfo * method));
 DO_APP_FUNC(0x012699C0, void, Player_Shoot, (Player * __this, float LODCFMOPDCN, MethodInfo * method));

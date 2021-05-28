@@ -83,6 +83,13 @@ struct Color {
     float a;
 };
 
+struct Rect {
+    float m_XMin;
+    float m_YMin;
+    float m_Width;
+    float m_Height;
+};
+
 struct Matrix4x4 {
     float m00;
     float m10;
@@ -1000,6 +1007,37 @@ enum class FloatingTextType : int32_t {
     ConditionEffect = 0x00000006,
     Notification = 0x00000007,
     Exaltation = 0x00000008,
+};
+
+struct SpriteShader__Fields {
+    struct MonoBehaviour__Fields _;
+    struct Material *_material;
+    struct Rect PCCKLFFKGJK;
+    struct Vector2 GDKGLGPAFLF;
+    float JNEAHLKBIDI;
+    float NMAKJHLCMAF;
+    float NOLIANINOPG;
+    float CAEIBOOBFBD;
+    bool BFANJMOOOOC;
+    struct Color HFNKCLKAIPJ;
+    struct Color GOCNPEOLHFM;
+    struct Color CCGHNLLBBNE;
+    struct Color BAPFKFALEFP;
+    float IIBJFCIIALE;
+    bool FMNONLFMDGJ;
+    bool COMFECJAEPL;
+    int32_t MFOIMKEOOAO;
+    int32_t BANBNGGGHJL;
+    struct MaterialPropertyBlock *JJCBPGEAGHL;
+    struct SpriteRenderer *HGLIEJOCNMI;
+    bool CBHDGGBKGDF;
+    struct CGPOGAAKLFL *BBNEIDIMNED;
+};
+
+struct SpriteShader {
+    struct SpriteShader__Class *klass;
+    MonitorData *monitor;
+    struct SpriteShader__Fields fields;
 };
 
 struct __declspec(align(8)) MapViewService__Fields {

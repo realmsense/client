@@ -45,6 +45,14 @@ void Detour_BasicObject_Init(BasicObject* __this, MethodInfo* method)
 	return Original_BasicObject_Init(__this, method);
 }
 
+void Detour_SpriteShader_UpdateMask(SpriteShader* __this, CGPOGAAKLFL* DLNMEAOOHKA, int32_t large_cloth, int32_t small_cloth, MethodInfo* method)
+{
+	for (Module* module : ModuleManager::modules)
+		module->onSpriteShader_UpdateMask(__this, large_cloth, small_cloth);
+
+	return Original_SpriteShader_UpdateMask(__this, DLNMEAOOHKA, large_cloth, small_cloth, nullptr);
+}
+
 bool InitHooks()
 {
 	bool ret = true;
@@ -69,6 +77,12 @@ bool InitHooks()
 		ret = false;
 	}
 
+
+	if (MH_CreateHook(SpriteShader_UpdateMask, Detour_SpriteShader_UpdateMask, reinterpret_cast<LPVOID*>(&Original_SpriteShader_UpdateMask)) != MH_OK)
+	{
+		std::cout << "Failed to Detour SpriteShader_UpdateMask" << std::endl;
+		ret = false;
+	}
 
 	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)
 	{

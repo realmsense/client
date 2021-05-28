@@ -21,8 +21,10 @@ SkinChangerModule::SkinChangerModule()
 	this->has_gui_elements = true;
 
 	this->pet = nullptr;
-	this->player_skin_id = 0;
-	this->pet_skin_id = 0;
+	this->player_skin_id = -1;
+	this->large_outfit = -1;
+	this->small_outfit = -1;
+	this->pet_skin_id = -1;
 
 	this->ready();
 }
@@ -31,12 +33,17 @@ void SkinChangerModule::onEnable()
 {
 	this->log.floatingText(Color32_GREEN);
 	this->log << this->name << " ON" << std::endl;
+
+	if (this->player_skin_id != -1)
+		this->changePlayerSkin(this->player_skin_id);
 }
 
 void SkinChangerModule::onDisable()
 {
 	this->log.floatingText(Color32_RED);
 	this->log << this->name << " OFF" << std::endl;
+
+	this->changePlayerSkin(this->old_player_skin_id);
 }
 
 void SkinChangerModule::renderGUI()
@@ -75,7 +82,8 @@ void SkinChangerModule::renderGUI()
 
 			if (ImGui::ImageButton(texture_id, ImVec2((float)img_size, (float)img_size)))
 			{
-				this->changePlayerSkin(skin->skin_id);
+				this->player_skin_id = skin->skin_id;
+				this->changePlayerSkin(this->player_skin_id);
 				this->log << "Changed Player Skin to " << skin->name << " (" << skin->skin_id << ")" << std::endl;
 				this->setEnabled(true);
 			}
@@ -92,7 +100,66 @@ void SkinChangerModule::renderGUI()
 			GUI_WrapInLoop(i, (int)player_skins[current_class].size());
 		}
 	}
-	
+
+	if (ImGui::CollapsingHeader("Outfit"))
+	{
+		if (ImGui::Button("Reset Small Outfit"))
+			this->small_outfit = -1;
+
+		ImGui::SameLine();
+
+		if (ImGui::Button("Reset Large Outfit"))
+			this->large_outfit = -1;
+
+		static std::vector<Skin*> player_outfits;
+		static bool init = false;
+		if (!init)
+		{
+			#include "../../other/player_outfits.h"
+			init = true;
+		}
+
+		for (int i = 0; i < player_outfits.size(); i++)
+		{
+			Skin* skin = player_outfits[i];
+			void* texture_id = (void*)skin->load();
+			if (!texture_id) continue;
+
+			if (ImGui::ImageButton(texture_id, ImVec2((float)img_size, (float)img_size)))
+			{
+				if (skin->name.rfind("Small") == 0)
+				{
+					this->small_outfit = skin->skin_id;
+					this->log << "Changed Small Outfit to " << skin->name << " (" << skin->skin_id << ")" << std::endl;
+
+				}
+				else if (skin->name.rfind("Large") == 0)
+				{
+					this->large_outfit = skin->skin_id;
+					this->log << "Changed Large Outfit to " << skin->name << " (" << skin->skin_id << ")" << std::endl;
+				}
+				else
+				{
+					this->log.floatingText(Color32_BLUE);
+					this->log << "Unknown outfit selected!" << std::endl;
+				}
+
+				this->setEnabled(true);
+			}
+
+			if (ImGui::IsItemHovered())
+			{
+				ImGui::BeginTooltip();
+				ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+				ImGui::TextUnformatted(skin->name.c_str());
+				ImGui::PopTextWrapPos();
+				ImGui::EndTooltip();
+			}
+
+			GUI_WrapInLoop(i, (int)player_outfits.size());
+		}
+	}
+
 	if (ImGui::CollapsingHeader("Pet Skin"))
 	{
 		// [PetFamily][Rarity] = Skin[];
@@ -156,25 +223,43 @@ void SkinChangerModule::renderGUI()
 
 void SkinChangerModule::onMapChange()
 {
+	if (Player* player = GetPlayer())
+		this->old_player_skin_id = ((MapObject*)player)->fields.skin_id;
+
 	if (!this->enabled) return;
 
-	if (this->player_skin_id != 0)
+	if (this->player_skin_id != -1)
 		this->changePlayerSkin(this->player_skin_id);
 
-	if (this->pet_skin_id != 0)
+	if (this->pet_skin_id != -1)
 		this->changePetSkin(this->pet_skin_id);
+}
+
+void SkinChangerModule::onSpriteShader_UpdateMask(app::SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth)
+{
+	if (!this->enabled) return;
+
+	BasicObject* player = (BasicObject*)GetPlayer();
+	SpriteShader* player_spriteshader = player->fields.NJGEIJDFFND->fields.spriteShader;
+	if (sprite_shader == player_spriteshader)
+	{
+		if (this->large_outfit != -1)
+			large_cloth = this->large_outfit;
+
+		if (this->small_outfit != -1)
+			small_cloth = this->small_outfit;
+	}
 }
 
 void SkinChangerModule::changePlayerSkin(int skin_id)
 {
-	this->player_skin_id = skin_id;
-
 	Player* player = GetPlayer();
 	if (!player) return;
 
-	((MapObject*)player)->fields.skin_id = this->player_skin_id;
+	if (this->old_player_skin_id == -1)
+		this->old_player_skin_id = ((MapObject*)player)->fields.skin_id;
 
-	// TODO: store old skin id so we can toggle enable
+	((MapObject*)player)->fields.skin_id = skin_id;
 }
 
 

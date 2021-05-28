@@ -10,11 +10,17 @@ public:
 	void onEnable() override;
 	void onDisable() override;
 	void renderGUI() override;
+
     void onMapChange() override;
+    void onSpriteShader_UpdateMask(app::SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth) override;
 
 private:
-    app::Pet* pet;
 	int player_skin_id;
+    int old_player_skin_id;
+    int large_outfit;
+    int small_outfit;
+
+    app::Pet* pet;
     int pet_skin_id;
     void changePetSkin(int skin_id);
     void changePlayerSkin(int skin_id);

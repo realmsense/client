@@ -5,6 +5,7 @@ enc_temp_folder
 
 src/other/player_skins
 src/other/pet_skins
+src/other/outfits
 
 # updater script
 venv

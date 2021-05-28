@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 import threading
+import shutil
 
 from functions.helpers import download_file, parse_int
 
@@ -57,6 +58,86 @@ def dump_player_skins():
 
     logger.log(logging.INFO, "Done")
     IndentFilter.level -= 1
+
+
+def dump_player_outfits():
+
+    # RotMG doesn't store dyes/textiles textures in the xml
+    # For textiles we need to extract all the sprites in the "textileWxH" spritesheet. (w = width, h = height)
+    # (see below how rotmg uses the <Tex1/2> attribute for textiles)
+    # For Dyes, there's no sprite because it's just a solid color.
+    # E.g.: 0x01F0F8FF = #f0f8ff (idk what the 0x01 is)
+
+    spritesheet_file = download_file(SPRITESHEET_URL, TEMP_DIR / "spritesheet.json")
+    spritesheet_img = download_file(MAPOBJECTS_IMG_URL, TEMP_DIR / "mapObjects.png")
+    spritesheet_json = read_json(spritesheet_file)
+
+    cpp_lines = []
+
+    textiles_xml = download_file(TEXTILES_XML_URL, TEMP_DIR / "textiles.xml")
+    textiles = []
+    for object in ET.parse(textiles_xml).getroot():
+        name = object.get("id")
+        tex1 = object.find("Tex1")
+        tex2 = object.find("Tex2")
+
+        tex = ""
+        if tex1 is not None:
+            tex = tex1.text
+        else:
+            tex = tex2.text
+
+        textiles.append({"name": name, "tex": tex})
+        file = ROOT_DIR / "../src/other/outfits" / (tex + ".png")
+        cpp_file = str(file).replace("\\", "\\\\")
+        cpp_str = f'player_outfits.push_back(new Skin("{name}", "{cpp_file}", {tex}));'
+        cpp_lines.append(cpp_str)
+
+    # Textiles - Extract images
+    for sprite in spritesheet_json["sprites"]:
+        if not sprite["spriteSheetName"].startswith("textile"):
+            continue
+
+        sprite_index = sprite["index"]
+        pos = sprite["position"]
+        spritesheet_name = sprite["spriteSheetName"]
+        
+        # build the tex1/tex2: 0x9000001
+        # 0x9 is the width of the textile, last digit is the index of the file from the spritesheet.
+        width = regex.search("textile(\d+)x", spritesheet_name).group(1)
+        # name = "0x" + hex(int(width)) 
+        name = hex(int(width))
+        name = name.ljust(9, "0")   # 0x9000000
+        name = int(name, 0)
+        name += sprite["index"]     # add index
+        name = hex(name)            # convert back to hex string, 0x9000001
+
+        file_name = name + ".png"
+        output_file = ROOT_DIR / "../src/other/outfits" / file_name
+        
+        exists = any(x for x in textiles if x["tex"] == name)
+        if not exists:
+            continue
+
+        # extract_textile_thread(spritesheet_img, output_file, pos)
+        thread = threading.Thread(target=extract_textile_thread, args=(spritesheet_img, output_file, pos))
+        thread.start()
+
+    # Extract Dyes
+
+
+        # large_outfits.push_back(new Skin(name, file, type))
+        # cpp_skin_str = f'player_skins[ClassList::{class_name}].push_back(new Skin("{name}", "{cpp_skin_file}", {type}));'
+
+    # Output Header
+    outfits_h = ROOT_DIR / "../src/other/player_outfits.h"
+    outfits_h.write_text("\n".join(cpp_lines))
+
+
+def extract_textile_thread(spritesheet_img, output_file, pos):
+    extract_from_image(output_file, spritesheet_img, pos)
+    resize_repeat_image(output_file, pos["w"] * 4)
+    resize_image(output_file, 4)
 
 
 def dump_pet_skins():
