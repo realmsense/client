@@ -27,6 +27,7 @@ public:
 	virtual void onMainLoop() { };
 	virtual void onMapChange() { };
 	virtual void onCheckTileWalkable(bool& walkable) { };
+	virtual void onPlayerShoot(app::Player* __this, float& angle) { };
 
 protected:
 	virtual void onEnable() = 0;

@@ -23,6 +23,14 @@ bool Detour_MapViewService_CheckTileWalkable(MapViewService* __this, float EOOJA
 	return walkable;
 }
 
+void Detour_Player_Shoot(Player* __this, float angle, MethodInfo* method)
+{
+	for (Module* module : ModuleManager::modules)
+		module->onPlayerShoot(__this, angle);
+
+	return Original_Player_Shoot(__this, angle, method);
+}
+
 void Detour_BasicObject_Init(BasicObject* __this, MethodInfo* method)
 {
 	switch (__this->fields.CDNHIOHCAIB)
@@ -54,6 +62,13 @@ bool InitHooks()
 		std::cout << "Failed to Detour BasicObject_Init" << std::endl;
 		ret = false;
 	}
+
+	if (MH_CreateHook(Player_Shoot, Detour_Player_Shoot, reinterpret_cast<LPVOID*>(&Original_Player_Shoot)) != MH_OK)
+	{
+		std::cout << "Failed to Detour Player_Shoot" << std::endl;
+		ret = false;
+	}
+
 
 	if (MH_EnableHook(MH_ALL_HOOKS) != MH_OK)
 	{

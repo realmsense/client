@@ -50,24 +50,19 @@ void AutoAimModule::renderGUI()
 	}
 }
 
-void AutoAimModule::onMainLoop()
+void AutoAimModule::onPlayerShoot(Player* player, float& angle)
 {
 	if (!this->enabled) return;
-
-	Player* player = GetPlayer();
-	if (!player) return;
 
 	Character* enemy = this->chooseEnemy();
 	if (!enemy) return;
 
 	Vector2 player_pos = GetEntityPos((BasicObject*)player);
 	Vector2 enemy_pos = GetEntityPos((BasicObject*)enemy);
-	
+
 	float diff_x = enemy_pos.x - player_pos.x;
 	float diff_y = enemy_pos.y - player_pos.y;
-	float angle = atan2(diff_y, diff_x);
-
-	Player_Shoot(player, angle, nullptr);
+	angle = atan2(diff_y, diff_x);
 }
 
 Character* AutoAimModule::chooseEnemy()
