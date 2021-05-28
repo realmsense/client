@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "helpers.h"
 #include "autoaim.h"
+
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 #include "imgui/imgui.h"
@@ -14,6 +16,7 @@ AutoAimModule::AutoAimModule()
 	this->type = ModuleList::AutoAim;
 	this->has_gui_elements = true;
 
+	this->reverse_cult_staff = true;
 	this->target_mode = AutoAim_Target(1);
 
 	this->ready();
@@ -48,21 +51,42 @@ void AutoAimModule::renderGUI()
 		this->target_mode = AutoAim_Target(selected_mode);
 		this->log << "Target Mode set to " << target_modes[selected_mode] << std::endl;
 	}
+
+	if (ImGui::Checkbox("Reverse Cult Staff", &this->reverse_cult_staff))
+	{
+		this->log.floatingText(Color32_BLUE);
+		this->log << "Reverse Cult Staff: " << (this->reverse_cult_staff ? "ON" : "OFF") << std::endl;
+	}
 }
 
 void AutoAimModule::onPlayerShoot(Player* player, float& angle)
 {
-	if (!this->enabled) return;
+	if (this->enabled)
+	{
+		Character* enemy = this->chooseEnemy();
+		if (enemy)
+		{
+			Vector2 player_pos = GetEntityPos((BasicObject*)player);
+			Vector2 enemy_pos = GetEntityPos((BasicObject*)enemy);
 
-	Character* enemy = this->chooseEnemy();
-	if (!enemy) return;
+			float diff_x = enemy_pos.x - player_pos.x;
+			float diff_y = enemy_pos.y - player_pos.y;
+			angle = atan2(diff_y, diff_x);
+		}
+	}
 
-	Vector2 player_pos = GetEntityPos((BasicObject*)player);
-	Vector2 enemy_pos = GetEntityPos((BasicObject*)enemy);
+	if (reverse_cult_staff)
+	{
+		EquipmentSlot* weapon = GetEquipmentSlot(0);
+		ObjectProperties* object_properties = ((ItemSlot*)weapon)->fields.object_properties;
+		if (!object_properties) return;
 
-	float diff_x = enemy_pos.x - player_pos.x;
-	float diff_y = enemy_pos.y - player_pos.y;
-	angle = atan2(diff_y, diff_x);
+		bool cult_staff = il2cppi_to_string(object_properties->fields.displayId) == "Staff of Unholy Sacrifice";
+		if (!cult_staff)
+		{
+			angle -= M_PI;
+		}
+	}
 }
 
 Character* AutoAimModule::chooseEnemy()

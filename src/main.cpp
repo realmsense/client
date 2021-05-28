@@ -26,12 +26,7 @@ void MainThread(HMODULE hModule)
 
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
-            static GameController* game_controller = (GameController*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.Game.GameController, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
-            ChatManager* chat_manager = game_controller->fields.chatManager;
-
-            ChatSlot* chat_slot = ChatManager_GetChatMessage(chat_manager, nullptr);
-            chat_slot->fields.formatted_message = (String*)il2cpp_string_new("<color=#FFFF00>Extacypls died at level 20, killed by Demon of the Abyss</color>");
-            ChatManager_AddSlot(chat_manager, chat_slot, nullptr);
+            //
         }
 
         // V key - toggle noclip

@@ -731,6 +731,265 @@ struct ChatSlot {
     struct ChatSlot__Fields fields;
 };
 
+struct __declspec(align(8)) TextureProperties__Fields {
+    struct Texture_1 *TextureAttribute;
+    struct RandomTexture *RandomTextureAttribute;
+    struct KLKDLLPEACH *_textureData;
+};
+
+struct TextureProperties {
+    struct TextureProperties__Class *klass;
+    MonitorData *monitor;
+    struct TextureProperties__Fields fields;
+};
+
+struct BaseProperties__Fields {
+    struct TextureProperties__Fields _;
+    struct Top *TopTextureElement;
+    struct EffectProperties *Effect;
+};
+
+struct BaseProperties {
+    struct BaseProperties__Class *klass;
+    MonitorData *monitor;
+    struct BaseProperties__Fields fields;
+};
+
+struct ObjectProperties__Fields {
+    struct BaseProperties__Fields _;
+    struct String *id;
+    struct TopAnimation__Array *TopAnimation;
+    struct String *DisplayId;
+    struct String *BagType;
+    struct String *TypeAttribute;
+    struct String *SetTypeAttribute;
+    struct String *SetNameAttribute;
+    struct String *Model;
+    struct String *NoTexture;
+    struct String *OccupySquareElement;
+    struct String *NoCoverElement;
+    struct String *ShadowSizeElement;
+    struct String *PlayerElement;
+    struct String *EnemyElement;
+    struct String *AlwaysPositiveHealth;
+    struct String *DrawOnGroundElement;
+    struct String *DrawUnderElement;
+    struct String *FullOccupyElement;
+    struct String *EnemyOccupySquareElement;
+    struct String *StaticElement;
+    struct String *NoMiniMapElement;
+    struct String *HealthBarElement;
+    struct String *ProtectFromGroundDamageElement;
+    struct String *ProtectFromSinkElement;
+    struct String *FlyingElement;
+    struct String *ShowNameElement;
+    struct String *DontFaceAttacksElement;
+    struct String *DontFaceMovementElement;
+    struct String *ZElement;
+    struct String *ColorElement;
+    struct String *SizeElement;
+    struct String *MinSizeElement;
+    struct String *MaxSizeElement;
+    struct String *SizeStepElement;
+    struct String *LargeSkillPotionElement;
+    struct String *SmallSkillPotionElement;
+    struct String *BloodProbElement;
+    struct String *BloodColorElement;
+    struct String *ShadowColorElement;
+    struct String *ClassElement;
+    struct String *RotationElement;
+    struct String *AngleCorrectionElement;
+    struct String *SlotTypesElement;
+    struct String *NexusPortalElement;
+    struct String *LockedPortalElement;
+    struct ProjectileProperties__Array *Projectiles;
+    struct ShortLineTexture *ShortLineTextureElement;
+    struct LTexture *LTextureElement;
+    struct LineTexture *LineTextureElement;
+    struct String *BaseIndentElement;
+    struct String *TopIndentElement;
+    struct String *HeightElement;
+    struct String *NoWallTextureRepeatElement;
+    struct String *NoTopTextureRepeatElement;
+    struct String *NumProjectilesElement;
+    struct String *ArcGapElement;
+    struct String *SlotTypeElement;
+    struct String *LotElement;
+    struct String *CanPutSoulboundObjectsElement;
+    struct String *SoulboundElement;
+    struct String *DropTradableElement;
+    struct String *ConsumableElement;
+    struct QuickslotAllowed *QuickslotAllowedElement;
+    struct QuickslotCooldown *QuickslotCooldownElement;
+    struct String *OnlyDraggableToQuickslotElement;
+    struct String *OnlyUsableFromQuickslotElement;
+    struct String *AddsQuickslot;
+    struct String *MarkElement;
+    struct String *TokenElement;
+    struct String *TreasureElement;
+    struct String *PetFoodElement;
+    struct String *TierElement;
+    struct String *InvUseElement;
+    struct String *DescriptionElement;
+    struct String *FeedPowerElement;
+    struct String *UsableElement;
+    struct String *PotionElement;
+    struct String *XPBonusElement;
+    struct String *MpEndCostElement;
+    struct String *MpCostElement;
+    struct UnlockLevel__Array *UnlockLevel;
+    struct LevelIncrease__Array *LevelIncrease;
+    struct String *EquipmentElement;
+    struct MaxHitPoints *MaxHitPointsElement;
+    struct MaxMagicPoints *MaxMagicPointsElement;
+    struct Attack *AttackElement;
+    struct Defense *DefenseElement;
+    struct Speed *SpeedElement;
+    struct Dexterity *DexterityElement;
+    struct String *BurstCountElement;
+    struct String *BurstDelayElement;
+    struct String *BurstMinDelayElement;
+    struct String *Fame;
+    struct String *Price;
+    struct HpRegen *HpRegenElement;
+    struct MpRegen *MpRegenElement;
+    struct String *UnlockCostElement;
+    struct Activate__Array *Activators;
+    struct ActivateOnEquip__Array *ActivateOnEquip;
+    struct String *CooldownElement;
+    struct String *StunImmuneElement;
+    struct String *ParalyzeImmuneElement;
+    struct String *InvincibleElement;
+    struct String *DazedImmuneElement;
+    struct String *StasisImmuneElement;
+    struct String *RateOfFireElement;
+    struct HealthBarBoss *HealthBarBossElement;
+    struct String *DosesElement;
+    struct String *QuantityElement;
+    struct ExtraTooltipData *ExtraTooltipDataElement;
+    struct String *VaultItemElement;
+    struct AnimatedTexture *AnimatedTextureElement;
+    struct Animation_1__Array *AnimationElement;
+    struct String *IntergamePortalElement;
+    struct String *DungeonNameElement;
+    struct String *MultiPhaseElement;
+    struct String *PetBehaviorElement;
+    struct String *PetSkin;
+    struct String *DefaultSkin;
+    struct String *PetAbilityElement;
+    struct String *Family;
+    struct String *Rarity;
+    struct String *NoHatchOrFuse;
+    struct String *BasicPet;
+    struct WhileMoving *WhileMoving;
+    struct AltTexture__Array *AltTexture;
+    struct DotTexture *DotTexture;
+    struct TTexture *TTexture;
+    struct CrossTexture *CrossTexture;
+    struct String *GroupElement;
+    struct Portrait *Portrait;
+    struct String *HitSound;
+    struct String *DeathSound;
+    struct Sound__Array *Sound;
+    struct String *OldSound;
+    struct String *Tex1Element;
+    struct String *Tex2Element;
+    struct Texture_1 *Mask_1;
+    struct String *NoSkinSelect;
+    struct String *UnlockSpecial;
+    struct String *PlayerClassType;
+    struct String *IngredeintElement;
+    struct String *BgObjectElement;
+    struct String *ForbidUseOnMaxHPElement;
+    struct String *ForbidUseOnMaxMPElement;
+    struct ForbidUseOnState *ForbidUseOnStateElement;
+    struct MinimapIcon *MinimapIconElement;
+    struct FollowMouse *FollowMouseElement;
+    bool occupySquare;
+    int32_t type;
+    int32_t shadowSize;
+    int32_t maxStack;
+    float qsCooldownDuration;
+    struct String *displayId;
+    bool isPlayer;
+    bool isEnemy;
+    bool drawOnGround;
+    bool drawUnder;
+    bool fullOccupy;
+    bool enemyOccupySquare;
+    bool isStatic;
+    bool noMiniMap;
+    bool noHealthBar;
+    int32_t healthBar;
+    bool protectFromGroundDamage;
+    bool protectFromSink;
+    float z;
+    bool flying;
+    int32_t color;
+    bool showName;
+    bool dontFaceAttacks;
+    bool dontFaceMovement;
+    bool isUsable;
+    float bloodProb;
+    int32_t mpCost;
+    int32_t mpEndCost;
+    float cooldown;
+    bool hasCooldown;
+    int32_t bloodColor;
+    bool ignoreHit;
+    bool isForbidUseOnMaxHP;
+    bool isForbidUseOnMaxMP;
+    bool isForbidUseStat;
+    uint32_t forbidStatId;
+    int32_t feedPowerValue;
+    bool alwaysPositiveHealth;
+    int32_t minSize;
+    int32_t maxSize;
+    int32_t sizeStep;
+    float angleCorrection;
+    float rotation;
+    int32_t slotTypeElementValue;
+    struct String *className;
+    float baseIndent;
+    float topIndent;
+    float height;
+    bool wallRepeat;
+    bool topRepeat;
+    int32_t numProjectiles;
+    float arcGap;
+    bool hasTopAnimation;
+    bool isSoulbound;
+    bool is3dObject;
+    int32_t connectType;
+    int32_t questBarDistance;
+    float questBarXOffset;
+    float questBarYOffset;
+    bool hasAnimationFrame;
+    struct List_1_System_Int32_ *slotTypes;
+    float rateOfFire;
+    bool isGravestone;
+    struct Dictionary_2_System_Byte_System_String_ *sounds;
+    float abilityUseDiscount;
+    int32_t tex1;
+    int32_t tex2;
+    struct WhileMovingProperties *whileMovingProperties;
+    bool hasMinimapIcon;
+    int32_t burstCountValue;
+    int32_t burstDelayValue;
+    int32_t burstMinDelay;
+    float _pixelPerUnit;
+    struct Vector2 _pivot;
+    struct Vector2 inventoryIconOffset;
+    struct ForgeProperties *forgeProperties;
+    float summonSpeed;
+};
+
+struct ObjectProperties {
+    struct ObjectProperties__Class *klass;
+    MonitorData *monitor;
+    struct ObjectProperties__Fields fields;
+};
+
 enum class FloatingTextType : int32_t {
     Xp = 0x00000000,
     Damage = 0x00000001,
@@ -928,6 +1187,159 @@ struct GameController {
     struct GameController__Class *klass;
     MonitorData *monitor;
     struct GameController__Fields fields;
+};
+
+struct ItemSlot__Fields {
+    struct MonoBehaviour__Fields _;
+    struct GameObject *slotImageContainer;
+    struct GameObject *slotBackgroundContainer;
+    struct TextMeshProUGUI *tierLabel;
+    struct TextMeshProUGUI *quantityLabel;
+    int32_t JIPDPBJPGGE;
+    struct MapObject *KCKGPAMMOOD;
+    bool CBHDGGBKGDF;
+    struct ObjectProperties *object_properties;
+    int32_t GGDJDKOPBPK;
+    struct UIMapObjectShader *PAPCHKNDPMA;
+    struct Image *JJNOHCLNAEL;
+    struct UIIconLoader *NNPNABHPEAE;
+    struct RectTransform *iconRectTransform;
+    bool allowAdjustIconPosition;
+    struct Settings *DKCDBOLECHM;
+    struct HNCCPCHKKHG *EOBDBMDFFGH;
+    int32_t MJIPCOPNAKL;
+};
+
+struct ItemSlot {
+    struct ItemSlot__Class *klass;
+    MonitorData *monitor;
+    struct ItemSlot__Fields fields;
+};
+
+enum class EMOPGKHHDGD : int32_t {
+    Player = 0x00000000,
+    OtherPlayer = 0x00000001,
+    Npc = 0x00000002,
+    Lootbag = 0x00000003,
+};
+
+enum class ItemLocationType : int32_t {
+    None = 0x00000000,
+    Map = 0x00000001,
+    Equipment = 0x00000002,
+    Inventory = 0x00000003,
+    Backpack = 0x00000004,
+    Quickslot = 0x00000005,
+    VaultPanel = 0x00000006,
+    PotionPanel = 0x00000007,
+};
+
+struct InteractiveItemSlot__Fields {
+    struct ItemSlot__Fields _;
+    struct Sprite *emptySlotBackground;
+    struct Sprite *usedSlotBackground;
+    bool ignoreDrag;
+    bool FCAFCEMCHLF;
+    int32_t JACEFHMDMFN;
+    bool DOHLGBANCLE;
+    bool HJAMBFGKFBM;
+    #if defined(_CPLUSPLUS_)
+    EMOPGKHHDGD DNOJABLKJHG;
+    #else
+    int32_t DNOJABLKJHG;
+    #endif
+    struct Transform *KALELMALCCC;
+    struct CanvasGroup *KCEDINDNJFK;
+    struct EquipmentManager *HCCCOFFFJJI;
+    bool LEIOIENOGPM;
+    struct PointerEventData *CPHAKFOMJHE;
+    #if defined(_CPLUSPLUS_)
+    ItemLocationType dragPlaceType;
+    #else
+    int32_t dragPlaceType;
+    #endif
+};
+
+struct InteractiveItemSlot {
+    struct InteractiveItemSlot__Class *klass;
+    MonitorData *monitor;
+    struct InteractiveItemSlot__Fields fields;
+};
+
+struct EquipmentManager__Fields {
+    struct MonoBehaviour__Fields _;
+    struct EquipmentManager_DLOBHGAFJPJ *MHMEGLCFADE;
+    struct EquipmentManager_DLOBHGAFJPJ *JKPEMKJBAAP;
+    struct GameObject *inputBlocker;
+    struct Transform *dragObjectContainer;
+    struct EquipmentSlot__Array *equipmentSlots;
+    struct InventorySlot__Array *inventorySlots;
+    struct QuickSlot__Array *quickSlots;
+    struct Sprite *secondSlotCenter;
+    struct Sprite *secondSlotRight;
+    struct Image *secondSlot;
+    struct GameObject *thirdQuickslot;
+    struct DropItemHelper *IOEDNEBKAPA;
+    struct MapViewService *OHLHEKBJMOO;
+    struct SocketManager_1 *HPIPJDMLKLK;
+    struct Player *NCEPPPOAADJ;
+    int32_t IGLKBGPGJIA;
+    bool CBHDGGBKGDF;
+    #if defined(_CPLUSPLUS_)
+    ItemLocationType KBMFHPACBOG;
+    #else
+    int32_t KBMFHPACBOG;
+    #endif
+    struct HCLAMODFNBI *LPKIADKODHC;
+    struct InteractiveItemSlot *OKKPHBNPFJI;
+    struct InteractiveItemSlot *PFDHCOJJIEJ;
+    struct JILKFLHPEGF *GEFPKKENNGM;
+    struct TooltipManager *HMLJCEJHPBN;
+    struct MFJFDOPGBHL *MOFGBPJLIMF;
+    struct Dictionary_2_System_Int32_Dictionary_2_System_Int32_System_Single_ *AFALBJACJJM;
+};
+
+struct EquipmentManager {
+    struct EquipmentManager__Class *klass;
+    MonitorData *monitor;
+    struct EquipmentManager__Fields fields;
+};
+
+struct EquipmentSlot__Fields {
+    struct InteractiveItemSlot__Fields _;
+    struct Image *slotBackgroundImage;
+    struct UIIconLoader *_iconLoader;
+    struct GameObject *_slotCooldown;
+    struct Image *_slotCooldownSlider;
+    struct TextMeshProUGUI *_slotCooldownLabel;
+    struct TextMeshProUGUI *_tierLabel;
+    struct Animator *_anim;
+    struct RectTransform *slotRectTransform;
+    struct MapViewService *OHLHEKBJMOO;
+    struct Player *NCEPPPOAADJ;
+    struct Image *EPHNMJDPIGG;
+    bool activeVisualCooldown;
+    int32_t PANGLOGEKON;
+    bool PMCABEDCKHI;
+    bool JONFEEHJENG;
+    float AHNLFICKHOP;
+    bool GFCMAFMFJFK;
+    bool MDHEMNHFKOB;
+    bool LEFIPNFIKEP;
+};
+
+struct EquipmentSlot {
+    struct EquipmentSlot__Class *klass;
+    MonitorData *monitor;
+    struct EquipmentSlot__Fields fields;
+};
+
+struct EquipmentSlot__Array {
+    struct EquipmentSlot__Array__Class *klass;
+    MonitorData *monitor;
+    Il2CppArrayBounds *bounds;
+    il2cpp_array_size_t max_length;
+    struct EquipmentSlot *vector[32];
 };
 
 struct ChatManager__Fields {

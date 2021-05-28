@@ -100,6 +100,14 @@ Vector2 GetEntityPos(BasicObject* entity)
     return pos;
 }
 
+EquipmentSlot* GetEquipmentSlot(int index)
+{
+    static GameController* game_controller = (GameController*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.Game.GameController, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+    EquipmentManager* equipment_manager = game_controller->fields.equipmentManager;
+    EquipmentSlot** items = equipment_manager->fields.equipmentSlots->vector;
+    return items[index];
+}
+
 void ShowFloatingText(const char* message, FloatingTextType type, __int64 color)
 {
     Player* player = GetPlayer();

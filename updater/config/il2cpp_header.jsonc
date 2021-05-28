@@ -43,6 +43,8 @@
         ["CLEPBEMBHAJ", "FloatingTextType"],
         ["OMIPCDPIAOC", "MapObjectType"],
         ["HLMENPGLNDH", "MapItem"],
+        ["FDOLMLKAKIN", "ItemLocationType"],
+        ["EMOPGKHHDGD", "EMOPGKHHDGD"], // Player, OtherPlayer, Npc, Lootbag
         ["EFBAFDICAFG", "EFBAFDICAFG"], // Right, Left, Down, Up, None, First
         ["BJHJLINJFAI", "BJHJLINJFAI"]  // Stand, Walk, Attack, NumAction
     ],
@@ -99,6 +101,44 @@
             "props": {
                 "__Fields": [ ]
             }
+        },
+        {
+            "name": "EquipmentManager",
+            "props": { "__Fields": [ ] }
+        },
+        {
+            "name": "EquipmentSlot",
+            "props": { "__Fields": [ ] }
+        },
+        {
+            "name": "ItemSlot",
+            "props": {
+                "__Fields": [
+                    ["PBCAODDPDEI", "object_properties"]
+                ]
+            }
+        },
+        {
+            "name": "EquipmentSlot__Array",
+            "props": { }
+        },
+        {
+            "name": "InteractiveItemSlot",
+            "props": { "__Fields": [ ] }
+        },
+
+
+        {
+            "name": "ObjectProperties",
+            "props": { "__Fields": [ ] }
+        },
+        {
+            "name": "BaseProperties",
+            "props": { "__Fields": [ ] }
+        },
+        {
+            "name": "TextureProperties",
+            "props": { "__Fields": [ ] }
         },
 
         /* random */

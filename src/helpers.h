@@ -18,4 +18,5 @@ Camera* GetMainCamera();
 Player* GetPlayer();
 Pet* GetPet();
 Vector2 GetEntityPos(BasicObject* entity);
+EquipmentSlot* GetEquipmentSlot(int index);
 void ShowFloatingText(const char* message, FloatingTextType type, __int64 color);

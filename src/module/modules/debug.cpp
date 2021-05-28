@@ -29,6 +29,8 @@ void DebugModule::onDisable()
 {
 	this->log.floatingText(Color32_RED);
 	this->log << this->name << " OFF" << std::endl;
+
+	this->draw_enemy_tracers = false;
 }
 
 void DebugModule::renderGUI()
