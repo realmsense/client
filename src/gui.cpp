@@ -157,51 +157,54 @@ HRESULT __stdcall Detour_Present(IDXGISwapChain* pSwapChain, UINT SyncInterval, 
 
     //ImGui::ShowDemoWindow();
 
-    const char* category_names[] = {
-        "View",         // ModuleCategory::VIEW
-        "Movement",     // ModuleCategory::MOVEMENT
-        "Auto",         // ModuleCategory::AUTO
-        "Other"         // ModuleCategory::OTHER
-    };
-
-    for (int i = 0; i < (int)ModuleCategory::Count; i++)
+    if (g_bGuiOpen)
     {
-        ModuleCategory category = ModuleCategory(i);
-        const char* category_name = category_names[i];
+        const char* category_names[] = {
+            "View",         // ModuleCategory::VIEW
+            "Movement",     // ModuleCategory::MOVEMENT
+            "Auto",         // ModuleCategory::AUTO
+            "Other"         // ModuleCategory::OTHER
+        };
 
-        ImGui::Begin(category_name);
-        for (Module* module : ModuleManager::modules)
+        for (int i = 0; i < (int)ModuleCategory::Count; i++)
         {
-            if (!module->initialized) continue;
-            if (module->category != category) continue;
+            ModuleCategory category = ModuleCategory(i);
+            const char* category_name = category_names[i];
 
-            const char* module_name = module->name.c_str();
-            ImGui::PushID(module_name);
-
-            if (ImGui::Checkbox("", &module->enabled))
-                module->setEnabled(module->enabled, true);
-
-            const ImVec2 checkboxSize = ImGui::GetItemRectSize();
-            ImGui::SameLine();
-            if (!module->has_gui_elements)
+            ImGui::Begin(category_name);
+            for (Module* module : ModuleManager::modules)
             {
-                // Empty header
-                ImGui::CollapsingHeader(module_name, ImGuiTreeNodeFlags_Leaf);
-            }
-            else
-            {
-                if (ImGui::CollapsingHeader(module_name))
+                if (!module->initialized) continue;
+                if (module->category != category) continue;
+
+                const char* module_name = module->name.c_str();
+                ImGui::PushID(module_name);
+
+                if (ImGui::Checkbox("", &module->enabled))
+                    module->setEnabled(module->enabled, true);
+
+                const ImVec2 checkboxSize = ImGui::GetItemRectSize();
+                ImGui::SameLine();
+                if (!module->has_gui_elements)
                 {
-                    ImGui::Indent(checkboxSize.x + 5.0f);
-                    module->renderGUI();
-                    ImGui::Unindent(checkboxSize.x + 5.0f);
+                    // Empty header
+                    ImGui::CollapsingHeader(module_name, ImGuiTreeNodeFlags_Leaf);
                 }
+                else
+                {
+                    if (ImGui::CollapsingHeader(module_name))
+                    {
+                        ImGui::Indent(checkboxSize.x + 5.0f);
+                        module->renderGUI();
+                        ImGui::Unindent(checkboxSize.x + 5.0f);
+                    }
+                }
+
+                ImGui::PopID();
             }
 
-            ImGui::PopID();
+            ImGui::End();
         }
-
-        ImGui::End();
     }
 
     ImGui::Render();

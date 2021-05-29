@@ -24,6 +24,12 @@ void MainThread(HMODULE hModule)
             break;
         }
 
+        // ` - toggle menu
+        if (GetAsyncKeyState(VK_OEM_3) & 1)
+        {
+            g_bGuiOpen = !g_bGuiOpen;
+        }
+
         if (GetAsyncKeyState(VK_INSERT) & 1)
         {
             //

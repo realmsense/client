@@ -19,6 +19,8 @@ void CleanEnemyList()
 	}
 }
 
+bool g_bGuiOpen;
+
 void LoadSettings()
 {
 	// iterate modules, run a loadSettings() method to override variables
