@@ -19,6 +19,9 @@ def generate_il2cpp_functions():
     functions_file = download_file(IL2CPP_FUNCTIONS_URL, TEMP_DIR / "il2cpp-functions.h")
     # functions_file = TEMP_DIR / "il2cpp-functions.h"
 
+    api_functions_file = download_file(IL2CPP_API_FUNCTIONS_URL, TEMP_DIR / "il2cpp-api-functions-ptr.h")
+    # api_functions_file = TEMP_DIR / "il2cpp-api-functions-ptr.h"
+
     remaining_functions = []
     logger.log(logging.INFO, "Initialising JSON Data")
     for function in header_config["functions"]:
@@ -46,6 +49,10 @@ def generate_il2cpp_functions():
         output_functions = ROOT_DIR / "../src/il2cpp/appdata/il2cpp-functions.h"
         output_functions.write_text("\n".join(output_lines))
 
+    logger.log(logging.INFO, "Copying api functions ptr")
+    with open(api_functions_file) as file:
+        output_api_functions = ROOT_DIR / "../src/il2cpp/appdata/il2cpp-api-functions-ptr.h"
+        output_api_functions.write_text(file.read())
 
     if len(remaining_functions) > 0:
         logger.log(logging.ERROR, "Failed to get the following functions:")
