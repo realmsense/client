@@ -2,8 +2,6 @@ import xml.etree.ElementTree as ET
 import threading
 import shutil
 
-from functions.helpers import download_file, parse_int
-
 from classes import *
 from functions import *
 
@@ -11,6 +9,9 @@ def dump_player_skins():
 
     logger.log(logging.INFO, "Dumping player skins...")
     IndentFilter.level += 1
+
+    PLAYER_SKINS_DIR = ROOT_DIR / "../src/other/player_skins"
+    delete_dir_contents(PLAYER_SKINS_DIR)
 
     spritesheet_file = download_file(SPRITESHEET_URL, TEMP_DIR / "spritesheet.json")
     spritesheet_img = download_file(CHARACTERS_IMG_URL, TEMP_DIR / "characters.png")
@@ -34,7 +35,7 @@ def dump_player_skins():
 
         class_name = CLASS_LIST[class_id]
         file_name = strip_non_ascii(name).lower().replace("-", " ").replace(" ", "_") + ".png"
-        output_file = ROOT_DIR / "../src/other/player_skins" / file_name
+        output_file = PLAYER_SKINS_DIR / file_name
         
         # extract_animated_sprite(output_file, spritesheet_json, spritesheet_img, sprite_name, sprite_index)
         thread = threading.Thread(target=extract_animated_sprite, args=(output_file, spritesheet_json, spritesheet_img, sprite_name, sprite_index))
@@ -68,6 +69,9 @@ def dump_player_outfits():
     # For Dyes, there's no sprite because it's just a solid color.
     # E.g.: 0x01F0F8FF = #f0f8ff (idk what the 0x01 is)
 
+    PLAYER_OUTFITS_DIR = ROOT_DIR / "../src/other/player_outfits"
+    delete_dir_contents(PLAYER_OUTFITS_DIR)
+
     spritesheet_file = download_file(SPRITESHEET_URL, TEMP_DIR / "spritesheet.json")
     spritesheet_img = download_file(MAPOBJECTS_IMG_URL, TEMP_DIR / "mapObjects.png")
     spritesheet_json = read_json(spritesheet_file)
@@ -88,7 +92,7 @@ def dump_player_outfits():
             tex = tex2.text
 
         textiles.append({"name": name, "tex": tex})
-        file = ROOT_DIR / "../src/other/outfits" / (tex + ".png")
+        file = PLAYER_OUTFITS_DIR / (tex + ".png")
         cpp_file = str(file).replace("\\", "\\\\")
         cpp_str = f'player_outfits.push_back(new Skin("{name}", "{cpp_file}", {tex}));'
         cpp_lines.append(cpp_str)
@@ -113,7 +117,7 @@ def dump_player_outfits():
         name = hex(name)            # convert back to hex string, 0x9000001
 
         file_name = name + ".png"
-        output_file = ROOT_DIR / "../src/other/outfits" / file_name
+        output_file = PLAYER_OUTFITS_DIR / file_name
         
         exists = any(x for x in textiles if x["tex"] == name)
         if not exists:
@@ -144,6 +148,9 @@ def dump_pet_skins():
 
     logger.log(logging.INFO, "Dumping pet skins...")
     IndentFilter.level += 1
+
+    PET_SKINS_DIR = ROOT_DIR / "../src/other/pet_skins"
+    delete_dir_contents(PET_SKINS_DIR)
 
     spritesheet_file = download_file(SPRITESHEET_URL, TEMP_DIR / "spritesheet.json")
     spritesheet_img = download_file(CHARACTERS_IMG_URL, TEMP_DIR / "characters.png")
@@ -176,7 +183,7 @@ def dump_pet_skins():
         else: family = family.text
 
         file_name = strip_non_ascii(name).lower().replace("?", "").replace("'", "").replace(" ", "_") + ".png"
-        output_file = ROOT_DIR / "../src/other/pet_skins" / file_name
+        output_file = PET_SKINS_DIR / file_name
 
         cpp_skin_file = str(output_file).replace("\\", "\\\\") # TODO: use resource to pack in dll
 
