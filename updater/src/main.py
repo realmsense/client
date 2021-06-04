@@ -1,7 +1,15 @@
+import sys
 from classes import *
 from functions import *
 
+def parse_args():
+    global CURRENT_CLIENT_URL
+    if len(sys.argv) > 1:
+        CURRENT_CLIENT_URL =  sys.argv[1]
+
 def main():
+
+    parse_args()
 
     delete_dir_contents(OUTPUT_DIR)
     delete_dir_contents(TEMP_DIR)
