@@ -36,7 +36,8 @@ def generate_il2cpp_functions():
         for line in file.readlines():
             line = line.replace("\n", "")
             for function in remaining_functions:
-                if function["original"] in line:
+                search = ", " + function["original"] + ","
+                if search in line:
                     line = line.replace(function["original"], function["replace"])
                     line = do_replace(line)
                     line = line.replace(do_replace(function["replace"]), function["replace"])
