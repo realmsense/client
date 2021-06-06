@@ -37,7 +37,10 @@ void Detour_BasicObject_Init(BasicObject* __this, MethodInfo* method)
 	{
 		case MapObjectType::Character: // enemy
 		{
-			g_aEnemyList.insert((Character*)__this);
+			if (__this->fields.BEHCPLKDAFD->fields.isEnemy)
+			{
+				g_aEnemyList.insert((Character*)__this);
+			}
 			break;
 		}
 	}
