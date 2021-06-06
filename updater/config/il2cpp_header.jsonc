@@ -16,7 +16,9 @@
         ["COEDKELBKMI", "Character"],
         ["LAAIPMHLFJN", "MapObject"],
         ["GJLIMCBOCJG", "BasicObject"],
-        ["PIPCAMDKBDA", "ChatSlot"]
+        ["PIPCAMDKBDA", "ChatSlot"],
+        ["NOKENPCHCDE", "GuildInfo"],
+        ["CMMFKBHHLCM", "Guild"]
     ],
     "functions": [
         ["Type_GetType_2", "Type_GetType"],
@@ -26,7 +28,9 @@
         ["Camera_ScreenToWorldPoint_1", "Camera_ScreenToWorldPoint"],
         ["Behaviour_set_enabled", "Behaviour_set_enabled"],
         ["Component_1_get_transform", "Component_get_transform"],
+        ["Component_1_get_gameObject", "Component_get_gameObject"],
         ["Object_1_FindObjectOfType", "Object_FindObjectOfType"],
+        ["GameObject_SetActive", "GameObject_SetActive"],
         ["Transform_get_position", "Transform_get_position"],
         ["Transform_get_localPosition", "Transform_get_localPosition"],
         ["GJLIMCBOCJG_GPIMPPOPDJO", "BasicObject_Init"],
@@ -37,6 +41,8 @@
         ["MapObjectUIManager_ShowFloatingText", "MapObjectUIManager_ShowFloatingText"],
         ["ChatManager_AddSlot", "ChatManager_AddSlot"],
         ["ChatManager_GetChatMessage", "ChatManager_GetChatMessage"],
+        ["TMP_Text_SetText", "TMP_Text_SetText"],
+        ["TMP_Text_set_color", "TMP_Text_set_color"],
         ["SpriteShader_UpdateMask", "SpriteShader_UpdateMask"]
     ],
     "enums": [
@@ -47,15 +53,30 @@
         ["FDOLMLKAKIN", "ItemLocationType"],
         ["EMOPGKHHDGD", "EMOPGKHHDGD"], // Player, OtherPlayer, Npc, Lootbag
         ["EFBAFDICAFG", "EFBAFDICAFG"], // Right, Left, Down, Up, None, First
-        ["BJHJLINJFAI", "BJHJLINJFAI"]  // Stand, Walk, Attack, NumAction
+        ["BJHJLINJFAI", "BJHJLINJFAI"], // Stand, Walk, Attack, NumAction
+
+        ["FontStyles", "FontStyles"],
+        ["HorizontalAlignmentOptions", "HorizontalAlignmentOptions"],
+        ["ColorMode", "ColorMode"],
+        ["FontWeight", "FontWeight"],
+        ["VertexSortingOrder", "VertexSortingOrder"],
+        ["TextureMappingOptions", "TextureMappingOptions"],
+        ["TMP_Text_TextInputSources", "TMP_Text_TextInputSources"],
+        ["TextOverflowModes", "TextOverflowModes"],
+        ["TextRenderFlags", "TextRenderFlags"],
+        ["TextAlignmentOptions", "TextAlignmentOptions"],
+        ["VerticalAlignmentOptions", "VerticalAlignmentOptions"],
+        ["TMP_TextElementType", "TMP_TextElementType"]
     ],
     "structs": [
         // C# Types with no __Fields
         { "name": "Vector2",    "props": { } },
         { "name": "Vector3",    "props": { } },
+        { "name": "Vector4",    "props": { } },
         { "name": "Color",      "props": { } },
+        { "name": "Color32",    "props": { } },
         { "name": "Matrix4x4",  "props": { } },
-        { "name": "float3",  "props": { } },
+        { "name": "float3",     "props": { } },
         { "name": "Nullable_1_UnityEngine_Vector2_", "props": { } },
         { "name": "NativeList_1_Unity_Mathematics_float3_", "props": { } },
         { "name": "NativeList_1_FCMKBLMGMBJ_", "props": { } },
@@ -72,16 +93,67 @@
         { "name": "Transform",          "props": { "__Fields": [ ] } },
         { "name": "Camera",             "props": { "__Fields": [ ] } },
         { "name": "Rect",               "props": { } },
+        
+        { "name": "UIBehaviour",                                                "props": { "__Fields": [ ] } },
+        { "name": "MaskableGraphic",                                            "props": { "__Fields": [ ] } },
+        { "name": "Graphic",                                                    "props": { "__Fields": [ ] } },
+        { "name": "TMP_Text",                                                   "props": { "__Fields": [ ] } },
+        { "name": "TMP_TextProcessingStack_1_System_Int32_",                    "props": { } },
+        { "name": "TMP_TextProcessingStack_1_System_Single_",                   "props": { } },
+        { "name": "TMP_TextProcessingStack_1_TMP_ColorGradient_",               "props": { } },
+        { "name": "TMP_TextProcessingStack_1_UnityEngine_Color32_",             "props": { } },
+        { "name": "TMP_Text_SpecialCharacter",                                  "props": { } },
+        { "name": "TMP_TextProcessingStack_1_WordWrapState_",                   "props": { } },
+        { "name": "VertexGradient",                                             "props": { } },
+        { "name": "WordWrapState",                                              "props": { } },
+        { "name": "TMP_FontStyleStack",                                         "props": { } },
+        { "name": "TMP_TextProcessingStack_1_HighlightState_",                  "props": { } },
+        { "name": "HighlightState",                                             "props": { } },
+        { "name": "MaterialReference",                                          "props": { } },
+        { "name": "TMP_LineInfo",                                               "props": { } },
+        { "name": "TMP_TextProcessingStack_1_FontWeight_",                      "props": { } },
+        { "name": "TMP_TextProcessingStack_1_HorizontalAlignmentOptions_",      "props": { } },
+        { "name": "TMP_TextProcessingStack_1_MaterialReference_",               "props": { } },
+        { "name": "Extents",                                                    "props": { } },
+        { "name": "TMP_Offset",                                                 "props": { } },
+        { "name": "TextMeshProUGUI",                                            "props": { "__Fields": [ ] } },
 
         // RotMG Types
 
         /* managers */
         { "name": "MapObjectUIManager", "props": { "__Fields": [ ] } },
-        { "name": "ApplicationManager", "props": { "__Fields": [ ] } },
-        { "name": "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_", "props": { "__Fields": [ ] } },
-        { "name": "EntityManager", "props": { } },
-        { "name": "ViewHandler", "props": { "__Fields": [ ] } },
-        { "name": "SpriteShader", "props": { "__Fields": [ ] } },
+        { "name": "EntityManager",      "props": { } },
+        { "name": "ViewHandler",        "props": { "__Fields": [ ] } },
+        { "name": "SpriteShader",       "props": { "__Fields": [ ] } },
+        { "name": "CharacterInfo",      "props": { "__Fields": [ ] } },
+        { "name": "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_",   "props": { "__Fields": [ ] } },
+
+        {
+            "name": "ApplicationManager",
+            "props": {
+                "__Fields": [
+                    ["_ADOFIDIACLF_k__BackingField", "guild_info"]
+                ]
+            }
+        },
+        
+        {
+            "name": "NOKENPCHCDE", // GuildInfo - needs better name
+            "props": {
+                "__Fields": [
+                    ["FEIMEPOPLPI", "members"],
+                    ["DBIAPDOFNMD", "guild"]
+                ]
+            }
+        },
+        {
+            "name": "CMMFKBHHLCM", // Guild
+            "props": {
+                "__Fields": [
+                    ["LDAGNECOJAJ", "name"]   
+                ]
+            }
+        },
 
         {
             "name": "GameController",
@@ -155,6 +227,9 @@
             "name": "KBKBDLLEGGO", /* Settings */
             "props": {
                 "__Fields": [
+                    ["NCADAPAJGCH", "account_name"],
+                    ["_FPIKBBOPAGD_k__BackingField", "account_guid"],
+                    ["_NMGDJEDLAGK_k__BackingField", "access_token"],
                     ["PMAAJDBAIHC", "rotate_speed"]
                 ]
             }

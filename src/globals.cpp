@@ -19,7 +19,7 @@ void CleanEnemyList()
 	}
 }
 
-bool g_bGuiOpen;
+bool g_bGuiOpen = true;
 
 void LoadSettings()
 {

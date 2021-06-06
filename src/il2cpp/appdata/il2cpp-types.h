@@ -120,6 +120,21 @@ struct Vector2 {
     float y;
 };
 
+struct Vector4 {
+    float x;
+    float y;
+    float z;
+    float w;
+};
+
+struct Color32 {
+    int32_t rgba;
+    uint8_t r;
+    uint8_t g;
+    uint8_t b;
+    uint8_t a;
+};
+
 struct Transform__Fields {
     struct Component__Fields _;
 };
@@ -148,6 +163,765 @@ struct float3 {
 
 struct EntityManager {
     struct EntityDataAccess *m_EntityDataAccess;
+};
+
+struct UIBehaviour__Fields {
+    struct MonoBehaviour__Fields _;
+};
+
+struct UIBehaviour {
+    struct UIBehaviour__Class *klass;
+    MonitorData *monitor;
+    struct UIBehaviour__Fields fields;
+};
+
+struct Graphic__Fields {
+    struct UIBehaviour__Fields _;
+    struct Material *m_Material;
+    struct Color m_Color;
+    bool m_SkipLayoutUpdate;
+    bool m_SkipMaterialUpdate;
+    bool m_RaycastTarget;
+    struct RectTransform *m_RectTransform;
+    struct CanvasRenderer *m_CanvasRenderer;
+    struct Canvas *m_Canvas;
+    bool m_VertsDirty;
+    bool m_MaterialDirty;
+    struct UnityAction *m_OnDirtyLayoutCallback;
+    struct UnityAction *m_OnDirtyVertsCallback;
+    struct UnityAction *m_OnDirtyMaterialCallback;
+    struct Mesh *m_CachedMesh;
+    struct Vector2__Array *m_CachedUvs;
+    struct TweenRunner_1_ColorTween_ *m_ColorTweenRunner;
+    bool _useLegacyMeshGeneration_k__BackingField;
+};
+
+struct Graphic {
+    struct Graphic__Class *klass;
+    MonitorData *monitor;
+    struct Graphic__Fields fields;
+};
+
+struct MaskableGraphic__Fields {
+    struct Graphic__Fields _;
+    bool m_ShouldRecalculateStencil;
+    struct Material *m_MaskMaterial;
+    struct RectMask2D *m_ParentMask;
+    bool m_Maskable;
+    bool m_IsMaskingGraphic;
+    bool m_IncludeForMasking;
+    struct MaskableGraphic_CullStateChangedEvent *m_OnCullStateChanged;
+    bool m_ShouldRecalculate;
+    int32_t m_StencilValue;
+    struct Vector3__Array *m_Corners;
+};
+
+struct MaskableGraphic {
+    struct MaskableGraphic__Class *klass;
+    MonitorData *monitor;
+    struct MaskableGraphic__Fields fields;
+};
+
+enum class ColorMode : int32_t {
+    Single = 0x00000000,
+    HorizontalGradient = 0x00000001,
+    VerticalGradient = 0x00000002,
+    FourCornersGradient = 0x00000003,
+};
+
+struct MaterialReference {
+    int32_t index;
+    struct TMP_FontAsset *fontAsset;
+    struct TMP_SpriteAsset *spriteAsset;
+    struct Material *material;
+    bool isDefaultMaterial;
+    bool isFallbackMaterial;
+    struct Material *fallbackMaterial;
+    float padding;
+    int32_t referenceCount;
+};
+
+struct TMP_Offset {
+    float m_Left;
+    float m_Right;
+    float m_Top;
+    float m_Bottom;
+};
+
+struct HighlightState {
+    struct Color32 color;
+    struct TMP_Offset padding;
+};
+
+enum class TextAlignmentOptions : int32_t {
+    TopLeft = 0x00000101,
+    Top = 0x00000102,
+    TopRight = 0x00000104,
+    TopJustified = 0x00000108,
+    TopFlush = 0x00000110,
+    TopGeoAligned = 0x00000120,
+    Left = 0x00000201,
+    Center = 0x00000202,
+    Right = 0x00000204,
+    Justified = 0x00000208,
+    Flush = 0x00000210,
+    CenterGeoAligned = 0x00000220,
+    BottomLeft = 0x00000401,
+    Bottom = 0x00000402,
+    BottomRight = 0x00000404,
+    BottomJustified = 0x00000408,
+    BottomFlush = 0x00000410,
+    BottomGeoAligned = 0x00000420,
+    BaselineLeft = 0x00000801,
+    Baseline = 0x00000802,
+    BaselineRight = 0x00000804,
+    BaselineJustified = 0x00000808,
+    BaselineFlush = 0x00000810,
+    BaselineGeoAligned = 0x00000820,
+    MidlineLeft = 0x00001001,
+    Midline = 0x00001002,
+    MidlineRight = 0x00001004,
+    MidlineJustified = 0x00001008,
+    MidlineFlush = 0x00001010,
+    MidlineGeoAligned = 0x00001020,
+    CaplineLeft = 0x00002001,
+    Capline = 0x00002002,
+    CaplineRight = 0x00002004,
+    CaplineJustified = 0x00002008,
+    CaplineFlush = 0x00002010,
+    CaplineGeoAligned = 0x00002020,
+    Converted = 0x0000ffff,
+};
+
+struct TMP_TextProcessingStack_1_MaterialReference_ {
+    struct MaterialReference__Array *itemStack;
+    int32_t index;
+    struct MaterialReference m_DefaultItem;
+    int32_t m_Capacity;
+    int32_t m_RolloverSize;
+    int32_t m_Count;
+};
+
+struct VertexGradient {
+    struct Color topLeft;
+    struct Color topRight;
+    struct Color bottomLeft;
+    struct Color bottomRight;
+};
+
+struct TMP_TextProcessingStack_1_System_Single_ {
+    struct Single__Array *itemStack;
+    int32_t index;
+    float m_DefaultItem;
+    int32_t m_Capacity;
+    int32_t m_RolloverSize;
+    int32_t m_Count;
+};
+
+enum class FontWeight : int32_t {
+    Thin = 0x00000064,
+    ExtraLight = 0x000000c8,
+    Light = 0x0000012c,
+    Regular = 0x00000190,
+    Medium = 0x000001f4,
+    SemiBold = 0x00000258,
+    Bold = 0x000002bc,
+    Heavy = 0x00000320,
+    Black = 0x00000384,
+};
+
+struct TMP_TextProcessingStack_1_FontWeight_ {
+    struct FontWeight__Array *itemStack;
+    int32_t index;
+    #if defined(_CPLUSPLUS_)
+    FontWeight m_DefaultItem;
+    #else
+    int32_t m_DefaultItem;
+    #endif
+    int32_t m_Capacity;
+    int32_t m_RolloverSize;
+    int32_t m_Count;
+};
+
+enum class FontStyles : int32_t {
+    Normal = 0x00000000,
+    Bold = 0x00000001,
+    Italic = 0x00000002,
+    Underline = 0x00000004,
+    LowerCase = 0x00000008,
+    UpperCase = 0x00000010,
+    SmallCaps = 0x00000020,
+    Strikethrough = 0x00000040,
+    Superscript = 0x00000080,
+    Subscript = 0x00000100,
+    Highlight = 0x00000200,
+};
+
+struct TMP_FontStyleStack {
+    uint8_t bold;
+    uint8_t italic;
+    uint8_t underline;
+    uint8_t strikethrough;
+    uint8_t highlight;
+    uint8_t superscript;
+    uint8_t subscript;
+    uint8_t uppercase;
+    uint8_t lowercase;
+    uint8_t smallcaps;
+};
+
+enum class HorizontalAlignmentOptions : int32_t {
+    Left = 0x00000001,
+    Center = 0x00000002,
+    Right = 0x00000004,
+    Justified = 0x00000008,
+    Flush = 0x00000010,
+    Geometry = 0x00000020,
+};
+
+enum class VerticalAlignmentOptions : int32_t {
+    Top = 0x00000100,
+    Middle = 0x00000200,
+    Bottom = 0x00000400,
+    Baseline = 0x00000800,
+    Geometry = 0x00001000,
+    Capline = 0x00002000,
+};
+
+struct TMP_TextProcessingStack_1_HorizontalAlignmentOptions_ {
+    struct HorizontalAlignmentOptions__Array *itemStack;
+    int32_t index;
+    #if defined(_CPLUSPLUS_)
+    HorizontalAlignmentOptions m_DefaultItem;
+    #else
+    int32_t m_DefaultItem;
+    #endif
+    int32_t m_Capacity;
+    int32_t m_RolloverSize;
+    int32_t m_Count;
+};
+
+enum class TextOverflowModes : int32_t {
+    Overflow = 0x00000000,
+    Ellipsis = 0x00000001,
+    Masking = 0x00000002,
+    Truncate = 0x00000003,
+    ScrollRect = 0x00000004,
+    Page = 0x00000005,
+    Linked = 0x00000006,
+};
+
+enum class TextureMappingOptions : int32_t {
+    Character = 0x00000000,
+    Line = 0x00000001,
+    Paragraph = 0x00000002,
+    MatchAspect = 0x00000003,
+};
+
+enum class TextRenderFlags : int32_t {
+    DontRender = 0x00000000,
+    Render = 0x000000ff,
+};
+
+enum class VertexSortingOrder : int32_t {
+    Normal = 0x00000000,
+    Reverse = 0x00000001,
+};
+
+enum class TMP_Text_TextInputSources : int32_t {
+    Text = 0x00000000,
+    SetText = 0x00000001,
+    SetCharArray = 0x00000002,
+    String = 0x00000003,
+};
+
+struct Extents {
+    struct Vector2 min;
+    struct Vector2 max;
+};
+
+struct TMP_LineInfo {
+    int32_t controlCharacterCount;
+    int32_t characterCount;
+    int32_t visibleCharacterCount;
+    int32_t spaceCount;
+    int32_t wordCount;
+    int32_t firstCharacterIndex;
+    int32_t firstVisibleCharacterIndex;
+    int32_t lastCharacterIndex;
+    int32_t lastVisibleCharacterIndex;
+    float length;
+    float lineHeight;
+    float ascender;
+    float baseline;
+    float descender;
+    float maxAdvance;
+    float width;
+    float marginLeft;
+    float marginRight;
+    #if defined(_CPLUSPLUS_)
+    HorizontalAlignmentOptions alignment;
+    #else
+    int32_t alignment;
+    #endif
+    struct Extents lineExtents;
+};
+
+struct TMP_TextProcessingStack_1_System_Int32_ {
+    struct Int32__Array *itemStack;
+    int32_t index;
+    int32_t m_DefaultItem;
+    int32_t m_Capacity;
+    int32_t m_RolloverSize;
+    int32_t m_Count;
+};
+
+struct TMP_TextProcessingStack_1_UnityEngine_Color32_ {
+    struct Color32__Array *itemStack;
+    int32_t index;
+    struct Color32 m_DefaultItem;
+    int32_t m_Capacity;
+    int32_t m_RolloverSize;
+    int32_t m_Count;
+};
+
+struct TMP_TextProcessingStack_1_HighlightState_ {
+    struct HighlightState__Array *itemStack;
+    int32_t index;
+    struct HighlightState m_DefaultItem;
+    int32_t m_Capacity;
+    int32_t m_RolloverSize;
+    int32_t m_Count;
+};
+
+struct TMP_TextProcessingStack_1_TMP_ColorGradient_ {
+    struct TMP_ColorGradient__Array *itemStack;
+    int32_t index;
+    struct TMP_ColorGradient *m_DefaultItem;
+    int32_t m_Capacity;
+    int32_t m_RolloverSize;
+    int32_t m_Count;
+};
+
+struct WordWrapState {
+    int32_t previous_WordBreak;
+    int32_t total_CharacterCount;
+    int32_t visible_CharacterCount;
+    int32_t visible_SpriteCount;
+    int32_t visible_LinkCount;
+    int32_t firstCharacterIndex;
+    int32_t firstVisibleCharacterIndex;
+    int32_t lastCharacterIndex;
+    int32_t lastVisibleCharIndex;
+    int32_t lineNumber;
+    float maxCapHeight;
+    float maxAscender;
+    float maxDescender;
+    float startOfLineAscender;
+    float maxLineAscender;
+    float maxLineDescender;
+    float pageAscender;
+    #if defined(_CPLUSPLUS_)
+    HorizontalAlignmentOptions horizontalAlignment;
+    #else
+    int32_t horizontalAlignment;
+    #endif
+    float marginLeft;
+    float marginRight;
+    float xAdvance;
+    float preferredWidth;
+    float preferredHeight;
+    float previousLineScale;
+    int32_t wordCount;
+    #if defined(_CPLUSPLUS_)
+    FontStyles fontStyle;
+    #else
+    int32_t fontStyle;
+    #endif
+    int32_t italicAngle;
+    float fontScale;
+    float fontScaleMultiplier;
+    float currentFontSize;
+    float baselineOffset;
+    float lineOffset;
+    bool isDrivenLineSpacing;
+    float glyphHorizontalAdvanceAdjustment;
+    float cSpace;
+    float mSpace;
+    struct TMP_TextInfo *textInfo;
+    struct TMP_LineInfo lineInfo;
+    struct Color32 vertexColor;
+    struct Color32 underlineColor;
+    struct Color32 strikethroughColor;
+    struct Color32 highlightColor;
+    struct TMP_FontStyleStack basicStyleStack;
+    struct TMP_TextProcessingStack_1_System_Int32_ italicAngleStack;
+    struct TMP_TextProcessingStack_1_UnityEngine_Color32_ colorStack;
+    struct TMP_TextProcessingStack_1_UnityEngine_Color32_ underlineColorStack;
+    struct TMP_TextProcessingStack_1_UnityEngine_Color32_ strikethroughColorStack;
+    struct TMP_TextProcessingStack_1_UnityEngine_Color32_ highlightColorStack;
+    struct TMP_TextProcessingStack_1_HighlightState_ highlightStateStack;
+    struct TMP_TextProcessingStack_1_TMP_ColorGradient_ colorGradientStack;
+    struct TMP_TextProcessingStack_1_System_Single_ sizeStack;
+    struct TMP_TextProcessingStack_1_System_Single_ indentStack;
+    struct TMP_TextProcessingStack_1_FontWeight_ fontWeightStack;
+    struct TMP_TextProcessingStack_1_System_Int32_ styleStack;
+    struct TMP_TextProcessingStack_1_System_Single_ baselineStack;
+    struct TMP_TextProcessingStack_1_System_Int32_ actionStack;
+    struct TMP_TextProcessingStack_1_MaterialReference_ materialReferenceStack;
+    struct TMP_TextProcessingStack_1_HorizontalAlignmentOptions_ lineJustificationStack;
+    int32_t spriteAnimationID;
+    struct TMP_FontAsset *currentFontAsset;
+    struct TMP_SpriteAsset *currentSpriteAsset;
+    struct Material *currentMaterial;
+    int32_t currentMaterialIndex;
+    struct Extents meshExtents;
+    bool tagNoParsing;
+    bool isNonBreakingSpace;
+};
+
+struct TMP_TextProcessingStack_1_WordWrapState_ {
+    struct WordWrapState__Array *itemStack;
+    int32_t index;
+    struct WordWrapState m_DefaultItem;
+    int32_t m_Capacity;
+    int32_t m_RolloverSize;
+    int32_t m_Count;
+};
+
+enum class TMP_TextElementType : int32_t {
+    Character = 0x00000000,
+    Sprite = 0x00000001,
+};
+
+struct TMP_Text_SpecialCharacter {
+    struct TMP_Character *character;
+    struct TMP_FontAsset *fontAsset;
+    struct Material *material;
+    int32_t materialIndex;
+};
+
+struct TMP_Text__Fields {
+    struct MaskableGraphic__Fields _;
+    struct String *m_text;
+    struct ITextPreprocessor *m_TextPreprocessor;
+    bool m_isRightToLeft;
+    struct TMP_FontAsset *m_fontAsset;
+    struct TMP_FontAsset *m_currentFontAsset;
+    bool m_isSDFShader;
+    struct Material *m_sharedMaterial;
+    struct Material *m_currentMaterial;
+    struct MaterialReference__Array *m_materialReferences;
+    struct Dictionary_2_System_Int32_System_Int32_ *m_materialReferenceIndexLookup;
+    struct TMP_TextProcessingStack_1_MaterialReference_ m_materialReferenceStack;
+    int32_t m_currentMaterialIndex;
+    struct Material__Array *m_fontSharedMaterials;
+    struct Material *m_fontMaterial;
+    struct Material__Array *m_fontMaterials;
+    bool m_isMaterialDirty;
+    struct Color32 m_fontColor32;
+    struct Color m_fontColor;
+    struct Color32 m_underlineColor;
+    struct Color32 m_strikethroughColor;
+    bool m_enableVertexGradient;
+    #if defined(_CPLUSPLUS_)
+    ColorMode m_colorMode;
+    #else
+    int32_t m_colorMode;
+    #endif
+    struct VertexGradient m_fontColorGradient;
+    struct TMP_ColorGradient *m_fontColorGradientPreset;
+    struct TMP_SpriteAsset *m_spriteAsset;
+    bool m_tintAllSprites;
+    bool m_tintSprite;
+    struct Color32 m_spriteColor;
+    struct TMP_StyleSheet *m_StyleSheet;
+    struct TMP_Style *m_TextStyle;
+    int32_t m_TextStyleHashCode;
+    bool m_overrideHtmlColors;
+    struct Color32 m_faceColor;
+    struct Color32 m_outlineColor;
+    float m_outlineWidth;
+    float m_fontSize;
+    float m_currentFontSize;
+    float m_fontSizeBase;
+    struct TMP_TextProcessingStack_1_System_Single_ m_sizeStack;
+    #if defined(_CPLUSPLUS_)
+    FontWeight m_fontWeight;
+    #else
+    int32_t m_fontWeight;
+    #endif
+    #if defined(_CPLUSPLUS_)
+    FontWeight m_FontWeightInternal;
+    #else
+    int32_t m_FontWeightInternal;
+    #endif
+    struct TMP_TextProcessingStack_1_FontWeight_ m_FontWeightStack;
+    bool m_enableAutoSizing;
+    float m_maxFontSize;
+    float m_minFontSize;
+    int32_t m_AutoSizeIterationCount;
+    int32_t m_AutoSizeMaxIterationCount;
+    bool m_IsAutoSizePointSizeSet;
+    float m_fontSizeMin;
+    float m_fontSizeMax;
+    #if defined(_CPLUSPLUS_)
+    FontStyles m_fontStyle;
+    #else
+    int32_t m_fontStyle;
+    #endif
+    #if defined(_CPLUSPLUS_)
+    FontStyles m_FontStyleInternal;
+    #else
+    int32_t m_FontStyleInternal;
+    #endif
+    struct TMP_FontStyleStack m_fontStyleStack;
+    bool m_isUsingBold;
+    #if defined(_CPLUSPLUS_)
+    HorizontalAlignmentOptions m_HorizontalAlignment;
+    #else
+    int32_t m_HorizontalAlignment;
+    #endif
+    #if defined(_CPLUSPLUS_)
+    VerticalAlignmentOptions m_VerticalAlignment;
+    #else
+    int32_t m_VerticalAlignment;
+    #endif
+    #if defined(_CPLUSPLUS_)
+    TextAlignmentOptions m_textAlignment;
+    #else
+    int32_t m_textAlignment;
+    #endif
+    #if defined(_CPLUSPLUS_)
+    HorizontalAlignmentOptions m_lineJustification;
+    #else
+    int32_t m_lineJustification;
+    #endif
+    struct TMP_TextProcessingStack_1_HorizontalAlignmentOptions_ m_lineJustificationStack;
+    struct Vector3__Array *m_textContainerLocalCorners;
+    float m_characterSpacing;
+    float m_cSpacing;
+    float m_monoSpacing;
+    float m_wordSpacing;
+    float m_lineSpacing;
+    float m_lineSpacingDelta;
+    float m_lineHeight;
+    bool m_IsDrivenLineSpacing;
+    float m_lineSpacingMax;
+    float m_paragraphSpacing;
+    float m_charWidthMaxAdj;
+    float m_charWidthAdjDelta;
+    bool m_enableWordWrapping;
+    bool m_isCharacterWrappingEnabled;
+    bool m_isNonBreakingSpace;
+    bool m_isIgnoringAlignment;
+    float m_wordWrappingRatios;
+    #if defined(_CPLUSPLUS_)
+    TextOverflowModes m_overflowMode;
+    #else
+    int32_t m_overflowMode;
+    #endif
+    int32_t m_firstOverflowCharacterIndex;
+    struct TMP_Text *m_linkedTextComponent;
+    struct TMP_Text *parentLinkedComponent;
+    bool m_isTextTruncated;
+    bool m_enableKerning;
+    float m_GlyphHorizontalAdvanceAdjustment;
+    bool m_enableExtraPadding;
+    bool checkPaddingRequired;
+    bool m_isRichText;
+    bool m_parseCtrlCharacters;
+    bool m_isOverlay;
+    bool m_isOrthographic;
+    bool m_isCullingEnabled;
+    bool m_isMaskingEnabled;
+    bool isMaskUpdateRequired;
+    bool m_ignoreCulling;
+    #if defined(_CPLUSPLUS_)
+    TextureMappingOptions m_horizontalMapping;
+    #else
+    int32_t m_horizontalMapping;
+    #endif
+    #if defined(_CPLUSPLUS_)
+    TextureMappingOptions m_verticalMapping;
+    #else
+    int32_t m_verticalMapping;
+    #endif
+    float m_uvLineOffset;
+    #if defined(_CPLUSPLUS_)
+    TextRenderFlags m_renderMode;
+    #else
+    int32_t m_renderMode;
+    #endif
+    #if defined(_CPLUSPLUS_)
+    VertexSortingOrder m_geometrySortingOrder;
+    #else
+    int32_t m_geometrySortingOrder;
+    #endif
+    bool m_IsTextObjectScaleStatic;
+    bool m_VertexBufferAutoSizeReduction;
+    int32_t m_firstVisibleCharacter;
+    int32_t m_maxVisibleCharacters;
+    int32_t m_maxVisibleWords;
+    int32_t m_maxVisibleLines;
+    bool m_useMaxVisibleDescender;
+    int32_t m_pageToDisplay;
+    bool m_isNewPage;
+    struct Vector4 m_margin;
+    float m_marginLeft;
+    float m_marginRight;
+    float m_marginWidth;
+    float m_marginHeight;
+    float m_width;
+    struct TMP_TextInfo *m_textInfo;
+    bool m_havePropertiesChanged;
+    bool m_isUsingLegacyAnimationComponent;
+    struct Transform *m_transform;
+    struct RectTransform *m_rectTransform;
+    struct Vector2 m_PreviousRectTransformSize;
+    struct Vector2 m_PreviousPivotPosition;
+    bool _autoSizeTextContainer_k__BackingField;
+    bool m_autoSizeTextContainer;
+    struct Mesh *m_mesh;
+    bool m_isVolumetricText;
+    struct Action_1_TMPro_TMP_TextInfo_ *OnPreRenderText;
+    struct TMP_SpriteAnimator *m_spriteAnimator;
+    float m_flexibleHeight;
+    float m_flexibleWidth;
+    float m_minWidth;
+    float m_minHeight;
+    float m_maxWidth;
+    float m_maxHeight;
+    struct LayoutElement *m_LayoutElement;
+    float m_preferredWidth;
+    float m_renderedWidth;
+    bool m_isPreferredWidthDirty;
+    float m_preferredHeight;
+    float m_renderedHeight;
+    bool m_isPreferredHeightDirty;
+    bool m_isCalculatingPreferredValues;
+    int32_t m_layoutPriority;
+    bool m_isLayoutDirty;
+    bool m_isAwake;
+    bool m_isWaitingOnResourceLoad;
+    bool m_isInputParsingRequired;
+    #if defined(_CPLUSPLUS_)
+    TMP_Text_TextInputSources m_inputSource;
+    #else
+    int32_t m_inputSource;
+    #endif
+    float m_fontScale;
+    float m_fontScaleMultiplier;
+    struct Char__Array *m_htmlTag;
+    struct RichTextTagAttribute__Array *m_xmlAttribute;
+    struct Single__Array *m_attributeParameterValues;
+    float tag_LineIndent;
+    float tag_Indent;
+    struct TMP_TextProcessingStack_1_System_Single_ m_indentStack;
+    bool tag_NoParsing;
+    bool m_isParsingText;
+    struct Matrix4x4 m_FXMatrix;
+    bool m_isFXMatrixSet;
+    struct TMP_Text_UnicodeChar__Array *m_InternalParsingBuffer;
+    int32_t m_InternalParsingBufferSize;
+    struct TMP_CharacterInfo__Array *m_internalCharacterInfo;
+    struct Char__Array *m_input_CharArray;
+    int32_t m_charArray_Length;
+    int32_t m_totalCharacterCount;
+    struct WordWrapState m_SavedWordWrapState;
+    struct WordWrapState m_SavedLineState;
+    struct WordWrapState m_SavedEllipsisState;
+    struct WordWrapState m_SavedLastValidState;
+    struct WordWrapState m_SavedSoftLineBreakState;
+    struct TMP_TextProcessingStack_1_WordWrapState_ m_EllipsisInsertionCandidateStack;
+    int32_t m_characterCount;
+    int32_t m_firstCharacterOfLine;
+    int32_t m_firstVisibleCharacterOfLine;
+    int32_t m_lastCharacterOfLine;
+    int32_t m_lastVisibleCharacterOfLine;
+    int32_t m_lineNumber;
+    int32_t m_lineVisibleCharacterCount;
+    int32_t m_pageNumber;
+    float m_PageAscender;
+    float m_maxTextAscender;
+    float m_maxCapHeight;
+    float m_ElementAscender;
+    float m_ElementDescender;
+    float m_maxLineAscender;
+    float m_maxLineDescender;
+    float m_startOfLineAscender;
+    float m_startOfLineDescender;
+    float m_lineOffset;
+    struct Extents m_meshExtents;
+    struct Color32 m_htmlColor;
+    struct TMP_TextProcessingStack_1_UnityEngine_Color32_ m_colorStack;
+    struct TMP_TextProcessingStack_1_UnityEngine_Color32_ m_underlineColorStack;
+    struct TMP_TextProcessingStack_1_UnityEngine_Color32_ m_strikethroughColorStack;
+    struct TMP_TextProcessingStack_1_HighlightState_ m_HighlightStateStack;
+    struct TMP_ColorGradient *m_colorGradientPreset;
+    struct TMP_TextProcessingStack_1_TMP_ColorGradient_ m_colorGradientStack;
+    bool m_colorGradientPresetIsTinted;
+    float m_tabSpacing;
+    float m_spacing;
+    struct TMP_TextProcessingStack_1_System_Int32___Array *m_TextStyleStacks;
+    int32_t m_TextStyleStackDepth;
+    struct TMP_TextProcessingStack_1_System_Int32_ m_ItalicAngleStack;
+    int32_t m_ItalicAngle;
+    struct TMP_TextProcessingStack_1_System_Int32_ m_actionStack;
+    float m_padding;
+    float m_baselineOffset;
+    struct TMP_TextProcessingStack_1_System_Single_ m_baselineOffsetStack;
+    float m_xAdvance;
+    #if defined(_CPLUSPLUS_)
+    TMP_TextElementType m_textElementType;
+    #else
+    int32_t m_textElementType;
+    #endif
+    struct TMP_TextElement *m_cached_TextElement;
+    struct TMP_Text_SpecialCharacter m_Ellipsis;
+    struct TMP_Text_SpecialCharacter m_Underline;
+    struct TMP_SpriteAsset *m_defaultSpriteAsset;
+    struct TMP_SpriteAsset *m_currentSpriteAsset;
+    int32_t m_spriteCount;
+    int32_t m_spriteIndex;
+    int32_t m_spriteAnimationID;
+    bool m_ignoreActiveState;
+    struct Decimal__Array *k_Power;
+};
+
+struct TMP_Text {
+    struct TMP_Text__Class *klass;
+    MonitorData *monitor;
+    struct TMP_Text__Fields fields;
+};
+
+struct TextMeshProUGUI__Fields {
+    struct TMP_Text__Fields _;
+    bool m_hasFontAssetChanged;
+    struct TMP_SubMeshUI__Array *m_subTextObjects;
+    float m_previousLossyScaleY;
+    struct Vector3__Array *m_RectTransformCorners;
+    struct CanvasRenderer *m_canvasRenderer;
+    struct Canvas *m_canvas;
+    bool m_isFirstAllocation;
+    int32_t m_max_characters;
+    struct Material *m_baseMaterial;
+    bool m_isScrollRegionSet;
+    struct Vector4 m_maskOffset;
+    struct Matrix4x4 m_EnvMapMatrix;
+    bool m_isRegisteredForEvents;
+    bool m_isRebuildingLayout;
+    struct Coroutine *m_DelayedGraphicRebuild;
+    struct Coroutine *m_DelayedMaterialRebuild;
+    struct Rect m_ClipRect;
+    bool m_ValidRect;
+    struct Action_1_TMPro_TMP_TextInfo_ *OnPreRenderText;
+};
+
+struct TextMeshProUGUI {
+    struct TextMeshProUGUI__Class *klass;
+    MonitorData *monitor;
+    struct TextMeshProUGUI__Fields fields;
 };
 
 enum class MapObjectType : int32_t {
@@ -619,7 +1393,7 @@ struct __declspec(align(8)) Settings__Fields {
     bool MFKGHCMCOAO;
     bool DFNNJCDKMPP;
     struct String *GMMFCEFMDAG;
-    struct String *NCADAPAJGCH;
+    struct String *account_name;
     bool IABDPDAGMAO;
     bool AAFACMHNKOA;
     bool GHABKCFFJNE;
@@ -703,10 +1477,10 @@ struct __declspec(align(8)) Settings__Fields {
     struct CKMLLKPOBKP *IPNPGOLNLAC;
     bool GNMINIBGBEG;
     struct List_1_System_String_ *NFKNFKDFEID;
-    struct String *_NMGDJEDLAGK_k__BackingField;
+    struct String *access_token;
     struct String *_CLAPFHFJMJK_k__BackingField;
     struct String *_FFIJPPMKHJC_k__BackingField;
-    struct String *_FPIKBBOPAGD_k__BackingField;
+    struct String *account_guid;
     struct String *_MMGODEBMBML_k__BackingField;
     struct String *_LBDCDELDPAE_k__BackingField;
 };
@@ -1415,6 +2189,55 @@ struct ChatManager {
     struct ChatManager__Fields fields;
 };
 
+struct __declspec(align(8)) GuildInfo__Fields {
+    struct GuildInfo_DDEGJMDCEJA *EGDIJHJIBGD;
+    struct GuildInfo_NNJIKNJGIHA *KCAIDCIBKKK;
+    struct GuildInfo_NNJIKNJGIHA *LNNHCIMICEP;
+    struct GuildInfo_NNJIKNJGIHA *MEOCJOKOLDM;
+    struct GuildInfo_NNJIKNJGIHA *MLEBOFKMCAM;
+    struct List_1_GACKJCEOIII_ *CNOPBBOGPCP;
+    struct List_1_GACKJCEOIII_ *DADBHCCOMJF;
+    struct List_1_GACKJCEOIII_ *HKOHLBDEMGJ;
+    struct List_1_DCIICIOCNKC_ *PCJLEMKOHNI;
+    struct List_1_DCIICIOCNKC_ *members;
+    struct List_1_DCIICIOCNKC_ *JPFDDMHLGIB;
+    struct Dictionary_2_System_String_GACKJCEOIII_ *JBEBEKJHGHC;
+    struct Dictionary_2_System_String_GACKJCEOIII_ *HBHHPNEFJDN;
+    bool NBMNMGPFNFE;
+    bool CBOBBEGOPII;
+    bool LGEDHCJMMJO;
+    int32_t IPAIPDMLIGL;
+    int32_t PDOKNOOEKBH;
+    int32_t JMGIEOIFLEK;
+    bool CNJKBGIJOGJ;
+    struct Dictionary_2_System_String_CLJPCEEAFLB_ *OONMMPJJNGK;
+    struct CLJPCEEAFLB *NHEBHFMOAPN;
+    struct Guild *guild;
+    struct SocketManager_1 *HPIPJDMLKLK;
+};
+
+struct GuildInfo {
+    struct GuildInfo__Class *klass;
+    MonitorData *monitor;
+    struct GuildInfo__Fields fields;
+};
+
+struct __declspec(align(8)) Guild__Fields {
+    struct String *name;
+    struct String *LFOJNOEOOAJ;
+    int32_t NLPINCHJGDH;
+    int32_t DBJCIGMFGHB;
+    struct String *ACPCLIEIKLB;
+    struct List_1_DCIICIOCNKC_ *JPFDDMHLGIB;
+    int32_t DIGGMDMKDCO;
+};
+
+struct Guild {
+    struct Guild__Class *klass;
+    MonitorData *monitor;
+    struct Guild__Fields fields;
+};
+
 struct CameraManager__Fields {
     struct MonoBehaviour__Fields _;
     bool JGOPOFJJPMM;
@@ -1475,6 +2298,29 @@ struct CameraPerspectiveEditor {
     struct CameraPerspectiveEditor__Class *klass;
     MonitorData *monitor;
     struct CameraPerspectiveEditor__Fields fields;
+};
+
+struct CharacterInfo__Fields {
+    struct MonoBehaviour__Fields _;
+    struct BaseButton *charactersButton;
+    struct TextMeshProUGUI *accountName;
+    struct GameObject *guildInfo;
+    struct TextMeshProUGUI *guildNameLabel;
+    struct Image *guildIcon;
+    struct UIIconLoader *characterIconLoader;
+    struct Image *starIcon;
+    struct TextMeshProUGUI *starCountLabel;
+    struct UIInfoTooltip *tooltipInfo;
+    struct MapViewService *OHLHEKBJMOO;
+    struct SocketManager_1 *HPIPJDMLKLK;
+    struct GameObject *ui;
+    struct UIItemShader *AAOFKKKOLBP;
+};
+
+struct CharacterInfo {
+    struct CharacterInfo__Class *klass;
+    MonitorData *monitor;
+    struct CharacterInfo__Fields fields;
 };
 
 struct NIIFJAMEHDD__Fields {
@@ -1607,7 +2453,7 @@ struct ApplicationManager__Fields {
     struct DKOAEHAOGPN *_MMMOGCFIEPP_k__BackingField;
     struct KIJEBPDLFID *_BCDPFICEIJM_k__BackingField;
     struct NCEKHOMHKOG *_LAHNDMLIIIM_k__BackingField;
-    struct NOKENPCHCDE *_ADOFIDIACLF_k__BackingField;
+    struct GuildInfo *guild_info;
     struct MICPFEDBHDI *_GEGNFLNAION_k__BackingField;
     struct TutorialManager *_GFOCJPOFMJK_k__BackingField;
     struct AHLHJGLGCDJ *_DJMICDKMBOF_k__BackingField;

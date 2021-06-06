@@ -111,6 +111,12 @@
     <ClCompile Include="src\module\modules\camera_settings.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\modules\name_change.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui\misc\cpp\imgui_stdlib.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers.h">
@@ -232,6 +238,12 @@
     </ClInclude>
     <ClInclude Include="src\il2cpp\appdata\il2cpp-internal-types.h">
       <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\name_change.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\imgui\misc\cpp\imgui_stdlib.h">
+      <Filter>Source Files\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,7 @@ enum class ModuleList
     Debug,
     SkinChanger,
     CameraSettings,
+    NameChange,
     Count
 };
 
