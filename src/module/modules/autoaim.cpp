@@ -78,7 +78,7 @@ void AutoAimModule::onPlayerShoot(Player* player, float& angle)
 	if (reverse_cult_staff)
 	{
 		EquipmentSlot* weapon = GetEquipmentSlot(0);
-		ObjectProperties* object_properties = ((ItemSlot*)weapon)->fields.object_properties;
+		ObjectProperties* object_properties = weapon->fields._._.object_properties;
 		if (!object_properties) return;
 
 		bool cult_staff = il2cppi_to_string(object_properties->fields.displayId) == "Staff of Unholy Sacrifice";
@@ -133,16 +133,16 @@ Character* AutoAimModule::chooseEnemy()
 
 		if (this->target_mode == AutoAim_Target::HighestDef)
 		{
-			int chosen_defense = ((MapObject*)chosen_enemy)->fields.defense;
-			int current_defense = ((MapObject*)enemy)->fields.defense;
+			int chosen_defense = chosen_enemy->fields._.defense;
+			int current_defense = enemy->fields._.defense;
 			if (current_defense > chosen_defense)
 				chosen_enemy = enemy;
 		}
 
 		if (this->target_mode == AutoAim_Target::HighestMaxHP)
 		{
-			int chosen_maxhp = ((MapObject*)chosen_enemy)->fields.max_hp;
-			int current_maxhp = ((MapObject*)enemy)->fields.max_hp;
+			int chosen_maxhp = chosen_enemy->fields._.max_hp;
+			int current_maxhp = enemy->fields._.max_hp;
 			if (current_maxhp > chosen_maxhp)
 				chosen_enemy = enemy;
 		}

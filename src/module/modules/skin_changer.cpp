@@ -224,7 +224,7 @@ void SkinChangerModule::renderGUI()
 void SkinChangerModule::onMapChange()
 {
 	if (Player* player = GetPlayer())
-		this->old_player_skin_id = ((MapObject*)player)->fields.skin_id;
+		this->old_player_skin_id = player->fields._._.skin_id;
 
 	if (!this->enabled) return;
 
@@ -257,9 +257,9 @@ void SkinChangerModule::changePlayerSkin(int skin_id)
 	if (!player) return;
 
 	if (this->old_player_skin_id == -1)
-		this->old_player_skin_id = ((MapObject*)player)->fields.skin_id;
+		this->old_player_skin_id = player->fields._._.skin_id;
 
-	((MapObject*)player)->fields.skin_id = skin_id;
+	player->fields._._.skin_id = skin_id;
 }
 
 

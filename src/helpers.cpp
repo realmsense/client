@@ -116,7 +116,7 @@ void ShowFloatingText(const char* message, FloatingTextType type, __int64 color)
     static ApplicationManager* application_manager = (ApplicationManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.ApplicationManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
     static MapViewService* map_view_service = ApplicationManager_get_MapViewService(application_manager, nullptr);
 
-    ViewHandler* view_handler = reinterpret_cast<BasicObject*>(player)->fields.NJGEIJDFFND;
+    ViewHandler* view_handler = player->fields._._._.NJGEIJDFFND;
     MapObjectUIManager* gui_manager = view_handler->fields.GUIManager;
     String* text = reinterpret_cast<String*>(il2cpp_string_new(message));
 
