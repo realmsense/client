@@ -43,6 +43,8 @@
         ["ChatManager_GetChatMessage", "ChatManager_GetChatMessage"],
         ["TMP_Text_SetText", "TMP_Text_SetText"],
         ["TMP_Text_set_color", "TMP_Text_set_color"],
+        ["SettingsManager_GetKeyCode", "SettingsManager_GetKeyCode"],
+        ["Input_GetKey", "Input_GetKey"],
         ["SpriteShader_UpdateMask", "SpriteShader_UpdateMask"]
     ],
     "enums": [
@@ -51,6 +53,8 @@
         ["OMIPCDPIAOC", "MapObjectType"],
         ["HLMENPGLNDH", "MapItem"],
         ["FDOLMLKAKIN", "ItemLocationType"],
+        ["GCAPHHCPLGG", "SettingsKeyCode"],
+        ["KeyCode", "KeyCode"],
         ["EMOPGKHHDGD", "EMOPGKHHDGD"], // Player, OtherPlayer, Npc, Lootbag
         ["EFBAFDICAFG", "EFBAFDICAFG"], // Right, Left, Down, Up, None, First
         ["BJHJLINJFAI", "BJHJLINJFAI"], // Stand, Walk, Attack, NumAction
@@ -87,6 +91,7 @@
         { "name": "Type",               "props": { "__Fields": [ ] } },
         { "name": "RuntimeTypeHandle",  "props": { } },
         { "name": "Object_1",           "props": { "__Fields": [ ] } },
+        { "name": "GameObject",         "props": { "__Fields": [ ] } },
         { "name": "Component_1",        "props": { "__Fields": [ ] } },
         { "name": "Behaviour",          "props": { "__Fields": [ ] } },
         { "name": "MonoBehaviour",      "props": { "__Fields": [ ] } },
@@ -123,6 +128,7 @@
         /* managers */
         { "name": "MapObjectUIManager", "props": { "__Fields": [ ] } },
         { "name": "EntityManager",      "props": { } },
+        { "name": "SettingsManager",    "props": { "__Fields": [ ] } },
         { "name": "ViewHandler",        "props": { "__Fields": [ ] } },
         { "name": "SpriteShader",       "props": { "__Fields": [ ] } },
         { "name": "CharacterInfo",      "props": { "__Fields": [ ] } },
@@ -296,7 +302,8 @@
                 "__Fields": [
                     ["PHNLNOOLAIO", "skin_id"],
                     ["LOBGNENJGPK", "defense"],
-                    ["JLECINIONGJ", "max_hp"]
+                    ["JLECINIONGJ", "max_hp"],
+                    ["FBLOKBOPOOC", "invulnerable"]
                 ] 
             }
         },

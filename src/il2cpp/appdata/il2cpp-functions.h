@@ -10,10 +10,12 @@ DO_APP_FUNC(0x02937E80, void, GameObject_SetActive, (GameObject * __this, bool v
 DO_APP_FUNC(0x00EBDB40, Object *, Object_FindObjectOfType, (Type * type, MethodInfo * method));
 DO_APP_FUNC(0x02870BA0, Vector3, Transform_get_position, (Transform * __this, MethodInfo * method));
 DO_APP_FUNC(0x02870870, Vector3, Transform_get_localPosition, (Transform * __this, MethodInfo * method));
+DO_APP_FUNC(0x015D8DA0, bool, Input_GetKey, (KeyCode key, MethodInfo * method));
 DO_APP_FUNC(0x002E6120, void, TMP_Text_set_color, (TMP_Text * __this, Color value, MethodInfo * method));
 DO_APP_FUNC(0x002DC1A0, void, TMP_Text_SetText, (TMP_Text * __this, String * text, bool syncTextInputBox, MethodInfo * method));
 DO_APP_FUNC(0x01713C80, ChatSlot *, ChatManager_GetChatMessage, (ChatManager * __this, MethodInfo * method));
 DO_APP_FUNC(0x0170D520, void, ChatManager_AddSlot, (ChatManager * __this, ChatSlot * MJLCGOABOIA, MethodInfo * method));
+DO_APP_FUNC(0x017621A0, KeyCode, SettingsManager_GetKeyCode, (SettingsManager * __this, SettingsKeyCode PAGPIKLPGPA, MethodInfo * method));
 DO_APP_FUNC(0x0288A4D0, void, SpriteShader_UpdateMask, (SpriteShader * __this, CGPOGAAKLFL * DLNMEAOOHKA, int32_t KDNJFAAKECF, int32_t HPGLAHDANIJ, MethodInfo * method));
 DO_APP_FUNC(0x01A2C210, void, BasicObject_Init, (BasicObject * __this, MethodInfo * method));
 DO_APP_FUNC(0x01AAC360, void, Pet_ChangeSkin, (Pet * __this, int32_t OGBGLIIENMF, MethodInfo * method));

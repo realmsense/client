@@ -122,3 +122,15 @@ void ShowFloatingText(const char* message, FloatingTextType type, __int64 color)
 
     MapObjectUIManager_ShowFloatingText(gui_manager, type, text, color, 0.0f, nullptr);
 }
+
+bool GetKeyDown(SettingsKeyCode code)
+{
+    static SettingsManager* settings_manager = (SettingsManager*)FindObjectByQualifiedName("DecaGames.RotMG.UI.Managers.SettingsManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+    KeyCode key_code = SettingsManager_GetKeyCode(settings_manager, code, nullptr);
+    return Input_GetKey(key_code, nullptr);
+}
+
+bool GetKeyDown(KeyCode code)
+{
+    return Input_GetKey(code, nullptr);
+}

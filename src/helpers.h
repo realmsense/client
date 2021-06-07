@@ -20,3 +20,6 @@ Pet* GetPet();
 Vector2 GetEntityPos(BasicObject* entity);
 EquipmentSlot* GetEquipmentSlot(int index);
 void ShowFloatingText(const char* message, FloatingTextType type, __int64 color);
+
+bool GetKeyDown(SettingsKeyCode code);
+bool GetKeyDown(KeyCode code);
