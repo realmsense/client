@@ -82,7 +82,7 @@ void AutoAimModule::onPlayerShoot(Player* player, float& angle)
 		if (!object_properties) return;
 
 		bool cult_staff = il2cppi_to_string(object_properties->fields.displayId) == "Staff of Unholy Sacrifice";
-		if (!cult_staff)
+		if (cult_staff)
 		{
 			angle -= M_PI;
 		}
