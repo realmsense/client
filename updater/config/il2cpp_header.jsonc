@@ -16,9 +16,7 @@
         ["COEDKELBKMI", "Character"],
         ["LAAIPMHLFJN", "MapObject"],
         ["GJLIMCBOCJG", "BasicObject"],
-        ["PIPCAMDKBDA", "ChatSlot"],
-        ["NOKENPCHCDE", "GuildInfo"],
-        ["CMMFKBHHLCM", "Guild"]
+        ["PIPCAMDKBDA", "ChatSlot"]
     ],
     "functions": [
         ["Type_GetType_2", "Type_GetType"],
@@ -147,24 +145,6 @@
         },
         
         {
-            "name": "NOKENPCHCDE", // GuildInfo - needs better name
-            "props": {
-                "__Fields": [
-                    ["FEIMEPOPLPI", "members"],
-                    ["DBIAPDOFNMD", "guild"]
-                ]
-            }
-        },
-        {
-            "name": "CMMFKBHHLCM", // Guild
-            "props": {
-                "__Fields": [
-                    ["LDAGNECOJAJ", "name"]   
-                ]
-            }
-        },
-
-        {
             "name": "GameController",
             "props": {
                 "__Fields": [
@@ -290,7 +270,9 @@
         {
             "name": "JFNHHLNJJKP", /* Player */
             "props": {
-                "__Fields": [ ]
+                "__Fields": [
+                    ["FLCOMAGIJOI", "guild_name"]
+                ]
             }
         },
         {

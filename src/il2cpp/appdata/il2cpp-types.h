@@ -1553,7 +1553,7 @@ struct Player__Fields {
     bool EOEFBDJDGBE;
     int32_t PBOEOIGCJDP;
     int32_t GNJMIDCOGGG;
-    struct String *FLCOMAGIJOI;
+    struct String *guild_name;
     bool NCKGHPFNNFK;
     int32_t HJBCGDPGDKC;
     float POIGCBNJFGI;
@@ -2537,55 +2537,6 @@ struct ChatManager {
     struct ChatManager__Fields fields;
 };
 
-struct __declspec(align(8)) GuildInfo__Fields {
-    struct GuildInfo_DDEGJMDCEJA *EGDIJHJIBGD;
-    struct GuildInfo_NNJIKNJGIHA *KCAIDCIBKKK;
-    struct GuildInfo_NNJIKNJGIHA *LNNHCIMICEP;
-    struct GuildInfo_NNJIKNJGIHA *MEOCJOKOLDM;
-    struct GuildInfo_NNJIKNJGIHA *MLEBOFKMCAM;
-    struct List_1_GACKJCEOIII_ *CNOPBBOGPCP;
-    struct List_1_GACKJCEOIII_ *DADBHCCOMJF;
-    struct List_1_GACKJCEOIII_ *HKOHLBDEMGJ;
-    struct List_1_DCIICIOCNKC_ *PCJLEMKOHNI;
-    struct List_1_DCIICIOCNKC_ *members;
-    struct List_1_DCIICIOCNKC_ *JPFDDMHLGIB;
-    struct Dictionary_2_System_String_GACKJCEOIII_ *JBEBEKJHGHC;
-    struct Dictionary_2_System_String_GACKJCEOIII_ *HBHHPNEFJDN;
-    bool NBMNMGPFNFE;
-    bool CBOBBEGOPII;
-    bool LGEDHCJMMJO;
-    int32_t IPAIPDMLIGL;
-    int32_t PDOKNOOEKBH;
-    int32_t JMGIEOIFLEK;
-    bool CNJKBGIJOGJ;
-    struct Dictionary_2_System_String_CLJPCEEAFLB_ *OONMMPJJNGK;
-    struct CLJPCEEAFLB *NHEBHFMOAPN;
-    struct Guild *guild;
-    struct SocketManager_1 *HPIPJDMLKLK;
-};
-
-struct GuildInfo {
-    struct GuildInfo__Class *klass;
-    MonitorData *monitor;
-    struct GuildInfo__Fields fields;
-};
-
-struct __declspec(align(8)) Guild__Fields {
-    struct String *name;
-    struct String *LFOJNOEOOAJ;
-    int32_t NLPINCHJGDH;
-    int32_t DBJCIGMFGHB;
-    struct String *ACPCLIEIKLB;
-    struct List_1_DCIICIOCNKC_ *JPFDDMHLGIB;
-    int32_t DIGGMDMKDCO;
-};
-
-struct Guild {
-    struct Guild__Class *klass;
-    MonitorData *monitor;
-    struct Guild__Fields fields;
-};
-
 struct SettingsManager__Fields {
     struct MonoBehaviour__Fields _;
     bool JOFMCOFEDJP;
@@ -2969,7 +2920,7 @@ struct ApplicationManager__Fields {
     struct DKOAEHAOGPN *_MMMOGCFIEPP_k__BackingField;
     struct KIJEBPDLFID *_BCDPFICEIJM_k__BackingField;
     struct NCEKHOMHKOG *_LAHNDMLIIIM_k__BackingField;
-    struct GuildInfo *guild_info;
+    struct NOKENPCHCDE *guild_info;
     struct MICPFEDBHDI *_GEGNFLNAION_k__BackingField;
     struct TutorialManager *_GFOCJPOFMJK_k__BackingField;
     struct AHLHJGLGCDJ *_DJMICDKMBOF_k__BackingField;

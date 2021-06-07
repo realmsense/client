@@ -129,7 +129,7 @@ void NameChangeModule::changeGuildName(std::string name)
 	CharacterInfo* character_info = this->GetCharacterInfo();
 	GameObject* guild_object = character_info->fields.guildInfo;
 
-	if (name == "")
+	if (name == "" || name == " ")
 	{
 		GameObject_SetActive(guild_object, false, nullptr);
 	}
@@ -148,14 +148,8 @@ void NameChangeModule::changeGuildName(std::string name)
 
 void NameChangeModule::resetGuildName()
 {
-	static ApplicationManager* application_manager = (ApplicationManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.ApplicationManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
-	static GuildInfo* guild_info = application_manager->fields.guild_info;
-	static Guild* guild = guild_info->fields.guild;
-
-	if (!guild)
-		this->changeGuildName(""); // hide
-	else
-		this->changeGuildName(il2cppi_to_string(guild->fields.name));
+	Player* player = GetPlayer();
+	this->changeGuildName(il2cppi_to_string(player->fields.guild_name));
 }
 
 CharacterInfo* NameChangeModule::GetCharacterInfo()
