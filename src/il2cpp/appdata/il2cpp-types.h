@@ -500,6 +500,15 @@ enum class KeyCode : int32_t {
     Joystick8Button19 = 0x000001fd,
 };
 
+struct RaycastHit2D {
+    struct Vector2 m_Centroid;
+    struct Vector2 m_Point;
+    struct Vector2 m_Normal;
+    float m_Distance;
+    float m_Fraction;
+    int32_t m_Collider;
+};
+
 struct EntityManager {
     struct EntityDataAccess *m_EntityDataAccess;
 };
@@ -2778,6 +2787,33 @@ struct CameraPerspectiveEditor {
     struct CameraPerspectiveEditor__Class *klass;
     MonitorData *monitor;
     struct CameraPerspectiveEditor__Fields fields;
+};
+
+struct InputManager__Fields {
+    struct MonoBehaviour__Fields _;
+    bool isInteractHoldDown;
+    struct MapViewService *OHLHEKBJMOO;
+    struct CameraManager *KEIBIEADOBC;
+    struct EquipmentManager *HCCCOFFFJJI;
+    struct PopupManager *KHFEOFMPGGG;
+    struct MiniMapManager *MPDIMLPFNBE;
+    struct SettingsManager *BOJJBEJPDHF;
+    bool CBHDGGBKGDF;
+    bool CCEKJFLNIDO;
+    bool ABDEALGBCPK;
+    bool OFELALGANLE;
+    bool CCFMBLCDBAB;
+    struct Settings *DKCDBOLECHM;
+    int32_t EDHIDLAPEJK;
+    bool interactionKeyPressed;
+    struct RaycastHit2D EMEKLCCAPFF;
+    struct PlayerActionPanelHelper *KEKMGDLFCKG;
+};
+
+struct InputManager {
+    struct InputManager__Class *klass;
+    MonitorData *monitor;
+    struct InputManager__Fields fields;
 };
 
 struct CharacterInfo__Fields {

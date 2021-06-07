@@ -25,5 +25,7 @@ private:
 	AutoAim_Target target_mode;
 	bool reverse_cult_staff;
 	app::Character* chooseEnemy();
+
+	void setAutoFire(bool enabled);
 };
 

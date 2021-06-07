@@ -26,12 +26,14 @@ void AutoAimModule::onEnable()
 {
 	this->log.floatingText(Color32_GREEN);
 	this->log << this->name << " ON" << std::endl;
+	this->setAutoFire(true);
 }
 
 void AutoAimModule::onDisable()
 {
 	this->log.floatingText(Color32_RED);
 	this->log << this->name << " OFF" << std::endl;
+	this->setAutoFire(true);
 }
 
 void AutoAimModule::renderGUI()
@@ -61,7 +63,8 @@ void AutoAimModule::renderGUI()
 
 void AutoAimModule::onPlayerShoot(Player* player, float& angle)
 {
-	if (this->enabled)
+	bool attack_held = GetKeyDown(SettingsKeyCode::UseWeaponAttack); // allow user to override autoaim but holding left click
+	if (this->enabled && !attack_held)
 	{
 		Character* enemy = this->chooseEnemy();
 		if (enemy)
@@ -84,7 +87,7 @@ void AutoAimModule::onPlayerShoot(Player* player, float& angle)
 		bool cult_staff = il2cppi_to_string(object_properties->fields.displayId) == "Staff of Unholy Sacrifice";
 		if (cult_staff)
 		{
-			angle -= M_PI;
+			angle -= (float)M_PI;
 		}
 	}
 }
@@ -97,6 +100,8 @@ Character* AutoAimModule::chooseEnemy()
 	Character* chosen_enemy = nullptr;
 	for (Character* enemy : g_aEnemyList)
 	{
+		if (!enemy) continue; // probably need to hook the dispose function that is actually called, rn we're getting random crashes
+
 		if (this->target_mode == AutoAim_Target::Any)
 			return enemy;
 
@@ -149,4 +154,10 @@ Character* AutoAimModule::chooseEnemy()
 	}
 
 	return chosen_enemy;
+}
+
+void AutoAimModule::setAutoFire(bool enabled)
+{
+	static InputManager* input_manager = (InputManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.Options.InputManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+	InputManager_set_AutoFire(input_manager, enabled, nullptr);
 }

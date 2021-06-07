@@ -22,4 +22,5 @@ DO_APP_FUNC(0x01AAC360, void, Pet_ChangeSkin, (Pet * __this, int32_t OGBGLIIENMF
 DO_APP_FUNC(0x015FB2E0, void, Player_Shoot, (Player * __this, float LODCFMOPDCN, MethodInfo * method));
 DO_APP_FUNC(0x0031CCF0, MapViewService *, ApplicationManager_get_MapViewService, (ApplicationManager * __this, MethodInfo * method));
 DO_APP_FUNC(0x01694960, bool, MapViewService_CheckTileWalkable, (MapViewService * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method));
+DO_APP_FUNC(0x01D16CF0, void, InputManager_set_AutoFire, (InputManager * __this, bool GKLFNLCLLGM, MethodInfo * method));
 DO_APP_FUNC(0x019363A0, void, MapObjectUIManager_ShowFloatingText, (MapObjectUIManager * __this, FloatingTextType DBMPDNFHFNL, String * OBEFKMANGCK, Nullable_1_UnityEngine_Color32_ HNDHLEHECGE, float MPNAHCHFHMD, MethodInfo * method));
