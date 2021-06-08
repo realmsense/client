@@ -2,8 +2,8 @@
 #include "helpers.h"
 #include "name_change.h"
 
-#include "imgui/imgui.h"
-#include "imgui/misc/cpp/imgui_stdlib.h"
+#include "thirdparty/imgui/imgui.h"
+#include "thirdparty/imgui/misc/cpp/imgui_stdlib.h"
 
 NameChangeModule::NameChangeModule()
 	: Module()

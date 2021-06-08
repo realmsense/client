@@ -2,7 +2,7 @@
 #include "helpers.h"
 #include "camera_settings.h"
 
-#include "imgui/imgui.h"
+#include "thirdparty/imgui/imgui.h"
 
 CameraSettingsModule::CameraSettingsModule()
 	: Module()

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "helpers.h"
-#include "minhook/include/MinHook.h"
 #include "module/module_manager.h"
+#include "thirdparty/minhook/include/MinHook.h"
 
 // function typdef _FunctionName
 #define DO_APP_FUNC(a, r, n, p) typedef r (* _ ## n) p;

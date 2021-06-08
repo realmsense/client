@@ -3,7 +3,7 @@
 #include "debug.h"
 
 #include "gui.h"
-#include "imgui/imgui.h"
+#include "thirdparty/imgui/imgui.h"
 
 DebugModule::DebugModule()
 	: Module()

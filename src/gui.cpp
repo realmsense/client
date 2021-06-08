@@ -1,13 +1,13 @@
 #include "pch.h"
 #include "gui.h"
-#include "kiero/kiero.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_win32.h"
-#include "imgui/imgui_impl_dx11.h"
-#include <d3d11.h>
-
 #include "module/module_manager.h"
 
+#include "thirdparty/kiero/kiero.h"
+#include "thirdparty/imgui/imgui.h"
+#include "thirdparty/imgui/imgui_impl_win32.h"
+#include "thirdparty/imgui/imgui_impl_dx11.h"
+
+#include <d3d11.h>
 #define STB_IMAGE_IMPLEMENTATION
 #include "other/stb_image.h"
 

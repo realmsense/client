@@ -2,7 +2,7 @@
 #include "helpers.h"
 #include "skin_changer.h"
 
-#include "imgui/imgui.h"
+#include "thirdparty/imgui/imgui.h"
 
 Skin::Skin(std::string name, std::string file_name, int skin_id)
 	: GuiImage(file_name)

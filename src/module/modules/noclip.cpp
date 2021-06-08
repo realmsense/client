@@ -2,7 +2,7 @@
 #include "noclip.h"
 #include "helpers.h"
 
-#include "imgui/imgui.h"
+#include "thirdparty/imgui/imgui.h"
 
 NoclipModule::NoclipModule()
 	: Module()

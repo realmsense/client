@@ -19,6 +19,18 @@
     <Filter Include="Source Files\other">
       <UniqueIdentifier>{1385aa1f-1fbd-4b4e-8359-0c829d801cc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\thirdparty">
+      <UniqueIdentifier>{e72a806d-4fe5-4086-a439-31cdf50b9dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\thirdparty\imgui">
+      <UniqueIdentifier>{b50f06b4-0a67-417e-b448-ce103dd4cdce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\thirdparty\kiero">
+      <UniqueIdentifier>{45cff9eb-8432-4dc8-af9c-2c86e10b2cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\thirdparty\minhook">
+      <UniqueIdentifier>{f1163919-34b5-4ffe-bd14-4f2680631167}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\helpers.cpp">
@@ -36,47 +48,8 @@
     <ClCompile Include="src\helpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\imgui\imgui.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_demo.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_draw.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_impl_dx11.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_impl_win32.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_tables.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_widgets.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
     <ClCompile Include="src\gui.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\kiero\kiero.cpp">
-      <Filter>Source Files\kiero</Filter>
-    </ClCompile>
-    <ClCompile Include="src\minhook\src\buffer.c">
-      <Filter>Source Files\minhook</Filter>
-    </ClCompile>
-    <ClCompile Include="src\minhook\src\hook.c">
-      <Filter>Source Files\minhook</Filter>
-    </ClCompile>
-    <ClCompile Include="src\minhook\src\trampoline.c">
-      <Filter>Source Files\minhook</Filter>
-    </ClCompile>
-    <ClCompile Include="src\minhook\src\hde\hde32.c">
-      <Filter>Source Files\minhook</Filter>
-    </ClCompile>
-    <ClCompile Include="src\minhook\src\hde\hde64.c">
-      <Filter>Source Files\minhook</Filter>
     </ClCompile>
     <ClCompile Include="src\module\module_manager.cpp">
       <Filter>Source Files\module</Filter>
@@ -114,8 +87,47 @@
     <ClCompile Include="src\module\modules\name_change.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\imgui\misc\cpp\imgui_stdlib.cpp">
-      <Filter>Source Files\imgui</Filter>
+    <ClCompile Include="src\thirdparty\imgui\imgui.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_demo.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_draw.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_impl_dx11.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_impl_win32.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_tables.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\kiero\kiero.cpp">
+      <Filter>Source Files\thirdparty\kiero</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\minhook\src\buffer.c">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\minhook\src\hook.c">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\minhook\src\trampoline.c">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\minhook\src\hde\hde32.c">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\minhook\src\hde\hde64.c">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\misc\cpp\imgui_stdlib.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,45 +160,6 @@
     </ClInclude>
     <ClInclude Include="src\helpers.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imconfig.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui_impl_dx11.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui_impl_win32.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui_internal.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kiero\kiero.h">
-      <Filter>Source Files\kiero</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\buffer.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\trampoline.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\hde\hde32.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\hde\hde64.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\hde\pstdint.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\hde\table32.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\hde\table64.h">
-      <Filter>Source Files\minhook</Filter>
     </ClInclude>
     <ClInclude Include="src\gui.h">
       <Filter>Source Files</Filter>
@@ -242,8 +215,56 @@
     <ClInclude Include="src\module\modules\name_change.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
-    <ClInclude Include="src\imgui\misc\cpp\imgui_stdlib.h">
-      <Filter>Source Files\imgui</Filter>
+    <ClInclude Include="src\thirdparty\imgui\imconfig.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imgui.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imgui_impl_dx11.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imgui_impl_win32.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imgui_internal.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imstb_rectpack.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imstb_textedit.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imstb_truetype.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\kiero\kiero.h">
+      <Filter>Source Files\thirdparty\kiero</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\buffer.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\trampoline.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\hde\hde32.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\hde\hde64.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\hde\pstdint.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\hde\table32.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\hde\table64.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\misc\cpp\imgui_stdlib.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -261,15 +282,6 @@
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{362313b7-2c28-40d8-98f2-b0ad3343ed0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\imgui">
-      <UniqueIdentifier>{75c77e9d-3ec9-439d-a1d0-72544fb89b93}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\kiero">
-      <UniqueIdentifier>{8e19a2a2-7fc9-432c-b67d-038a5e15eea0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\minhook">
-      <UniqueIdentifier>{61ae7d89-0003-43ae-9a00-d0efea67afe8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\module">
       <UniqueIdentifier>{73c5f675-5e99-4458-b5c2-ce6a7a6de1a9}</UniqueIdentifier>

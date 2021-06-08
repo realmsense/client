@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../module.h"
-#include "imgui/imgui.h"
+#include "thirdparty/imgui/imgui.h"
 
 class NameChangeModule : public Module {
 public:

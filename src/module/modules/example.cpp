@@ -2,7 +2,7 @@
 #include "helpers.h"
 #include "example.h"
 
-#include "imgui/imgui.h"
+#include "thirdparty/imgui/imgui.h"
 
 ExampleModule::ExampleModule()
 	: Module()
