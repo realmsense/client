@@ -7,16 +7,62 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "other/stb_image.h"
 
-// Simple helper function to load an image into a DX11 texture with common settings
-bool LoadTextureFromFile(const char* filename, ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height)
+GuiImage::GuiImage(std::string file_name)
 {
-    // Load from disk into a raw RGBA buffer
-    int image_width = 0;
-    int image_height = 0;
-    unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
-    if (image_data == NULL)
-        return false;
+    this->file_name = file_name;
+    this->bytes = nullptr;
+    this->bytes_len = 0;
 
+    this->init = false;
+    this->failed = false;
+}
+
+GuiImage::GuiImage(unsigned char* bytes, int bytes_len)
+{
+    this->file_name = "";
+    this->bytes = bytes;
+    this->bytes_len = bytes_len;
+
+    this->init = false;
+    this->failed = false;
+}
+
+ID3D11ShaderResourceView* GuiImage::load()
+{
+    if (this->failed)
+        return nullptr;
+
+    if (this->init)
+        return this->texture;
+
+    if (this->file_name != "")
+    {
+        bool ret = this->loadFromFile(this->file_name.c_str(), this->texture, this->width, this->height);
+        if (!ret)
+        {
+            std::cout << "Failed to load GUI Image: " << this->file_name << std::endl;
+            this->failed = true;
+            return nullptr;
+        }
+
+        this->init = true;
+        return this->texture;
+    }
+
+    if (this->bytes_len > 0)
+    {
+        this->loadFromMemory(this->bytes, this->bytes_len, this->texture, this->width, this->height);
+        this->init = true;
+        return this->texture;
+    }
+
+    this->failed = true;
+    std::cout << "GUI Image has no file or bytes loaded!" << std::endl;
+    return nullptr;
+}
+
+void GuiImage::loadTexture(unsigned char* image_data, ID3D11ShaderResourceView*& out_srv, int image_width, int image_height)
+{
     // Create texture
     D3D11_TEXTURE2D_DESC desc;
     ZeroMemory(&desc, sizeof(desc));
@@ -44,38 +90,22 @@ bool LoadTextureFromFile(const char* filename, ID3D11ShaderResourceView** out_sr
     srvDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
     srvDesc.Texture2D.MipLevels = desc.MipLevels;
     srvDesc.Texture2D.MostDetailedMip = 0;
-    g_pDevice->CreateShaderResourceView(pTexture, &srvDesc, out_srv);
+    g_pDevice->CreateShaderResourceView(pTexture, &srvDesc, &out_srv);
     pTexture->Release();
+}
 
-    *out_width = image_width;
-    *out_height = image_height;
-    stbi_image_free(image_data);
+bool GuiImage::loadFromFile(const char* filename, ID3D11ShaderResourceView*& out_srv, int& image_width, int& image_height)
+{
+    unsigned char* image_data = stbi_load(filename, &image_width, &image_height, NULL, 4);
+    if (image_data == NULL)
+        return false;
+
+    this->loadTexture(image_data, out_srv, image_width, image_height);
     return true;
 }
 
-GuiImage::GuiImage(std::string file_name)
+void GuiImage::loadFromMemory(unsigned char* bytes, int len, ID3D11ShaderResourceView*& out_srv, int& image_width, int& image_height)
 {
-    this->file_name = file_name;
-    this->init = false;
-    this->failed = false;
-}
-
-ID3D11ShaderResourceView* GuiImage::load()
-{
-    if (this->failed)
-        return nullptr;
-
-    if (this->init)
-        return this->texture;
-
-    bool ret = LoadTextureFromFile(this->file_name.c_str(), &this->texture, &this->width, &this->height);
-    if (!ret)
-    {
-        std::cout << "Failed to load GUI Image: " << this->file_name << std::endl;
-        this->failed = true;
-        return nullptr;
-    }
-
-    this->init = true;
-    return this->texture;
+    unsigned char* image_data = stbi_load_from_memory(bytes, len, &image_width, &image_height, nullptr, 4);
+    this->loadTexture(image_data, out_srv, image_width, image_height);
 }
