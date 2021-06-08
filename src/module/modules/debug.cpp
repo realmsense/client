@@ -1,8 +1,7 @@
 #include "pch.h"
 #include "helpers.h"
 #include "debug.h"
-
-#include "gui.h"
+#include "gui/gui.h"
 #include "thirdparty/imgui/imgui.h"
 
 DebugModule::DebugModule()

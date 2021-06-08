@@ -1,6 +1,7 @@
 #pragma once
 
-#include "gui.h"
+#include "gui/gui.h"
+#include "gui/gui_image.h"
 #include "../module.h"
 
 class SkinChangerModule : public Module {

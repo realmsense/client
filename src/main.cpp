@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "il2cpp-init.h"
 #include "helpers.h"
-#include "gui.h"
 #include "hooks.h"
+#include "gui/gui.h"
 
 #include "module/module_list.h"
 #include "module/module_manager.h"

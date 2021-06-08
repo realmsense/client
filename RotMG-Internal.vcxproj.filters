@@ -19,6 +19,9 @@
     <Filter Include="Source Files\other">
       <UniqueIdentifier>{1385aa1f-1fbd-4b4e-8359-0c829d801cc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\gui">
+      <UniqueIdentifier>{b7425970-8481-4dc8-af2d-7491b3a0de5e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source Files\thirdparty">
       <UniqueIdentifier>{e72a806d-4fe5-4086-a439-31cdf50b9dcf}</UniqueIdentifier>
     </Filter>
@@ -46,9 +49,6 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="src\helpers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\module\module_manager.cpp">
@@ -129,6 +129,12 @@
     <ClCompile Include="src\thirdparty\imgui\misc\cpp\imgui_stdlib.cpp">
       <Filter>Source Files\thirdparty\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="src\gui\gui.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gui_image.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers.h">
@@ -159,9 +165,6 @@
       <Filter>Source Files\il2cpp\framework</Filter>
     </ClInclude>
     <ClInclude Include="src\helpers.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\module\module_manager.h">
@@ -265,6 +268,12 @@
     </ClInclude>
     <ClInclude Include="src\thirdparty\imgui\misc\cpp\imgui_stdlib.h">
       <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\gui.h">
+      <Filter>Source Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\gui_image.h">
+      <Filter>Source Files\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

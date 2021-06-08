@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "helpers.h"
 #include "skin_changer.h"
+#include "gui/gui_image.h"
 
 #include "thirdparty/imgui/imgui.h"
 

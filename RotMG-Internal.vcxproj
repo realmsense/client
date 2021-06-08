@@ -20,7 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\globals.cpp" />
-    <ClCompile Include="src\gui.cpp" />
+    <ClCompile Include="src\gui\gui.cpp" />
+    <ClCompile Include="src\gui\gui_image.cpp" />
     <ClCompile Include="src\helpers.cpp" />
     <ClCompile Include="src\hooks.cpp" />
     <ClCompile Include="src\il2cpp\framework\il2cpp-init.cpp">
@@ -101,7 +102,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\globals.h" />
-    <ClInclude Include="src\gui.h" />
+    <ClInclude Include="src\gui\gui.h" />
+    <ClInclude Include="src\gui\gui_image.h" />
     <ClInclude Include="src\helpers.h" />
     <ClInclude Include="src\hooks.h" />
     <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions-ptr.h" />
