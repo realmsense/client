@@ -17,9 +17,8 @@ def main():
     logger.setup()
 
     dump_player_skins()
+    dump_player_textiles()
     dump_pet_skins()
-    dump_player_outfits()
-    dump_player_outfits()
     generate_il2cpp_types()
     generate_il2cpp_functions()
 

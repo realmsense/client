@@ -3,12 +3,9 @@
 x64
 enc_temp_folder
 
-src/other/player_skins
-src/other/pet_skins
-src/other/outfits
+src/other/skins
 
 # updater script
 venv
 __pycache__
 updater/output
-updater/output/temp

@@ -39,12 +39,45 @@ def parse_int(str):
     return int(str, base)
 
 
+def generate_byte_arr(file_path: Path):
+    with open(file_path, "rb") as file:
+        data = file.read()
+        bytes = [hex(i) for i in data]
+        bytes_len = len(bytes)
+
+        bytes_str = str(bytes)
+        for char in ["[", "'", "]"]:
+            bytes_str = bytes_str.replace(char, "")
+
+        bytes_str = "{ " + bytes_str + " }"
+
+        return (bytes_str, bytes_len)
+
+
 def strip_non_ascii(string):
     stripped = (c for c in string if 0 < ord(c) < 127)
     return "".join(stripped)
 
 
+def strip_non_alphabetic(string: str, replacement=""):
+    stripped = regex.sub("[^a-zA-Z]", replacement, string)
+    return stripped
+
+
+def number_to_word(number: int, short=False):
+    words = None
+    if not short:
+        words = { 0: "zero", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six", 7: "seven", 8: "eight", 9: "nine" }
+    else:
+        words = { 0: "a", 1: "b", 2: "c", 3: "d", 4: "e", 5: "f", 6: "g", 7: "h", 8: "i", 9: "j" }
+
+    return words[number]
+
+
 def download_file(url, output_file: Path):
+    if output_file.exists():
+        return output_file
+
     logger.log(logging.INFO, f"Downloading {url}")
     response = requests.get(url)
     output_file.write_bytes(response.content)

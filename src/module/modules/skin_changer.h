@@ -29,7 +29,8 @@ private:
 
 struct Skin : GuiImage
 {
-	Skin(std::string name, std::string file_name, int skin_id);
+    Skin(std::string name, std::string file_name, int skin_id);
+    Skin(std::string name, unsigned char* bytes, int bytes_len, int skin_id);
 
 	std::string name;
 	int skin_id;

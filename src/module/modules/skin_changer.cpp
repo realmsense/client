@@ -5,8 +5,19 @@
 
 #include "thirdparty/imgui/imgui.h"
 
+#include "other/skins/player_skins_bytes.h"
+#include "other/skins/player_textiles_bytes.h"
+#include "other/skins/pet_skins_bytes.h"
+
 Skin::Skin(std::string name, std::string file_name, int skin_id)
 	: GuiImage(file_name)
+{
+	this->name = name;
+	this->skin_id = skin_id;
+}
+
+Skin::Skin(std::string name, unsigned char* bytes, int bytes_len, int skin_id)
+	: GuiImage(bytes, bytes_len)
 {
 	this->name = name;
 	this->skin_id = skin_id;
@@ -52,13 +63,15 @@ void SkinChangerModule::renderGUI()
 	static int img_size = 30;
 	ImGui::SliderInt("Icon Size", &img_size, 0, 100);
 
+	// TODO: too much duplicate code, probably have to break it out into multiple functions
+
 	if (ImGui::CollapsingHeader("Player Skin"))
 	{
 		static std::map<ClassList, std::vector<Skin*>> player_skins;
 		static bool init = false;
 		if (!init)
 		{
-			#include "../../other/player_skins.h"
+			#include "other/skins/player_skins_init.h"
 			init = true;
 		}
 
@@ -104,35 +117,31 @@ void SkinChangerModule::renderGUI()
 
 	if (ImGui::CollapsingHeader("Outfit"))
 	{
-		if (ImGui::Button("Reset Small Outfit"))
-			this->small_outfit = -1;
-
+		if (ImGui::Button("Reset Small Outfit")) this->small_outfit = -1;
 		ImGui::SameLine();
-
-		if (ImGui::Button("Reset Large Outfit"))
-			this->large_outfit = -1;
-
-		static std::vector<Skin*> player_outfits;
+		if (ImGui::Button("Reset Large Outfit")) this->large_outfit = -1;
+	
+		static std::vector<Skin*> player_textiles;
 		static bool init = false;
 		if (!init)
 		{
-			#include "../../other/player_outfits.h"
+			#include "other/skins/player_textiles_init.h"
 			init = true;
 		}
-
-		for (int i = 0; i < player_outfits.size(); i++)
+	
+		for (int i = 0; i < player_textiles.size(); i++)
 		{
-			Skin* skin = player_outfits[i];
+			Skin* skin = player_textiles[i];
 			void* texture_id = (void*)skin->load();
 			if (!texture_id) continue;
-
+	
 			if (ImGui::ImageButton(texture_id, ImVec2((float)img_size, (float)img_size)))
 			{
 				if (skin->name.rfind("Small") == 0)
 				{
 					this->small_outfit = skin->skin_id;
 					this->log << "Changed Small Outfit to " << skin->name << " (" << skin->skin_id << ")" << std::endl;
-
+	
 				}
 				else if (skin->name.rfind("Large") == 0)
 				{
@@ -144,10 +153,10 @@ void SkinChangerModule::renderGUI()
 					this->log.floatingText(Color32_BLUE);
 					this->log << "Unknown outfit selected!" << std::endl;
 				}
-
+	
 				this->setEnabled(true);
 			}
-
+	
 			if (ImGui::IsItemHovered())
 			{
 				ImGui::BeginTooltip();
@@ -156,8 +165,8 @@ void SkinChangerModule::renderGUI()
 				ImGui::PopTextWrapPos();
 				ImGui::EndTooltip();
 			}
-
-			GUI_WrapInLoop(i, (int)player_outfits.size());
+	
+			GUI_WrapInLoop(i, (int)player_textiles.size());
 		}
 	}
 
@@ -168,10 +177,10 @@ void SkinChangerModule::renderGUI()
 		static bool init = false;
 		if (!init)
 		{
-			#include "../../other/pet_skins.h"
+			#include "other/skins/pet_skins_init.h"
 			init = true;
 		}
-
+	
 		const char* pet_families[] = { "Any", "Aquatic", "Automation", "Avian", "Canine", "Exotic", "Farm", "Feline", "Humanoid", "Insect", "Penguin", "Reptile", "Spooky", "Woodland", "? ? ? ?" };
 		static PetFamily current_family = PetFamily(0);
 		for (int i = 0; i < (int)PetFamily::Count; i++)
@@ -181,10 +190,10 @@ void SkinChangerModule::renderGUI()
 			{
 				current_family = PetFamily(i);
 			}
-
+	
 			GUI_WrapInLoop(i, (int)PetFamily::Count);
 		}
-
+	
 		const char* pet_rarities[] = { "Common", "Uncommon", "Rare", "Legendary", "Divine" };
 		static PetRarity current_rarity = PetRarity(0);
 		for (auto x : pet_skins[current_family])
@@ -193,20 +202,20 @@ void SkinChangerModule::renderGUI()
 			const char* rarity_name = pet_rarities[(int)rarity];
 			 
 			ImGui::Text(rarity_name);
-
+	
 			for (int i = 0; i < x.second.size(); i++)
 			{
 				Skin* skin = x.second[i];
 				void* texture_id = (void*)skin->load();
 				if (!texture_id) continue;
-
+	
 				if (ImGui::ImageButton(texture_id, ImVec2((float)img_size, (float)img_size)))
 				{
 					this->changePetSkin(skin->skin_id);
 					this->log << "Changed Pet Skin to " << skin->name << " (" << skin->skin_id << ")" << std::endl;
 					this->setEnabled(true);
 				}
-
+	
 				if (ImGui::IsItemHovered())
 				{
 					ImGui::BeginTooltip();
@@ -215,7 +224,7 @@ void SkinChangerModule::renderGUI()
 					ImGui::PopTextWrapPos();
 					ImGui::EndTooltip();
 				}
-
+	
 				GUI_WrapInLoop(i, (int)x.second.size());
 			}
 		}

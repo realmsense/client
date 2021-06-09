@@ -1,30 +1,37 @@
 import xml.etree.ElementTree as ET
 import threading
-import shutil
+import re as regex
+from typing import TypedDict
 
 from classes import *
-from functions import *
+from functions.helpers import delete_dir_contents, download_file, extract_animated_sprite, extract_from_image, generate_byte_arr, number_to_word, parse_int, read_json, resize_image, resize_repeat_image, strip_non_alphabetic
+
+class Skin(TypedDict):
+    name: str
+    file: Path
+    variable_name: str
+    category: str
+    category2: str
+    skin_id: int
+
 
 def dump_player_skins():
 
     logger.log(logging.INFO, "Dumping player skins...")
     IndentFilter.level += 1
 
-    PLAYER_SKINS_DIR = ROOT_DIR / "../src/other/player_skins"
-    delete_dir_contents(PLAYER_SKINS_DIR)
-
     spritesheet_file = download_file(SPRITESHEET_URL, TEMP_DIR / "spritesheet.json")
     spritesheet_img = download_file(CHARACTERS_IMG_URL, TEMP_DIR / "characters.png")
     skins_xml = download_file(SKINS_XML_URL, TEMP_DIR / "skins.xml")
-
     spritesheet_json = read_json(spritesheet_file)
 
-    cpp_skins = {}
-    for class_name in CLASS_LIST.values():
-        cpp_skins[class_name] = []
+    PLAYER_SKINS_DIR = TEMP_DIR / "player_skins"
+    delete_dir_contents(PLAYER_SKINS_DIR)
 
-    logger.log(logging.INFO, "Outputting png files...")
+    skins: list[Skin] = []
+    threads: list[threading.Thread] = []
 
+    logger.log(logging.INFO, "Parsing xml")
     tree = ET.parse(skins_xml)
     for object in tree.getroot():
         name = object.get("id")
@@ -33,53 +40,82 @@ def dump_player_skins():
         sprite_name = object.find("AnimatedTexture/File").text
         sprite_index = object.find("AnimatedTexture/Index").text
 
-        class_name = CLASS_LIST[class_id]
-        file_name = strip_non_ascii(name).lower().replace("-", " ").replace(" ", "_") + ".png"
+        variable_name = strip_non_alphabetic(name).lower()
+        file_name = variable_name + ".png"
         output_file = PLAYER_SKINS_DIR / file_name
-        
-        # extract_animated_sprite(output_file, spritesheet_json, spritesheet_img, sprite_name, sprite_index)
+
+        class_name = CLASS_LIST[class_id]
+
+        skin: Skin = {
+            "name": name,
+            "file": output_file,
+            "category": class_name,
+            "variable_name": variable_name,
+            "skin_id": type
+        }
+
+        skins.append(skin)
+
         thread = threading.Thread(target=extract_animated_sprite, args=(output_file, spritesheet_json, spritesheet_img, sprite_name, sprite_index))
+        threads.append(thread)
+
+    logger.log(logging.INFO, f"Dumping {len(threads)} png files")
+    for thread in threads: # start all threads
         thread.start()
+    for thread in threads: # wait for all threads to complete
+        thread.join()
 
-        cpp_skin_file = str(output_file).replace("\\", "\\\\") # TODO: use resource to pack in dll
-        cpp_skin_str = f'player_skins[ClassList::{class_name}].push_back(new Skin("{name}", "{cpp_skin_file}", {type}));'
-        cpp_skins[class_name].append(cpp_skin_str)
+    logger.log(logging.INFO, "Generating header")
+    bytes_lines = []
+    init_lines = []
+    for skin in skins:
+        bytes_str, bytes_len = generate_byte_arr(skin["file"])
 
-    logger.log(logging.INFO, "Writing to player_skins.h...")
+        bytes_line = f"unsigned char {skin['variable_name']}[] = {bytes_str};"
+        if not bytes_line in bytes_lines:
+            bytes_lines.append(bytes_line)
+            
+        init_lines.append(f'player_skins[ClassList::{skin["category"]}].push_back(new Skin("{skin["name"]}", {skin["variable_name"]}, {bytes_len}, {skin["skin_id"]}));')
 
-    lines = []
-    for class_name, skins in cpp_skins.items():
-        lines.append(f"// {class_name}")
-        for skin in skins:
-            lines.append(skin)
-        lines.append("")
+    logger.log(logging.INFO, "Writing to player_skins_init.h...")
+    init_h = ROOT_DIR / "../src/other/skins/player_skins_init.h"
+    init_h.write_text("\n".join(init_lines))
 
-    player_skins_h = ROOT_DIR / "../src/other/player_skins.h"
-    player_skins_h.write_text("\n".join(lines))
+    logger.log(logging.INFO, "Writing to player_skins_bytes.h...")
+    bytes_h = ROOT_DIR / "../src/other/skins/player_skins_bytes.h"
+    bytes_h.write_text("\n".join(bytes_lines))
 
     logger.log(logging.INFO, "Done")
     IndentFilter.level -= 1
 
 
-def dump_player_outfits():
+def dump_player_textiles():
 
-    # RotMG doesn't store dyes/textiles textures in the xml
-    # For textiles we need to extract all the sprites in the "textileWxH" spritesheet. (w = width, h = height)
-    # (see below how rotmg uses the <Tex1/2> attribute for textiles)
-    # For Dyes, there's no sprite because it's just a solid color.
-    # E.g.: 0x01F0F8FF = #f0f8ff (idk what the 0x01 is)
+    # For textiles:
+    # The same sprite is applied to multiple things,( player skin, small/large textile frames, etc) so it makes sense there isn't duplicate images for each of these things.
+    # The Tex attribute is formatted like so: 0x9000001
+    # Where 9 is the width of the sprite, and 1 is the index in the spritesheet.
+    # So we must first parse textiles.xml to get a list of all textiles with their name + tex attribute
+    # Then, we can iterate the textile spritesheets and create the Tex (sprite[width] + sprite[index]) to match the xml -> sprite
 
-    PLAYER_OUTFITS_DIR = ROOT_DIR / "../src/other/player_outfits"
-    delete_dir_contents(PLAYER_OUTFITS_DIR)
+    # For dyes:
+    # There's no sprite, because dyes are just a solid color
+    # Tex: 0x01F0F8FF 
+    # 0x01 + F0F8FF= #f0f8ff
+    # no use extracting these, we can /probably/ just set the player's color to anything using a color picker
+
+    logger.log(logging.INFO, "Dumping player textiles...")
+    IndentFilter.level += 1
+
+    PLAYER_TEXTILES_DIR = TEMP_DIR / "player_textiles"
+    delete_dir_contents(PLAYER_TEXTILES_DIR)
 
     spritesheet_file = download_file(SPRITESHEET_URL, TEMP_DIR / "spritesheet.json")
     spritesheet_img = download_file(MAPOBJECTS_IMG_URL, TEMP_DIR / "mapObjects.png")
+    textiles_xml = download_file(TEXTILES_XML_URL, TEMP_DIR / "textiles.xml")
     spritesheet_json = read_json(spritesheet_file)
 
-    cpp_lines = []
-
-    textiles_xml = download_file(TEXTILES_XML_URL, TEMP_DIR / "textiles.xml")
-    textiles = []
+    textiles: list[Skin] = []
     for object in ET.parse(textiles_xml).getroot():
         name = object.get("id")
         tex1 = object.find("Tex1")
@@ -91,51 +127,79 @@ def dump_player_outfits():
         else:
             tex = tex2.text
 
-        textiles.append({"name": name, "tex": tex})
-        file = PLAYER_OUTFITS_DIR / (tex + ".png")
-        cpp_file = str(file).replace("\\", "\\\\")
-        cpp_str = f'player_outfits.push_back(new Skin("{name}", "{cpp_file}", {tex}));'
-        cpp_lines.append(cpp_str)
+        variable_name = ""
+        for char in str(parse_int(tex)):
+            variable_name += number_to_word(int(char), True)
 
-    # Textiles - Extract images
+        file_name = variable_name + ".png"
+        output_file = PLAYER_TEXTILES_DIR / file_name
+
+        textile: Skin = {
+            "name": name,
+            "file": output_file,
+            # "category": "", # could do large/small, would allow us to change sizing in imgui 
+            "variable_name": variable_name,
+            "skin_id": tex
+        }
+        textiles.append(textile)
+
+    threads: list[threading.Thread] = []
     for sprite in spritesheet_json["sprites"]:
         if not sprite["spriteSheetName"].startswith("textile"):
             continue
 
-        sprite_index = sprite["index"]
         pos = sprite["position"]
         spritesheet_name = sprite["spriteSheetName"]
         
-        # build the tex1/tex2: 0x9000001
-        # 0x9 is the width of the textile, last digit is the index of the file from the spritesheet.
+        # build the Tex attribute, see top comment
         width = regex.search("textile(\d+)x", spritesheet_name).group(1)
-        # name = "0x" + hex(int(width)) 
-        name = hex(int(width))
-        name = name.ljust(9, "0")   # 0x9000000
-        name = int(name, 0)
-        name += sprite["index"]     # add index
-        name = hex(name)            # convert back to hex string, 0x9000001
+        tex = hex(int(width))
+        tex = tex.ljust(9, "0")     # 0x9000000
+        tex = int(tex, 0)
+        tex += sprite["index"]      # add index
+        tex = hex(tex)              # convert back to hex string, 0x9000001
 
-        file_name = name + ".png"
-        output_file = PLAYER_OUTFITS_DIR / file_name
-        
-        exists = any(x for x in textiles if x["tex"] == name)
+        exists = any(x for x in textiles if x["skin_id"] == tex)
         if not exists:
             continue
 
-        # extract_textile_thread(spritesheet_img, output_file, pos)
+        variable_name = ""
+        for char in str(parse_int(tex)):
+            variable_name += number_to_word(int(char), True)
+
+        file_name = variable_name + ".png"
+        output_file = PLAYER_TEXTILES_DIR / file_name
         thread = threading.Thread(target=extract_textile_thread, args=(spritesheet_img, output_file, pos))
+        threads.append(thread)
+
+    logger.log(logging.INFO, f"Dumping {len(threads)} png files")
+    for thread in threads: # start all threads
         thread.start()
+    for thread in threads: # wait for all threads to complete
+        thread.join()
 
-    # Extract Dyes
+    logger.log(logging.INFO, "Generating header")
+    bytes_lines = []
+    init_lines = []
+    for textile in textiles:
+        bytes_str, bytes_len = generate_byte_arr(textile["file"])
 
+        bytes_line = f"unsigned char {textile['variable_name']}[] = {bytes_str};"
+        if not bytes_line in bytes_lines:
+            bytes_lines.append(f"unsigned char {textile['variable_name']}[] = {bytes_str};")
 
-        # large_outfits.push_back(new Skin(name, file, type))
-        # cpp_skin_str = f'player_skins[ClassList::{class_name}].push_back(new Skin("{name}", "{cpp_skin_file}", {type}));'
+        init_lines.append(f'player_textiles.push_back(new Skin("{textile["name"]}", {textile["variable_name"]}, {bytes_len}, {textile["skin_id"]}));')
 
-    # Output Header
-    outfits_h = ROOT_DIR / "../src/other/player_outfits.h"
-    outfits_h.write_text("\n".join(cpp_lines))
+    logger.log(logging.INFO, "Writing to player_textiles_init.h...")
+    init_h = ROOT_DIR / "../src/other/skins/player_textiles_init.h"
+    init_h.write_text("\n".join(init_lines))
+
+    logger.log(logging.INFO, "Writing to player_textiles_bytes.h...")
+    bytes_h = ROOT_DIR / "../src/other/skins/player_textiles_bytes.h"
+    bytes_h.write_text("\n".join(bytes_lines))
+
+    logger.log(logging.INFO, "Done")
+    IndentFilter.level -= 1
 
 
 def extract_textile_thread(spritesheet_img, output_file, pos):
@@ -149,18 +213,18 @@ def dump_pet_skins():
     logger.log(logging.INFO, "Dumping pet skins...")
     IndentFilter.level += 1
 
-    PET_SKINS_DIR = ROOT_DIR / "../src/other/pet_skins"
+    PET_SKINS_DIR = TEMP_DIR / "pet_skins"
     delete_dir_contents(PET_SKINS_DIR)
 
     spritesheet_file = download_file(SPRITESHEET_URL, TEMP_DIR / "spritesheet.json")
     spritesheet_img = download_file(CHARACTERS_IMG_URL, TEMP_DIR / "characters.png")
     pets_xml = download_file(PETS_XML_URL, TEMP_DIR / "pets.xml")
-
     spritesheet_json = read_json(spritesheet_file)
 
-    cpp_skins = {} # [family]: { [rarity]: str[] }
+    skins: list[Skin] = []
+    threads: list[threading.Thread] = []
 
-    logger.log(logging.INFO, "Outputting png files...")
+    logger.log(logging.INFO, "Parsing xml")
     tree = ET.parse(pets_xml)
     for object in tree.getroot():
 
@@ -182,36 +246,49 @@ def dump_pet_skins():
         elif family.text == "? ? ? ?": family = "Question"
         else: family = family.text
 
-        file_name = strip_non_ascii(name).lower().replace("?", "").replace("'", "").replace(" ", "_") + ".png"
+        variable_name = strip_non_alphabetic(name).lower()
+        file_name = variable_name + ".png"
         output_file = PET_SKINS_DIR / file_name
 
-        cpp_skin_file = str(output_file).replace("\\", "\\\\") # TODO: use resource to pack in dll
-
-        # extract_animated_sprite(output_file, spritesheet_json, spritesheet_img, sprite_name, sprite_index)
         thread = threading.Thread(target=extract_animated_sprite, args=(output_file, spritesheet_json, spritesheet_img, sprite_name, sprite_index, 33))
+        threads.append(thread)
+
+        skin: Skin = {
+            "name": name,
+            "file": output_file,
+            "category": family,
+            "category2": rarity,
+            "variable_name": variable_name,
+            "skin_id": type
+        }
+
+        skins.append(skin)
+
+    logger.log(logging.INFO, f"Dumping {len(threads)} png files")
+    for thread in threads: # start all threads
         thread.start()
+    for thread in threads: # wait for all threads to complete
+        thread.join()
 
-        if cpp_skins.get(family) is None:
-            cpp_skins[family] = {}
-        if cpp_skins[family].get(rarity) is None:
-            cpp_skins[family][rarity] = []
+    logger.log(logging.INFO, "Generating header")
+    bytes_lines = []
+    init_lines = []
+    for skin in skins:
+        bytes_str, bytes_len = generate_byte_arr(skin["file"])
 
-        cpp_skin_str = f'pet_skins[PetFamily::{family}][PetRarity::{rarity}].push_back(new Skin("{name}", "{cpp_skin_file}", {type}));'
-        cpp_skins[family][rarity].append(cpp_skin_str)
+        bytes_line = f"unsigned char {skin['variable_name']}[] = {bytes_str};"
+        if not bytes_line in bytes_lines:
+            bytes_lines.append(bytes_line)
 
-    logger.log(logging.INFO, "Writing to pet_skins.h")
+        init_lines.append(f'pet_skins[PetFamily::{skin["category"]}][PetRarity::{skin["category2"]}].push_back(new Skin("{skin["name"]}", {skin["variable_name"]}, {bytes_len}, {skin["skin_id"]}));')
 
-    lines = []
-    for family, rarity_list in cpp_skins.items():
-        lines.append(f"// {family}")
-        for rarity, skins in rarity_list.items():
-            lines.append(f"/* {rarity} */")
-            for skin in skins:
-                lines.append(skin)
-        lines.append("")
+    logger.log(logging.INFO, "Writing to pet_skins_init.h...")
+    init_h = ROOT_DIR / "../src/other/skins/pet_skins_init.h"
+    init_h.write_text("\n".join(init_lines))
 
-    pet_skins_h = ROOT_DIR / "../src/other/pet_skins.h"
-    pet_skins_h.write_text("\n".join(lines))
+    logger.log(logging.INFO, "Writing to pet_skins_bytes.h...")
+    bytes_h = ROOT_DIR / "../src/other/skins/pet_skins_bytes.h"
+    bytes_h.write_text("\n".join(bytes_lines))
 
     logger.log(logging.INFO, "Done")
     IndentFilter.level -= 1
