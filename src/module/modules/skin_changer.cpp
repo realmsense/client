@@ -36,6 +36,7 @@ SkinChangerModule::SkinChangerModule()
 	this->player_skin_id = -1;
 	this->large_outfit = -1;
 	this->small_outfit = -1;
+	this->rainbow_oufit = false;
 	this->pet_skin_id = -1;
 
 	this->ready();
@@ -117,10 +118,50 @@ void SkinChangerModule::renderGUI()
 
 	if (ImGui::CollapsingHeader("Outfit"))
 	{
-		if (ImGui::Button("Reset Small Outfit")) this->small_outfit = -1;
+		if (ImGui::Button("Reset Small Outfit"))
+		{
+			this->small_outfit = 0x0;
+			this->setEnabled(true);
+		}
+
 		ImGui::SameLine();
-		if (ImGui::Button("Reset Large Outfit")) this->large_outfit = -1;
+
+		if (ImGui::Button("Reset Large Outfit"))
+		{
+			this->large_outfit = 0x0;
+			this->setEnabled(true);
+		}
 	
+		ImGuiColorEditFlags coloredit_flags = ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_DisplayRGB;
+
+		static float small_dye[3];
+		if (ImGui::ColorEdit3("Small Dye", small_dye, coloredit_flags))
+		{
+			this->small_outfit = this->RGBToDye(small_dye);
+			this->setEnabled(true);
+		}
+
+		ImGui::SameLine();
+
+		static float large_dye[3];
+		if (ImGui::ColorEdit3("Large Dye", large_dye, coloredit_flags))
+		{
+			this->large_outfit = this->RGBToDye(large_dye);
+			this->setEnabled(true);
+		}
+
+		ImGui::SameLine();
+
+		if (ImGui::Checkbox("Rainbow Outfit", &this->rainbow_oufit))
+		{
+			if (!this->rainbow_oufit)
+			{
+				this->small_outfit = 0x0;
+				this->large_outfit = 0x0;
+			}
+			this->setEnabled(true);
+		}
+
 		static std::vector<Skin*> player_textiles;
 		static bool init = false;
 		if (!init)
@@ -231,6 +272,16 @@ void SkinChangerModule::renderGUI()
 	}
 }
 
+unsigned int SkinChangerModule::RGBToDye(float color[3])
+{
+	int r = (int)(color[0] * 255);
+	int g = (int)(color[1] * 255);
+	int b = (int)(color[2] * 255);
+
+	unsigned int hex = (0x01 << 24) | (r << 16) | (g << 8) | b;
+	return hex;
+}
+
 void SkinChangerModule::onMapChange()
 {
 	if (Player* player = GetPlayer())
@@ -243,6 +294,24 @@ void SkinChangerModule::onMapChange()
 
 	if (this->pet_skin_id != -1)
 		this->changePetSkin(this->pet_skin_id);
+}
+
+void SkinChangerModule::onMainLoop()
+{
+	if (!this->enabled) return;
+
+	if (this->rainbow_oufit)
+	{
+		static float hue = 1.0f;
+		static float speed = 0.0035f;
+		hue += speed;
+		if (hue > 360.0f) hue = 1.0f;
+		ImVec4 rainbow = (ImVec4)(ImColor)ImColor::HSV(hue, 1.0f, 1.0f);
+
+		float color[3] = { rainbow.x, rainbow.y, rainbow.z };
+		this->small_outfit = RGBToDye(color);
+		this->large_outfit = RGBToDye(color);
+	}
 }
 
 void SkinChangerModule::onSpriteShader_UpdateMask(app::SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth)

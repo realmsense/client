@@ -13,18 +13,25 @@ public:
 	void renderGUI() override;
 
     void onMapChange() override;
+    void onMainLoop() override;
     void onSpriteShader_UpdateMask(app::SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth) override;
 
 private:
-	int player_skin_id;
-    int old_player_skin_id;
+
     int large_outfit;
     int small_outfit;
+    bool rainbow_oufit;
 
     app::Pet* pet;
     int pet_skin_id;
     void changePetSkin(int skin_id);
+
+    int player_skin_id;
+    int old_player_skin_id;
     void changePlayerSkin(int skin_id);
+
+    // Convert an RGB color to the Tex value used for dyes (0x1 << r << g << b)
+    unsigned int RGBToDye(float color[3]);
 };
 
 struct Skin : GuiImage
@@ -36,7 +43,6 @@ struct Skin : GuiImage
 	int skin_id;
 };
 
-// TODO: move to a separate file for custom struct includes. we can #define Color32 there to
 enum class ClassList
 {
     Any,
