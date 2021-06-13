@@ -60,7 +60,7 @@ bool InitHooks()
 {
 	bool ret = true;
 	uintptr_t baseAddress = GetBaseAddress();
-	std::cout << "GameAssembly.dll at " << std::hex << baseAddress << std::endl;
+	std::cout << "GameAssembly.dll at " << std::hex << baseAddress << std::dec << std::endl;
 
 	if (MH_CreateHook(MapViewService_CheckTileWalkable, Detour_MapViewService_CheckTileWalkable, reinterpret_cast<LPVOID*>(&Original_MapViewService_CheckTileWalkable)) != MH_OK)
 	{
