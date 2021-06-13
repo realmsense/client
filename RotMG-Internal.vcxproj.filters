@@ -135,6 +135,9 @@
     <ClCompile Include="src\gui\gui_image.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\modules\autonexus.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers.h">
@@ -274,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="src\gui\gui_image.h">
       <Filter>Source Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\autonexus.h">
+      <Filter>Source Files\module\modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

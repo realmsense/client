@@ -13,6 +13,7 @@ enum class ModuleList
 {
 	Noclip,
     AutoAim,
+    AutoNexus,
     Debug,
     SkinChanger,
     CameraSettings,

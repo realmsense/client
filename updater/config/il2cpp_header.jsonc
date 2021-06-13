@@ -44,7 +44,8 @@
         ["SettingsManager_GetKeyCode", "SettingsManager_GetKeyCode"],
         ["Input_GetKey", "Input_GetKey"],
         ["InputManager_set_AutoFire", "InputManager_set_AutoFire"],
-        ["SpriteShader_UpdateMask", "SpriteShader_UpdateMask"]
+        ["SpriteShader_UpdateMask", "SpriteShader_UpdateMask"],
+        ["DKMLMKFGPCC_MNNGGOHMENI", "MapViewService_Nexus"]
     ],
     "enums": [
         ["Allocator", "Allocator__Enum"],
