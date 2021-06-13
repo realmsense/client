@@ -9,7 +9,7 @@ TEMP_DIR        = OUTPUT_DIR / "temp"
 
 
 ### Urls
-CURRENT_CLIENT_URL = "https://rotmg.extacy.cc/production/client/current/"
+CURRENT_CLIENT_URL = "https://rotmg.extacy.cc/builds/production/client/current/"
 
 IL2CPP_FUNCTIONS_URL     = CURRENT_CLIENT_URL + "il2cpp_dump/cpp/appdata/il2cpp-functions.h"
 IL2CPP_API_FUNCTIONS_URL = CURRENT_CLIENT_URL + "il2cpp_dump/cpp/appdata/il2cpp-api-functions-ptr.h"
