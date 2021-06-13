@@ -1439,7 +1439,7 @@ struct MapObject__Fields {
     bool HCPADPBCLAE;
     int32_t ENPPCKKNLKM;
     int32_t max_hp;
-    int32_t DPPBIPLPHJB;
+    int32_t hp;
     bool OCOMOLCKIMN;
     bool IACPCCIMDAD;
     bool GEKMCEOBGEO;

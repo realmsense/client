@@ -286,9 +286,19 @@
             "props": { 
                 "__Fields": [
                     ["PHNLNOOLAIO", "skin_id"],
-                    ["LOBGNENJGPK", "defense"],
+                    ["FBLOKBOPOOC", "invulnerable"],
+
                     ["JLECINIONGJ", "max_hp"],
-                    ["FBLOKBOPOOC", "invulnerable"]
+                    ["DPPBIPLPHJB", "hp"],
+                    ["OPAKKHFJCPG", "max_mp"],
+                    ["EBOMCCHKMDG", "mp"],
+                    
+                    ["HJBCGDPGDKC", "attack"],
+                    ["LOBGNENJGPK", "defense"],
+                    ["POIGCBNJFGI", "speed"],
+                    ["IEMNCCPAMML", "dexterity"],
+                    ["OKHDFNLCLDB", "vitality"],
+                    ["GHIJMFHMMBN", "wisdom"]
                 ] 
             }
         },
