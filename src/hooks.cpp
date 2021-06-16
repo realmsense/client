@@ -56,6 +56,17 @@ void Detour_SpriteShader_UpdateMask(SpriteShader* __this, CGPOGAAKLFL* DLNMEAOOH
 	return Original_SpriteShader_UpdateMask(__this, DLNMEAOOHKA, large_cloth, small_cloth, nullptr);
 }
 
+
+bool Detour_ChatFilter_Validate(ChatFilter* __this, String* message, MethodInfo* method)
+{
+	bool filter = Original_ChatFilter_Validate(__this, message, method);
+
+	for (Module* module : ModuleManager::modules)
+		module->onChatFilterValidate(filter);
+
+	return filter;
+}
+
 bool InitHooks()
 {
 	bool ret = true;
@@ -84,6 +95,12 @@ bool InitHooks()
 	if (MH_CreateHook(SpriteShader_UpdateMask, Detour_SpriteShader_UpdateMask, reinterpret_cast<LPVOID*>(&Original_SpriteShader_UpdateMask)) != MH_OK)
 	{
 		std::cout << "Failed to Detour SpriteShader_UpdateMask" << std::endl;
+		ret = false;
+	}
+
+	if (MH_CreateHook(ChatFilter_Validate, Detour_ChatFilter_Validate, reinterpret_cast<LPVOID*>(&Original_ChatFilter_Validate)) != MH_OK)
+	{
+		std::cout << "Failed to Detour ChatFilter_Validate" << std::endl;
 		ret = false;
 	}
 

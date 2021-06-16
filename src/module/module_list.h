@@ -6,4 +6,5 @@
 #include "modules/skin_changer.h"
 #include "modules/camera_settings.h"
 #include "modules/name_change.h"
+#include "modules/disable_chat_filter.h"
 #include "modules/debug.h"

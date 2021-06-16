@@ -15,6 +15,7 @@ namespace ModuleManager
 		modules.push_back(new SkinChangerModule());
 		modules.push_back(new CameraSettingsModule());
 		modules.push_back(new NameChangeModule());
+		modules.push_back(new DisableChatFilterModule());
 		modules.push_back(new DebugModule());
 	}
 

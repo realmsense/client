@@ -34,6 +34,7 @@
     <ClCompile Include="src\module\modules\autonexus.cpp" />
     <ClCompile Include="src\module\modules\camera_settings.cpp" />
     <ClCompile Include="src\module\modules\debug.cpp" />
+    <ClCompile Include="src\module\modules\disable_chat_filter.cpp" />
     <ClCompile Include="src\module\modules\example.cpp" />
     <ClCompile Include="src\module\modules\name_change.cpp" />
     <ClCompile Include="src\module\modules\noclip.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="src\module\modules\autonexus.h" />
     <ClInclude Include="src\module\modules\camera_settings.h" />
     <ClInclude Include="src\module\modules\debug.h" />
+    <ClInclude Include="src\module\modules\disable_chat_filter.h" />
     <ClInclude Include="src\module\modules\example.h" />
     <ClInclude Include="src\module\modules\name_change.h" />
     <ClInclude Include="src\module\modules\noclip.h" />

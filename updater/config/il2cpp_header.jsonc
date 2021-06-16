@@ -16,7 +16,8 @@
         ["COEDKELBKMI", "Character"],
         ["LAAIPMHLFJN", "MapObject"],
         ["GJLIMCBOCJG", "BasicObject"],
-        ["PIPCAMDKBDA", "ChatSlot"]
+        ["PIPCAMDKBDA", "ChatSlot"],
+        ["DAOINPHCAEG", "ChatFilter"]
     ],
     "functions": [
         ["Type_GetType_2", "Type_GetType"],
@@ -45,7 +46,8 @@
         ["Input_GetKey", "Input_GetKey"],
         ["InputManager_set_AutoFire", "InputManager_set_AutoFire"],
         ["SpriteShader_UpdateMask", "SpriteShader_UpdateMask"],
-        ["DKMLMKFGPCC_MNNGGOHMENI", "MapViewService_Nexus"]
+        ["DKMLMKFGPCC_MNNGGOHMENI", "MapViewService_Nexus"],
+        ["DAOINPHCAEG_GBGPMMIJCCF", "ChatFilter_Validate"]
     ],
     "enums": [
         ["Allocator", "Allocator__Enum"],
@@ -135,6 +137,7 @@
         { "name": "SpriteShader",       "props": { "__Fields": [ ] } },
         { "name": "CharacterInfo",      "props": { "__Fields": [ ] } },
         { "name": "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_",   "props": { "__Fields": [ ] } },
+        { "name": "DAOINPHCAEG",        "props": { "__Fields": [ ] } },
 
         {
             "name": "ApplicationManager",

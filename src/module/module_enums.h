@@ -18,6 +18,7 @@ enum class ModuleList
     SkinChanger,
     CameraSettings,
     NameChange,
+    DisableChatFilter,
     Count
 };
 

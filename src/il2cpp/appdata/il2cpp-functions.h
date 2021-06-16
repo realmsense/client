@@ -25,3 +25,4 @@ DO_APP_FUNC(0x013016C0, void, MapViewService_Nexus, (MapViewService * __this, Me
 DO_APP_FUNC(0x01301FA0, bool, MapViewService_CheckTileWalkable, (MapViewService * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method));
 DO_APP_FUNC(0x01960AE0, void, InputManager_set_AutoFire, (InputManager * __this, bool GKLFNLCLLGM, MethodInfo * method));
 DO_APP_FUNC(0x01591DE0, void, MapObjectUIManager_ShowFloatingText, (MapObjectUIManager * __this, FloatingTextType DBMPDNFHFNL, String * OBEFKMANGCK, Nullable_1_UnityEngine_Color32_ HNDHLEHECGE, float MPNAHCHFHMD, MethodInfo * method));
+DO_APP_FUNC(0x02D85480, bool, ChatFilter_Validate, (ChatFilter * __this, String * DCGGIEJHCEC, MethodInfo * method));

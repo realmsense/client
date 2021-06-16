@@ -2537,6 +2537,17 @@ struct ChatManager {
     struct ChatManager__Fields fields;
 };
 
+struct __declspec(align(8)) ChatFilter__Fields {
+    struct String__Array *OOPGGDLNJHB;
+    struct Regex *HJLCLEMMGHD;
+};
+
+struct ChatFilter {
+    struct ChatFilter__Class *klass;
+    MonitorData *monitor;
+    struct ChatFilter__Fields fields;
+};
+
 struct SettingsManager__Fields {
     struct MonoBehaviour__Fields _;
     bool JOFMCOFEDJP;
