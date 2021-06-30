@@ -20,34 +20,118 @@
         ["DAOINPHCAEG", "ChatFilter"]
     ],
     "functions": [
-        ["Type_GetType_2", "Type_GetType"],
-        ["Camera_get_orthographicSize", "Camera_get_orthographicSize"],
-        ["Camera_set_orthographicSize", "Camera_set_orthographicSize"],
-        ["Camera_WorldToScreenPoint_1", "Camera_WorldToScreenPoint"],
-        ["Camera_ScreenToWorldPoint_1", "Camera_ScreenToWorldPoint"],
-        ["Behaviour_set_enabled", "Behaviour_set_enabled"],
-        ["Component_1_get_transform", "Component_get_transform"],
-        ["Component_1_get_gameObject", "Component_get_gameObject"],
-        ["Object_1_FindObjectOfType", "Object_FindObjectOfType"],
-        ["GameObject_SetActive", "GameObject_SetActive"],
-        ["Transform_get_position", "Transform_get_position"],
-        ["Transform_get_localPosition", "Transform_get_localPosition"],
-        ["GJLIMCBOCJG_GPIMPPOPDJO", "BasicObject_Init"],
-        ["DAFEAHGLBGL_KOBJNFBMICI", "Pet_ChangeSkin"],
-        ["JFNHHLNJJKP_GBHNOKKCMJA", "Player_Shoot"],
-        ["ApplicationManager_get_MapViewService", "ApplicationManager_get_MapViewService"],
-        ["DKMLMKFGPCC_NAGLHCDBGIM", "MapViewService_CheckTileWalkable"],
-        ["MapObjectUIManager_ShowFloatingText", "MapObjectUIManager_ShowFloatingText"],
-        ["ChatManager_AddSlot", "ChatManager_AddSlot"],
-        ["ChatManager_GetChatMessage", "ChatManager_GetChatMessage"],
-        ["TMP_Text_SetText", "TMP_Text_SetText"],
-        ["TMP_Text_set_color", "TMP_Text_set_color"],
-        ["SettingsManager_GetKeyCode", "SettingsManager_GetKeyCode"],
-        ["Input_GetKey", "Input_GetKey"],
-        ["InputManager_set_AutoFire", "InputManager_set_AutoFire"],
-        ["SpriteShader_UpdateMask", "SpriteShader_UpdateMask"],
-        ["DKMLMKFGPCC_MNNGGOHMENI", "MapViewService_Nexus"],
-        ["DAOINPHCAEG_GBGPMMIJCCF", "ChatFilter_Validate"]
+        {
+            "name": ["Type_GetType", "Type_GetType"],
+            "typedef": "(String * typeName, MethodInfo * method)"
+        },
+        {
+            "name": ["Camera_get_orthographicSize", "Camera_get_orthographicSize"],
+            "typedef": "(Camera * __this, MethodInfo * method)"
+        },
+        {
+            "name": ["Camera_set_orthographicSize", "Camera_set_orthographicSize"],
+            "typedef": "(Camera * __this, float value, MethodInfo * method)"
+        },
+        {
+            "name": ["Camera_WorldToScreenPoint", "Camera_WorldToScreenPoint"],
+            "typedef": "(Camera * __this, Vector3 position, MethodInfo * method)"
+        },
+        {
+            "name": ["Camera_ScreenToWorldPoint", "Camera_ScreenToWorldPoint"],
+            "typedef": "(Camera * __this, Vector3 position, MethodInfo * method)"
+        },
+        {
+            "name": ["Behaviour_set_enabled", "Behaviour_set_enabled"],
+            "typedef": "(Behaviour * __this, bool value, MethodInfo * method)"
+        },
+        {
+            "name": ["Component_1_get_transform", "Component_get_transform"],
+            "typedef": "(Component_1 * __this, MethodInfo * method)"
+        },
+        {
+            "name": ["Component_1_get_gameObject", "Component_get_gameObject"],
+            "typedef": "(Component_1 * __this, MethodInfo * method)"
+        },
+        {
+            "name": ["Object_1_FindObjectOfType", "Object_FindObjectOfType"],
+            "typedef": "(Type * type, MethodInfo * method)"
+        },
+        {
+            "name": ["GameObject_SetActive", "GameObject_SetActive"],
+            "typedef": "(GameObject * __this, bool value, MethodInfo * method)"
+        },
+        {
+            "name": ["Transform_get_position", "Transform_get_position"],
+            "typedef": "(Transform * __this, MethodInfo * method)"
+        },
+        {
+            "name": ["Transform_get_localPosition", "Transform_get_localPosition"],
+            "typedef": "(Transform * __this, MethodInfo * method)"
+        },
+        {
+            "name": ["GJLIMCBOCJG_GPIMPPOPDJO", "BasicObject_Init"],
+            "typedef": "(GJLIMCBOCJG * __this, MethodInfo * method)"
+        },
+        {
+            "name": ["DAFEAHGLBGL_KOBJNFBMICI", "Pet_ChangeSkin"],
+            "typedef": "(DAFEAHGLBGL * __this, int32_t OGBGLIIENMF, MethodInfo * method)"
+        },
+        {
+            "name": ["JFNHHLNJJKP_GBHNOKKCMJA", "Player_Shoot"],
+            "typedef": "(JFNHHLNJJKP * __this, float LODCFMOPDCN, MethodInfo * method)"
+        },
+        {
+            "name": ["ApplicationManager_get_MapViewService", "ApplicationManager_get_MapViewService"],
+            "typedef": "(ApplicationManager * __this, MethodInfo * method)"
+        },
+        {
+            "name": ["DKMLMKFGPCC_NAGLHCDBGIM", "MapViewService_CheckTileWalkable"],
+            "typedef": "(DKMLMKFGPCC * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method)"
+        },
+        {
+            "name": ["MapObjectUIManager_ShowFloatingText", "MapObjectUIManager_ShowFloatingText"],
+            "typedef": "(MapObjectUIManager * __this, CLEPBEMBHAJ__Enum DBMPDNFHFNL, String * OBEFKMANGCK, Nullable_1_UnityEngine_Color32_ HNDHLEHECGE, float MPNAHCHFHMD, MethodInfo * method)"
+        },
+        {
+            "name": ["ChatManager_AddSlot", "ChatManager_AddSlot"],
+            "typedef": "(ChatManager * __this, PIPCAMDKBDA * MJLCGOABOIA, MethodInfo * method)"
+        },
+        {
+            "name": ["ChatManager_GetChatMessage", "ChatManager_GetChatMessage"],
+            "typedef": "(ChatManager * __this, MethodInfo * method)"
+        },
+        {
+            "name": ["TMP_Text_SetText", "TMP_Text_SetText"],
+            "typedef": "(TMP_Text * __this, String * text, bool syncTextInputBox, MethodInfo * method)"
+        },
+        {
+            "name": ["TMP_Text_set_color", "TMP_Text_set_color"],
+            "typedef": "(TMP_Text * __this, Color value, MethodInfo * method)"
+        },
+        {
+            "name": ["SettingsManager_GetKeyCode", "SettingsManager_GetKeyCode"],
+            "typedef": "(SettingsManager * __this, GCAPHHCPLGG__Enum PAGPIKLPGPA, MethodInfo * method)"
+        },
+        {
+            "name": ["Input_GetKey", "Input_GetKey"],
+            "typedef": "(KeyCode__Enum key, MethodInfo * method)"
+        },
+        {
+            "name": ["InputManager_set_AutoFire", "InputManager_set_AutoFire"],
+            "typedef": "(InputManager * __this, bool GKLFNLCLLGM, MethodInfo * method)"
+        },
+        {
+            "name": ["SpriteShader_UpdateMask", "SpriteShader_UpdateMask"],
+            "typedef": "(SpriteShader * __this, CGPOGAAKLFL * DLNMEAOOHKA, int32_t KDNJFAAKECF, int32_t HPGLAHDANIJ, MethodInfo * method)"
+        },
+        {
+            "name": ["DKMLMKFGPCC_MNNGGOHMENI", "MapViewService_Nexus"],
+            "typedef": "(DKMLMKFGPCC * __this, MethodInfo * method)"
+        },
+        {
+            "name": ["DAOINPHCAEG_GBGPMMIJCCF", "ChatFilter_Validate"],
+            "typedef": "(DAOINPHCAEG * __this, String * DCGGIEJHCEC, MethodInfo * method)"
+        }
     ],
     "enums": [
         ["Allocator", "Allocator__Enum"],

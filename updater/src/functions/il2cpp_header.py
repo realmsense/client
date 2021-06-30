@@ -1,5 +1,4 @@
-from abc import abstractproperty
-from time import struct_time
+import re as regex
 from classes import *
 from functions import *
 
@@ -26,8 +25,9 @@ def generate_il2cpp_functions():
     logger.log(logging.INFO, "Initialising JSON Data")
     for function in header_config["functions"]:
         remaining_functions.append({
-            "original": function[0],
-            "replace": function[1]
+            "original": function["name"][0],
+            "replace": function["name"][1],
+            "typedef": function["typedef"]
         })
     
     logger.log(logging.INFO, "Parsing header")
@@ -36,13 +36,17 @@ def generate_il2cpp_functions():
         for line in file.readlines():
             line = line.replace("\n", "")
             for function in remaining_functions:
-                search = ", " + function["original"] + ","
-                if search in line:
-                    line = line.replace(function["original"], function["replace"])
+                pattern = regex.compile(f"({function['original']}(?:_\d)?), " + regex.escape(function["typedef"]))
+                match = regex.search(pattern, line)
+                if match:
+                    function_name = match.group(1)
+                    line = line.replace(function_name, function["replace"])
                     line = do_replace(line)
-                    line = line.replace(do_replace(function["replace"]), function["replace"])
-                    output_lines.append(line)
 
+                    # fix replaced function name if it was accidentally changed in do_replace
+                    line = line.replace(do_replace(function["replace"]), function["replace"])
+
+                    output_lines.append(line)
                     remaining_functions.remove(function)
                     break
 
