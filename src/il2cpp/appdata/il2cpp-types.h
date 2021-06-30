@@ -1524,6 +1524,7 @@ struct Nullable_1_UnityEngine_Vector2_ {
 
 struct Player__Fields {
     struct Character__Fields _;
+    int32_t FBKMMJLFEBD;
     struct Player_MLMCBBKGONG *FCIEBGPMHNK;
     struct Player_MLMCBBKGONG *KPPKMGPOFNP;
     struct Player_MLMCBBKGONG *LHPMIHBOOPM;
@@ -1592,6 +1593,7 @@ struct Player__Fields {
     bool IMFCINFDMKK;
     bool MFAHJBIFENI;
     bool ICPMFIFFACJ;
+    bool EIMKOCOAFOK;
     int32_t LAFABEDFNCK;
     int32_t MNBLAJKMPJG;
     int32_t AOHKAGOOECE;
@@ -2036,6 +2038,7 @@ struct ObjectProperties__Fields {
     struct FollowMouse *FollowMouseElement;
     bool occupySquare;
     int32_t type;
+    int32_t parsedSetTypeAttribute;
     int32_t shadowSize;
     int32_t maxStack;
     float qsCooldownDuration;
@@ -2699,6 +2702,7 @@ struct CameraManager__Fields {
     struct ProCamera2D *proCamera2D;
     struct ProCamera2DPixelPerfect *BDAEGGDPHCK;
     struct Camera *EHHILFMGPMB;
+    struct CustomInputModule *inputModule;
     struct CameraPerspectiveEditor *perspective_editor;
     bool FPNMHACOHEK;
     struct MADPOKNCADM *COCCGGGBDFP;
@@ -2805,6 +2809,7 @@ struct NIIFJAMEHDD__Fields {
     struct MapObject__Fields _;
     struct List_1_NOBHMIPLKAP_ *DOENFMFONLM;
     float NMCEDOFIKDL;
+    uint8_t EIBAJBLFCJM;
     bool FCAFCEMCHLF;
     bool LLKEJMLKCCA;
 };
