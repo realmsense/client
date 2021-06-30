@@ -22,115 +22,143 @@
     "functions": [
         {
             "name": ["Type_GetType", "Type_GetType"],
-            "typedef": "(String * typeName, MethodInfo * method)"
+            "typedef": "(String * typeName, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Camera_get_orthographicSize", "Camera_get_orthographicSize"],
-            "typedef": "(Camera * __this, MethodInfo * method)"
+            "typedef": "(Camera * __this, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Camera_set_orthographicSize", "Camera_set_orthographicSize"],
-            "typedef": "(Camera * __this, float value, MethodInfo * method)"
+            "typedef": "(Camera * __this, float value, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Camera_WorldToScreenPoint", "Camera_WorldToScreenPoint"],
-            "typedef": "(Camera * __this, Vector3 position, MethodInfo * method)"
+            "typedef": "(Camera * __this, Vector3 position, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Camera_ScreenToWorldPoint", "Camera_ScreenToWorldPoint"],
-            "typedef": "(Camera * __this, Vector3 position, MethodInfo * method)"
+            "typedef": "(Camera * __this, Vector3 position, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Behaviour_set_enabled", "Behaviour_set_enabled"],
-            "typedef": "(Behaviour * __this, bool value, MethodInfo * method)"
+            "typedef": "(Behaviour * __this, bool value, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Component_1_get_transform", "Component_get_transform"],
-            "typedef": "(Component_1 * __this, MethodInfo * method)"
+            "typedef": "(Component_1 * __this, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Component_1_get_gameObject", "Component_get_gameObject"],
-            "typedef": "(Component_1 * __this, MethodInfo * method)"
+            "typedef": "(Component_1 * __this, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Object_1_FindObjectOfType", "Object_FindObjectOfType"],
-            "typedef": "(Type * type, MethodInfo * method)"
+            "typedef": "(Type * type, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["GameObject_SetActive", "GameObject_SetActive"],
-            "typedef": "(GameObject * __this, bool value, MethodInfo * method)"
+            "typedef": "(GameObject * __this, bool value, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Transform_get_position", "Transform_get_position"],
-            "typedef": "(Transform * __this, MethodInfo * method)"
+            "typedef": "(Transform * __this, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Transform_get_localPosition", "Transform_get_localPosition"],
-            "typedef": "(Transform * __this, MethodInfo * method)"
+            "typedef": "(Transform * __this, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["GJLIMCBOCJG_GPIMPPOPDJO", "BasicObject_Init"],
-            "typedef": "(GJLIMCBOCJG * __this, MethodInfo * method)"
+            "typedef": "(GJLIMCBOCJG * __this, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["DAFEAHGLBGL_KOBJNFBMICI", "Pet_ChangeSkin"],
-            "typedef": "(DAFEAHGLBGL * __this, int32_t OGBGLIIENMF, MethodInfo * method)"
+            "typedef": "(DAFEAHGLBGL * __this, int32_t OGBGLIIENMF, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["JFNHHLNJJKP_GBHNOKKCMJA", "Player_Shoot"],
-            "typedef": "(JFNHHLNJJKP * __this, float LODCFMOPDCN, MethodInfo * method)"
+            "typedef": "(JFNHHLNJJKP * __this, float LODCFMOPDCN, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["ApplicationManager_get_MapViewService", "ApplicationManager_get_MapViewService"],
-            "typedef": "(ApplicationManager * __this, MethodInfo * method)"
+            "typedef": "(ApplicationManager * __this, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["DKMLMKFGPCC_NAGLHCDBGIM", "MapViewService_CheckTileWalkable"],
-            "typedef": "(DKMLMKFGPCC * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method)"
+            "typedef": "(DKMLMKFGPCC * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["MapObjectUIManager_ShowFloatingText", "MapObjectUIManager_ShowFloatingText"],
-            "typedef": "(MapObjectUIManager * __this, CLEPBEMBHAJ__Enum DBMPDNFHFNL, String * OBEFKMANGCK, Nullable_1_UnityEngine_Color32_ HNDHLEHECGE, float MPNAHCHFHMD, MethodInfo * method)"
+            "typedef": "(MapObjectUIManager * __this, CLEPBEMBHAJ__Enum DBMPDNFHFNL, String * OBEFKMANGCK, Nullable_1_UnityEngine_Color32_ HNDHLEHECGE, float MPNAHCHFHMD, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["ChatManager_AddSlot", "ChatManager_AddSlot"],
-            "typedef": "(ChatManager * __this, PIPCAMDKBDA * MJLCGOABOIA, MethodInfo * method)"
+            "typedef": "(ChatManager * __this, PIPCAMDKBDA * MJLCGOABOIA, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["ChatManager_GetChatMessage", "ChatManager_GetChatMessage"],
-            "typedef": "(ChatManager * __this, MethodInfo * method)"
+            "typedef": "(ChatManager * __this, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["TMP_Text_SetText", "TMP_Text_SetText"],
-            "typedef": "(TMP_Text * __this, String * text, bool syncTextInputBox, MethodInfo * method)"
+            "typedef": "(TMP_Text * __this, String * text, bool syncTextInputBox, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["TMP_Text_set_color", "TMP_Text_set_color"],
-            "typedef": "(TMP_Text * __this, Color value, MethodInfo * method)"
+            "typedef": "(TMP_Text * __this, Color value, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["SettingsManager_GetKeyCode", "SettingsManager_GetKeyCode"],
-            "typedef": "(SettingsManager * __this, GCAPHHCPLGG__Enum PAGPIKLPGPA, MethodInfo * method)"
+            "typedef": "(SettingsManager * __this, GCAPHHCPLGG__Enum PAGPIKLPGPA, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["Input_GetKey", "Input_GetKey"],
-            "typedef": "(KeyCode__Enum key, MethodInfo * method)"
+            "typedef": "(KeyCode__Enum key, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["InputManager_set_AutoFire", "InputManager_set_AutoFire"],
-            "typedef": "(InputManager * __this, bool GKLFNLCLLGM, MethodInfo * method)"
+            "typedef": "(InputManager * __this, bool GKLFNLCLLGM, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["SpriteShader_UpdateMask", "SpriteShader_UpdateMask"],
-            "typedef": "(SpriteShader * __this, CGPOGAAKLFL * DLNMEAOOHKA, int32_t KDNJFAAKECF, int32_t HPGLAHDANIJ, MethodInfo * method)"
+            "typedef": "(SpriteShader * __this, CGPOGAAKLFL * DLNMEAOOHKA, int32_t KDNJFAAKECF, int32_t HPGLAHDANIJ, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["DKMLMKFGPCC_MNNGGOHMENI", "MapViewService_Nexus"],
-            "typedef": "(DKMLMKFGPCC * __this, MethodInfo * method)"
+            "typedef": "(DKMLMKFGPCC * __this, MethodInfo * method)",
+            "methodinfo": false
         },
         {
             "name": ["DAOINPHCAEG_GBGPMMIJCCF", "ChatFilter_Validate"],
-            "typedef": "(DAOINPHCAEG * __this, String * DCGGIEJHCEC, MethodInfo * method)"
+            "typedef": "(DAOINPHCAEG * __this, String * DCGGIEJHCEC, MethodInfo * method)",
+            "methodinfo": false
         }
     ],
     "enums": [

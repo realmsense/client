@@ -4,6 +4,8 @@
 #include "thirdparty/minhook/include/MinHook.h"
 
 // function typdef _FunctionName
+#define DO_APP_FUNC_METHODINFO(a, n) extern struct MethodInfo ** n // unused
+
 #define DO_APP_FUNC(a, r, n, p) typedef r (* _ ## n) p;
 #include "il2cpp-functions.h"
 #undef DO_APP_FUNC
@@ -12,6 +14,8 @@
 #define DO_APP_FUNC(a, r, n, p) _ ## n Original_ ## n = nullptr;
 #include "il2cpp-functions.h"
 #undef DO_APP_FUNC
+
+#undef DO_APP_FUNC_METHODINFO
 
 bool Detour_MapViewService_CheckTileWalkable(MapViewService* __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo* method)
 {

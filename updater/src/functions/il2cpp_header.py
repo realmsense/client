@@ -27,8 +27,16 @@ def generate_il2cpp_functions():
         remaining_functions.append({
             "original": function["name"][0],
             "replace": function["name"][1],
-            "typedef": function["typedef"]
+            "typedef": function["typedef"],
+            "methodinfo": False
         })
+
+        if function["methodinfo"]:
+            remaining_functions.append({
+                "original": function["name"][0] + "__MethodInfo",
+                "replace": function["name"][1] + "__MethodInfo",
+                "methodinfo": True
+            })
     
     logger.log(logging.INFO, "Parsing header")
     with open(functions_file) as file:
@@ -36,19 +44,29 @@ def generate_il2cpp_functions():
         for line in file.readlines():
             line = line.replace("\n", "")
             for function in remaining_functions:
-                pattern = regex.compile(f"({function['original']}(?:_\d)?), " + regex.escape(function["typedef"]))
-                match = regex.search(pattern, line)
-                if match:
-                    function_name = match.group(1)
-                    line = line.replace(function_name, function["replace"])
-                    line = do_replace(line)
 
-                    # fix replaced function name if it was accidentally changed in do_replace
-                    line = line.replace(do_replace(function["replace"]), function["replace"])
+                if function["methodinfo"]:
+                    if function["original"] in line:
+                        line = line.replace(function["original"], function["replace"])
+                        output_lines.append(line)
+                        remaining_functions.remove(function)
+                        break
 
-                    output_lines.append(line)
-                    remaining_functions.remove(function)
-                    break
+                if not function["methodinfo"]:
+                    pattern = regex.compile(f"({function['original']}(?:_\d)?), " + regex.escape(function["typedef"]))
+                    match = regex.search(pattern, line)
+                    if match:
+                        function_name = match.group(1)
+                        line = line.replace(function_name, function["replace"])
+                        line = do_replace(line)
+
+                        # fix replaced function name if it was accidentally changed in do_replace
+                        line = line.replace(do_replace(function["replace"]), function["replace"])
+
+                        output_lines.append(line)
+                        remaining_functions.remove(function)
+                        break
+
 
         logger.log(logging.INFO, "Outputting")
         output_functions = ROOT_DIR / "../src/il2cpp/appdata/il2cpp-functions.h"
