@@ -25,5 +25,6 @@ DO_APP_FUNC(0x0030D3A0, MapViewService *, ApplicationManager_get_MapViewService,
 DO_APP_FUNC(0x01495A10, bool, MapViewService_CheckTileWalkable, (MapViewService * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method));
 DO_APP_FUNC(0x01495130, void, MapViewService_Nexus, (MapViewService * __this, MethodInfo * method));
 DO_APP_FUNC(0x0153F780, void, InputManager_set_AutoFire, (InputManager * __this, bool GKLFNLCLLGM, MethodInfo * method));
+DO_APP_FUNC(0x0150DCE0, void, GameController_FixedUpdate, (GameController * __this, MethodInfo * method));
 DO_APP_FUNC(0x01A79420, void, MapObjectUIManager_ShowFloatingText, (MapObjectUIManager * __this, FloatingTextType DBMPDNFHFNL, String * OBEFKMANGCK, Nullable_1_UnityEngine_Color32_ HNDHLEHECGE, float MPNAHCHFHMD, MethodInfo * method));
 DO_APP_FUNC(0x01E2DBA0, bool, ChatFilter_Validate, (ChatFilter * __this, String * DCGGIEJHCEC, MethodInfo * method));

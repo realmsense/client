@@ -25,6 +25,7 @@ public:
 
 	// Module Events, to be overrided in parent
 	virtual void onMainLoop() { };
+	virtual void onFixedUpdate() { };
 	virtual void onMapChange() { };
 	virtual void onCheckTileWalkable(bool& walkable) { };
 	virtual void onPlayerShoot(app::Player* __this, float& angle) { };

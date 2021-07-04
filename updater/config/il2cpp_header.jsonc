@@ -161,6 +161,11 @@
             "methodinfo": false
         },
         {
+            "name": ["GameController_FixedUpdate", "GameController_FixedUpdate"],
+            "typedef": "(GameController * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
             "name": ["DAOINPHCAEG_GBGPMMIJCCF", "ChatFilter_Validate"],
             "typedef": "(DAOINPHCAEG * __this, String * DCGGIEJHCEC, MethodInfo * method)",
             "methodinfo": false

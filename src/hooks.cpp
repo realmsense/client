@@ -71,6 +71,14 @@ bool Detour_ChatFilter_Validate(ChatFilter* __this, String* message, MethodInfo*
 	return filter;
 }
 
+void Detour_GameController_FixedUpdate(GameController* __this, MethodInfo* method)
+{
+	for (Module* module : ModuleManager::modules)
+		module->onFixedUpdate();
+
+	return Original_GameController_FixedUpdate(__this, method);
+}
+
 bool InitHooks()
 {
 	bool ret = true;
@@ -105,6 +113,12 @@ bool InitHooks()
 	if (MH_CreateHook(ChatFilter_Validate, Detour_ChatFilter_Validate, reinterpret_cast<LPVOID*>(&Original_ChatFilter_Validate)) != MH_OK)
 	{
 		std::cout << "Failed to Detour ChatFilter_Validate" << std::endl;
+		ret = false;
+	}
+
+	if (MH_CreateHook(GameController_FixedUpdate, Detour_GameController_FixedUpdate, reinterpret_cast<LPVOID*>(&Original_GameController_FixedUpdate)) != MH_OK)
+	{
+		std::cout << "Failed to Detour GameController_FixedUpdate" << std::endl;
 		ret = false;
 	}
 
