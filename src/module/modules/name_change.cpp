@@ -47,6 +47,35 @@ void NameChangeModule::onDisable()
 void NameChangeModule::onMainLoop()
 {
 	if (!this->enabled) return;
+
+	if (this->wait_for_playername)
+	{
+		CharacterInfo* character_info = this->GetCharacterInfo();
+		TMP_Text* account_name_label = (TMP_Text*)character_info->fields.accountName;
+		String* account_name_text = TMP_Text_get_text(account_name_label, nullptr);
+
+		std::string player_name = il2cppi_to_string(account_name_text);
+		if (player_name != this->custom_player_name)
+		{
+			this->changePlayerName(this->custom_player_name);
+			this->wait_for_playername = false;
+		}
+	}
+
+	if (this->wait_for_guildname)
+	{
+		CharacterInfo* character_info = this->GetCharacterInfo();
+		TMP_Text* guild_name_label = (TMP_Text*)character_info->fields.guildNameLabel;
+		String* guild_name_text = TMP_Text_get_text(guild_name_label, nullptr);
+
+		std::string guild_name = il2cppi_to_string(guild_name_text);
+		if (guild_name != this->custom_guild_name)
+		{
+			this->changeGuildName(this->custom_guild_name);
+			this->wait_for_guildname = false;
+		}
+	}
+
 	if (this->rainbow_name)
 	{
 		static float hue = 1.0f;
@@ -63,14 +92,13 @@ void NameChangeModule::onMainLoop()
 void NameChangeModule::onMapChange()
 {
 	if (!this->enabled) return;
-
+	
+	// Wait for our original name to be set before setting our custom player/guild name
 	if (this->custom_player_name != "")
-		this->changePlayerName(this->custom_player_name);
+		this->wait_for_playername = true;
 
 	if (this->custom_guild_name != "")
-		this->changeGuildName(this->custom_guild_name);
-
-	std::cout << this->custom_player_name << std::endl;
+		this->wait_for_guildname = true;
 }
 
 void NameChangeModule::renderGUI()

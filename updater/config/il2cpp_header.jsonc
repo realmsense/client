@@ -121,6 +121,11 @@
             "methodinfo": false
         },
         {
+            "name": ["TMP_Text_get_text", "TMP_Text_get_text"],
+            "typedef": "(TMP_Text * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
             "name": ["TMP_Text_SetText", "TMP_Text_SetText"],
             "typedef": "(TMP_Text * __this, String * text, bool syncTextInputBox, MethodInfo * method)",
             "methodinfo": false

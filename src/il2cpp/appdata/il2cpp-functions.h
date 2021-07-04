@@ -11,6 +11,7 @@ DO_APP_FUNC(0x0284ED70, Object *, Object_FindObjectOfType, (Type * type, MethodI
 DO_APP_FUNC(0x00C5C2F0, Vector3, Transform_get_position, (Transform * __this, MethodInfo * method));
 DO_APP_FUNC(0x00C5BFC0, Vector3, Transform_get_localPosition, (Transform * __this, MethodInfo * method));
 DO_APP_FUNC(0x0146F220, bool, Input_GetKey, (KeyCode key, MethodInfo * method));
+DO_APP_FUNC(0x002B4CA0, String *, TMP_Text_get_text, (TMP_Text * __this, MethodInfo * method));
 DO_APP_FUNC(0x002D67D0, void, TMP_Text_set_color, (TMP_Text * __this, Color value, MethodInfo * method));
 DO_APP_FUNC(0x002CC850, void, TMP_Text_SetText, (TMP_Text * __this, String * text, bool syncTextInputBox, MethodInfo * method));
 DO_APP_FUNC(0x01647E70, ChatSlot *, ChatManager_GetChatMessage, (ChatManager * __this, MethodInfo * method));
