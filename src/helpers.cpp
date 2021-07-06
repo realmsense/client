@@ -1,8 +1,6 @@
 #include "pch.h"
 #include <codecvt>
 
-using namespace app;
-
 uintptr_t GetBaseAddress()
 {
     return (uintptr_t)GetModuleHandle(L"GameAssembly.dll");

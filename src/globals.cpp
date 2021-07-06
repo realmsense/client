@@ -1,8 +1,6 @@
 #include "pch.h"
 #include <unordered_set>
 
-using namespace app;
-
 std::unordered_set<Character*> g_aEnemyList;
 void CleanEnemyList()
 {

@@ -1,7 +1,5 @@
 #include "il2cpp-internal-types.h"
 
-namespace app {
-
 struct __declspec(align(8)) String__Fields {
     int32_t m_stringLength;
     uint16_t m_firstChar;
@@ -2978,5 +2976,3 @@ struct UnityThread {
     MonitorData *monitor;
     struct UnityThread__Fields fields;
 };
-
-} // end namespace app

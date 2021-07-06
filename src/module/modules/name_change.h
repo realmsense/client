@@ -25,12 +25,12 @@ private:
 	void resetPlayerName();
 
 	bool rainbow_name;
-	void changeNameColor(app::Color color);
+	void changeNameColor(Color color);
 
 	std::string custom_guild_name;
 	void changeGuildName(std::string name);
 	void resetGuildName();
 
-	app::CharacterInfo* GetCharacterInfo();
+	CharacterInfo* GetCharacterInfo();
 };
 

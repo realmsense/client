@@ -19,12 +19,12 @@ public:
 	void onDisable() override;
 	void renderGUI() override;
 
-	void onPlayerShoot(app::Player* __this, float& angle) override;
+	void onPlayerShoot(Player* __this, float& angle) override;
 
 private:
 	AutoAim_Target target_mode;
 	bool reverse_cult_staff;
-	app::Character* chooseEnemy();
+	Character* chooseEnemy();
 
 	void setAutoFire(bool enabled);
 };

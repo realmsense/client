@@ -142,7 +142,7 @@ def generate_il2cpp_types():
 
         output_lines = []
         output_lines.append('#include "il2cpp-internal-types.h"\n')
-        output_lines.append("namespace app {\n")
+        # output_lines.append("namespace app {\n")
 
         for line in file.readlines():
             line = line.replace("\n", "")
@@ -215,7 +215,7 @@ def generate_il2cpp_types():
                 output_lines.append(line)
                 continue
 
-        output_lines.append("} // end namespace app")
+        # output_lines.append("} // end namespace app")
 
         logger.log(logging.INFO, "Outputting")
         output_internal_types = ROOT_DIR / "../src/il2cpp/appdata/il2cpp-internal-types.h"

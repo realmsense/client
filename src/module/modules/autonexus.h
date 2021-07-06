@@ -20,6 +20,6 @@ private:
 	void checkHP();
 	void nexus();
 
-	void calculateHPValues(app::Player* player, int& hp_percent, int& nexus_hp);
+	void calculateHPValues(Player* player, int& hp_percent, int& nexus_hp);
 };
 

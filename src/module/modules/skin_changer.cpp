@@ -314,7 +314,7 @@ void SkinChangerModule::onMainLoop()
 	}
 }
 
-void SkinChangerModule::onSpriteShader_UpdateMask(app::SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth)
+void SkinChangerModule::onSpriteShader_UpdateMask(SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth)
 {
 	if (!this->enabled) return;
 

@@ -7,8 +7,6 @@
 #include "module/module_list.h"
 #include "module/module_manager.h"
 
-using namespace app;
-
 void MainThread(HMODULE hModule)
 {
     il2cpp_thread_attach(il2cpp_domain_get());

@@ -14,7 +14,7 @@ public:
 
     void onMapChange() override;
     void onMainLoop() override;
-    void onSpriteShader_UpdateMask(app::SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth) override;
+    void onSpriteShader_UpdateMask(SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth) override;
 
 private:
 
@@ -22,7 +22,7 @@ private:
     int small_outfit;
     bool rainbow_oufit;
 
-    app::Pet* pet;
+    Pet* pet;
     int pet_skin_id;
     void changePetSkin(int skin_id);
 

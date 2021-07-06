@@ -2,8 +2,6 @@
 
 #include <string>
 
-using namespace app;
-
 uintptr_t GetBaseAddress();
 void CreateConsole();
 void RemoveConsole();
