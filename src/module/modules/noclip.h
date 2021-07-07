@@ -10,7 +10,7 @@ public:
 	void onDisable() override;
 	void renderGUI() override;
 
-	virtual void onCheckTileWalkable(bool& walkable) override;
+	virtual bool hookPost_MapViewService_CheckTileWalkable(MapViewService*& __this, float& x, float y, bool& return_value) override;
 
 private:
 	bool safe_mode;

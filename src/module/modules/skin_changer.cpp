@@ -314,9 +314,9 @@ void SkinChangerModule::onMainLoop()
 	}
 }
 
-void SkinChangerModule::onSpriteShader_UpdateMask(SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth)
+bool SkinChangerModule::hook_SpriteShader_UpdateMask(SpriteShader*& sprite_shader, CGPOGAAKLFL*& DLNMEAOOHKA, int32_t& large_cloth, int32_t& small_cloth, bool& NOP)
 {
-	if (!this->enabled) return;
+	if (!this->enabled) return false;
 
 	BasicObject* player = (BasicObject*)GetPlayer();
 	SpriteShader* player_spriteshader = player->fields.NJGEIJDFFND->fields.spriteShader;
@@ -327,7 +327,11 @@ void SkinChangerModule::onSpriteShader_UpdateMask(SpriteShader* sprite_shader, i
 
 		if (this->small_outfit != -1)
 			small_cloth = this->small_outfit;
+
+		return true;
 	}
+
+	return false;
 }
 
 void SkinChangerModule::changePlayerSkin(int skin_id)

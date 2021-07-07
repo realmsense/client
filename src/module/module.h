@@ -25,12 +25,15 @@ public:
 
 	// Module Events, to be overrided in parent
 	virtual void onMainLoop() { };
-	virtual void onFixedUpdate() { };
 	virtual void onMapChange() { };
-	virtual void onCheckTileWalkable(bool& walkable) { };
-	virtual void onPlayerShoot(Player* __this, float& angle) { };
-	virtual void onSpriteShader_UpdateMask(SpriteShader* sprite_shader, int32_t& large_cloth, int32_t& small_cloth) { };
-	virtual void onChatFilterValidate(bool& filter) { };
+	virtual bool hook_GameController_FixedUpdate(GameController* __this, bool& NOP) { return false; };
+	virtual bool hookPre_ChatFilter_Validate(ChatFilter*& __this, String*& message, bool& return_value) { return false; };
+	virtual bool hookPost_ChatFilter_Validate(ChatFilter*& __this, String*& message, bool& return_value) { return false; };
+	virtual bool hookPre_MapViewService_CheckTileWalkable(MapViewService*& __this, float& x, float y, bool& return_value) { return false; };
+	virtual bool hookPost_MapViewService_CheckTileWalkable(MapViewService*& __this, float& x, float y, bool& return_value) { return false; };
+	virtual bool hook_SpriteShader_UpdateMask(SpriteShader*& __this, CGPOGAAKLFL*& DLNMEAOOHKA, int32_t& large_cloth, int32_t& small_cloth, bool& NOP) { return false; };
+	virtual bool hook_Player_Shoot(Player*& player, float& angle, MethodInfo*& method, bool& NOP) { return false; };
+
 
 protected:
 	virtual void onEnable() = 0;

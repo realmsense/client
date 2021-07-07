@@ -58,11 +58,12 @@ void NoclipModule::toggleNoclip()
 	Behaviour_set_enabled((Behaviour*)unity_thread, !this->enabled, nullptr);
 }
 
-void NoclipModule::onCheckTileWalkable(bool& walkable)
+
+bool NoclipModule::hookPost_MapViewService_CheckTileWalkable(MapViewService*& __this, float& x, float y, bool& return_value)
 {
-	if (this->enabled)
-	{
-		this->on_walkable_tile = walkable;
-		walkable = true;
-	}
+	if (!this->enabled) return false;
+
+	this->on_walkable_tile = return_value;
+	return_value = true;
+	return true;
 }

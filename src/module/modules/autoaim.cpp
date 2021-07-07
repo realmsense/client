@@ -61,8 +61,10 @@ void AutoAimModule::renderGUI()
 	}
 }
 
-void AutoAimModule::onPlayerShoot(Player* player, float& angle)
+bool AutoAimModule::hook_Player_Shoot(Player*& player, float& angle, MethodInfo*& method, bool& NOP)
 {
+	bool return_value = false;
+
 	bool attack_held = GetKeyDown(SettingsKeyCode::UseWeaponAttack); // allow user to override autoaim but holding left click
 	if (this->enabled && !attack_held)
 	{
@@ -75,6 +77,7 @@ void AutoAimModule::onPlayerShoot(Player* player, float& angle)
 			float diff_x = enemy_pos.x - player_pos.x;
 			float diff_y = enemy_pos.y - player_pos.y;
 			angle = atan2(diff_y, diff_x);
+			return_value = true;
 		}
 	}
 
@@ -82,14 +85,18 @@ void AutoAimModule::onPlayerShoot(Player* player, float& angle)
 	{
 		EquipmentSlot* weapon = GetEquipmentSlot(0);
 		ObjectProperties* object_properties = weapon->fields._._.object_properties;
-		if (!object_properties) return;
-
-		bool cult_staff = il2cppi_to_string(object_properties->fields.displayId) == "Staff of Unholy Sacrifice";
-		if (cult_staff)
+		if (object_properties)
 		{
-			angle -= (float)M_PI;
+			bool cult_staff = il2cppi_to_string(object_properties->fields.displayId) == "Staff of Unholy Sacrifice";
+			if (cult_staff)
+			{
+				angle -= (float)M_PI;
+				return_value = true;
+			}
 		}
 	}
+
+	return return_value;
 }
 
 Character* AutoAimModule::chooseEnemy()

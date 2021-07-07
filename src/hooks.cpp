@@ -17,20 +17,34 @@
 
 #undef DO_APP_FUNC_METHODINFO
 
-bool Detour_MapViewService_CheckTileWalkable(MapViewService* __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo* method)
+bool Detour_MapViewService_CheckTileWalkable(MapViewService* __this, float x, float y, MethodInfo* method)
 {
-	bool walkable = Original_MapViewService_CheckTileWalkable(__this, EOOJAMLJAOM, JDEKCEFBJFP, method);
+	bool return_value;
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hookPre_MapViewService_CheckTileWalkable(__this, x, y, return_value))
+			return return_value;
+	}
+
+	return_value = Original_MapViewService_CheckTileWalkable(__this, x, y, method);
 
 	for (Module* module : ModuleManager::modules)
-		module->onCheckTileWalkable(walkable);
+	{
+		if (module->hookPost_MapViewService_CheckTileWalkable(__this, x, y, return_value))
+			return return_value;
+	}
 
-	return walkable;
+	return return_value;
 }
 
 void Detour_Player_Shoot(Player* __this, float angle, MethodInfo* method)
 {
+	bool NOP = false;
 	for (Module* module : ModuleManager::modules)
-		module->onPlayerShoot(__this, angle);
+	{
+		if (module->hook_Player_Shoot(__this, angle, method, NOP))
+			if (NOP) return;
+	}
 
 	return Original_Player_Shoot(__this, angle, method);
 }
@@ -54,27 +68,44 @@ void Detour_BasicObject_Init(BasicObject* __this, MethodInfo* method)
 
 void Detour_SpriteShader_UpdateMask(SpriteShader* __this, CGPOGAAKLFL* DLNMEAOOHKA, int32_t large_cloth, int32_t small_cloth, MethodInfo* method)
 {
+	bool NOP = false;
 	for (Module* module : ModuleManager::modules)
-		module->onSpriteShader_UpdateMask(__this, large_cloth, small_cloth);
+	{
+		if (module->hook_SpriteShader_UpdateMask(__this, DLNMEAOOHKA, large_cloth, small_cloth, NOP))
+			if (NOP) return;
+	}
 
-	return Original_SpriteShader_UpdateMask(__this, DLNMEAOOHKA, large_cloth, small_cloth, nullptr);
+	return Original_SpriteShader_UpdateMask(__this, DLNMEAOOHKA, large_cloth, small_cloth, method);
 }
-
 
 bool Detour_ChatFilter_Validate(ChatFilter* __this, String* message, MethodInfo* method)
 {
-	bool filter = Original_ChatFilter_Validate(__this, message, method);
+	bool return_value;
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hookPre_ChatFilter_Validate(__this, message, return_value))
+			return return_value;
+	}
+
+	return_value = Original_ChatFilter_Validate(__this, message, method);
 
 	for (Module* module : ModuleManager::modules)
-		module->onChatFilterValidate(filter);
+	{
+		if (module->hookPost_ChatFilter_Validate(__this, message, return_value))
+			return return_value;
+	}
 
-	return filter;
+	return return_value;
 }
 
 void Detour_GameController_FixedUpdate(GameController* __this, MethodInfo* method)
 {
+	bool NOP = false;
 	for (Module* module : ModuleManager::modules)
-		module->onFixedUpdate();
+	{
+		if (module->hook_GameController_FixedUpdate(__this, NOP))
+			if (NOP) return;
+	}
 
 	return Original_GameController_FixedUpdate(__this, method);
 }

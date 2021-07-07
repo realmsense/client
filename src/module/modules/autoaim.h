@@ -19,7 +19,7 @@ public:
 	void onDisable() override;
 	void renderGUI() override;
 
-	void onPlayerShoot(Player* __this, float& angle) override;
+	bool hook_Player_Shoot(Player*& player, float& angle, MethodInfo*& method, bool& NOP);
 
 private:
 	AutoAim_Target target_mode;

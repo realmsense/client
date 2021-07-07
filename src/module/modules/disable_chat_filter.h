@@ -10,6 +10,6 @@ public:
 	void onDisable() override;
 	void renderGUI() override;
 
-	void onChatFilterValidate(bool& filter) override;
+	bool hookPre_ChatFilter_Validate(ChatFilter*& __this, String*& message, bool& return_value) override;
 };
 
