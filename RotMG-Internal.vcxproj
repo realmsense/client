@@ -30,6 +30,7 @@
     </ClCompile>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\module\module.cpp" />
+    <ClCompile Include="src\module\modules\anti_lag.cpp" />
     <ClCompile Include="src\module\modules\autoaim.cpp" />
     <ClCompile Include="src\module\modules\autonexus.cpp" />
     <ClCompile Include="src\module\modules\camera_settings.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="src\il2cpp\framework\il2cpp-appdata.h" />
     <ClInclude Include="src\il2cpp\framework\il2cpp-init.h" />
     <ClInclude Include="src\module\module.h" />
+    <ClInclude Include="src\module\modules\anti_lag.h" />
     <ClInclude Include="src\module\modules\autoaim.h" />
     <ClInclude Include="src\module\modules\autonexus.h" />
     <ClInclude Include="src\module\modules\camera_settings.h" />

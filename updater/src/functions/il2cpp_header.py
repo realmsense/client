@@ -269,3 +269,5 @@ def generate_il2cpp_types():
         for typedef in remaining_structs:
             logger.log(logging.INFO, typedef)
         IndentFilter.level -= 1
+
+    IndentFilter.level -= 1

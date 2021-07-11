@@ -32,7 +32,7 @@ void DisableChatFilterModule::renderGUI()
 	//
 }
 
-bool DisableChatFilterModule::hookPre_ChatFilter_Validate(ChatFilter*& __this, String*& message, bool& return_value)
+bool DisableChatFilterModule::hookPre_ChatFilter_Validate(ChatFilter*& __this, String*& message, MethodInfo*& method, bool& return_value)
 {
 	if (!this->enabled) return false;
 

@@ -14,7 +14,7 @@ public:
 
     void onMapChange() override;
     void onMainLoop() override;
-    bool hook_SpriteShader_UpdateMask(SpriteShader*& __this, CGPOGAAKLFL*& DLNMEAOOHKA, int32_t& large_cloth, int32_t& small_cloth, bool& NOP) override;
+    bool hook_SpriteShader_UpdateMask(SpriteShader*& __this, CGPOGAAKLFL*& DLNMEAOOHKA, int32_t& large_cloth, int32_t& small_cloth, MethodInfo*& method, bool& NOP) override;
 
 private:
 

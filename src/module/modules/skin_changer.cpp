@@ -314,7 +314,7 @@ void SkinChangerModule::onMainLoop()
 	}
 }
 
-bool SkinChangerModule::hook_SpriteShader_UpdateMask(SpriteShader*& sprite_shader, CGPOGAAKLFL*& DLNMEAOOHKA, int32_t& large_cloth, int32_t& small_cloth, bool& NOP)
+bool SkinChangerModule::hook_SpriteShader_UpdateMask(SpriteShader*& sprite_shader, CGPOGAAKLFL*& DLNMEAOOHKA, int32_t& large_cloth, int32_t& small_cloth, MethodInfo*& method, bool& NOP)
 {
 	if (!this->enabled) return false;
 
