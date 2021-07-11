@@ -4,7 +4,7 @@
 #include "thirdparty/minhook/include/MinHook.h"
 
 // function typdef _FunctionName
-#define DO_APP_FUNC_METHODINFO(a, n) extern struct MethodInfo ** n // unused
+#define DO_APP_FUNC_METHODINFO(a, n) 
 
 #define DO_APP_FUNC(a, r, n, p) typedef r (* _ ## n) p;
 #include "il2cpp-functions.h"
@@ -22,7 +22,7 @@ bool Detour_MapViewService_CheckTileWalkable(MapViewService* __this, float x, fl
 	bool return_value;
 	for (Module* module : ModuleManager::modules)
 	{
-		if (module->hookPre_MapViewService_CheckTileWalkable(__this, x, y, return_value))
+		if (module->hookPre_MapViewService_CheckTileWalkable(__this, x, y, method, return_value))
 			return return_value;
 	}
 
@@ -30,7 +30,7 @@ bool Detour_MapViewService_CheckTileWalkable(MapViewService* __this, float x, fl
 
 	for (Module* module : ModuleManager::modules)
 	{
-		if (module->hookPost_MapViewService_CheckTileWalkable(__this, x, y, return_value))
+		if (module->hookPost_MapViewService_CheckTileWalkable(__this, x, y, method, return_value))
 			return return_value;
 	}
 
@@ -47,6 +47,38 @@ void Detour_Player_Shoot(Player* __this, float angle, MethodInfo* method)
 	}
 
 	return Original_Player_Shoot(__this, angle, method);
+}
+
+void Detour_List_1_System_Object_Add(List_1_System_Object_* __this, Object* item, MethodInfo* method)
+{
+	bool NOP = false;
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hook_Detour_List_1_System_Object_Add(__this, item, method, NOP))
+			if (NOP) return;
+	}
+
+	return Original_List_1_System_Object_Add(__this, item, method);
+}
+
+bool Detour_List_1_System_Object_Remove(List_1_System_Object_* __this, Object* item, MethodInfo* method)
+{
+	bool return_value;
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hookPre_Detour_List_1_System_Object_Remove(__this, item, method, return_value))
+			return return_value;
+	}
+
+	return_value = Original_List_1_System_Object_Remove(__this, item, method);
+
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hookPost_Detour_List_1_System_Object_Remove(__this, item, method, return_value))
+			return return_value;
+	}
+
+	return return_value;
 }
 
 void Detour_BasicObject_Init(BasicObject* __this, MethodInfo* method)
@@ -71,7 +103,7 @@ void Detour_SpriteShader_UpdateMask(SpriteShader* __this, CGPOGAAKLFL* DLNMEAOOH
 	bool NOP = false;
 	for (Module* module : ModuleManager::modules)
 	{
-		if (module->hook_SpriteShader_UpdateMask(__this, DLNMEAOOHKA, large_cloth, small_cloth, NOP))
+		if (module->hook_SpriteShader_UpdateMask(__this, DLNMEAOOHKA, large_cloth, small_cloth, method, NOP))
 			if (NOP) return;
 	}
 
@@ -83,7 +115,7 @@ bool Detour_ChatFilter_Validate(ChatFilter* __this, String* message, MethodInfo*
 	bool return_value;
 	for (Module* module : ModuleManager::modules)
 	{
-		if (module->hookPre_ChatFilter_Validate(__this, message, return_value))
+		if (module->hookPre_ChatFilter_Validate(__this, message, method, return_value))
 			return return_value;
 	}
 
@@ -91,7 +123,7 @@ bool Detour_ChatFilter_Validate(ChatFilter* __this, String* message, MethodInfo*
 
 	for (Module* module : ModuleManager::modules)
 	{
-		if (module->hookPost_ChatFilter_Validate(__this, message, return_value))
+		if (module->hookPost_ChatFilter_Validate(__this, message, method, return_value))
 			return return_value;
 	}
 
@@ -103,11 +135,43 @@ void Detour_GameController_FixedUpdate(GameController* __this, MethodInfo* metho
 	bool NOP = false;
 	for (Module* module : ModuleManager::modules)
 	{
-		if (module->hook_GameController_FixedUpdate(__this, NOP))
+		if (module->hook_GameController_FixedUpdate(__this, method, NOP))
 			if (NOP) return;
 	}
 
 	return Original_GameController_FixedUpdate(__this, method);
+}
+
+Color Detour_Player_GetSpriteColor(Player* __this, MethodInfo* method)
+{
+	Color return_value;
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hookPre_Player_GetSpriteColor(__this, method, return_value))
+			return return_value;
+	}
+
+	return_value = Original_Player_GetSpriteColor(__this, method);
+
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hookPost_Player_GetSpriteColor(__this, method, return_value))
+			return return_value;
+	}
+
+	return return_value;
+}
+
+void Detour_CharacterGUIInfoSection_ChangeTransparencyValue(CharacterGUIInfoSection* __this, float transparency, MethodInfo* method)
+{
+	bool NOP = false;
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hook_CharacterGUIInfoSection_ChangeTransparencyValue(__this, transparency, method, NOP))
+			if (NOP) return;
+	}
+
+	return Original_CharacterGUIInfoSection_ChangeTransparencyValue(__this, transparency, method);
 }
 
 bool InitHooks()
@@ -134,6 +198,17 @@ bool InitHooks()
 		ret = false;
 	}
 
+	if (MH_CreateHook(List_1_System_Object_Add, Detour_List_1_System_Object_Add, reinterpret_cast<LPVOID*>(&Original_List_1_System_Object_Add)) != MH_OK)
+	{
+		std::cout << "Failed to Detour List_1_System_Object_Add" << std::endl;
+		ret = false;
+	}
+	
+	if (MH_CreateHook(List_1_System_Object_Remove, Detour_List_1_System_Object_Remove, reinterpret_cast<LPVOID*>(&Original_List_1_System_Object_Remove)) != MH_OK)
+	{
+		std::cout << "Failed to Detour List_1_System_Object_Remove" << std::endl;
+		ret = false;
+	}
 
 	if (MH_CreateHook(SpriteShader_UpdateMask, Detour_SpriteShader_UpdateMask, reinterpret_cast<LPVOID*>(&Original_SpriteShader_UpdateMask)) != MH_OK)
 	{
@@ -150,6 +225,17 @@ bool InitHooks()
 	if (MH_CreateHook(GameController_FixedUpdate, Detour_GameController_FixedUpdate, reinterpret_cast<LPVOID*>(&Original_GameController_FixedUpdate)) != MH_OK)
 	{
 		std::cout << "Failed to Detour GameController_FixedUpdate" << std::endl;
+		ret = false;
+	}
+	if (MH_CreateHook(Player_GetSpriteColor, Detour_Player_GetSpriteColor, reinterpret_cast<LPVOID*>(&Original_Player_GetSpriteColor)) != MH_OK)
+	{
+		std::cout << "Failed to Detour Player_GetSpriteColor" << std::endl;
+		ret = false;
+	}
+	
+	if (MH_CreateHook(CharacterGUIInfoSection_ChangeTransparencyValue, Detour_CharacterGUIInfoSection_ChangeTransparencyValue, reinterpret_cast<LPVOID*>(&Original_CharacterGUIInfoSection_ChangeTransparencyValue)) != MH_OK)
+	{
+		std::cout << "Failed to Detour CharacterGUIInfoSection_ChangeTransparencyValue" << std::endl;
 		ret = false;
 	}
 

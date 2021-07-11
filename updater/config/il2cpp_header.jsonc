@@ -169,16 +169,62 @@
             "name": ["DAOINPHCAEG_GBGPMMIJCCF", "ChatFilter_Validate"],
             "typedef": "(DAOINPHCAEG * __this, String * DCGGIEJHCEC, MethodInfo * method)",
             "methodinfo": false
+        },
+        {
+            "name": ["JFNHHLNJJKP_NCJKMPCFPHC", "Player_GetSpriteColor"],
+            "typedef": "(JFNHHLNJJKP * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["CharacterGUIInfoSection_ChangeTransparencyValue", "CharacterGUIInfoSection_ChangeTransparencyValue"],
+            "typedef": "(CharacterGUIInfoSection * __this, float GKLFNLCLLGM, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["QualitySettings_set_vSyncCount", "QualitySettings_set_vSyncCount"],
+            "typedef": "(int32_t value, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Application_set_targetFrameRate", "Application_set_targetFrameRate"],
+            "typedef": "(int32_t value, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["List_1_System_Object__Add", "List_1_System_Object_Add"],
+            "typedef": "(List_1_System_Object_ * __this, Object * item, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["List_1_System_Object__Remove", "List_1_System_Object_Remove"],
+            "typedef": "(List_1_System_Object_ * __this, Object * item, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["List_1_NIIFJAMEHDD__Add", "List_1_NIIFJAMEHDD__Add"],
+            "typedef": "(List_1_NIIFJAMEHDD_ * __this, NIIFJAMEHDD * item, MethodInfo * method)",
+            "methodinfo": true
+        },
+        {
+            "name": ["List_1_NIIFJAMEHDD__Remove", "List_1_NIIFJAMEHDD__Remove"],
+            "typedef": "(List_1_NIIFJAMEHDD_ * __this, NIIFJAMEHDD * item, MethodInfo * method)",
+            "methodinfo": true
+        },
+        {
+            "name": ["SpriteRenderer_set_color", "SpriteRenderer_set_color"],
+            "typedef": "(SpriteRenderer * __this, Color value, MethodInfo * method)",
+            "methodinfo": false
         }
     ],
     "enums": [
         ["Allocator", "Allocator__Enum"],
         ["CLEPBEMBHAJ", "FloatingTextType"],
         ["OMIPCDPIAOC", "MapObjectType"],
-        ["HLMENPGLNDH", "MapItem"],
+        ["HLMENPGLNDH", "MapItemType"],
         ["FDOLMLKAKIN", "ItemLocationType"],
         ["GCAPHHCPLGG", "SettingsKeyCode"],
         ["KeyCode", "KeyCode"],
+        ["PMHOACJAAAL", "CharacterGUI_NameType"], // OnlyName, OnlyBars, Full, None
         ["EMOPGKHHDGD", "EMOPGKHHDGD"], // Player, OtherPlayer, Npc, Lootbag
         ["EFBAFDICAFG", "EFBAFDICAFG"], // Right, Left, Down, Up, None, First
         ["BJHJLINJFAI", "BJHJLINJFAI"], // Stand, Walk, Attack, NumAction
@@ -223,7 +269,10 @@
         { "name": "Camera",             "props": { "__Fields": [ ] } },
         { "name": "Rect",               "props": { } },
         { "name": "RaycastHit2D",       "props": { } },
+        { "name": "SpriteRenderer",     "props": { "__Fields": [ ] } },
+        { "name": "Renderer",           "props": { "__Fields": [ ] } },
         
+        // TextMeshPro
         { "name": "UIBehaviour",                                                "props": { "__Fields": [ ] } },
         { "name": "MaskableGraphic",                                            "props": { "__Fields": [ ] } },
         { "name": "Graphic",                                                    "props": { "__Fields": [ ] } },
@@ -258,8 +307,9 @@
         { "name": "ViewHandler",        "props": { "__Fields": [ ] } },
         { "name": "SpriteShader",       "props": { "__Fields": [ ] } },
         { "name": "CharacterInfo",      "props": { "__Fields": [ ] } },
+        { "name": "CharacterGUIInfoSection", "props": { "__Fields": [ ] } },
+        { "name": "GUIInfoSection", "props": { "__Fields": [ ] } },
         { "name": "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_",   "props": { "__Fields": [ ] } },
-        { "name": "DAOINPHCAEG",        "props": { "__Fields": [ ] } },
 
         {
             "name": "ApplicationManager",
@@ -332,6 +382,8 @@
         },
 
         /* random */
+        { "name": "DAOINPHCAEG",        "props": { "__Fields": [ ] } },
+        { "name": "CGPOGAAKLFL",        "props": { "__Fields": [ ] } },
         {
             "name": "UnityThread",
             "props": {
@@ -412,6 +464,9 @@
             "props": { 
                 "__Fields": [
                     ["PHNLNOOLAIO", "skin_id"],
+                    ["ECPELIFEJPI", "map_item_type"],
+                    ["HGLIEJOCNMI", "sprite_renderer"],
+
                     ["FBLOKBOPOOC", "invulnerable"],
 
                     ["JLECINIONGJ", "max_hp"],
@@ -444,6 +499,15 @@
                 ]
             }
         },
-        { "name": "NIIFJAMEHDD", "props": { "__Fields": [ ] } }
+        {
+            "name": "NIIFJAMEHDD",
+            "props": {
+                "__Fields": [
+                    ["LLKEJMLKCCA",  "added_to_list"]
+                ]
+            }
+        },
+        { "name": "List_1_NIIFJAMEHDD_", "props": { "__Fields": [ ] } },
+        { "name": "List_1_System_Object_", "props": { "__Fields": [ ] } }
     ]
 }

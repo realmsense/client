@@ -25,6 +25,19 @@ struct Type {
     struct Type__Fields fields;
 };
 
+struct __declspec(align(8)) List_1_System_Object___Fields {
+    struct Object__Array *_items;
+    int32_t _size;
+    int32_t _version;
+    struct Object *_syncRoot;
+};
+
+struct List_1_System_Object_ {
+    struct List_1_System_Object___Class *klass;
+    MonitorData *monitor;
+    struct List_1_System_Object___Fields fields;
+};
+
 enum class Allocator__Enum : int32_t {
     Invalid = 0x00000000,
     None = 0x00000001,
@@ -125,6 +138,16 @@ struct Vector4 {
     float w;
 };
 
+struct Renderer__Fields {
+    struct Component__Fields _;
+};
+
+struct Renderer {
+    struct Renderer__Class *klass;
+    MonitorData *monitor;
+    struct Renderer__Fields fields;
+};
+
 struct Color32 {
     int32_t rgba;
     uint8_t r;
@@ -161,6 +184,16 @@ struct MonoBehaviour {
     struct MonoBehaviour__Class *klass;
     MonitorData *monitor;
     struct MonoBehaviour__Fields fields;
+};
+
+struct SpriteRenderer__Fields {
+    struct Renderer__Fields _;
+};
+
+struct SpriteRenderer {
+    struct SpriteRenderer__Class *klass;
+    MonitorData *monitor;
+    struct SpriteRenderer__Fields fields;
 };
 
 struct float3 {
@@ -1270,6 +1303,61 @@ struct TextMeshProUGUI {
     struct TextMeshProUGUI__Fields fields;
 };
 
+enum class CharacterGUI_NameType : int32_t {
+    OnlyName = 0x00000000,
+    OnlyBars = 0x00000001,
+    Full = 0x00000002,
+    None = 0x00000003,
+};
+
+struct GUIInfoSection__Fields {
+    struct MonoBehaviour__Fields _;
+    struct SpriteProgressBar *hpBar;
+    struct TextMeshPro *nameLabel;
+    struct GameObject *nameContainer;
+    bool HHHJJLLMPFP;
+    bool LGBOJEIEIPB;
+    struct MapObject *CKEINDDMPKI;
+    struct Settings *DKCDBOLECHM;
+    bool PNPKJEJJOEK;
+    bool GPOIICFHALE;
+    bool CBHDGGBKGDF;
+    bool ECLMADEKHPD;
+    #if defined(_CPLUSPLUS_)
+    CharacterGUI_NameType HFGHIKNEIEJ;
+    #else
+    int32_t HFGHIKNEIEJ;
+    #endif
+};
+
+struct GUIInfoSection {
+    struct GUIInfoSection__Class *klass;
+    MonitorData *monitor;
+    struct GUIInfoSection__Fields fields;
+};
+
+struct CharacterGUIInfoSection__Fields {
+    struct GUIInfoSection__Fields _;
+    struct WaitForEndOfFrame *GFPMIDMHPON;
+    struct HorizontalLayoutGroup *infoContainerLayout;
+    struct RectTransform__Array *rectToRefresh;
+    struct ContentSizeFitter *nameSizeFilter;
+    struct SpriteProgressBar *breathBar;
+    struct SpriteRenderer *starIcon;
+    struct Player *NCEPPPOAADJ;
+    bool DGNCMLKGKCO;
+    bool ACOINGPJGLE;
+    bool CANLAPPDMGJ;
+    bool MHCHEGAMHEL;
+    bool JKKDCANICCC;
+};
+
+struct CharacterGUIInfoSection {
+    struct CharacterGUIInfoSection__Class *klass;
+    MonitorData *monitor;
+    struct CharacterGUIInfoSection__Fields fields;
+};
+
 enum class MapObjectType : int32_t {
     BasicMapObject = 0x00000000,
     Projectile = 0x00000001,
@@ -1377,7 +1465,7 @@ struct BasicObject {
     struct BasicObject__Fields fields;
 };
 
-enum class MapItem : int32_t {
+enum class MapItemType : int32_t {
     Interaction = 0x00000000,
     LootBag = 0x00000001,
     Death = 0x00000002,
@@ -1452,7 +1540,7 @@ struct MapObject__Fields {
     double HDHLOKPBNLO;
     struct Int32__Array *NBKFIKODCFJ;
     #if defined(_CPLUSPLUS_)
-    MapItem ECPELIFEJPI;
+    MapItemType map_item_type;
     #else
     int32_t ECPELIFEJPI;
     #endif
@@ -1485,7 +1573,7 @@ struct MapObject__Fields {
     struct IPLLFANOFGD *CIJKGNOLCAO;
     struct SpriteMask *JNIJOIAHCEC;
     struct SortingGroup *LMEBLKJIFCK;
-    struct SpriteRenderer *HGLIEJOCNMI;
+    struct SpriteRenderer *sprite_renderer;
     bool JBINFIHJKBA;
     int32_t EAMFMEIBKJH;
     bool DHEPPKMKIGP;
@@ -1726,6 +1814,19 @@ struct MapObjectUIManager {
     struct MapObjectUIManager__Class *klass;
     MonitorData *monitor;
     struct MapObjectUIManager__Fields fields;
+};
+
+struct __declspec(align(8)) CGPOGAAKLFL__Fields {
+    struct Sprite *EMEEBEDIJJG;
+    struct Rect JLALMJBNEFH;
+    uint64_t BEBMCFEBOFA;
+    uint64_t PGPMLMINPJH;
+};
+
+struct CGPOGAAKLFL {
+    struct CGPOGAAKLFL__Class *klass;
+    MonitorData *monitor;
+    struct CGPOGAAKLFL__Fields fields;
 };
 
 struct __declspec(align(8)) Settings__Fields {
@@ -2803,13 +2904,26 @@ struct CharacterInfo {
     struct CharacterInfo__Fields fields;
 };
 
+struct __declspec(align(8)) List_1_NIIFJAMEHDD___Fields {
+    struct NIIFJAMEHDD__Array *_items;
+    int32_t _size;
+    int32_t _version;
+    struct Object *_syncRoot;
+};
+
+struct List_1_NIIFJAMEHDD_ {
+    struct List_1_NIIFJAMEHDD___Class *klass;
+    MonitorData *monitor;
+    struct List_1_NIIFJAMEHDD___Fields fields;
+};
+
 struct NIIFJAMEHDD__Fields {
     struct MapObject__Fields _;
     struct List_1_NOBHMIPLKAP_ *DOENFMFONLM;
     float NMCEDOFIKDL;
     uint8_t EIBAJBLFCJM;
     bool FCAFCEMCHLF;
-    bool LLKEJMLKCCA;
+    bool added_to_list;
 };
 
 struct NIIFJAMEHDD {

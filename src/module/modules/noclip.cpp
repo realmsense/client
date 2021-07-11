@@ -59,7 +59,7 @@ void NoclipModule::toggleNoclip()
 }
 
 
-bool NoclipModule::hookPost_MapViewService_CheckTileWalkable(MapViewService*& __this, float& x, float y, bool& return_value)
+bool NoclipModule::hookPost_MapViewService_CheckTileWalkable(MapViewService*& __this, float& x, float y, MethodInfo*& method, bool& return_value)
 {
 	if (!this->enabled) return false;
 
