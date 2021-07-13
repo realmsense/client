@@ -1,59 +1,9 @@
 #pragma once
 
-#include "pch.h"
+extern std::unordered_set<Character*> g_aEnemyList;
+void CleanEnemyList();
 
-void InitPointers();
+extern bool g_bGuiOpen;
+
 void LoadSettings();
-
-// Pointers (game objects)
-extern uintptr_t g_pBaseAddress;
-extern Entity* g_pPlayer;
-extern CameraManager* g_pCameraManager;
-extern uintptr_t g_pMainCamera;
-extern uintptr_t g_pIdleWatcher;
-extern uintptr_t g_pMapViewHelper;
-
-// Functions
-extern _System_GetType System_GetType;
-extern _il2cpp_string_new il2cpp_string_new;
-extern _DisableFog DisableFog;
-extern _EnableFog EnableFog;
-extern _TMPText_SetText TMPText_SetText;
-extern _TMPText_SetColor TMPText_SetColor;
-extern _Screen_GetFullscreenMode Screen_GetFullscreenMode;
-extern _Screen_SetFullscreenMode Screen_SetFullscreenMode;
-extern _Camera_set_orthographicSize Camera_set_orthographicSize;
-extern _Behaviour_set_enabled Behaviour_set_enabled;
-extern _Behaviour_get_enabled Behaviour_get_enabled;
-extern _Component_GetGameObject Component_GetGameObject;
-extern _Object_FindObjectOfType Object_FindObjectOfType;
-extern _Object_GetName Object_GetName;
-extern _GameObject_Find GameObject_Find;
-extern _GameObject_GetTransform GameObject_GetTransform;
-extern _GameObject_GetActive GameObject_GetActive;
-extern _GameObject_SetActive GameObject_SetActive;
-extern _Transform_Find Transform_Find;
-extern _Transform_GetChild Transform_GetChild;
-extern _Transform_get_childCount Transform_get_childCount;
-extern _Transform_get_position Transform_get_position;
-extern _Transform_set_position Transform_set_position;
-extern _Transform_get_localScale Transform_get_localScale;
-extern _Transform_set_localScale Transform_set_localScale;
-extern _WorldToScreen WorldToScreen;
-extern _ScreenToWorld ScreenToWorld;
-extern _SetVsync SetVsync;
-extern _SetFpsTarget SetFpsTarget;
-extern _ShowFloatingText __ShowFloatingText;
-
-// Variables / Settings
-extern bool g_bMenuOpen;
-extern bool g_bWindowFocused;
-extern std::unordered_set<Entity*> g_aEnemyList;
-extern std::vector<Entity*> g_aPlayerList;
-
-/* other */
-extern int g_iReconDelay;
-
-/* debug */
-extern bool g_bEnemyTracers;
-extern bool g_bEnemyNames;
+void SaveSettings();

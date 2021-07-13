@@ -7,10 +7,17 @@ class ModuleLogger : private std::streambuf, public std::ostream
 {
 public:
     ModuleLogger();
-    bool floatingText;
-    __int64 color;
+    void floatingText(__int64 color);
+
+    std::string module_name;
 
 protected:
     int overflow(int c) override;
     void log(char c);
+
+private:
+    std::stringstream stream;
+
+    bool floatingTextEnabled;
+    __int64 floatingTextColor;
 };

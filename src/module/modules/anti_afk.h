@@ -1,19 +1,16 @@
 #pragma once
 
-#include "structs.h"
 #include "../module.h"
 
-class AntiAfkModule : public Module {
+class AntiAFKModule : public Module {
 public:
-    AntiAfkModule();
+	AntiAFKModule();
 
-    uintptr_t idleWatcherObj;
-
-    void onEnable();
-    void onDisable();
-    void renderGUI();
-    bool onEvent(ModuleEvent event, CDataPack* dp);
+	void onEnable() override;
+	void onDisable() override;
+	void renderGUI() override;
 
 private:
-    bool GetIdleWatcher();
+	IdleWatcher* GetIdleWatcher();
 };
+

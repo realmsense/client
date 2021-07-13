@@ -1,34 +1,29 @@
 #pragma once
 
-#include "structs.h"
 #include "../module.h"
 
 class AntiLagModule : public Module {
 public:
-    AntiLagModule();
+	AntiLagModule();
 
-    float playerSize;
-    bool hideTiles;
-    bool hidePets;
-    bool showFPS;
-    bool unlimitedFPS;
-    int fullscreenMode;
+	void onEnable() override;
+	void onDisable() override;
+	void renderGUI() override;
 
-    void onEnable();
-    void onDisable();
-    void renderGUI();
-    bool onEvent(ModuleEvent event, CDataPack* dp);
-    bool onMainLoop();
-    bool onPetUpdate(CDataPack* dp);
+	bool hook_GameController_FixedUpdate(GameController* __this, MethodInfo*& method, bool& NOP) override;
+	bool hookPost_Player_GetSpriteColor(Player*& __this, MethodInfo*& method, Color& return_value) override;
+	bool hook_CharacterGUIInfoSection_ChangeTransparencyValue(CharacterGUIInfoSection*& __this, float& transparency, MethodInfo*& method, bool& NOP) override;
 
-    void ResizePlayers(float scale);
-    void HideTiles(bool hide);
-    void ShowFPS(bool show);
-    void ToggleUnlimitedFPS(bool on);
-    void SetFullscreenMode(int mode);
+	bool hook_Detour_List_1_System_Object_Add(List_1_System_Object_*& __this, Object*& item, MethodInfo*& method, bool& NOP) override;
+	bool hookPre_Detour_List_1_System_Object_Remove(List_1_System_Object_*& __this, Object*& item, MethodInfo*& method, bool& return_value) override;
 
 private:
+	float player_transparency;
+	std::unordered_set<Pet*> pet_list;
+	float pet_transparency;
+	bool unlimited_fps;
 
+
+	void setUnlimitedFPS(bool enabled);
 };
 
-void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale);

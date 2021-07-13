@@ -1,172 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0927fe21-a2cc-4bb7-b887-fe71b340d42d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp">
+      <UniqueIdentifier>{04ace69b-532b-44c3-a971-7987c512104e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp\appdata">
+      <UniqueIdentifier>{65156da5-f6a3-4d94-97c4-c2271a3cac89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp\framework">
+      <UniqueIdentifier>{ef24a836-2875-42ca-8550-a7bf287f30a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{85f00ee9-0de3-4d07-84b4-873d33059ce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\other">
+      <UniqueIdentifier>{1385aa1f-1fbd-4b4e-8359-0c829d801cc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui">
+      <UniqueIdentifier>{b7425970-8481-4dc8-af2d-7491b3a0de5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\thirdparty">
+      <UniqueIdentifier>{e72a806d-4fe5-4086-a439-31cdf50b9dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\thirdparty\imgui">
+      <UniqueIdentifier>{b50f06b4-0a67-417e-b448-ce103dd4cdce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\thirdparty\kiero">
+      <UniqueIdentifier>{45cff9eb-8432-4dc8-af9c-2c86e10b2cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\thirdparty\minhook">
+      <UniqueIdentifier>{f1163919-34b5-4ffe-bd14-4f2680631167}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\helpers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\il2cpp\framework\il2cpp-init.cpp">
+      <Filter>Source Files\il2cpp\framework</Filter>
+    </ClCompile>
     <ClCompile Include="src\pch.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="src\helpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\gui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\globals.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\hooks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_demo.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_draw.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_impl_dx11.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_impl_win32.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_tables.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui\imgui_widgets.cpp">
-      <Filter>Source Files\imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="src\kiero\kiero.cpp">
-      <Filter>Source Files\kiero</Filter>
-    </ClCompile>
-    <ClCompile Include="src\minhook\src\buffer.c">
-      <Filter>Source Files\minhook</Filter>
-    </ClCompile>
-    <ClCompile Include="src\minhook\src\hook.c">
-      <Filter>Source Files\minhook</Filter>
-    </ClCompile>
-    <ClCompile Include="src\minhook\src\trampoline.c">
-      <Filter>Source Files\minhook</Filter>
-    </ClCompile>
-    <ClCompile Include="src\minhook\src\hde\hde32.c">
-      <Filter>Source Files\minhook</Filter>
-    </ClCompile>
-    <ClCompile Include="src\minhook\src\hde\hde64.c">
-      <Filter>Source Files\minhook</Filter>
-    </ClCompile>
     <ClCompile Include="src\module\module_manager.cpp">
+      <Filter>Source Files\module</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\module.cpp">
       <Filter>Source Files\module</Filter>
     </ClCompile>
     <ClCompile Include="src\module\modules\noclip.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\module\module.cpp">
+    <ClCompile Include="src\hooks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\module_logger.cpp">
       <Filter>Source Files\module</Filter>
     </ClCompile>
-    <ClCompile Include="src\other\CDataPack.cpp">
-      <Filter>Source Files\other</Filter>
+    <ClCompile Include="src\globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\modules\debug.cpp">
+      <Filter>Source Files\module\modules</Filter>
     </ClCompile>
     <ClCompile Include="src\module\modules\autoaim.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\module\modules\walk.cpp">
+    <ClCompile Include="src\module\modules\example.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\module\modules\disable_fog.cpp">
+    <ClCompile Include="src\module\modules\skin_changer.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\module\modules\unlimited_zoom.cpp">
-      <Filter>Source Files\module\modules</Filter>
-    </ClCompile>
-    <ClCompile Include="src\module\modules\anti_lag.cpp">
+    <ClCompile Include="src\module\modules\camera_settings.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
     <ClCompile Include="src\module\modules\name_change.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\module\modules\anti_afk.cpp">
+    <ClCompile Include="src\thirdparty\imgui\imgui.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_demo.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_draw.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_impl_dx11.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_impl_win32.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_tables.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\kiero\kiero.cpp">
+      <Filter>Source Files\thirdparty\kiero</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\minhook\src\buffer.c">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\minhook\src\hook.c">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\minhook\src\trampoline.c">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\minhook\src\hde\hde32.c">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\minhook\src\hde\hde64.c">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="src\thirdparty\imgui\misc\cpp\imgui_stdlib.cpp">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gui.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\gui_image.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\module\modules\autonexus.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\other\scan.cpp">
-      <Filter>Source Files\other</Filter>
+    <ClCompile Include="src\module\modules\disable_chat_filter.cpp">
+      <Filter>Source Files\module\modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\module\module_logger.cpp">
-      <Filter>Source Files\module</Filter>
+    <ClCompile Include="src\module\modules\anti_lag.cpp">
+      <Filter>Source Files\module\modules</Filter>
     </ClCompile>
-    <ClCompile Include="src\module\modules\skin_change.cpp">
+    <ClCompile Include="src\module\modules\anti_afk.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\pch.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\helpers.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-api-functions-ptr.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-functions.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-metadata-version.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-types.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-types-ptr.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\framework\il2cpp-appdata.h">
+      <Filter>Source Files\il2cpp\framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\framework\il2cpp-init.h">
+      <Filter>Source Files\il2cpp\framework</Filter>
     </ClInclude>
     <ClInclude Include="src\helpers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\hooks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\structs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imconfig.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui_impl_dx11.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui_impl_win32.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imgui_internal.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imstb_rectpack.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imstb_textedit.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\imgui\imstb_truetype.h">
-      <Filter>Source Files\imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="src\kiero\kiero.h">
-      <Filter>Source Files\kiero</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\buffer.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\trampoline.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\hde\hde32.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\hde\hde64.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\hde\pstdint.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\hde\table32.h">
-      <Filter>Source Files\minhook</Filter>
-    </ClInclude>
-    <ClInclude Include="src\minhook\src\hde\table64.h">
-      <Filter>Source Files\minhook</Filter>
+      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\module\module_manager.h">
       <Filter>Source Files\module</Filter>
@@ -180,82 +191,136 @@
     <ClInclude Include="src\module\module_list.h">
       <Filter>Source Files\module</Filter>
     </ClInclude>
-    <ClInclude Include="src\other\CDataPack.h">
-      <Filter>Source Files\other</Filter>
+    <ClInclude Include="src\module\module_enums.h">
+      <Filter>Source Files\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hooks.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\module_logger.h">
+      <Filter>Source Files\module</Filter>
+    </ClInclude>
+    <ClInclude Include="src\globals.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\debug.h">
+      <Filter>Source Files\module\modules</Filter>
     </ClInclude>
     <ClInclude Include="src\module\modules\autoaim.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
-    <ClInclude Include="src\module\modules\walk.h">
+    <ClInclude Include="src\module\modules\example.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
-    <ClInclude Include="src\module\modules\disable_fog.h">
+    <ClInclude Include="src\module\modules\skin_changer.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
-    <ClInclude Include="src\module\modules\unlimited_zoom.h">
+    <ClInclude Include="src\other\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\camera_settings.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\il2cpp\appdata\il2cpp-internal-types.h">
+      <Filter>Source Files\il2cpp\appdata</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\name_change.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imconfig.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imgui.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imgui_impl_dx11.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imgui_impl_win32.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imgui_internal.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imstb_rectpack.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imstb_textedit.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\imstb_truetype.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\kiero\kiero.h">
+      <Filter>Source Files\thirdparty\kiero</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\buffer.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\trampoline.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\hde\hde32.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\hde\hde64.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\hde\pstdint.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\hde\table32.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\minhook\src\hde\table64.h">
+      <Filter>Source Files\thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="src\thirdparty\imgui\misc\cpp\imgui_stdlib.h">
+      <Filter>Source Files\thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\gui.h">
+      <Filter>Source Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\gui_image.h">
+      <Filter>Source Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\autonexus.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\disable_chat_filter.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
     <ClInclude Include="src\module\modules\anti_lag.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
-    <ClInclude Include="src\module\modules\name_change.h">
-      <Filter>Source Files\module\modules</Filter>
-    </ClInclude>
     <ClInclude Include="src\module\modules\anti_afk.h">
       <Filter>Source Files\module\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="src\other\fake_ntdl.h">
-      <Filter>Source Files\other</Filter>
-    </ClInclude>
-    <ClInclude Include="src\other\scan.h">
-      <Filter>Source Files\other</Filter>
-    </ClInclude>
-    <ClInclude Include="src\other\reclass.h">
-      <Filter>Source Files\other</Filter>
-    </ClInclude>
-    <ClInclude Include="src\other\offsets.h">
-      <Filter>Source Files\other</Filter>
-    </ClInclude>
-    <ClInclude Include="src\module\module_logger.h">
-      <Filter>Source Files\module</Filter>
-    </ClInclude>
-    <ClInclude Include="src\module\module_enums.h">
-      <Filter>Source Files\module</Filter>
-    </ClInclude>
-    <ClInclude Include="src\module\modules\skin_change.h">
-      <Filter>Source Files\module\modules</Filter>
-    </ClInclude>
-    <ClInclude Include="src\other\skins.h">
-      <Filter>Source Files\other</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{d98b67bc-ae02-47c6-9aca-a5c7948cb481}</UniqueIdentifier>
+      <UniqueIdentifier>{c3991249-53d9-4663-b823-441c82806314}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp">
+      <UniqueIdentifier>{dc2bbb52-9536-4571-96a7-2149171c040e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp\appdata">
+      <UniqueIdentifier>{546707ff-b898-48af-8038-b7dd4817781d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\il2cpp\framework">
+      <UniqueIdentifier>{d7579c01-2e7e-42c3-9c03-4525d63f9370}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{02dcd431-e026-4405-8b49-2f45729264a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\kiero">
-      <UniqueIdentifier>{2d9d37d2-f30a-42c1-be64-dc73b476fa7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\imgui">
-      <UniqueIdentifier>{30e60c4e-5f3d-4019-8df4-e4d3d5605edc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\minhook">
-      <UniqueIdentifier>{b1c7fb31-3f06-44df-b7c3-ad181be6c19f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{80841d27-735c-49f0-a7a0-70dca6b5e95e}</UniqueIdentifier>
+      <UniqueIdentifier>{362313b7-2c28-40d8-98f2-b0ad3343ed0d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\module">
-      <UniqueIdentifier>{e8d50ba9-2a81-412d-a83a-34fbdf8b069a}</UniqueIdentifier>
+      <UniqueIdentifier>{73c5f675-5e99-4458-b5c2-ce6a7a6de1a9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\module\modules">
-      <UniqueIdentifier>{0176278c-a113-4b4a-b533-8d1c756acdc2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\other">
-      <UniqueIdentifier>{63be5454-49c6-4caf-8709-075b9e6a06a8}</UniqueIdentifier>
+      <UniqueIdentifier>{93271a72-b9a3-4134-8e46-eab7ded76b66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

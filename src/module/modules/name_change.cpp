@@ -1,259 +1,245 @@
 #include "pch.h"
-#include "../module.h"
-#include "../module_manager.h"
-
+#include "helpers.h"
 #include "name_change.h"
-#include "imgui/imgui.h" // for colors
+
+#include "thirdparty/imgui/imgui.h"
+#include "thirdparty/imgui/misc/cpp/imgui_stdlib.h"
 
 NameChangeModule::NameChangeModule()
-    : Module()
+	: Module()
 {
-    this->name = "Name Change";
-    this->enabled = false;
-    this->type = ModuleList::NameChange;
-    this->category = ModuleCategory::OTHER;
-    this->hasGuiElements = true;
+	this->name = "Name Change";
+	this->enabled = false;
+	this->category = ModuleCategory::OTHER;
+	this->type = ModuleList::NameChange;
+	this->has_gui_elements = true;
 
-    this->charInfoObj = 0;
-    this->input_focused = false;
-
-    this->customPlayerName = "";
-    this->originalPlayerName = "\0";
-
-    this->customGuildName = "";
-    this->originalGuildName = "\0";
-
-    Color white{ 1.0f, 1.0f, 1.0f, 1.0f };
-    this->rainbowName = false;
-    this->customNameColor = white;
-
-    this->ready();
+	this->ready();
 }
 
 void NameChangeModule::onEnable()
 {
-    this->log.color = Color32_GREEN;
-    this->log.floatingText = true;
-    this->log << this->name << " enabled" << std::endl;
+	this->log.floatingText(Color32_GREEN);
+	this->log << this->name << " ON" << std::endl;
+
+	if (this->custom_player_name != "")
+		this->changePlayerName(this->custom_player_name);
+
+	if (this->custom_guild_name != "")
+		this->change_guild = true;
 }
 
 void NameChangeModule::onDisable()
 {
-    this->log.color = Color32_RED;
-    this->log.floatingText = true;
-    this->log << this->name << " disabled" << std::endl;
+	this->log.floatingText(Color32_RED);
+	this->log << this->name << " OFF" << std::endl;
+	
+	std::string original_playername = il2cppi_to_string(this->getOriginalPlayerName());
+	this->changePlayerName(original_playername);
+	this->resetGuild();
+}
 
-    // Reset to original names / color
-    if (this->originalPlayerName != "\0")
-        this->ChangePlayerName(this->originalPlayerName.c_str());
+bool NameChangeModule::hook_GameController_FixedUpdate(GameController* __this, MethodInfo*& method, bool& NOP)
+{
+	if (this->change_guild)
+	{
+		this->changeGuild(this->custom_guild_name, this->custom_guild_rank);
+		this->change_guild = false;
+	}
+	return false;
+}
 
-    if (this->originalGuildName != "\0")
-        this->ChangeGuildName(this->originalGuildName.c_str());
+bool NameChangeModule::hook_TMP_Text_set_text_internal(TMP_Text*& __this, String*& value, MethodInfo*& method, bool& NOP)
+{
+	if (!this->enabled) return false;
 
-    this->rainbowName = false;
-    Color white{ 1.0f, 1.0f, 1.0f, 1.0f };
-    this->ChangeNameColor(white);
+	auto account_name = this->GetGuiManager()->fields.characterInfo->fields.accountName;
+	if (__this == (TMP_Text*)account_name)
+	{
+		if (this->custom_player_name != "")
+		{
+			// prevent infinite-loop, when we set our custom name in this->changePlayerName
+			if (il2cppi_to_string(value) == this->custom_player_name)
+				return false;
+
+			this->changePlayerName(this->custom_player_name);
+			NOP = true;
+			return true;
+		}
+	}
+
+	auto guild_name = this->GetGuiManager()->fields.characterInfo->fields.guildNameLabel;
+	if (__this == (TMP_Text*)guild_name)
+	{
+		if (this->custom_guild_name != "")
+		{
+			// prevent infinite-loop, when we set our custom name in this->changePlayerName
+			if (il2cppi_to_string(value) == this->custom_guild_name)
+				return false;
+
+			this->changeGuild(this->custom_guild_name, this->custom_guild_rank);
+			NOP = true;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+bool NameChangeModule::hook_GameObject_SetActive(GameObject*& __this, bool& value, MethodInfo*& method, bool& NOP)
+{
+	if (!this->enabled) return false;
+
+	bool show_guild = this->hide_guild ? false : this->custom_guild_name != "";
+	if (value == show_guild) return false;
+
+	GuiManager* gui_manager = this->GetGuiManager();
+	GameObject* guild_info = gui_manager->fields.characterInfo->fields.guildInfo;
+	
+	Transform* guild_info_transf = GameObject_get_transform(guild_info, nullptr);
+	int child_count = Transform_get_childCount(guild_info_transf, nullptr);
+	for (int i = 0; i < child_count; i++)
+	{
+		Transform* child_transf = Transform_GetChild(guild_info_transf, i, nullptr);
+		GameObject* child_obj = Component_get_gameObject((Component*)child_transf, nullptr);
+		if (__this != child_obj) continue;
+
+		this->setGuildVisibility(show_guild);
+		NOP = true;
+		return true;
+	}
+
+	return false;
+}
+
+bool NameChangeModule::hook_ChatManager_AddSlot(ChatManager*& __this, ChatSlot*& chat_slot, MethodInfo*& method, bool& NOP)
+{
+	if (!this->enabled || this->custom_player_name == "") return false;
+
+	std::string original_name = il2cppi_to_string(this->getOriginalPlayerName());
+	std::string message = il2cppi_to_string(chat_slot->fields.formatted_message);
+
+	// replace occurence of our original name
+	size_t start_pos = message.find(original_name);
+	if (start_pos == std::string::npos) return false;
+	message.replace(start_pos, message.length(), this->custom_player_name);
+
+	chat_slot->fields.formatted_message = (String*)il2cpp_string_new(message.c_str());
+	return false;
 }
 
 void NameChangeModule::renderGUI()
 {
-    bool input_focused = false;
+	// TODO: block unity inputs
 
-    static char customPlayerName[128] = "";
-    if (ImGui::InputText("Custom Player Name", customPlayerName, IM_ARRAYSIZE(customPlayerName)))
-        this->ChangePlayerName(customPlayerName);
-    if (ImGui::IsItemFocused()) input_focused = true;
+	if (ImGui::InputText("Custom Player Name", &this->custom_player_name))
+	{
+		this->changePlayerName(this->custom_player_name);
+		this->setEnabled(true);
+	}
 
-    if (ImGui::Checkbox("Rainbow Name", &this->rainbowName))
-        this->ToggleRainbowName(this->rainbowName);
+	static int selected_guildrank = 0;
+	if (ImGui::Combo("Custom Guild Rank", &selected_guildrank, guild_ranks, IM_ARRAYSIZE(guild_ranks), IM_ARRAYSIZE(guild_ranks)))
+	{
+		// rotmg devs forgot what an enum is, and have hard coded values for guild ranks (See ALGAPFJEAOI const ints: 0, 10, 20, 30, 40)
+		// maybe a coincidence, but multiplying the index by 10 gives us the value used
+		// we subtract rank_length because guild_ranks is in descending order
+		int rank_length = IM_ARRAYSIZE(guild_ranks) - 1; // 4
+		this->custom_guild_rank = (rank_length - selected_guildrank) * 10;
 
-    static char customGuildName[128] = "";
-    if (ImGui::InputText("Custom Guild Name", customGuildName, IM_ARRAYSIZE(customGuildName)))
-        this->ChangeGuildName(customGuildName);
-    if (ImGui::IsItemFocused()) input_focused = true;
+		this->change_guild = true;
+		// this->changeGuild(this->custom_guild_name, this->custom_guild_rank);
+		this->setEnabled(true);
+	}
 
-    this->input_focused = input_focused;
+	if (ImGui::InputText("Custom Guild Name", &this->custom_guild_name))
+	{
+		this->change_guild = true;
+		//this->changeGuild(this->custom_guild_name, this->custom_guild_rank);
+		this->setEnabled(true);
+	}
+
+	if (ImGui::Checkbox("Hide Guild", &this->hide_guild))
+	{
+		this->setGuildVisibility(!this->hide_guild);
+		this->setEnabled(true);
+	}
 }
 
-bool NameChangeModule::onEvent(ModuleEvent event, CDataPack* dp)
+void NameChangeModule::changePlayerName(std::string name)
 {
-    switch (event)
-    {
-    case ModuleEvent::MainLoop:
-        return this->onMainLoop();
-    case ModuleEvent::GetKeyDown:
-        return this->onGetKeyDown();
-    case ModuleEvent::MapChange:
-        return this->onMapChange();
-    case ModuleEvent::TMP_SetText:
-        return this->onTMPSetText(dp);
-    default:
-        return true;
-    }
+	GuiManager* gui_manager = this->GetGuiManager();
+	TextMeshProUGUI* account_name = gui_manager->fields.characterInfo->fields.accountName;
+
+	TMP_Text_SetText(
+		(TMP_Text*)account_name,
+		(String*)il2cpp_string_new(name.c_str()),
+		true,
+		nullptr
+	);
 }
 
-bool NameChangeModule::onMainLoop()
+String* NameChangeModule::getOriginalPlayerName()
 {
-    this->enabled =
-        this->rainbowName
-        || strlen(this->customPlayerName) != 0
-        || strlen(this->customGuildName) != 0;
-
-    if (this->rainbowName)
-    {
-        static float hue = 1.0f;
-        static float speed = 0.0035f;
-        hue += speed;
-        if (hue > 360.0f) hue = 1.0f;
-        ImVec4 rainbow = (ImVec4)(ImColor)ImColor::HSV(hue, 1.0f, 1.0f);
-
-        this->customNameColor = { rainbow.x, rainbow.y, rainbow.z, 1.0f };
-        this->ChangeNameColor(this->customNameColor);
-    }
-
-    return true;
+	static GameController* game_controller = (GameController*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.Game.GameController, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+	Settings* settings = game_controller->fields.settings;
+	return settings->fields.account_name;
 }
 
-bool NameChangeModule::onGetKeyDown()
+void NameChangeModule::changeGuild(std::string name, int rank)
 {
-    return !this->input_focused; // block inputs if input focused
+	GuiManager* gui_manager = this->GetGuiManager();
+
+	if (name != "")
+	{
+		TextMeshProUGUI* guild_name = gui_manager->fields.characterInfo->fields.guildNameLabel;
+		TMP_Text_SetText(
+			(TMP_Text*)guild_name,
+			(String*)il2cpp_string_new(name.c_str()),
+			true,
+			nullptr
+		);
+	}
+
+	Image* guild_icon = gui_manager->fields.characterInfo->fields.guildIcon;
+	GuildIcon_SetIcon(guild_icon, (int)rank, nullptr);
+
+	this->setGuildVisibility(true);
 }
 
-bool NameChangeModule::onMapChange()
+void NameChangeModule::resetGuild()
 {
-    if (strlen(this->customPlayerName))
-        this->ChangePlayerName(this->customPlayerName);
+	Player* player = GetPlayer();
+	if (!player) return;
 
-    if (strlen(this->customGuildName))
-        this->ChangeGuildName(this->customGuildName);
+	std::string original_guildname = il2cppi_to_string(player->fields.guild_name);
+	if (original_guildname == "")
+	{
+		this->setGuildVisibility(false);
+		return;
+	}
 
-    this->ChangeNameColor(this->customNameColor);
-    return true;
+	this->changeGuild(original_guildname, player->fields.guild_rank);
 }
 
-bool NameChangeModule::onTMPSetText(CDataPack* dp)
+void NameChangeModule::setGuildVisibility(bool shown)
 {
-    dp->Reset();
-    size_t txtLen = dp->ReadCell();
-    const char* txt2 = dp->ReadString(&txtLen);
-    std::string text(txt2);
+	GuiManager* gui_manager = this->GetGuiManager();
+	GameObject* guild_info = gui_manager->fields.characterInfo->fields.guildInfo;
+	GameObject_SetActive(guild_info, shown, nullptr);
 
-    // Replace instances of our original player/guild name with our custom name
-
-    if (
-        strlen(this->customPlayerName)                          // we have a custom name
-        && this->originalPlayerName != "\0"                     // old name is set
-        && this->customPlayerName != this->originalPlayerName   // custom name is not our old name
-    ) {
-        std::string::size_type n = 0;
-        while ((n = text.find(this->originalPlayerName, n)) != std::string::npos)
-        {
-            text.replace(n, this->originalPlayerName.size(), this->customPlayerName);
-            n += strlen(this->customPlayerName);
-        }
-    }
-
-    if (
-        strlen(this->customGuildName)                           // we have a custom guild name
-        && this->originalGuildName != "\0"                      // old guild name is set
-        && this->customGuildName != this->originalGuildName     // custom guild name is not our actual guild name
-    ) {
-        std::string::size_type n = 0;
-        while ((n = text.find(this->originalGuildName, n)) != std::string::npos)
-        {
-            text.replace(n, this->originalGuildName.size(), this->customGuildName);
-            n += strlen(this->customGuildName);
-        }
-    }
-
-    dp->Reset();
-    dp->PackCell(text.length());
-    dp->PackString(text.c_str());
-    return true;
+	Transform* guild_info_transf = GameObject_get_transform(guild_info, nullptr);
+	int child_count = Transform_get_childCount(guild_info_transf, nullptr);
+	for (int i = 0; i < child_count; i++)
+	{
+		Transform* child_transf = Transform_GetChild(guild_info_transf, i, nullptr);
+		GameObject* child_obj = Component_get_gameObject((Component*)child_transf, nullptr);
+		GameObject_SetActive(child_obj, shown, nullptr);
+	}
 }
 
-void NameChangeModule::ToggleRainbowName(bool enabled)
+GuiManager* NameChangeModule::GetGuiManager()
 {
-    this->rainbowName = enabled;
-    if (!this->rainbowName)
-    {
-        // Reset name back to white text
-        Color white{ 1.0f, 1.0f, 1.0f, 1.0f };
-        this->ChangeNameColor(white);
-    }
-}
-
-void NameChangeModule::ChangeNameColor(Color color)
-{
-    this->customNameColor = color;
-
-    if (!this->GetCharInfoObject()) return;
-    if (!g_pPlayer) return;
-
-    uintptr_t accountName = (uintptr_t)this->charInfoObj->account_name_tmp;
-    TMPText_SetColor(accountName, color);
-}
-
-void NameChangeModule::ChangePlayerName(const char* name)
-{
-    this->customPlayerName = name;
-
-    if (!this->GetCharInfoObject()) return;
-    if (!g_pPlayer) return;
-
-    uintptr_t accountName_TMP = (uintptr_t)this->charInfoObj->account_name_tmp;
-    if (this->originalPlayerName == "\0")
-        this->originalPlayerName = ReadUnityString(g_pPlayer->name);
-
-    String* str = il2cpp_string_new(name);
-    TMPText_SetText(accountName_TMP, str, true);
-
-    this->log.floatingText = false;
-    this->log << "[" << this->name << "] Player name set to: " << name << std::endl;
-}
-
-void NameChangeModule::ChangeGuildName(const char* name)
-{
-    this->customGuildName = name;
-
-    if (!this->GetCharInfoObject())
-        return;
-
-    uintptr_t guildInfo_Obj = (uintptr_t)this->charInfoObj->guild_info_obj;
-    uintptr_t guildName_TMP = (uintptr_t)this->charInfoObj->guild_name_tmp;
-
-    uintptr_t guildInfo_Transform = GameObject_GetTransform(guildInfo_Obj);
-    String* guildName_str = il2cpp_string_new("Guildname");
-    uintptr_t guildName_Obj = Component_GetGameObject(Transform_Find(guildInfo_Transform, guildName_str));
-
-    if (this->originalGuildName == "\0")
-    {
-        String* guildName_txt = *(String**)(guildName_TMP + 0xc8); // m_text, too lazy to make TMPro_Text in reclass for just 1 prop
-        this->originalGuildName = ReadUnityString(guildName_txt);
-    }
-
-    String* str = il2cpp_string_new(this->customGuildName);
-    TMPText_SetText(guildName_TMP, str, true);
-
-    bool showGuildName = strlen(this->customGuildName) != 0;
-    GameObject_SetActive(guildInfo_Obj, showGuildName);
-    GameObject_SetActive(guildName_Obj, showGuildName);
-
-    this->log.floatingText = false;
-    this->log << "[" << this->name << "] Changed guild name to: " << name << std::endl;
-}
-
-bool NameChangeModule::GetCharInfoObject()
-{
-    if (this->charInfoObj)
-        return true; // pointer is persistent
-
-    uintptr_t charInfoObj = FindObjectByQualifiedName("DecaGames.RotMG.UI.GUI.CharacterInfo, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
-    if (charInfoObj)
-    {
-        this->charInfoObj = (CharacterInfo_GUI*)charInfoObj;
-        return true;
-    }
-
-    return false;
+	static GuiManager* gui_manager = (GuiManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.GUI.GuiManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+	return gui_manager;
 }

@@ -1,13 +1,20 @@
 #include "pch.h"
-#include "module_logger.h"
 
-#include <sstream>
+#include "helpers.h"
+#include "module_logger.h"
 
 ModuleLogger::ModuleLogger()
     : std::ostream(this)
 {
-    this->floatingText = false;
-    this->color = 0;
+    this->floatingTextEnabled = false;
+    this->floatingTextColor = 0;
+    this->stream = std::stringstream();
+}
+
+void ModuleLogger::floatingText(__int64 color)
+{
+    this->floatingTextEnabled = true;
+    this->floatingTextColor = color;
 }
 
 int ModuleLogger::overflow(int c)
@@ -18,22 +25,23 @@ int ModuleLogger::overflow(int c)
 
 void ModuleLogger::log(char c)
 {
-    static std::stringstream stream;
+    // Continue pushing characters into the stream until we reach EOL
     if (c != '\n')
     {
-        stream << c;
+        this->stream << c;
+        return;
     }
-    else
+
+    // Reached the end of this line, perform the actual logging
+    std::cout << "[" << this->module_name << "] " << this->stream.str() << std::endl;
+
+    if (this->floatingTextEnabled)
     {
-        std::cout << stream.str() << std::endl;
-
-        if (this->floatingText && g_pPlayer)
-        {
-            ShowFloatingText(stream.str().c_str(), FloatingTextType(0), this->color);
-        }
-
-        stream.str("");
-        stream.clear();
+        ShowFloatingText(this->stream.str().c_str(), FloatingTextType::Notification, this->floatingTextColor);
     }
-}
 
+    // Reset for next log
+    this->floatingTextEnabled = false;
+    stream.str("");
+    stream.clear();
+}

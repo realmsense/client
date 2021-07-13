@@ -2,65 +2,27 @@
 #include "module.h"
 #include "module_list.h"
 
-std::vector<Module*> modules;
-
-void LoadModules()
+namespace ModuleManager
 {
-    // TODO: use settings to enable/disable modules
-    // some modules (such as noclip) should stay disabled though
+	std::vector<Module*> modules;
 
-    // View
-    modules.push_back(new DisableFogModule());
-    modules.push_back(new UnlimitedZoomModule());
-    modules.push_back(new AntiLagModule());
-    modules.push_back(new SkinChangeModule());
+	void LoadModules()
+	{
+		std::cout << "Loading Modules..." << std::endl;
+		modules.push_back(new NoclipModule());
+		modules.push_back(new AutoAimModule());
+		modules.push_back(new AutoNexusModule());
+		modules.push_back(new SkinChangerModule());
+		modules.push_back(new CameraSettingsModule());
+		modules.push_back(new NameChangeModule());
+		modules.push_back(new DisableChatFilterModule());
+		modules.push_back(new AntiLagModule());
+		modules.push_back(new AntiAFKModule());
+		modules.push_back(new DebugModule());
+	}
 
-    // Movement
-    modules.push_back(new NoclipModule());
-    modules.push_back(new WalkModule());
-
-    // Auto
-    modules.push_back(new AutoAimModule());
-    
-    // Other
-    modules.push_back(new AntiAfkModule());
-    modules.push_back(new NameChangeModule());
-}
-
-void UnloadModules()
-{
-    for (auto& module : modules)
-    {
-        module->setEnabled(false, false);
-        delete module;
-    }
-}
-
-std::vector<Module*> GetAllModules()
-{
-    return modules;
-}
-
-std::vector<Module*> GetModules(ModuleCategory category)
-{
-    std::vector<Module*> ret;
-    for (auto module : modules)
-    {
-        if (module->category == category)
-            ret.push_back(module);
-    }
-    return ret;
-}
-
-// Return value is if the function should continue
-bool CallEvent(ModuleEvent event, CDataPack* dp)
-{
-    bool returnValue = true;
-    for (auto& module : modules)
-    {
-        if (!module->onEvent(event, dp))
-            returnValue = false;
-    }
-
-    return returnValue;
+	void UnloadModules()
+	{
+		std::cout << "Unloading Modules..." << std::endl;
+	}
 }

@@ -1,147 +1,170 @@
 #include "pch.h"
-#include "../module.h"
-#include "../module_manager.h"
-
-#include "imgui/imgui.h"
+#include "helpers.h"
 #include "autoaim.h"
 
-AutoAimModule::AutoAimModule()
-    : Module()
-{
-    this->name = "Auto Aim";
-    this->enabled = false;
-    this->type = ModuleList::AutoAim;
-    this->category = ModuleCategory::AUTO;
-    this->hasGuiElements = true;
+#define _USE_MATH_DEFINES
+#include <math.h>
 
-    // TODO: load the target option from config or default to closest mouse
-    this->target = AutoAimTarget::ClosestMouse;
-    this->ready();
+#include "thirdparty/imgui/imgui.h"
+
+AutoAimModule::AutoAimModule()
+	: Module()
+{
+	this->name = "Auto Aim";
+	this->enabled = false;
+	this->category = ModuleCategory::AUTO;
+	this->type = ModuleList::AutoAim;
+	this->has_gui_elements = true;
+
+	this->reverse_cult_staff = true;
+	this->target_mode = AutoAim_Target(1);
+
+	this->ready();
 }
 
 void AutoAimModule::onEnable()
 {
-    this->log.color = Color32_GREEN;
-    this->log.floatingText = true;
-    this->log << this->name << " enabled" << std::endl;
+	this->log.floatingText(Color32_GREEN);
+	this->log << this->name << " ON" << std::endl;
+	this->setAutoFire(true);
 }
 
 void AutoAimModule::onDisable()
 {
-    this->log.color = Color32_RED;
-    this->log.floatingText = true;
-    this->log << this->name << " disabled" << std::endl;
+	this->log.floatingText(Color32_RED);
+	this->log << this->name << " OFF" << std::endl;
+	this->setAutoFire(true);
 }
 
 void AutoAimModule::renderGUI()
 {
-    const char* aim_targets[] =
-    {
-        "Closest to Mouse",     // AutoAimTarget::ClosestMouse
-        "Closest to Player",    // AutoAimTarget::ClosestPos
-        "Highest Defense",      // AutoAimTarget::HighestDef
-        "Highest Max HP (Boss)" // AutoAimTarget::HighestMaxHP
-    };
+	const char* target_modes[] = {
+		"Any",					// AutoAim_Target::Any,
+		"Closest to Mouse",		// AutoAim_Target::ClosestMouse,
+		"Closest to Player",	// AutoAim_Target::ClosestPos,
+		"Highest Defense",		// AutoAim_Target::HighestDef,
+		"Highest Max HP",		// AutoAim_Target::HighestMaxHP
+	};
 
-    static int selected_target = 1;
-    ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing() * strlen(aim_targets[3]) / 2); // set width to the widest string
-    if (ImGui::Combo("Auto Aim Target", &selected_target, aim_targets, IM_ARRAYSIZE(aim_targets), IM_ARRAYSIZE(aim_targets)))
-    {
-        this->target = static_cast<AutoAimTarget>(selected_target);
-        this->log.floatingText = false;
-        this->log << "Auto Aim Target: " << aim_targets[selected_target] << std::endl;
-    }
+	static int selected_mode = 1;
+	ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing() * strlen(target_modes[2]) / 2); // set width to the widest string
+	if (ImGui::Combo("Target Mode", &selected_mode, target_modes, IM_ARRAYSIZE(target_modes), IM_ARRAYSIZE(target_modes)))
+	{
+		this->target_mode = AutoAim_Target(selected_mode);
+		this->log << "Target Mode set to " << target_modes[selected_mode] << std::endl;
+	}
+
+	if (ImGui::Checkbox("Reverse Cult Staff", &this->reverse_cult_staff))
+	{
+		this->log.floatingText(Color32_BLUE);
+		this->log << "Reverse Cult Staff: " << (this->reverse_cult_staff ? "ON" : "OFF") << std::endl;
+	}
 }
 
-bool AutoAimModule::onEvent(ModuleEvent event, CDataPack* dp)
+bool AutoAimModule::hook_Player_Shoot(Player*& player, float& angle, MethodInfo*& method, bool& NOP)
 {
-    if (!this->enabled)
-        return true;
+	bool return_value = false;
 
-    switch (event)
-    {
-    case ModuleEvent::GetMousePos:
-        return this->onGetMousePos(dp);
-    default:
-        return true;
-    }
+	bool attack_held = GetKeyDown(SettingsKeyCode::UseWeaponAttack); // allow user to override autoaim but holding left click
+	if (this->enabled && !attack_held)
+	{
+		Character* enemy = this->chooseEnemy();
+		if (enemy)
+		{
+			Vector2 player_pos = GetEntityPos((BasicObject*)player);
+			Vector2 enemy_pos = GetEntityPos((BasicObject*)enemy);
+
+			float diff_x = enemy_pos.x - player_pos.x;
+			float diff_y = enemy_pos.y - player_pos.y;
+			angle = atan2(diff_y, diff_x);
+			return_value = true;
+		}
+	}
+
+	if (reverse_cult_staff)
+	{
+		EquipmentSlot* weapon = GetEquipmentSlot(0);
+		ObjectProperties* object_properties = weapon->fields._._.object_properties;
+		if (object_properties)
+		{
+			bool cult_staff = il2cppi_to_string(object_properties->fields.displayId) == "Staff of Unholy Sacrifice";
+			if (cult_staff)
+			{
+				angle -= (float)M_PI;
+				return_value = true;
+			}
+		}
+	}
+
+	return return_value;
 }
 
-bool AutoAimModule::onGetMousePos(CDataPack* dp)
+Character* AutoAimModule::chooseEnemy()
 {
-    if (!g_pCameraManager) return true;
-    if (!g_pPlayer) return true;
+	Player* player = GetPlayer();
+	if (!player) return nullptr;
 
-    dp->Reset();
-    Vector3 mouse_pos{};
-    mouse_pos.x = dp->ReadFloat();
-    mouse_pos.y = dp->ReadFloat();
+	Character* chosen_enemy = nullptr;
+	for (Character* enemy : g_aEnemyList)
+	{
+		if (!enemy) continue; // probably need to hook the dispose function that is actually called, rn we're getting random crashes
 
-    Entity* chosen_enemy = nullptr;
+		if (this->target_mode == AutoAim_Target::Any)
+			return enemy;
 
-    for (auto& enemy : g_aEnemyList)
-    {
-        if (chosen_enemy == nullptr)
-        {
-            chosen_enemy = enemy;
-            continue;
-        }
+		if (chosen_enemy == nullptr)
+		{
+			chosen_enemy = enemy;
+			continue;
+		}
 
-        if (this->target == AutoAimTarget::ClosestPos)
-        {
-            const float chosen_distance = CalculateDistance(chosen_enemy->pos, g_pPlayer->pos);
-            const float current_distance = CalculateDistance(enemy->pos, g_pPlayer->pos);
+		Vector2 player_pos = GetEntityPos((BasicObject*)player);
+		Vector2 current_enemy_pos = GetEntityPos((BasicObject*)enemy);
+		Vector2 chosen_enemy_pos = GetEntityPos((BasicObject*)chosen_enemy);
 
-            if (current_distance < chosen_distance)
-                chosen_enemy = enemy;
-        }
-        else if (this->target == AutoAimTarget::ClosestMouse)
-        {
-            const Vector3 mouse_world_pos3 = ScreenToWorld(g_pMainCamera, mouse_pos);
-            const Vector2 mouse_world_pos = { mouse_world_pos3.x, mouse_world_pos3.y * -1 };
+		if (this->target_mode == AutoAim_Target::ClosestMouse)
+		{
+			Camera* camera = GetMainCamera();
+			ImVec2 cursor_pos = ImGui::GetMousePos();
+			Vector3 mouse_world_pos3 = Camera_ScreenToWorldPoint(camera, { cursor_pos.x, cursor_pos.y * -1, 0.0f }, nullptr);
+			Vector2 mouse_world_pos = { mouse_world_pos3.x, mouse_world_pos3.y * -1 };
 
-            const float chosen_distance = CalculateDistance(chosen_enemy->pos, mouse_world_pos);
-            const float currentdistance = CalculateDistance(enemy->pos, mouse_world_pos);
+			float chosen_distance = CalculateDistance(chosen_enemy_pos, mouse_world_pos);
+			float current_distance = CalculateDistance(current_enemy_pos, mouse_world_pos);
+			if (current_distance < chosen_distance)
+				chosen_enemy = enemy;
+		}
 
-            if (currentdistance < chosen_distance) 
-                chosen_enemy = enemy;
+		if (this->target_mode == AutoAim_Target::ClosestPos)
+		{
+			float chosen_distance = CalculateDistance(player_pos, chosen_enemy_pos);
+			float current_distance = CalculateDistance(player_pos, current_enemy_pos);
+			if (current_distance < chosen_distance)
+				chosen_enemy = enemy;
+		}
 
-        }
-        else if (this->target == AutoAimTarget::HighestDef)
-        {
-            // TODO: what happens if the enemy is armor broken?
-            // (abrn) I don't think this matters because the defense itself doesn't change on armor break
-            const int chosen_def = chosen_enemy->defense;
-            const int current_defense = enemy->defense;
+		if (this->target_mode == AutoAim_Target::HighestDef)
+		{
+			int chosen_defense = chosen_enemy->fields._.defense;
+			int current_defense = enemy->fields._.defense;
+			if (current_defense > chosen_defense)
+				chosen_enemy = enemy;
+		}
 
-            if (current_defense > chosen_def)
-                chosen_enemy = enemy;
-        }
-        else if (this->target == AutoAimTarget::HighestMaxHP)
-        {
-            const int chosen_hp = chosen_enemy->max_hp;
-            const int current_hp = enemy->max_hp;
-            if (chosen_hp > current_hp)
-                chosen_enemy = enemy;
-        }
-        else
-            chosen_enemy = enemy;
+		if (this->target_mode == AutoAim_Target::HighestMaxHP)
+		{
+			int chosen_maxhp = chosen_enemy->fields._.max_hp;
+			int current_maxhp = enemy->fields._.max_hp;
+			if (current_maxhp > chosen_maxhp)
+				chosen_enemy = enemy;
+		}
+	}
 
-        if (chosen_enemy != nullptr)
-            break;
-    }
+	return chosen_enemy;
+}
 
-    if (chosen_enemy)
-    {
-        const Vector3 enemy_pos = { chosen_enemy->pos.x, (chosen_enemy->pos.y) * -1, 0.0f };
-        const Vector3 enemy_screen_pos = WorldToScreen(g_pMainCamera, enemy_pos);
-
-        dp->Reset();
-        dp->PackFloat(enemy_screen_pos.x);
-        dp->PackFloat(enemy_screen_pos.y);
-    }
-
-    //std::cout << mousePos.x << "," << mousePos.y << std::endl;
-
-    return true;
+void AutoAimModule::setAutoFire(bool enabled)
+{
+	static InputManager* input_manager = (InputManager*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.Options.InputManager, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+	InputManager_set_AutoFire(input_manager, enabled, nullptr);
 }

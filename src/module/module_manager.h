@@ -1,25 +1,23 @@
 #pragma once
+
 #include "module.h"
-#include "module_list.h"
 
-void LoadModules();
-void UnloadModules();
-std::vector<Module*> GetAllModules();
-std::vector<Module*> GetModules(ModuleCategory category);
-bool CallEvent(ModuleEvent event, CDataPack* dp);
-
-//template<class T>
-template<typename T, typename std::enable_if<std::is_base_of<Module, T>::value>::type* = nullptr>
-T* GetModule(ModuleList type)
+namespace ModuleManager
 {
-    std::vector<Module*> modules = GetAllModules();
-    for (auto& module : modules)
-    {
-        if (module->type == type)
-        {
-            return (T*)module;
-        }
-    }
+	extern std::vector<Module*> modules;
+	void LoadModules();
+	void UnloadModules();
 
-    return nullptr;
+    template<typename T, typename std::enable_if<std::is_base_of<Module, T>::value>::type* = nullptr>
+    T* FindModule(ModuleList type)
+    {
+        for (Module* module : modules)
+        {
+            if (module->type == type)
+            {
+                return (T*)module;
+            }
+        }
+        return nullptr;
+    }
 }

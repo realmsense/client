@@ -1,33 +1,23 @@
 #pragma once
 
+#include <string>
+
+uintptr_t GetBaseAddress();
 void CreateConsole();
 void RemoveConsole();
 
 float CalculateDistance(Vector2 a, Vector2 b);
 
-std::string PtrToHex(uintptr_t ptr);
-std::string ReadUnityString(String* str);
-std::string ReadUnityString(uintptr_t addr);
+std::string il2cppi_to_string(Il2CppString* str);
+std::string il2cppi_to_string(String* str);
 
-uintptr_t FindGameObject(const char* name);
-uintptr_t FindObjectByQualifiedName(const char* assemblyQualifiedName);
-std::vector<uintptr_t> GetChildTransforms(uintptr_t gameObject);
-std::vector<uintptr_t> FindChildTransforms(uintptr_t parentTransform, std::vector<std::string> names);
+Object* FindObjectByQualifiedName(const char* assemblyQualifiedName);
+Camera* GetMainCamera();
+Player* GetPlayer();
+Pet* GetPet();
+Vector2 GetEntityPos(BasicObject* entity);
+EquipmentSlot* GetEquipmentSlot(int index);
+void ShowFloatingText(const char* message, FloatingTextType type, __int64 color);
 
-void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale);
-
-template<class T>
-std::vector<T> ReadUnityList(List* source)
-{
-    std::vector<T> arr;
-    int length = source->size;
-    uintptr_t addr = (uintptr_t)source->items;
-    for (int i = 0; i < length; i++)
-    {
-        T item = *(T*)(addr + 0x20 + (0x8 * i));
-        arr.push_back(item);
-    }
-    return arr;
-}
-
-void ShowFloatingText(const char* text, FloatingTextType type, __int64 colour);
+bool GetKeyDown(SettingsKeyCode code);
+bool GetKeyDown(KeyCode code);

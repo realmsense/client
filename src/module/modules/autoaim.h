@@ -1,27 +1,31 @@
 #pragma once
 
-#include "structs.h"
 #include "../module.h"
 
-enum class AutoAimTarget
+enum class AutoAim_Target
 {
-    ClosestMouse,
-    ClosestPos,
-    HighestDef,
-    HighestMaxHP
+	Any,
+	ClosestMouse,
+	ClosestPos,
+	HighestDef,
+	HighestMaxHP
 };
 
 class AutoAimModule : public Module {
 public:
-    AutoAimModule();
+	AutoAimModule();
 
-    AutoAimTarget target;
+	void onEnable() override;
+	void onDisable() override;
+	void renderGUI() override;
 
-    void onEnable();
-    void onDisable();
-    void renderGUI();
-    bool onEvent(ModuleEvent event, CDataPack* dp);
+	bool hook_Player_Shoot(Player*& player, float& angle, MethodInfo*& method, bool& NOP);
 
 private:
-    bool onGetMousePos(CDataPack* dp);
+	AutoAim_Target target_mode;
+	bool reverse_cult_staff;
+	Character* chooseEnemy();
+
+	void setAutoFire(bool enabled);
 };
+

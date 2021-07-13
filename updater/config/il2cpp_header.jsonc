@@ -1,0 +1,544 @@
+{
+    "replacements": [
+        // rename
+        ["Component_1", "Component"],
+        ["Object_1", "Object"],
+        
+        // Duplicate
+        ["Il2CppString", "String"],
+        
+        // obfuscated
+        ["KBKBDLLEGGO", "Settings"],
+        ["DKMLMKFGPCC", "MapViewService"],
+        ["FJBJOOHPBDL", "FogController"],
+        ["DAFEAHGLBGL", "Pet"],
+        ["JFNHHLNJJKP", "Player"],
+        ["COEDKELBKMI", "Character"],
+        ["LAAIPMHLFJN", "MapObject"],
+        ["GJLIMCBOCJG", "BasicObject"],
+        ["PIPCAMDKBDA", "ChatSlot"],
+        ["DAOINPHCAEG", "ChatFilter"],
+        ["ALGAPFJEAOI", "GuildIcon"]
+    ],
+    "functions": [
+        {
+            "name": ["Type_GetType", "Type_GetType"],
+            "typedef": "(String * typeName, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Camera_get_orthographicSize", "Camera_get_orthographicSize"],
+            "typedef": "(Camera * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Camera_set_orthographicSize", "Camera_set_orthographicSize"],
+            "typedef": "(Camera * __this, float value, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Camera_WorldToScreenPoint", "Camera_WorldToScreenPoint"],
+            "typedef": "(Camera * __this, Vector3 position, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Camera_ScreenToWorldPoint", "Camera_ScreenToWorldPoint"],
+            "typedef": "(Camera * __this, Vector3 position, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Behaviour_set_enabled", "Behaviour_set_enabled"],
+            "typedef": "(Behaviour * __this, bool value, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Component_1_get_transform", "Component_get_transform"],
+            "typedef": "(Component_1 * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Component_1_get_gameObject", "Component_get_gameObject"],
+            "typedef": "(Component_1 * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Object_1_FindObjectOfType", "Object_FindObjectOfType"],
+            "typedef": "(Type * type, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["GameObject_SetActive", "GameObject_SetActive"],
+            "typedef": "(GameObject * __this, bool value, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["GameObject_get_transform", "GameObject_get_transform"],
+            "typedef": "(GameObject * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Transform_get_childCount", "Transform_get_childCount"],
+            "typedef": "(Transform * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Transform_GetChild", "Transform_GetChild"],
+            "typedef": "(Transform * __this, int32_t index, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Transform_get_position", "Transform_get_position"],
+            "typedef": "(Transform * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Transform_get_localPosition", "Transform_get_localPosition"],
+            "typedef": "(Transform * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["GJLIMCBOCJG_GPIMPPOPDJO", "BasicObject_Init"],
+            "typedef": "(GJLIMCBOCJG * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["DAFEAHGLBGL_KOBJNFBMICI", "Pet_ChangeSkin"],
+            "typedef": "(DAFEAHGLBGL * __this, int32_t OGBGLIIENMF, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["JFNHHLNJJKP_GBHNOKKCMJA", "Player_Shoot"],
+            "typedef": "(JFNHHLNJJKP * __this, float LODCFMOPDCN, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["ApplicationManager_get_MapViewService", "ApplicationManager_get_MapViewService"],
+            "typedef": "(ApplicationManager * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["DKMLMKFGPCC_NAGLHCDBGIM", "MapViewService_CheckTileWalkable"],
+            "typedef": "(DKMLMKFGPCC * __this, float EOOJAMLJAOM, float JDEKCEFBJFP, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["MapObjectUIManager_ShowFloatingText", "MapObjectUIManager_ShowFloatingText"],
+            "typedef": "(MapObjectUIManager * __this, CLEPBEMBHAJ__Enum DBMPDNFHFNL, String * OBEFKMANGCK, Nullable_1_UnityEngine_Color32_ HNDHLEHECGE, float MPNAHCHFHMD, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["ChatManager_AddSlot", "ChatManager_AddSlot"],
+            "typedef": "(ChatManager * __this, PIPCAMDKBDA * MJLCGOABOIA, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["ChatManager_GetChatMessage", "ChatManager_GetChatMessage"],
+            "typedef": "(ChatManager * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["TMP_Text_get_text", "TMP_Text_get_text"],
+            "typedef": "(TMP_Text * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["TMP_Text_SetText", "TMP_Text_SetText"],
+            "typedef": "(TMP_Text * __this, String * text, bool syncTextInputBox, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["TMP_Text_set_text", "TMP_Text_set_text_internal"],
+            "typedef": "(TMP_Text * __this, String * value, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["SettingsManager_GetKeyCode", "SettingsManager_GetKeyCode"],
+            "typedef": "(SettingsManager * __this, GCAPHHCPLGG__Enum PAGPIKLPGPA, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Input_GetKey", "Input_GetKey"],
+            "typedef": "(KeyCode__Enum key, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["InputManager_set_AutoFire", "InputManager_set_AutoFire"],
+            "typedef": "(InputManager * __this, bool GKLFNLCLLGM, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["SpriteShader_UpdateMask", "SpriteShader_UpdateMask"],
+            "typedef": "(SpriteShader * __this, CGPOGAAKLFL * DLNMEAOOHKA, int32_t KDNJFAAKECF, int32_t HPGLAHDANIJ, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["DKMLMKFGPCC_MNNGGOHMENI", "MapViewService_Nexus"],
+            "typedef": "(DKMLMKFGPCC * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["GameController_FixedUpdate", "GameController_FixedUpdate"],
+            "typedef": "(GameController * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["DAOINPHCAEG_GBGPMMIJCCF", "ChatFilter_Validate"],
+            "typedef": "(DAOINPHCAEG * __this, String * DCGGIEJHCEC, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["JFNHHLNJJKP_NCJKMPCFPHC", "Player_GetSpriteColor"],
+            "typedef": "(JFNHHLNJJKP * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["CharacterGUIInfoSection_ChangeTransparencyValue", "CharacterGUIInfoSection_ChangeTransparencyValue"],
+            "typedef": "(CharacterGUIInfoSection * __this, float GKLFNLCLLGM, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["QualitySettings_set_vSyncCount", "QualitySettings_set_vSyncCount"],
+            "typedef": "(int32_t value, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Application_set_targetFrameRate", "Application_set_targetFrameRate"],
+            "typedef": "(int32_t value, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["List_1_System_Object__Add", "List_1_System_Object_Add"],
+            "typedef": "(List_1_System_Object_ * __this, Object * item, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["List_1_System_Object__Remove", "List_1_System_Object_Remove"],
+            "typedef": "(List_1_System_Object_ * __this, Object * item, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["List_1_NIIFJAMEHDD__Add", "List_1_NIIFJAMEHDD__Add"],
+            "typedef": "(List_1_NIIFJAMEHDD_ * __this, NIIFJAMEHDD * item, MethodInfo * method)",
+            "methodinfo": true
+        },
+        {
+            "name": ["List_1_NIIFJAMEHDD__Remove", "List_1_NIIFJAMEHDD__Remove"],
+            "typedef": "(List_1_NIIFJAMEHDD_ * __this, NIIFJAMEHDD * item, MethodInfo * method)",
+            "methodinfo": true
+        },
+        {
+            "name": ["SpriteRenderer_set_color", "SpriteRenderer_set_color"],
+            "typedef": "(SpriteRenderer * __this, Color value, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["ALGAPFJEAOI_JBLDFAFHIBE", "GuildIcon_SetIcon"],
+            "typedef": "(Image * LIIEKCFGPOL, int32_t PFMCMEKMCMB, MethodInfo * method)",
+            "methodinfo": false
+        }
+    ],
+    "enums": [
+        ["Allocator", "Allocator__Enum"],
+        ["CLEPBEMBHAJ", "FloatingTextType"],
+        ["OMIPCDPIAOC", "MapObjectType"],
+        ["HLMENPGLNDH", "MapItemType"],
+        ["FDOLMLKAKIN", "ItemLocationType"],
+        ["GCAPHHCPLGG", "SettingsKeyCode"],
+        ["KeyCode", "KeyCode"],
+        ["Image_Type", "Image_Type"], // Simple, Sliced, Tiled, Filled
+        ["Image_FillMethod", "Image_FillMethod"], // Horizontal, Vertical, Radial90, Radial180, Radial360
+        ["PMHOACJAAAL", "CharacterGUI_NameType"], // OnlyName, OnlyBars, Full, None
+        ["EMOPGKHHDGD", "EMOPGKHHDGD"], // Player, OtherPlayer, Npc, Lootbag
+        ["EFBAFDICAFG", "EFBAFDICAFG"], // Right, Left, Down, Up, None, First
+        ["BJHJLINJFAI", "BJHJLINJFAI"], // Stand, Walk, Attack, NumAction
+
+        ["FontStyles", "FontStyles"],
+        ["HorizontalAlignmentOptions", "HorizontalAlignmentOptions"],
+        ["ColorMode", "ColorMode"],
+        ["FontWeight", "FontWeight"],
+        ["VertexSortingOrder", "VertexSortingOrder"],
+        ["TextureMappingOptions", "TextureMappingOptions"],
+        ["TMP_Text_TextInputSources", "TMP_Text_TextInputSources"],
+        ["TextOverflowModes", "TextOverflowModes"],
+        ["TextRenderFlags", "TextRenderFlags"],
+        ["TextAlignmentOptions", "TextAlignmentOptions"],
+        ["VerticalAlignmentOptions", "VerticalAlignmentOptions"],
+        ["TMP_TextElementType", "TMP_TextElementType"]
+    ],
+    "structs": [
+        // C# Types with no __Fields
+        { "name": "Vector2",    "props": { } },
+        { "name": "Vector3",    "props": { } },
+        { "name": "Vector4",    "props": { } },
+        { "name": "Color",      "props": { } },
+        { "name": "Color32",    "props": { } },
+        { "name": "Matrix4x4",  "props": { } },
+        { "name": "float3",     "props": { } },
+        { "name": "Nullable_1_UnityEngine_Vector2_", "props": { } },
+        { "name": "NativeList_1_Unity_Mathematics_float3_", "props": { } },
+        { "name": "NativeList_1_FCMKBLMGMBJ_", "props": { } },
+        { "name": "NativeList_1_NMLINFHMBBH_", "props": { } },
+
+        // Unity Types
+        { "name": "String",             "props": { "__Fields": [ ] } },
+        { "name": "Type",               "props": { "__Fields": [ ] } },
+        { "name": "RuntimeTypeHandle",  "props": { } },
+        { "name": "Object_1",           "props": { "__Fields": [ ] } },
+        { "name": "GameObject",         "props": { "__Fields": [ ] } },
+        { "name": "Component_1",        "props": { "__Fields": [ ] } },
+        { "name": "Behaviour",          "props": { "__Fields": [ ] } },
+        { "name": "MonoBehaviour",      "props": { "__Fields": [ ] } },
+        { "name": "Transform",          "props": { "__Fields": [ ] } },
+        { "name": "Camera",             "props": { "__Fields": [ ] } },
+        { "name": "Rect",               "props": { } },
+        { "name": "RaycastHit2D",       "props": { } },
+        { "name": "SpriteRenderer",     "props": { "__Fields": [ ] } },
+        { "name": "Image",              "props": { "__Fields": [ ] } },
+        { "name": "Renderer",           "props": { "__Fields": [ ] } },
+        
+        // TextMeshPro
+        { "name": "UIBehaviour",                                                "props": { "__Fields": [ ] } },
+        { "name": "MaskableGraphic",                                            "props": { "__Fields": [ ] } },
+        { "name": "Graphic",                                                    "props": { "__Fields": [ ] } },
+        { "name": "TMP_Text",                                                   "props": { "__Fields": [ ] } },
+        { "name": "TMP_TextProcessingStack_1_System_Int32_",                    "props": { } },
+        { "name": "TMP_TextProcessingStack_1_System_Single_",                   "props": { } },
+        { "name": "TMP_TextProcessingStack_1_TMP_ColorGradient_",               "props": { } },
+        { "name": "TMP_TextProcessingStack_1_UnityEngine_Color32_",             "props": { } },
+        { "name": "TMP_Text_SpecialCharacter",                                  "props": { } },
+        { "name": "TMP_TextProcessingStack_1_WordWrapState_",                   "props": { } },
+        { "name": "VertexGradient",                                             "props": { } },
+        { "name": "WordWrapState",                                              "props": { } },
+        { "name": "TMP_FontStyleStack",                                         "props": { } },
+        { "name": "TMP_TextProcessingStack_1_HighlightState_",                  "props": { } },
+        { "name": "HighlightState",                                             "props": { } },
+        { "name": "MaterialReference",                                          "props": { } },
+        { "name": "TMP_LineInfo",                                               "props": { } },
+        { "name": "TMP_TextProcessingStack_1_FontWeight_",                      "props": { } },
+        { "name": "TMP_TextProcessingStack_1_HorizontalAlignmentOptions_",      "props": { } },
+        { "name": "TMP_TextProcessingStack_1_MaterialReference_",               "props": { } },
+        { "name": "Extents",                                                    "props": { } },
+        { "name": "TMP_Offset",                                                 "props": { } },
+        { "name": "TextMeshProUGUI",                                            "props": { "__Fields": [ ] } },
+
+        // RotMG Types
+
+        /* managers */
+        { "name": "MapObjectUIManager", "props": { "__Fields": [ ] } },
+        { "name": "EntityManager",      "props": { } },
+        { "name": "GuiManager",         "props": { "__Fields": [ ] } },
+        { "name": "SettingsManager",    "props": { "__Fields": [ ] } },
+        { "name": "InputManager",       "props": { "__Fields": [ ] } },
+        { "name": "IdleWatcher",        "props": { "__Fields": [ ] } },
+        { "name": "ViewHandler",        "props": { "__Fields": [ ] } },
+        { "name": "SpriteShader",       "props": { "__Fields": [ ] } },
+        { "name": "CharacterInfo",      "props": { "__Fields": [ ] } },
+        { "name": "CharacterGUIInfoSection", "props": { "__Fields": [ ] } },
+        { "name": "GUIInfoSection", "props": { "__Fields": [ ] } },
+        { "name": "MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager_",   "props": { "__Fields": [ ] } },
+
+        {
+            "name": "ApplicationManager",
+            "props": {
+                "__Fields": [
+                    ["_ADOFIDIACLF_k__BackingField", "guild_info"]
+                ]
+            }
+        },
+        
+        {
+            "name": "GameController",
+            "props": {
+                "__Fields": [
+                    ["DKCDBOLECHM", "settings"]
+                ]
+            }
+        },
+        {
+            "name": "CameraManager",
+            "props": {
+                "__Fields": [
+                    ["OOJJDIANIBF", "perspective_editor"]
+                ]
+            }
+        },
+        {
+            "name": "CameraPerspectiveEditor",
+            "props": {
+                "__Fields": [ ]
+            }
+        },
+        {
+            "name": "EquipmentManager",
+            "props": { "__Fields": [ ] }
+        },
+        {
+            "name": "EquipmentSlot",
+            "props": { "__Fields": [ ] }
+        },
+        {
+            "name": "ItemSlot",
+            "props": {
+                "__Fields": [
+                    ["PBCAODDPDEI", "object_properties"]
+                ]
+            }
+        },
+        {
+            "name": "EquipmentSlot__Array",
+            "props": { }
+        },
+        {
+            "name": "InteractiveItemSlot",
+            "props": { "__Fields": [ ] }
+        },
+
+
+        {
+            "name": "ObjectProperties",
+            "props": { "__Fields": [ ] }
+        },
+        {
+            "name": "BaseProperties",
+            "props": { "__Fields": [ ] }
+        },
+        {
+            "name": "TextureProperties",
+            "props": { "__Fields": [ ] }
+        },
+
+        /* random */
+        { "name": "DAOINPHCAEG",        "props": { "__Fields": [ ] } },
+        { "name": "CGPOGAAKLFL",        "props": { "__Fields": [ ] } },
+        {
+            "name": "ALGAPFJEAOI", /* GuildIcon */
+            "props": { }
+        },
+        {
+            "name": "UnityThread",
+            "props": {
+                "__Fields": [ ]
+            }
+        },
+        {
+            "name": "KBKBDLLEGGO", /* Settings */
+            "props": {
+                "__Fields": [
+                    ["NCADAPAJGCH", "account_name"],
+                    ["_FPIKBBOPAGD_k__BackingField", "account_guid"],
+                    ["_NMGDJEDLAGK_k__BackingField", "access_token"],
+                    ["PMAAJDBAIHC", "rotate_speed"]
+                ]
+            }
+        },
+        {
+            "name": "DKMLMKFGPCC", /* MapViewService */
+            "props": {
+                "__Fields": [
+                    ["HFLGDFNPKPM", "player"]
+                ],
+                "__Class": [ ],
+                "__VTable": [ ],
+                "__StaticFields": [ ]
+            }
+        },
+        {
+            "name": "FJBJOOHPBDL", /* FogController */
+            "props": {
+                "__Fields": [ 
+                    ["DFHJJKMFHNA", "fog_range"],
+                    ["EFFBIGGGNKG", "fog_opacity"],
+                    ["OBOIGBODLNK", "unloaded_tile_distance"]
+                ],
+                "__Class": [ ],
+                "__VTable": [ ],
+                "__StaticFields": [
+                    ["APJIMGFDIOM", "view_distance"]
+                ]
+            }
+        },
+        {
+            "name": "ChatManager",
+            "props": {
+                "__Fields": [ ]
+            }
+        },
+        {
+            "name": "PIPCAMDKBDA", /* ChatSlot */
+            "props": {
+                "__Fields": [
+                    [ "HHAAMEHHGGP", "name" ],
+                    [ "FDDNDIFJIDA", "original_message" ],
+                    [ "JOGIHKDMLJM", "formatted_message" ]
+                ]
+            }
+        },
+        
+        /* entities */
+        {
+            "name": "JFNHHLNJJKP", /* Player */
+            "props": {
+                "__Fields": [
+                    ["FLCOMAGIJOI", "guild_name"],
+                    ["LAFABEDFNCK", "guild_rank"]
+                ]
+            }
+        },
+        {
+            "name": "COEDKELBKMI", /* Character */
+            "props": {
+                "__Fields": [ ]
+                }
+            },
+        {
+            "name": "LAAIPMHLFJN", /* MapObject */
+            "props": { 
+                "__Fields": [
+                    ["PHNLNOOLAIO", "skin_id"],
+                    ["ECPELIFEJPI", "map_item_type"],
+                    ["HGLIEJOCNMI", "sprite_renderer"],
+
+                    ["FBLOKBOPOOC", "invulnerable"],
+
+                    ["JLECINIONGJ", "max_hp"],
+                    ["DPPBIPLPHJB", "hp"],
+                    ["OPAKKHFJCPG", "max_mp"],
+                    ["EBOMCCHKMDG", "mp"],
+                    
+                    ["HJBCGDPGDKC", "attack"],
+                    ["LOBGNENJGPK", "defense"],
+                    ["POIGCBNJFGI", "speed"],
+                    ["IEMNCCPAMML", "dexterity"],
+                    ["OKHDFNLCLDB", "vitality"],
+                    ["GHIJMFHMMBN", "wisdom"]
+                ] 
+            }
+        },
+        {
+            "name": "GJLIMCBOCJG", /* BasicObject */
+            "props": {
+                "__Fields": [
+                    ["BIHICFBJDCC", "is_active" ]
+                ]
+            }
+        },
+        {
+            "name": "DAFEAHGLBGL",  /* Pet */
+            "props": {
+                "__Fields": [
+                    ["BKHBOCPPAOM", "object_props"]
+                ]
+            }
+        },
+        {
+            "name": "NIIFJAMEHDD",
+            "props": {
+                "__Fields": [
+                    ["LLKEJMLKCCA",  "added_to_list"]
+                ]
+            }
+        },
+        { "name": "List_1_NIIFJAMEHDD_", "props": { "__Fields": [ ] } },
+        { "name": "List_1_System_Object_", "props": { "__Fields": [ ] } }
+    ]
+}

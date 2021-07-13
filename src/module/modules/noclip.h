@@ -1,20 +1,20 @@
 #pragma once
 
-#include "structs.h"
 #include "../module.h"
 
 class NoclipModule : public Module {
 public:
-    NoclipModule();
+	NoclipModule();
 
-    float noclipSpeed;
+	void onEnable() override;
+	void onDisable() override;
+	void renderGUI() override;
 
-    void onEnable();
-    void onDisable();
-    void renderGUI();
-    bool onEvent(ModuleEvent event, CDataPack* dp);
+	virtual bool hookPost_MapViewService_CheckTileWalkable(MapViewService*& __this, float& x, float y, MethodInfo*& method, bool& return_value) override;
 
 private:
-    bool onMainLoop();
-    bool onUnityThreadUpdate();
+	bool safe_mode;
+	bool on_walkable_tile;
+	void toggleNoclip();
 };
+

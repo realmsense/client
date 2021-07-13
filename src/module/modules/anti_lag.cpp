@@ -1,276 +1,139 @@
 #include "pch.h"
-#include "../module.h"
-#include "../module_manager.h"
-
-#include "imgui/imgui.h"
-#include <chrono>
-#include <thread>
-#include <future>
-
+#include "helpers.h"
 #include "anti_lag.h"
 
-void ResizeCharacter(uintptr_t characterTransform, Vector3 newScale)
-{
-    std::vector<std::string> names{ "Content", "CharacterGUI", "Shadow" };
-    std::vector<uintptr_t> transformList = FindChildTransforms(characterTransform, names);
-    for (int i = 0; i < transformList.size(); i++)
-    {
-        if (names[i] == "Shadow")
-            Transform_set_localScale(transformList[i], { newScale.x / 1.5f, newScale.y / 3.0f, newScale.z }); // 0.6x 0.3y
-        else
-            Transform_set_localScale(transformList[i], newScale);
-    }
-}
+#include "thirdparty/imgui/imgui.h"
 
 AntiLagModule::AntiLagModule()
-    : Module()
+	: Module()
 {
-    this->name = "Anti Lag";
-    this->enabled = false;
-    this->type = ModuleList::AntiLag;
-    this->category = ModuleCategory::VIEW;
-    this->hasGuiElements = true;
+	this->name = "Anti Lag";
+	this->enabled = false;
+	this->category = ModuleCategory::VIEW;
+	this->type = ModuleList::AntiLag;
+	this->has_gui_elements = true;
 
-    this->playerSize = 1.0f;
-    this->hideTiles = false;
-    this->hidePets = false;
-    this->showFPS = false;
-    this->unlimitedFPS = false;
+	this->player_transparency = 1.0f;
+	this->pet_transparency = 1.0f;
+	this->unlimited_fps = false;
 
-    this->ready();
+	this->ready();
 }
 
 void AntiLagModule::onEnable()
 {
-    this->log.color = Color32_GREEN;
-    this->log.floatingText = true;
-    this->log << this->name << " enabled" << std::endl;
+	this->log.floatingText(Color32_GREEN);
+	this->log << this->name << " ON" << std::endl;
 }
 
 void AntiLagModule::onDisable()
 {
-    this->log.color = Color32_RED;
-    this->log.floatingText = true;
-    this->log << this->name << " disabled" << std::endl;
+	this->log.floatingText(Color32_RED);
+	this->log << this->name << " OFF" << std::endl;
 }
 
 void AntiLagModule::renderGUI()
 {
-    ImGui::SliderFloat("Player Size", &this->playerSize, 0.0f, 1.0f);
-    if (ImGui::IsItemDeactivatedAfterEdit()) // Only update transforms after the slider is released, to prevent the game crashing from too many updates
-        this->ResizePlayers(this->playerSize);
+	static int player_transparency = 100;
+	if (ImGui::SliderInt("Player Transparency", &player_transparency, 0, 100, "%d%%"))
+	{
+		this->player_transparency = (float)player_transparency / 100;
+		this->setEnabled(true);
+	}
 
-    if (ImGui::Checkbox("Hide Tiles", &this->hideTiles))
-        this->HideTiles(this->hideTiles);
+	static int pet_transparency = 100;
+	if (ImGui::SliderInt("Pet Transparency", &pet_transparency, 0, 100))
+	{
+		this->pet_transparency = (float)pet_transparency / 100;
+		this->setEnabled(true);
+	}
 
-    // use FindObjectsByType and resize all transforms
-    //ImGui::Checkbox("Hide Pets")
-
-    if (ImGui::Checkbox("Unlimited FPS", &this->unlimitedFPS))
-        this->ToggleUnlimitedFPS(this->unlimitedFPS);
-
-    if (ImGui::Checkbox("Show FPS", &this->showFPS))
-        this->ShowFPS(this->showFPS);
-
-    const char* fullscreen_modes[] =
-    {
-        "Exclusive Fullscreen",
-        "Fullscreen Windowed",
-        "Maximized Window",
-        "Windowed"
-    };
-
-    this->fullscreenMode = 1;
-
-    ImGui::SetNextItemWidth(ImGui::GetTextLineHeightWithSpacing() * strlen(fullscreen_modes[0]) / 2); // set width to the widest string
-    if (ImGui::Combo("Fullscreen Mode", &this->fullscreenMode, fullscreen_modes, IM_ARRAYSIZE(fullscreen_modes), IM_ARRAYSIZE(fullscreen_modes)))
-    {
-        this->SetFullscreenMode(this->fullscreenMode);
-        this->log.floatingText = true;
-        this->log << "Fullscreen Mode set to: " << fullscreen_modes[this->fullscreenMode] << std::endl;
-    }
+	if (ImGui::Checkbox("Unlimited FPS", &this->unlimited_fps))
+	{
+		this->setUnlimitedFPS(this->unlimited_fps);
+		if (this->unlimited_fps)
+			this->setEnabled(true);
+	}
 }
 
-bool AntiLagModule::onEvent(ModuleEvent event, CDataPack* dp)
+bool AntiLagModule::hook_GameController_FixedUpdate(GameController* __this, MethodInfo*& method, bool& NOP)
 {
-    switch (event)
-    {
-    case ModuleEvent::MainLoop:
-        return this->onMainLoop();
-    case ModuleEvent::Pet_Update:
-        return this->onPetUpdate(dp);
-    default:
-        return true;
-    }
+	if (!this->enabled) return false;
+
+	// TODO: Don't hide our own pet, or add an option
+	for (Pet* pet : this->pet_list)
+	{
+		SpriteRenderer* sprite_renderer = pet->fields._._.sprite_renderer;
+		if (!sprite_renderer) continue;
+
+		Color color = { 1.0f, 1.0f, 1.0f, this->pet_transparency };
+		SpriteRenderer_set_color(sprite_renderer, color, nullptr);
+	}
+
+	return false;
 }
 
-bool AntiLagModule::onMainLoop()
+bool AntiLagModule::hookPost_Player_GetSpriteColor(Player*& __this, MethodInfo*& method, Color& return_value)
 {
-    this->fullscreenMode = Screen_GetFullscreenMode();
-    return true;
+	if (!this->enabled) return false;
+
+    // TOOD: don't do this!!
+	if (__this == GetPlayer())
+		return false;
+
+	return_value.a = this->player_transparency;
+	return true;
 }
 
-bool AntiLagModule::onPetUpdate(CDataPack* dp)
+bool AntiLagModule::hook_CharacterGUIInfoSection_ChangeTransparencyValue(CharacterGUIInfoSection*& __this, float& transparency, MethodInfo*& method, bool& NOP)
 {
-    // TODO: we need a better method of hiding pets
-    // we're also potentially hiding map objects, if they use the same transform as a previous hidden pet
-
-    // the better option is to just disable the "MapObject" thing (from UnityExplorer)
-    // and not change scale like we're currently doing
-    // that way if we disable Hide Pets and load into a new map everything will be loaded correctly.
-    // downside is that we cannot unhide pets easily (unless we load into a new map)
-    // we could solve this by keeping a vector of disabled pets but that can become too difficult and potential memory issues (bad ptrs)
-
-    if (!this->hidePets)
-        return true;
-
-    Vector3 newScale = { 0.0f, 0.0f, 0.0f, };
-    dp->Reset();
-    dp->PackFloat(newScale.x);
-    dp->PackFloat(newScale.y);
-    dp->PackFloat(newScale.z);
-    return true;
+	if (!this->enabled) return false;
+	
+	// TODO: This is only set once, when a Character enters the map
+	// would be nice to see the transparency change with the imgui slider.
+	transparency = this->player_transparency;
+	return true;
 }
 
-void AntiLagModule::ResizePlayers(float scale)
+bool AntiLagModule::hook_Detour_List_1_System_Object_Add(List_1_System_Object_*& __this, Object*& item, MethodInfo*& method, bool& NOP)
 {
-    this->playerSize = scale;
+	if (method == *List_1_NIIFJAMEHDD__Add__MethodInfo)
+	{
+		NIIFJAMEHDD* entity = (NIIFJAMEHDD*)item;
+		if (entity->fields._.map_item_type == MapItemType::Pet)
+		{
+			Pet* pet = (Pet*)entity;
+			this->pet_list.insert(pet);
+		}
+	}
 
-    //auto future = std::async(std::launch::async, ResizePlayers, scale);
-
-    std::vector<uintptr_t> characterList = GetChildTransforms(FindGameObject("Character"));
-    for (int i = 0; i < characterList.size(); i++)
-    {
-        uintptr_t character = characterList[i];
-        Vector3 newScale = { scale, scale, 1.0f };
-        ResizeCharacter(character, newScale);
-
-        //std::this_thread::sleep_for(std::chrono::milliseconds(1));
-    }
-
-    // Reset our player's size
-    if (g_pPlayer)
-    {
-        Vector3 newScale = { 1.0f, 1.0f, 1.0f };
-        uintptr_t viewTransform = (uintptr_t)g_pPlayer->view_handler->view_transform;
-        ResizeCharacter(viewTransform, newScale);
-    }
+	return false;
 }
 
-void AntiLagModule::HideTiles(bool hide)
+bool AntiLagModule::hookPre_Detour_List_1_System_Object_Remove(List_1_System_Object_*& __this, Object*& item, MethodInfo*& method, bool& return_value)
 {
-    this->hideTiles = hide;
+	if (method == *List_1_NIIFJAMEHDD__Add__MethodInfo)
+	{
+		NIIFJAMEHDD* entity = (NIIFJAMEHDD*)item;
+		if (entity->fields._.map_item_type == MapItemType::Pet)
+		{
+			Pet* pet = (Pet*)entity;
+			this->pet_list.erase(pet);
+		}
+	}
 
-    //auto future = std::async(std::launch::async, _HideTiles, hide);
-
-    std::vector<uintptr_t> tileList = GetChildTransforms(FindGameObject("ComboTile"));
-    for (int i = 0; i < tileList.size(); i++)
-    {
-        uintptr_t tile = tileList[i];
-        if (hide)
-        {
-            Vector3 newScale = { 0.0f, 0.0f, 1.0f };
-            Transform_set_localScale(tile, newScale);
-        }
-        else
-        {
-            Vector3 newScale = { 1.0f, 1.0f, 1.0f };
-            Transform_set_localScale(tile, newScale);
-        }
-    }
-
-    if (this->hideTiles)
-    {
-        this->log.color = Color32_GREEN;
-        this->log.floatingText = true;
-        this->log << "Hide Tiles enabled" << std::endl;
-    }
-    else
-    {
-        this->log.color = Color32_RED;
-        this->log.floatingText = true;
-        this->log << "Hide Tiles disabled" << std::endl;
-    }
+	return false;
 }
 
-void AntiLagModule::ShowFPS(bool show)
+void AntiLagModule::setUnlimitedFPS(bool enabled)
 {
-    this->showFPS = show;
-
-    std::vector<uintptr_t> transfList = GetChildTransforms(FindGameObject("GameController"));
-    for (int i = 0; i < transfList.size(); i++)
-    {
-        uintptr_t transform = transfList[i];
-        std::string transformName = ReadUnityString(Object_GetName(transform));
-
-        // We can't just do Transform.Find() because the forward slash in "Fps/Stats" is treated as a path name
-        if (transformName != "Fps/Stats")
-            continue;
-
-        uintptr_t fpsStatsObj = Component_GetGameObject(transform);
-
-        String* str = il2cpp_string_new("FPS ---------------------------");
-        uintptr_t fpsTransf = Transform_Find(transform, str);
-        uintptr_t fpsObj = Component_GetGameObject(fpsTransf);
-
-        std::cout << std::hex << fpsStatsObj << std::endl;
-        std::cout << std::hex << fpsObj << std::endl;
-        std::cout << this->showFPS << std::endl;
-
-        // weird bug, we get access violations probably because the GraphyManager object isn't initialized ??
-        // try enabling in unity explorer, we get a bit of lag and prboably an error (if we're debugging) when we try to enalbe FPS/Stats
-        // dunno how to fix
-
-        GameObject_SetActive(fpsStatsObj, this->showFPS);
-        GameObject_SetActive(fpsObj, this->showFPS);
-        break;
-    }
-
-    if (this->showFPS)
-    {
-        this->log.color = Color32_GREEN;
-        this->log.floatingText = true;
-        this->log << "Show FPS enabled" << std::endl;
-    }
-    else
-    {
-        this->log.color = Color32_RED;
-        this->log.floatingText = true;
-        this->log << "Show FPS disabled" << std::endl;
-    }
-}
-
-
-void AntiLagModule::ToggleUnlimitedFPS(bool on)
-{
-    this->unlimitedFPS = on;
-    if (this->unlimitedFPS)
-    {
-        SetVsync(0);
-        SetFpsTarget(999);
-    }
-    else
-    {
-        // fps target is irrelevant if vsync is on
-        SetVsync(1);
-    }
-
-    if (this->unlimitedFPS)
-    {
-        this->log.color = Color32_GREEN;
-        this->log.floatingText = true;
-        this->log << "Unlimited FPS enabled" << std::endl;
-    }
-    else
-    {
-        this->log.color = Color32_RED;
-        this->log.floatingText = true;
-        this->log << "Unlimited FPS disabled" << std::endl;
-    }
-}
-
-void AntiLagModule::SetFullscreenMode(int mode)
-{
-    this->fullscreenMode = mode;
-    Screen_SetFullscreenMode(this->fullscreenMode);
+	if (enabled)
+	{
+		QualitySettings_set_vSyncCount(0, nullptr);
+		Application_set_targetFrameRate(999, nullptr);
+	}
+	else
+	{
+		QualitySettings_set_vSyncCount(1, nullptr);
+	}
 }

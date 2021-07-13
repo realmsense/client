@@ -1,75 +1,69 @@
 #include "pch.h"
-#include "../module.h"
-#include "../module_manager.h"
-
-#include "imgui/imgui.h"
-
 #include "noclip.h"
+#include "helpers.h"
+
+#include "thirdparty/imgui/imgui.h"
 
 NoclipModule::NoclipModule()
-    : Module()
+	: Module()
 {
-    this->name = "Noclip";
-    this->enabled = false;
-    this->type = ModuleList::Noclip;
-    this->category = ModuleCategory::MOVEMENT;
-    this->hasGuiElements = false;
+	this->name = "Noclip";
+	this->enabled = false;
+	this->category = ModuleCategory::MOVEMENT;
+	this->type = ModuleList::Noclip;
+	this->has_gui_elements = true;
 
-    this->noclipSpeed = 1.0f;
+	this->safe_mode = true;
+	this->on_walkable_tile = true;
 
-    this->ready();
+	this->ready();
 }
 
 void NoclipModule::onEnable()
 {
-    this->log.color = Color32_GREEN;
-    this->log.floatingText = true;
-    this->log << this->name << " enabled" << std::endl;
+	this->log.floatingText(Color32_GREEN);
+	this->log << this->name << " ON" << std::endl;
+
+	this->toggleNoclip();
 }
 
 void NoclipModule::onDisable()
 {
-    this->log.color = Color32_RED;
-    this->log.floatingText = true;
-    this->log << this->name << " disabled" << std::endl;
+	if (this->safe_mode && !this->on_walkable_tile)
+	{
+		this->log.floatingText(Color32_BLUE);
+		this->log << "On Unwalkable Tile!" << std::endl;
+		this->enabled = true;
+		return;
+	}
+
+	this->log.floatingText(Color32_RED);
+	this->log << this->name << " OFF" << std::endl;
+
+	this->toggleNoclip();
 }
 
 void NoclipModule::renderGUI()
 {
-    
+	if (ImGui::Checkbox("Safe Mode", &this->safe_mode))
+	{
+		this->log.floatingText(Color32_BLUE);
+		this->log << "Safe Mode: " << (this->safe_mode ? "ON" : "OFF") << std::endl;
+	}
 }
 
-bool NoclipModule::onEvent(ModuleEvent event, CDataPack* dp)
+void NoclipModule::toggleNoclip()
 {
-    switch (event)
-    {
-    case ModuleEvent::MainLoop:
-        return this->onMainLoop();
-    case ModuleEvent::UnityThread_Update:
-        return this->onUnityThreadUpdate();
-    default:
-        return true;
-    }
-}
-
-bool NoclipModule::onMainLoop()
-{
-    if (!this->enabled)
-        return true;
-
-    if (g_pPlayer)
-    {
-        if (GetAsyncKeyState(0x57)) g_pPlayer->pos.y -= 0.01f * this->noclipSpeed; // w - up
-        if (GetAsyncKeyState(0x41)) g_pPlayer->pos.x -= 0.01f * this->noclipSpeed; // a - left
-        if (GetAsyncKeyState(0x53)) g_pPlayer->pos.y += 0.01f * this->noclipSpeed; // s - down
-        if (GetAsyncKeyState(0x44)) g_pPlayer->pos.x += 0.01f * this->noclipSpeed; // d - right
-    }
-
-    return true;
+	static UnityThread* unity_thread = (UnityThread*)FindObjectByQualifiedName("DecaGames.RotMG.Extensions.UnityThread, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
+	Behaviour_set_enabled((Behaviour*)unity_thread, !this->enabled, nullptr);
 }
 
 
-bool NoclipModule::onUnityThreadUpdate()
+bool NoclipModule::hookPost_MapViewService_CheckTileWalkable(MapViewService*& __this, float& x, float y, MethodInfo*& method, bool& return_value)
 {
-    return !this->enabled;
+	if (!this->enabled) return false;
+
+	this->on_walkable_tile = return_value;
+	return_value = true;
+	return true;
 }
