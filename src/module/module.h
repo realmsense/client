@@ -41,6 +41,7 @@ public:
 	virtual bool hook_Player_Shoot(Player*& player, float& angle, MethodInfo*& method, bool& NOP) { return false; };
 	virtual bool hook_TMP_Text_set_text_internal(TMP_Text*& __this, String*& value, MethodInfo*& method, bool& NOP) { return false; };
 	virtual bool hook_GameObject_SetActive(GameObject*& __this, bool& value, MethodInfo*& method, bool& NOP) { return false; };
+	virtual bool hook_ChatManager_AddSlot(ChatManager*& __this, ChatSlot*& chat_slot, MethodInfo*& method, bool& NOP) { return false; };
 
 protected:
 	virtual void onEnable() = 0;

@@ -34,7 +34,8 @@ void NameChangeModule::onDisable()
 	this->log.floatingText(Color32_RED);
 	this->log << this->name << " OFF" << std::endl;
 	
-	this->resetPlayerName();
+	std::string original_playername = il2cppi_to_string(this->getOriginalPlayerName());
+	this->changePlayerName(original_playername);
 	this->resetGuild();
 }
 
@@ -111,6 +112,22 @@ bool NameChangeModule::hook_GameObject_SetActive(GameObject*& __this, bool& valu
 	return false;
 }
 
+bool NameChangeModule::hook_ChatManager_AddSlot(ChatManager*& __this, ChatSlot*& chat_slot, MethodInfo*& method, bool& NOP)
+{
+	if (!this->enabled || this->custom_player_name == "") return false;
+
+	std::string original_name = il2cppi_to_string(this->getOriginalPlayerName());
+	std::string message = il2cppi_to_string(chat_slot->fields.formatted_message);
+
+	// replace occurence of our original name
+	size_t start_pos = message.find(original_name);
+	if (start_pos == std::string::npos) return false;
+	message.replace(start_pos, message.length(), this->custom_player_name);
+
+	chat_slot->fields.formatted_message = (String*)il2cpp_string_new(message.c_str());
+	return false;
+}
+
 void NameChangeModule::renderGUI()
 {
 	// TODO: block unity inputs
@@ -162,12 +179,11 @@ void NameChangeModule::changePlayerName(std::string name)
 	);
 }
 
-void NameChangeModule::resetPlayerName()
+String* NameChangeModule::getOriginalPlayerName()
 {
 	static GameController* game_controller = (GameController*)FindObjectByQualifiedName("DecaGames.RotMG.Managers.Game.GameController, Assembly-CSharp, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null");
 	Settings* settings = game_controller->fields.settings;
-	std::string original_name = il2cppi_to_string(settings->fields.account_name);
-	this->changePlayerName(original_name);
+	return settings->fields.account_name;
 }
 
 void NameChangeModule::changeGuild(std::string name, int rank)

@@ -198,6 +198,18 @@ void Detour_GameObject_SetActive(GameObject* __this, bool value, MethodInfo* met
 	return Original_GameObject_SetActive(__this, value, method);
 }
 
+void Detour_ChatManager_AddSlot(ChatManager* __this, ChatSlot* chat_slot, MethodInfo* method)
+{
+	bool NOP = false;
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hook_ChatManager_AddSlot(__this, chat_slot, method, NOP))
+			if (NOP) return;
+	}
+
+	return Original_ChatManager_AddSlot(__this, chat_slot, method);
+}
+
 bool InitHooks()
 {
 	bool ret = true;
@@ -273,6 +285,12 @@ bool InitHooks()
 	if (MH_CreateHook(GameObject_SetActive, Detour_GameObject_SetActive, reinterpret_cast<LPVOID*>(&Original_GameObject_SetActive)) != MH_OK)
 	{
 		std::cout << "Failed to Detour GameObject_SetActive" << std::endl;
+		ret = false;
+	}
+
+	if (MH_CreateHook(ChatManager_AddSlot, Detour_ChatManager_AddSlot, reinterpret_cast<LPVOID*>(&Original_ChatManager_AddSlot)) != MH_OK)
+	{
+		std::cout << "Failed to Detour ChatManager_AddSlot" << std::endl;
 		ret = false;
 	}
 

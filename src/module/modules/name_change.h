@@ -16,14 +16,13 @@ public:
 	bool hook_GameController_FixedUpdate(GameController* __this, MethodInfo*& method, bool& NOP) override;
 	bool hook_TMP_Text_set_text_internal(TMP_Text*& __this, String*& value, MethodInfo*& method, bool& NOP) override;
 	bool hook_GameObject_SetActive(GameObject*& __this, bool& value, MethodInfo*& method, bool& NOP) override;
-
-	// TODO: onChatManager_addslot, replace sent chat messages
+	bool hook_ChatManager_AddSlot(ChatManager*& __this, ChatSlot*& chat_slot, MethodInfo*& method, bool& NOP) override;
 
 private:
 
 	std::string custom_player_name;
 	void changePlayerName(std::string name);
-	void resetPlayerName();
+	String* getOriginalPlayerName();
 
 	bool hide_guild;
 	std::string custom_guild_name;
