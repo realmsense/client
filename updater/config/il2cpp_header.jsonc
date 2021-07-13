@@ -17,7 +17,8 @@
         ["LAAIPMHLFJN", "MapObject"],
         ["GJLIMCBOCJG", "BasicObject"],
         ["PIPCAMDKBDA", "ChatSlot"],
-        ["DAOINPHCAEG", "ChatFilter"]
+        ["DAOINPHCAEG", "ChatFilter"],
+        ["ALGAPFJEAOI", "GuildIcon"]
     ],
     "functions": [
         {
@@ -68,6 +69,21 @@
         {
             "name": ["GameObject_SetActive", "GameObject_SetActive"],
             "typedef": "(GameObject * __this, bool value, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["GameObject_get_transform", "GameObject_get_transform"],
+            "typedef": "(GameObject * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Transform_get_childCount", "Transform_get_childCount"],
+            "typedef": "(Transform * __this, MethodInfo * method)",
+            "methodinfo": false
+        },
+        {
+            "name": ["Transform_GetChild", "Transform_GetChild"],
+            "typedef": "(Transform * __this, int32_t index, MethodInfo * method)",
             "methodinfo": false
         },
         {
@@ -131,8 +147,8 @@
             "methodinfo": false
         },
         {
-            "name": ["TMP_Text_set_color", "TMP_Text_set_color"],
-            "typedef": "(TMP_Text * __this, Color value, MethodInfo * method)",
+            "name": ["TMP_Text_set_text", "TMP_Text_set_text_internal"],
+            "typedef": "(TMP_Text * __this, String * value, MethodInfo * method)",
             "methodinfo": false
         },
         {
@@ -214,6 +230,11 @@
             "name": ["SpriteRenderer_set_color", "SpriteRenderer_set_color"],
             "typedef": "(SpriteRenderer * __this, Color value, MethodInfo * method)",
             "methodinfo": false
+        },
+        {
+            "name": ["ALGAPFJEAOI_JBLDFAFHIBE", "GuildIcon_SetIcon"],
+            "typedef": "(Image * LIIEKCFGPOL, int32_t PFMCMEKMCMB, MethodInfo * method)",
+            "methodinfo": false
         }
     ],
     "enums": [
@@ -224,6 +245,8 @@
         ["FDOLMLKAKIN", "ItemLocationType"],
         ["GCAPHHCPLGG", "SettingsKeyCode"],
         ["KeyCode", "KeyCode"],
+        ["Image_Type", "Image_Type"], // Simple, Sliced, Tiled, Filled
+        ["Image_FillMethod", "Image_FillMethod"], // Horizontal, Vertical, Radial90, Radial180, Radial360
         ["PMHOACJAAAL", "CharacterGUI_NameType"], // OnlyName, OnlyBars, Full, None
         ["EMOPGKHHDGD", "EMOPGKHHDGD"], // Player, OtherPlayer, Npc, Lootbag
         ["EFBAFDICAFG", "EFBAFDICAFG"], // Right, Left, Down, Up, None, First
@@ -270,6 +293,7 @@
         { "name": "Rect",               "props": { } },
         { "name": "RaycastHit2D",       "props": { } },
         { "name": "SpriteRenderer",     "props": { "__Fields": [ ] } },
+        { "name": "Image",              "props": { "__Fields": [ ] } },
         { "name": "Renderer",           "props": { "__Fields": [ ] } },
         
         // TextMeshPro
@@ -302,6 +326,7 @@
         /* managers */
         { "name": "MapObjectUIManager", "props": { "__Fields": [ ] } },
         { "name": "EntityManager",      "props": { } },
+        { "name": "GuiManager",         "props": { "__Fields": [ ] } },
         { "name": "SettingsManager",    "props": { "__Fields": [ ] } },
         { "name": "InputManager",       "props": { "__Fields": [ ] } },
         { "name": "ViewHandler",        "props": { "__Fields": [ ] } },
@@ -385,6 +410,10 @@
         { "name": "DAOINPHCAEG",        "props": { "__Fields": [ ] } },
         { "name": "CGPOGAAKLFL",        "props": { "__Fields": [ ] } },
         {
+            "name": "ALGAPFJEAOI", /* GuildIcon */
+            "props": { }
+        },
+        {
             "name": "UnityThread",
             "props": {
                 "__Fields": [ ]
@@ -449,7 +478,8 @@
             "name": "JFNHHLNJJKP", /* Player */
             "props": {
                 "__Fields": [
-                    ["FLCOMAGIJOI", "guild_name"]
+                    ["FLCOMAGIJOI", "guild_name"],
+                    ["LAFABEDFNCK", "guild_rank"]
                 ]
             }
         },

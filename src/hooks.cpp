@@ -174,6 +174,30 @@ void Detour_CharacterGUIInfoSection_ChangeTransparencyValue(CharacterGUIInfoSect
 	return Original_CharacterGUIInfoSection_ChangeTransparencyValue(__this, transparency, method);
 }
 
+void Detour_TMP_Text_set_text_internal(TMP_Text* __this, String* value, MethodInfo* method)
+{
+	bool NOP = false;
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hook_TMP_Text_set_text_internal(__this, value, method, NOP))
+			if (NOP) return;
+	}
+
+	return Original_TMP_Text_set_text_internal(__this, value, method);
+}
+
+void Detour_GameObject_SetActive(GameObject* __this, bool value, MethodInfo* method)
+{
+	bool NOP = false;
+	for (Module* module : ModuleManager::modules)
+	{
+		if (module->hook_GameObject_SetActive(__this, value, method, NOP))
+			if (NOP) return;
+	}
+
+	return Original_GameObject_SetActive(__this, value, method);
+}
+
 bool InitHooks()
 {
 	bool ret = true;
@@ -227,6 +251,7 @@ bool InitHooks()
 		std::cout << "Failed to Detour GameController_FixedUpdate" << std::endl;
 		ret = false;
 	}
+
 	if (MH_CreateHook(Player_GetSpriteColor, Detour_Player_GetSpriteColor, reinterpret_cast<LPVOID*>(&Original_Player_GetSpriteColor)) != MH_OK)
 	{
 		std::cout << "Failed to Detour Player_GetSpriteColor" << std::endl;
@@ -236,6 +261,18 @@ bool InitHooks()
 	if (MH_CreateHook(CharacterGUIInfoSection_ChangeTransparencyValue, Detour_CharacterGUIInfoSection_ChangeTransparencyValue, reinterpret_cast<LPVOID*>(&Original_CharacterGUIInfoSection_ChangeTransparencyValue)) != MH_OK)
 	{
 		std::cout << "Failed to Detour CharacterGUIInfoSection_ChangeTransparencyValue" << std::endl;
+		ret = false;
+	}
+
+	if (MH_CreateHook(TMP_Text_set_text_internal, Detour_TMP_Text_set_text_internal, reinterpret_cast<LPVOID*>(&Original_TMP_Text_set_text_internal)) != MH_OK)
+	{
+		std::cout << "Failed to Detour TMP_Text_set_text_internal" << std::endl;
+		ret = false;
+	}
+
+	if (MH_CreateHook(GameObject_SetActive, Detour_GameObject_SetActive, reinterpret_cast<LPVOID*>(&Original_GameObject_SetActive)) != MH_OK)
+	{
+		std::cout << "Failed to Detour GameObject_SetActive" << std::endl;
 		ret = false;
 	}
 

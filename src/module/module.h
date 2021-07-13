@@ -39,7 +39,8 @@ public:
 	virtual bool hookPost_MapViewService_CheckTileWalkable(MapViewService*& __this, float& x, float y, MethodInfo*& method, bool& return_value) { return false; };
 	virtual bool hook_SpriteShader_UpdateMask(SpriteShader*& __this, CGPOGAAKLFL*& DLNMEAOOHKA, int32_t& large_cloth, int32_t& small_cloth, MethodInfo*& method, bool& NOP) { return false; };
 	virtual bool hook_Player_Shoot(Player*& player, float& angle, MethodInfo*& method, bool& NOP) { return false; };
-
+	virtual bool hook_TMP_Text_set_text_internal(TMP_Text*& __this, String*& value, MethodInfo*& method, bool& NOP) { return false; };
+	virtual bool hook_GameObject_SetActive(GameObject*& __this, bool& value, MethodInfo*& method, bool& NOP) { return false; };
 
 protected:
 	virtual void onEnable() = 0;

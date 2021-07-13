@@ -3,6 +3,8 @@
 #include "../module.h"
 #include "thirdparty/imgui/imgui.h"
 
+static const char* guild_ranks[] = { "Founder", "Leader", "Officer", "Member", "Initiate" };
+
 class NameChangeModule : public Module {
 public:
 	NameChangeModule();
@@ -11,26 +13,26 @@ public:
 	void onDisable() override;
 	void renderGUI() override;
 
-	void onMainLoop() override;
-	void onMapChange() override;
+	bool hook_GameController_FixedUpdate(GameController* __this, MethodInfo*& method, bool& NOP) override;
+	bool hook_TMP_Text_set_text_internal(TMP_Text*& __this, String*& value, MethodInfo*& method, bool& NOP) override;
+	bool hook_GameObject_SetActive(GameObject*& __this, bool& value, MethodInfo*& method, bool& NOP) override;
+
 	// TODO: onChatManager_addslot, replace sent chat messages
 
 private:
-	// Wait until the original name is set on mapchange, before setting a custom one.
-	bool wait_for_playername = false;
-	bool wait_for_guildname = false;
 
 	std::string custom_player_name;
 	void changePlayerName(std::string name);
 	void resetPlayerName();
 
-	bool rainbow_name;
-	void changeNameColor(Color color);
-
+	bool hide_guild;
 	std::string custom_guild_name;
-	void changeGuildName(std::string name);
-	void resetGuildName();
+	int custom_guild_rank = 40; // default leader
+	bool change_guild; // TODO: need to sync renderGUI with Unity Update method
+	void changeGuild(std::string name, int rank);
+	void resetGuild();
+	void setGuildVisibility(bool shown);
 
-	CharacterInfo* GetCharacterInfo();
+	GuiManager* GetGuiManager();
 };
 

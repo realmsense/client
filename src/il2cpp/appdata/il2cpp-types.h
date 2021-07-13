@@ -601,6 +601,53 @@ struct MaskableGraphic {
     struct MaskableGraphic__Fields fields;
 };
 
+enum class Image_Type : int32_t {
+    Simple = 0x00000000,
+    Sliced = 0x00000001,
+    Tiled = 0x00000002,
+    Filled = 0x00000003,
+};
+
+enum class Image_FillMethod : int32_t {
+    Horizontal = 0x00000000,
+    Vertical = 0x00000001,
+    Radial90 = 0x00000002,
+    Radial180 = 0x00000003,
+    Radial360 = 0x00000004,
+};
+
+struct Image__Fields {
+    struct MaskableGraphic__Fields _;
+    struct Sprite *m_Sprite;
+    struct Sprite *m_OverrideSprite;
+    #if defined(_CPLUSPLUS_)
+    Image_Type m_Type;
+    #else
+    int32_t m_Type;
+    #endif
+    bool m_PreserveAspect;
+    bool m_FillCenter;
+    #if defined(_CPLUSPLUS_)
+    Image_FillMethod m_FillMethod;
+    #else
+    int32_t m_FillMethod;
+    #endif
+    float m_FillAmount;
+    bool m_FillClockwise;
+    int32_t m_FillOrigin;
+    float m_AlphaHitTestMinimumThreshold;
+    bool m_Tracked;
+    bool m_UseSpriteMesh;
+    float m_PixelsPerUnitMultiplier;
+    float m_CachedReferencePixelsPerUnit;
+};
+
+struct Image {
+    struct Image__Class *klass;
+    MonitorData *monitor;
+    struct Image__Fields fields;
+};
+
 enum class ColorMode : int32_t {
     Single = 0x00000000,
     HorizontalGradient = 0x00000001,
@@ -1680,7 +1727,7 @@ struct Player__Fields {
     bool MFAHJBIFENI;
     bool ICPMFIFFACJ;
     bool EIMKOCOAFOK;
-    int32_t LAFABEDFNCK;
+    int32_t guild_rank;
     int32_t MNBLAJKMPJG;
     int32_t AOHKAGOOECE;
     int32_t JIFIGGMMKPE;
@@ -2451,6 +2498,75 @@ struct GameController {
     struct GameController__Fields fields;
 };
 
+struct GuiManager__Fields {
+    struct MonoBehaviour__Fields _;
+    struct Image *xpBarProgressBarImage;
+    struct TextMeshProUGUI *creditsLabel;
+    struct TextMeshProUGUI *fameLabel;
+    struct Panel_1 *characterSelectionPanel;
+    struct Button *characterSelectionButton;
+    struct GameObject *socialIndicator;
+    struct Button *socialPanelButton;
+    struct ProgressBar *xpProgressBar;
+    struct ProgressBar *hpProgressBar;
+    struct GameObject *healthOverlay;
+    struct Animator *healthBeat;
+    struct ProgressBar *mpProgressBar;
+    struct TextMeshProUGUI *levelLabel;
+    struct Button *inGameSettingsButton;
+    struct Button *changeUIButton;
+    struct Toggle *statsToggle;
+    struct Toggle *petInfoToggle;
+    struct Toggle *exaltationToggle;
+    struct Button *nexusButton;
+    struct Button *externalShopButton;
+    struct HorizontalLayoutGroup *resourcesLayout;
+    struct TextMeshProUGUI *tipLabel;
+    struct Toggle *inventoryToggleButton;
+    struct Toggle *backpackToggleButton;
+    struct Toggle__Array *tabs;
+    int32_t AMHDNIHHGBE;
+    bool BNCJODKCIIO;
+    struct GameObject *inventoryContainer;
+    struct GameObject *backpackContainer;
+    struct BoostIcon *boostIcon;
+    struct ConfirmationInvitePanel *confirmationInvitePanel;
+    struct Settings *DKCDBOLECHM;
+    struct Player *NCEPPPOAADJ;
+    struct MapViewService *OHLHEKBJMOO;
+    struct CombatView *combatView;
+    struct InteractionPanel *interactionPanel;
+    struct LootBagPanel *lootBagPanel;
+    struct DeathScreenPanel *deathScreenPanel;
+    struct UICreator *uiCreator;
+    struct RealmQuestsManager *realmQuestsManager;
+    struct CharacterInfo *characterInfo;
+    struct EventsNotification *eventsNotification;
+    struct KeysViewManager *keysViewManager;
+    struct PausePanel *pausePanel;
+    struct BGBHFKICMIM *EFNINMGLFDC;
+    struct VisualSettings *KEOPGMJDCMF;
+    struct Panel_1 *IHEDAECEBML;
+    struct NOKENPCHCDE *PILJHNFHGOD;
+    struct SocketManager_1 *HPIPJDMLKLK;
+    struct TradePanel *tradePanel;
+    struct VaultPanel *vaultPanel;
+    struct VaultPanel *giftPanel;
+    struct PotionsPanel *potionsPanel;
+    struct QuestHpManager *questHpManager;
+    struct RealmTimerController *realmTimerController;
+    struct QualityConnectionView *qualityConnectionView;
+    struct Popup *GFAEMLPGMFC;
+    struct Popup *CODIAFOOANL;
+    struct Popup *BMIFNFBKLIP;
+};
+
+struct GuiManager {
+    struct GuiManager__Class *klass;
+    MonitorData *monitor;
+    struct GuiManager__Fields fields;
+};
+
 struct ItemSlot__Fields {
     struct MonoBehaviour__Fields _;
     struct GameObject *slotImageContainer;
@@ -3001,6 +3117,11 @@ struct MapViewService__Class {
     const Il2CppRGCTXData *rgctx_data;
     Il2CppClass_1 _1;
     struct MapViewService__VTable vtable;
+};
+
+struct GuildIcon {
+    struct GuildIcon__Class *klass;
+    MonitorData *monitor;
 };
 
 struct MonoSingleton_1_DecaGames_RotMG_Managers_ApplicationManager___Fields {
