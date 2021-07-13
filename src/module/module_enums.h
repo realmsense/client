@@ -15,6 +15,7 @@ enum class ModuleList
     AutoAim,
     AutoNexus,
     AntiLag,
+    AntiAFK,
     Debug,
     SkinChanger,
     CameraSettings,

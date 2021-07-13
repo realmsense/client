@@ -17,6 +17,7 @@ namespace ModuleManager
 		modules.push_back(new NameChangeModule());
 		modules.push_back(new DisableChatFilterModule());
 		modules.push_back(new AntiLagModule());
+		modules.push_back(new AntiAFKModule());
 		modules.push_back(new DebugModule());
 	}
 

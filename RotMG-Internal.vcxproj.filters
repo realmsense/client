@@ -144,6 +144,9 @@
     <ClCompile Include="src\module\modules\anti_lag.cpp">
       <Filter>Source Files\module\modules</Filter>
     </ClCompile>
+    <ClCompile Include="src\module\modules\anti_afk.cpp">
+      <Filter>Source Files\module\modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\helpers.h">
@@ -291,6 +294,9 @@
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
     <ClInclude Include="src\module\modules\anti_lag.h">
+      <Filter>Source Files\module\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\module\modules\anti_afk.h">
       <Filter>Source Files\module\modules</Filter>
     </ClInclude>
   </ItemGroup>

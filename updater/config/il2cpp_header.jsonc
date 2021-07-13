@@ -329,6 +329,7 @@
         { "name": "GuiManager",         "props": { "__Fields": [ ] } },
         { "name": "SettingsManager",    "props": { "__Fields": [ ] } },
         { "name": "InputManager",       "props": { "__Fields": [ ] } },
+        { "name": "IdleWatcher",        "props": { "__Fields": [ ] } },
         { "name": "ViewHandler",        "props": { "__Fields": [ ] } },
         { "name": "SpriteShader",       "props": { "__Fields": [ ] } },
         { "name": "CharacterInfo",      "props": { "__Fields": [ ] } },

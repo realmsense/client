@@ -3202,6 +3202,19 @@ struct ApplicationManager {
     struct ApplicationManager__Fields fields;
 };
 
+struct IdleWatcher__Fields {
+    struct MonoBehaviour__Fields _;
+    float JFPLHMDBMDH;
+    float GLOHCEEELLE;
+    bool MKOAJIFJNLP;
+};
+
+struct IdleWatcher {
+    struct IdleWatcher__Class *klass;
+    MonitorData *monitor;
+    struct IdleWatcher__Fields fields;
+};
+
 struct UnityThread__Fields {
     struct MonoBehaviour__Fields _;
 };
