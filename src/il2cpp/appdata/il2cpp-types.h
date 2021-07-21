@@ -1658,6 +1658,8 @@ struct Nullable_1_UnityEngine_Vector2_ {
 struct Player__Fields {
     struct Character__Fields _;
     int32_t FBKMMJLFEBD;
+    struct Player *MJKOGHBIFBL;
+    bool HEJPMADHAKG;
     struct Player_MLMCBBKGONG *FCIEBGPMHNK;
     struct Player_MLMCBBKGONG *KPPKMGPOFNP;
     struct Player_MLMCBBKGONG *LHPMIHBOOPM;
@@ -2354,6 +2356,7 @@ struct __declspec(align(8)) MapViewService__Fields {
     bool GOHAALMACCK;
     int32_t AOECHPEAAAC;
     bool NMLFLDHNEDF;
+    int32_t MEBJIPGKFKP;
     struct MiniMapManager *MPDIMLPFNBE;
     struct SocketManager_1 *HPIPJDMLKLK;
     struct GameController *LDNGFMMIBCA;
